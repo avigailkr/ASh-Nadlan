@@ -95,7 +95,6 @@ function chat(id){
     ).catch()
 }
 
-let con=useconfi
 
 function isDelete(){
     // alert("isDelete")
