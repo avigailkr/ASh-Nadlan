@@ -211,7 +211,7 @@ nameSlice='l';
         <CardContent></CardContent>
       </Collapse>
     </Card>
-  );
+ );
 }
 
 
