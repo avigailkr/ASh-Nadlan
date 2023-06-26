@@ -17,6 +17,7 @@ import MyProfile from './Components/icons/MyProfile';
 import Exit from './Components/Exit';
 import { useSelector } from 'react-redux';
 import Form from './Components/AddProp/Form';
+import Chacima from './Components/icons/Chacima';
 
 // import ChatF from './Components/ChatF';
 function App() {
@@ -26,14 +27,16 @@ function App() {
   return (
   <div className="App">
     {selectUser!=null &&<Profile/>}
-     <NavBar/>
+     <NavBar/> 
+     {/* <Chacima/> */}
      {/* <Board/> */}
-     <Routes>
+ 
+     
      {/* <ChatF/> */}
      {/* index-
      localhost:3000 כאשר אין ניתוב
       תציג את הדירות */}
-      
+<Routes>
 <Route index element={<Property/>}/>
 <Route path="property" element={<Property/>}/>
 <Route path="addProp" element={<Form/>}/>

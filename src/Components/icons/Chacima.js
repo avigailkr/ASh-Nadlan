@@ -11,32 +11,152 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';//אייקון פרופיל
 import { ChacimaUser } from '../../Services';
+import { useEffect } from 'react';
 
-export default function Chacima(props) {
-  let active=" ";
+// export default function Chacima(props) {
+//   let active=" ";
+//   const [open, setOpen] = React.useState(false);
+//   const anchorRef = React.useRef(null);
+
+//   const funcChacima = () => {
+//     setOpen((prevOpen) => !prevOpen);
+//       ChacimaUser(props.id).then(res=>console.log(res.data)).catch(err=>alert(err))
+//   };
+//   const funcUnChacima = () => {
+//     setOpen((prevOpen) => !prevOpen);
+//           alert("ביטול חסימההההההההה")
+
+//   };
+
+//   const handleClose = (event) => {
+//     if (anchorRef.current && anchorRef.current.contains(event.target)) {
+//      console.log(event);
+//     }
+
+//     setOpen(false);
+//     if(active=="חסימה")
+//     funcChacima();
+//     else 
+//     funcUnChacima();
+//   };
+
+//   function handleListKeyDown(event) {
+//     if (event.key === 'Tab') {
+//       event.preventDefault();
+//       setOpen(false);
+//     } else if (event.key === 'Escape') {
+//       setOpen(false);
+//     }
+//   }
+
+//   // return focus to the button when we transitioned from !open -> open
+//   const prevOpen = React.useRef(open);
+//   React.useEffect(() => {
+//     if (prevOpen.current === true && open === false) {
+//       anchorRef.current.focus();
+//     }
+
+//     prevOpen.current = open;
+//   }, [open]);
+
+//   if(props.owner1){
+//     if(props.owner1.Active.data[0]==1)
+//     active="חסימה"
+//     else if(props.owner1.Active.data[0]==0)
+//     active="בטל חסימה"
+//   }
+//   return (
+//     <Stack direction="row" spacing={2}>
+//         <Button
+//           ref={anchorRef}
+//           id="composition-button"
+//           aria-controls={open ? 'composition-menu' : undefined}
+//           aria-expanded={open ? 'true' : undefined}
+//           aria-haspopup="true"
+//           onClick={funcChacima}
+//         >
+//            {/*--------------- אייקון שלוש נקודות --------------*/}
+//            <MoreVertIcon />
+//           {/* ------------------------------------------- */}
+//         </Button>
+//         <Popper
+//           open={open}
+//           anchorEl={anchorRef.current}
+//           role={undefined}
+//           placement="bottom-start"
+//           transition
+//           disablePortal
+//         >
+//           {({ TransitionProps, placement }) => (
+//             <Grow
+//               {...TransitionProps}
+//               style={{
+//                 transformOrigin:
+//                   placement === 'bottom-start' ? 'left top' : 'left bottom',
+//               }}
+//             >
+//               <Paper>
+//                 <ClickAwayListener onClickAway={handleClose}>
+//                   <MenuList
+//                     autoFocusItem={open}
+//                     id="composition-menu"
+//                     aria-labelledby="composition-button"
+//                     onKeyDown={handleListKeyDown}
+//                   >
+//                     <MenuItem onClick={funcChacima} value="profile">{active}</MenuItem>
+//                   </MenuList>
+//                 </ClickAwayListener>
+//               </Paper>
+//             </Grow>
+//           )}
+//         </Popper>
+     
+//     </Stack>
+//   );
+// }
+
+
+export default function Chacima(props)  {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  let [isblock,setIsblock]=React.useState("חסימה");
 
-  const funcChacima = () => {
-    setOpen((prevOpen) => !prevOpen);
-      ChacimaUser(props.id).then(res=>console.log(res.data)).catch(err=>alert(err))
+  useEffect(()=>{
+    if(props.owner1){
+      if(props.owner1.Active.data[0]==1)
+      setIsblock("חסימה");
+      else if(props.owner1.Active.data[0]==0)
+      setIsblock("בטל חסימה");
+    }
+  },[])
+  const block = () => {
+    setIsblock("ביטול חסימה")
+    ChacimaUser(props.id).then(res=>console.log(res.data)).catch(err=>alert(err))
   };
-  const funcUnChacima = () => {
-    setOpen((prevOpen) => !prevOpen);
-          alert("ביטול חסימההההההההה")
+  const unblock = () => {
+          setIsblock("חסימה")
 
+  };
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-     console.log(event);
+      return;
     }
-
+    //כשאשר לחץ על אחד מהאפשרויות
     setOpen(false);
-    if(active=="חסימה")
-    funcChacima();
-    else 
-    funcUnChacima();
+    console.log(event.target)
+    console.log(event.target.value)
+    if(event.target.value=="1"){
+      if(isblock=="חסימה")
+      block();
+      else if(isblock=="ביטול חסימה")
+      unblock();
+    }
+    
+
   };
 
   function handleListKeyDown(event) {
@@ -58,23 +178,21 @@ export default function Chacima(props) {
     prevOpen.current = open;
   }, [open]);
 
-  if(props.owner1){
-    if(props.owner1.Active.data[0]==1)
-    active="חסימה"
-    else if(props.owner1.Active.data[0]==0)
-    active="בטל חסימה"
-  }
+
+
+
   return (
     <Stack direction="row" spacing={2}>
+      <div>
         <Button
           ref={anchorRef}
           id="composition-button"
           aria-controls={open ? 'composition-menu' : undefined}
           aria-expanded={open ? 'true' : undefined}
           aria-haspopup="true"
-          onClick={funcChacima}
+          onClick={handleToggle}
         >
-           {/*--------------- אייקון שלוש נקודות --------------*/}
+                     {/*--------------- אייקון שלוש נקודות --------------*/}
            <MoreVertIcon />
           {/* ------------------------------------------- */}
         </Button>
@@ -102,14 +220,16 @@ export default function Chacima(props) {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={funcChacima} value="profile">{active}</MenuItem>
+                    <MenuItem onClick={handleClose} value="1">{isblock}</MenuItem>
+                   {/* <MenuItem onClick={handleClose} value="2">My account</MenuItem>
+                    <MenuItem onClick={handleClose} value="3">Logout</MenuItem> */}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
             </Grow>
           )}
         </Popper>
-     
+      </div>
     </Stack>
-  );
+   );
 }

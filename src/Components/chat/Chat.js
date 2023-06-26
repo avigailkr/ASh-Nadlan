@@ -95,8 +95,6 @@ function chat(id){
     ).catch()
 }
 
-let con=useconfi
-
 function isDelete(){
     // alert("isDelete")
    // alert("האם אתה בטוח שאתה רוצה למחוק"?{deleteAllMass}:'cancel')
