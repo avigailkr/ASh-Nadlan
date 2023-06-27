@@ -4,6 +4,7 @@ export const ADDED_USER="ADDED_USER";
 export const DELETED_USER="DELETED_USER";
 export const SAVE_ARR_USER="SAVE_ARR_USER";
 export const SAVE_USER="SAVE_USER";
+// export const SAVE_ISACTIVE="SAVE_ISACTIVE";
 export const Exit="Exit";
 
 

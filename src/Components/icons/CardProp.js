@@ -57,6 +57,7 @@ export default function CardProp(props) {
   let [isLoved, setIsLoved] = useState(0);
   let [arrImg, setarrImg] = useState([]);
   let [index, setindex] = useState(0);
+
       useEffect(()=>{
         //כל התמונות של דירה זו
         getAllImgsByIdFromServer(idProp).then((res)=>{
@@ -76,7 +77,6 @@ export default function CardProp(props) {
 
 
     function back(){
-      console.log("back")
       if(arrImg.length==0)return;
       let lengthArrImg=arrImg.length;//3
       if(index==0)
@@ -86,7 +86,6 @@ export default function CardProp(props) {
         console.log(index)
     }
     function next(){
-      console.log("next")
       if(arrImg.length==0)return;
       let lengthArrImg=arrImg.length;//3
       if(index==lengthArrImg-1)
@@ -118,6 +117,7 @@ export default function CardProp(props) {
     DeletePropFromServer(idProp).then((res) => {
       alert("נמחק בהצלחה")
       dis(DeleteProp(idProp));
+
     }).catch(err => alert(err));
   }
 
@@ -142,11 +142,9 @@ export default function CardProp(props) {
   // {arrImg.length!=0 &&  console.log(arrImg[0].ImgSrc)}
 let nameSlice=' ';
 
-if(owner!={}){
-//console.log(owner.Mail.text.slice(0, 3))
-nameSlice='l';
+if(owner!=null){
+nameSlice=`${owner.Mail.slice(0,1)}`;
 }
-
   return (
    
     <Card sx={{maxWidth: 299}}>

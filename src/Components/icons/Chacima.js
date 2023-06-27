@@ -12,7 +12,11 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';//אייקון פרופיל
 import { ChacimaUser } from '../../Services';
 import { useEffect } from 'react';
-
+import { useState } from 'react';
+import CardProp from './CardProp';
+import Property from '../Property';
+import { useNavigate } from 'react-router-dom';
+import Call from '../Call';
 // export default function Chacima(props) {
 //   let active=" ";
 //   const [open, setOpen] = React.useState(false);
@@ -119,23 +123,25 @@ import { useEffect } from 'react';
 export default function Chacima(props)  {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  let [isblock,setIsblock]=React.useState("חסימה");
+  let [active,setActive]=useState(false);
+  let nav=useNavigate()
 
   useEffect(()=>{
     if(props.owner1){
       if(props.owner1.Active.data[0]==1)
-      setIsblock("חסימה");
+      setActive(true);
       else if(props.owner1.Active.data[0]==0)
-      setIsblock("בטל חסימה");
+      setActive(false);
     }
   },[])
-  const block = () => {
-    setIsblock("ביטול חסימה")
-    ChacimaUser(props.id).then(res=>console.log(res.data)).catch(err=>alert(err))
-  };
-  const unblock = () => {
-          setIsblock("חסימה")
 
+  const block = () => {//חסימת משתמש
+    setActive(false)
+    ChacimaUser(props.id,true).then(res=>console.log(res.data)).catch(err=>alert(err))
+  };
+  const unblock = ({ navigation: { navigate } }) => {//ביטול חסימה
+    setActive(true)
+    ChacimaUser(props.id,false).then(res=>console.log(res.data)).catch(err=>alert(err))
   };
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -147,13 +153,16 @@ export default function Chacima(props)  {
     }
     //כשאשר לחץ על אחד מהאפשרויות
     setOpen(false);
-    console.log(event.target)
-    console.log(event.target.value)
     if(event.target.value=="1"){
-      if(isblock=="חסימה")
-      block();
-      else if(isblock=="ביטול חסימה")
-      unblock();
+      alert(active)
+      if(active==false){//אם המשתמש חסום לך לבטל את החסימהו
+        unblock();
+      }
+      
+      else if(active==true){
+        block();
+      }
+     
     }
     
 
@@ -220,7 +229,7 @@ export default function Chacima(props)  {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose} value="1">{isblock}</MenuItem>
+                    <MenuItem onClick={handleClose} value="1">{active ? "חסיהמ" : "בטל חסימה"}</MenuItem>
                    {/* <MenuItem onClick={handleClose} value="2">My account</MenuItem>
                     <MenuItem onClick={handleClose} value="3">Logout</MenuItem> */}
                   </MenuList>

@@ -1,5 +1,8 @@
-const Help=()=>{
 
+const Help=()=>{  
+    
+  
+    
     return <>
         <h1>לעזרה</h1>
         <p>

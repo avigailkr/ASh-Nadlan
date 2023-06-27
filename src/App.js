@@ -18,6 +18,8 @@ import Exit from './Components/Exit';
 import { useSelector } from 'react-redux';
 import Form from './Components/AddProp/Form';
 import Chacima from './Components/icons/Chacima';
+import Users from './Components/icons/Users';
+
 
 // import ChatF from './Components/ChatF';
 function App() {
@@ -49,6 +51,7 @@ function App() {
 <Route path="login" element={<Login/>}/>
 <Route path="register" element={<Register/>}/>
 <Route path="myprofile" element={<MyProfile/>}/>
+<Route path="users" element={<Users/>}/>
 <Route path="exit" element={<Exit/>}/>
 </Routes>
 {/* <Collage/> */}

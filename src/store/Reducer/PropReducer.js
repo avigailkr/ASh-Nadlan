@@ -6,9 +6,12 @@ const initialState = {
 }
 
 const PropReducer=(state=initialState,action)=>{
+  
+ 
   switch(action.type){
           case TypeAction.DELETED_PROPERTY:
-              let arr1 = state.arr.filter((item) => { return item.id !== action.payload })
+              let arr1 = state.arr.filter((item) => { return item.Id != action.payload })
+              
               return {
                   ...state,
                   arr: arr1

@@ -27,8 +27,8 @@ export const UpdateUser=(user)=>{
     return axios.put(`http://localhost:8080/user/updateUser`,user)
 }
 //חסימת משתמש
-export const ChacimaUser=(id)=>{       
-    return axios.put(`http://localhost:8080/user/ChacimaUser/${id}`)
+export const ChacimaUser=(id,flag)=>{       
+    return axios.put(`http://localhost:8080/user/ChacimaUser/${id}/${flag}`)
 }
 //props
 //כל הנכסים
