@@ -1,29 +1,3 @@
-// import { useEffect } from "react";
-// import { getAllUsersFromServer } from "../../Services";
-// import { useSelector } from "react-redux";
-
-// const Users = () => {
-//   const users = useSelector((state) => state.user.arr);
-// console.log(users)
-//   return (
-//     <>
-
-    //   <div className="all-users">
-    //     {users != [] &&
-    //       users.map((item, index) => {
-    //         return (
-    //           <div className="div-user" key={item.Id}>
-    //             iii:{item.id}
-    //           </div>
-    //         );
-    //       })
-    // }
-    //   </div>
-//     </>
-//   );
-// };
-// export default Users;
-
 import * as React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
