@@ -14,11 +14,24 @@ import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
+import Chacima from "./Chacima";
 //import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 //import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 //import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 //import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-function createData(id, tz, name, mail, phone, active,idprop,price,city,isSale,inserDate) {
+function createData(
+  id,
+  tz,
+  name,
+  mail,
+  phone,
+  active,
+  idprop,
+  price,
+  city,
+  isSale,
+  inserDate
+) {
   return {
     id,
     tz,
@@ -29,12 +42,12 @@ function createData(id, tz, name, mail, phone, active,idprop,price,city,isSale,i
 
     detailsprop: [
       {
-        idprop:idprop,
+        idprop: idprop,
         price: price,
         city: city,
-        issale:isSale,
-        inserdate:inserDate
-      }
+        issale: isSale,
+        inserdate: inserDate,
+      },
     ],
   };
 }
@@ -110,105 +123,93 @@ function Row(props) {
     </React.Fragment>
   );
 }
-
-// Row.propTypes = {
-    
-//   row: PropTypes.shape({
-//     Id: PropTypes.string.isRequired,
-//     Tz: PropTypes.string.isRequired,
-//     Name: PropTypes.string.isRequired,
-//     Mail: PropTypes.string.isRequired,
-//     Phone: PropTypes.number.isRequired,
-//     Active: PropTypes.bool.isRequired,
-//     DetailsProp: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         IdProp: PropTypes.number.isRequired,
-//         Price: PropTypes.number.isRequired,
-//         City: PropTypes.number.isRequired,
-//         IsSale: PropTypes.bool.isRequired,
-//         InsertDate: PropTypes.string.isRequired,
-//       })
-//     ).isRequired,
-//     // name: PropTypes.string.isRequired,
-//     // price: PropTypes.number.isRequired,
-//     // protein: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
 Row.propTypes = {
-    row: PropTypes.shape({
-      calories: PropTypes.number.isRequired,
-      carbs: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      history: PropTypes.arrayOf(
-        PropTypes.shape({
-          amount: PropTypes.number.isRequired,
-          customerId: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      protein: PropTypes.number.isRequired,
-    }).isRequired,
-  };
-
-
+  row: PropTypes.shape({
+    calories: PropTypes.number.isRequired,
+    carbs: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    history: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number.isRequired,
+        customerId: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    protein: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default function Users() {
+  let users = useSelector((state) => state.user.arr);
+  let props = useSelector((state) => state.prop.arr);
+  let [rows, setRows] = useState([]);
+  //let rows=[]
+  let fullarr = [];
+  useEffect(() => {
+    users != [] &&
+      props != [] &&
+      users.map((item, index) => {
+        //   <IconButton aria-label="settings">
+        //   <Chacima id={item.Id} owner1={item}/>eeeeeeeeeeeeee
+        // </IconButton>
+        let arr = props.filter((pro) => {
+          return pro.IdUser == item.Id;
+        });
+        arr.map((i, indexprop) => {
+          let obj = createData(
+            item.Id,
+            item.Tz,
+            item.Name,
+            item.Mail,
+            item.Phone,
+            item.Active,
+            i.Id,
+            i.Price,
+            i.IdCity,
+            i.IsSale,
+            i.InsertDate
+          );
+          fullarr.push(obj);
+        });
+      });
+    setRows(fullarr);
+    console.log("rowsssefectt");
+    console.log(rows);
+  }, []);
+  if (rows.length != 0) {
+    console.log("pppppppppppppppppp");
+    console.log(rows);
+  }
+  return (
+    rows.length != 0 && (
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>IdUser</TableCell>
+              <TableCell>Tz</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Mail</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Active</TableCell>
 
-      let users = useSelector((state) => state.user.arr);
-      let props=useSelector(state=>state.prop.arr)
-      let [rows,setRows]=useState([]);
-    //let rows=[]
-    let fullarr=[]
-      useEffect(()=>{
-            (users != [] && props!=[]) &&
-            users.map((item, index) => 
-            {
-                let arr=props.filter((pro) => { return pro.IdUser == item.Id })
-                arr.map((i,indexprop)=>{
-                    let obj=createData(item.Id, item.Tz, item.Name, item.Mail, item.Phone,item.Active,
-                        i.Id,i.Price,i.IdCity,i.IsSale,i.InsertDate)
-                        fullarr.push(obj)
-                })
-            })
-            setRows(fullarr)
-                console.log("rowsssefectt")
-                console.log(rows)
-      },[])
-      if(rows.length!=0){
-
-        console.log("pppppppppppppppppp")
-        console.log(rows)
-      }
-     return (
-        rows.length!=0 && <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>IdUser</TableCell>
-                    <TableCell>Tz</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Mail</TableCell>
-                    <TableCell>Phone</TableCell>
-                    <TableCell>Active</TableCell>
-            {/* <TableCell>Dessert (100g serving)</TableCell>
+              {/* <TableCell>Dessert (100g serving)</TableCell>
             <TableCell align="right">Calories</TableCell>
             <TableCell align="right">Fat&nbsp;(g)</TableCell>
             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
             <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
-          </TableRow>
-        </TableHead>
-        <TableBody>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {console.log("rows")}
-           {console.log(rows)}
-          {rows!=[] && rows.map((row) => (
-             <Row key={row.id} row={row} />
-           
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            {console.log(rows)}
+            {rows != [] && rows.map((row) => <Row key={row.id} row={row} />)}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )
   );
 }

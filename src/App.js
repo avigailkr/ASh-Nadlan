@@ -18,7 +18,14 @@ import Exit from './Components/Exit';
 import { useSelector } from 'react-redux';
 import Form from './Components/AddProp/Form';
 import Chacima from './Components/icons/Chacima';
-import Users from './Components/icons/Users';
+// import Users from './Components/icons/Users';
+import City from './Components/icons/Filtering/City';
+import Size from './Components/icons/Filtering/Size';
+import Room from './Components/icons/Filtering/Room';
+import Price from './Components/icons/Filtering/Price';
+import TypeProp from './Components/icons/Filtering/TypeProp';
+import Filter from './Components/icons/Filtering/Filter';
+
 
 
 // import ChatF from './Components/ChatF';
@@ -32,8 +39,12 @@ function App() {
      <NavBar/> 
      {/* <Chacima/> */}
      {/* <Board/> */}
- 
-     
+     {/* <City/>
+     <Size/>
+     <Room/>
+    <Price/>
+    <TypeProp/> */}
+    <Filter/>
      {/* <ChatF/> */}
      {/* index-
      localhost:3000 כאשר אין ניתוב
@@ -51,8 +62,15 @@ function App() {
 <Route path="login" element={<Login/>}/>
 <Route path="register" element={<Register/>}/>
 <Route path="myprofile" element={<MyProfile/>}/>
-<Route path="users" element={<Users/>}/>
+{/* <Route path="users" element={<Users/>}/> */}
 <Route path="exit" element={<Exit/>}/>
+
+<Route path="city" element={<City/>}/>
+<Route path="size" element={<Size/>}/>
+<Route path="room" element={<Room/>}/>
+<Route path="price" element={<Price/>}/>
+<Route path="typeprop" element={<TypeProp/>}/>
+
 </Routes>
 {/* <Collage/> */}
 
