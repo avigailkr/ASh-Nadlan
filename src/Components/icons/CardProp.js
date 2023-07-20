@@ -58,62 +58,64 @@ export default function CardProp(props) {
   let [arrImg, setarrImg] = useState([]);
   let [index, setindex] = useState(0);
 
-      useEffect(()=>{
-        //כל התמונות של דירה זו
-        getAllImgsByIdFromServer(idProp).then((res)=>{
-          setarrImg(res.data);
-        }).catch(err=>alert(err))
+  useEffect(() => {
+    //כל התמונות של דירה זו
+    getAllImgsByIdFromServer(idProp).then((res) => {
+      setarrImg(res.data);
+    }).catch(err => alert(err))
 
 
-        getOwnerFromServer(idPropOwner).then(res=>{
-        setOwner(res.data[0])}).catch(err=>alert(err))
+    getOwnerFromServer(idPropOwner).then(res => {
+      setOwner(res.data[0])
+    }).catch(err => alert(err))
 
-        userSelect!=null && 
-        //בדיקה האם אהבתי את הדירה
-        getMyLikeFromServer(userSelect.Id, idProp).then((res) => {
-          setIsLoved(res.data.length);
-        }).catch(err => alert(err));
-    },[])
+    userSelect != null &&
+      //בדיקה האם אהבתי את הדירה
+      getMyLikeFromServer(userSelect.Id, idProp).then((res) => {
+        setIsLoved(res.data.length);
+      }).catch(err => alert(err));
+  }, [])
 
 
-    function back(){
-      if(arrImg.length==0)return;
-      let lengthArrImg=arrImg.length;//3
-      if(index==0)
-      setindex(lengthArrImg-1);
-      else setindex(index-1);
-      
-        console.log(index)
-    }
-    function next(){
-      if(arrImg.length==0)return;
-      let lengthArrImg=arrImg.length;//3
-      if(index==lengthArrImg-1)
+  function back() {
+    if (arrImg.length == 0) return;
+    let lengthArrImg = arrImg.length;//3
+    if (index == 0)
+      setindex(lengthArrImg - 1);
+    else setindex(index - 1);
+
+    console.log(index)
+  }
+  function next() {
+    if (arrImg.length == 0) return;
+    let lengthArrImg = arrImg.length;//3
+    if (index == lengthArrImg - 1)
       setindex(0);
-      else setindex(index+1);
+    else setindex(index + 1);
 
-        console.log(index)
-    }
+    console.log(index)
+  }
   const funfavorites = () => {
-    let like={
+    let like = {
       iduser: userSelect.Id,
       idprop: idProp
     }
 
-    if(isLoved==0){
-      AddLikeFromServer(like).then(()=>{
+    if (isLoved == 0) {
+      AddLikeFromServer(like).then(() => {
         setIsLoved(1);
-      }).catch(err=>alert(err))
+      }).catch(err => alert(err))
     }
-    
-    else{
-    DeleteLikeFromServer(userSelect.Id, idProp).then(()=>{
-      setIsLoved(0);
-    }).catch(err=>alert(err))}
-    
+
+    else {
+      DeleteLikeFromServer(userSelect.Id, idProp).then(() => {
+        setIsLoved(0);
+      }).catch(err => alert(err))
+    }
+
 
   }
-  function deleteProp(){
+  function deleteProp() {
     DeletePropFromServer(idProp).then((res) => {
       alert("נמחק בהצלחה")
       dis(DeleteProp(idProp));
@@ -131,61 +133,67 @@ export default function CardProp(props) {
   const nav = useNavigate();
 
   const fun = () => {
-     console.log("chatttttttttttttttttt");
+    console.log("chatttttttttttttttttt");
 
-    if(userSelect!=null)
+    if (userSelect != null)
       nav(`/chat/${idPropOwner}`);
+  };
+  const answer = () => {
+    console.log("chatttttttttttttttttt");
+
+    if (userSelect != null)
+      nav(`/answer`);
   };
 
   const [expanded, setExpanded] = React.useState(false);
 
   // {arrImg.length!=0 &&  console.log(arrImg[0].ImgSrc)}
-let nameSlice=' ';
+  let nameSlice = ' ';
 
-if(owner!=null){
-nameSlice=`${owner.Mail.slice(0,1)}`;
-}
+  if (owner != null) {
+    nameSlice = `${owner.Mail.slice(0, 1)}`;
+  }
   return (
-   
-    <Card sx={{maxWidth: 299}}>
-{
-(userSelect && owner!=null &&  userSelect.IdTypeUser==1 ) &&
 
-<CardHeader sx={owner.Active.data[0]==0 && {backgroundColor:"red"}}
-        avatar={
-          <Avatar sx={ { bgcolor: red[500] }} aria-label="recipe">
+    <Card sx={{ maxWidth: 299 }}>
+      {
+        (userSelect && owner != null && userSelect.IdTypeUser == 1) &&
+
+        <CardHeader sx={owner.Active.data[0] == 0 && { backgroundColor: "red" }}
+          avatar={
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
               {nameSlice}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <Chacima id={owner.Id} owner1={owner}/>
-          </IconButton>
-        }
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="settings">
+              <Chacima id={owner.Id} owner1={owner} />
+            </IconButton>
+          }
 
-        // getOwnerFromServer-שליפת השם והמייל של המוכר מהשרת 
-        title={owner.Name}
-        subheader={owner.Mail}
-       // subheader={(owner!={} && owner.Active.data[0]===0) && <p>*חסום</p>}
-       
-        
-      />
+          // getOwnerFromServer-שליפת השם והמייל של המוכר מהשרת 
+          title={owner.Name}
+          subheader={owner.Mail}
+        // subheader={(owner!={} && owner.Active.data[0]===0) && <p>*חסום</p>}
+
+
+        />
       }
 
-<div className="div-imges"> 
-  <ArrowBackIosIcon className="arrow1"  onClick={back}/>
-  {/* `../../image/${arrImg[index].ImgSrc}` */}
-{ arrImg.length!=[] && <img className="imges" src={"image/"+arrImg[index].ImgSrc}/>}
- <ArrowForwardIosIcon className="arrow2" onClick={next}/> 
-</div>
+      <div className="div-imges">
+        <ArrowBackIosIcon className="arrow1" onClick={back} />
+        {/* `../../image/${arrImg[index].ImgSrc}` */}
+        {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc} />}
+        <ArrowForwardIosIcon className="arrow2" onClick={next} />
+      </div>
       <CardContent>
         {/*----------------------------------------- bull-נשלח לפונקציה
         שתשים נקודה בין בל מילה------------------------------------------------- */}
         <Typography variant="body2" color="text.secondary">
           {props.props && (
             <>
-              {props.props.kind} {bull} {props.props.NumRoom} חד'{bull}{" "}
-              {props.props.Size} מ"ר
+              {props.props.kind} {bull} {props.props.RoomNum} חד'{bull}{" "}
+              {props.props.Sqm} מ"ר
             </>
           )}
         </Typography>
@@ -193,23 +201,23 @@ nameSlice=`${owner.Mail.slice(0,1)}`;
 
       <CardActions disableSpacing>
 
-        <IconButton aria-label="add to favorites" id="butfavor" onClick={()=>{userSelect!=null && funfavorites()}} >
-          {isLoved == 0 ? <FavoriteBorderIcon />:<FavoriteIcon />}
+        <IconButton aria-label="add to favorites" id="butfavor" onClick={() => { userSelect != null && funfavorites() }} >
+          {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
         <Link href="#">ראה עוד</Link>
 
 
-        {(userSelect &&  userSelect.IdTypeUser==1) && <IconButton aria-label="delete">
-          <DeleteForeverIcon onClick={deleteProp}/> 
+        {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
+          <DeleteForeverIcon onClick={deleteProp} />
         </IconButton>}
-
-        <input type="button" className="but-chat" onClick={fun} value="chat" />
+        {userSelect && userSelect.Id != idPropOwner && <input type="button" className="but-chat" onClick={fun} value="chat" />}
+        {userSelect && userSelect.Id == idPropOwner && <input type="button" className="but-chat" onClick={answer} value="answer" />}
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent></CardContent>
       </Collapse>
     </Card>
- );
+  );
 }
 
 
@@ -222,7 +230,7 @@ nameSlice=`${owner.Mail.slice(0,1)}`;
 
 
 
-      {/* <CardHeader
+{/* <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             R
@@ -238,4 +246,3 @@ nameSlice=`${owner.Mail.slice(0,1)}`;
         title={props.props.userId}
         subheader="September 14, 2016"
       /> */}
-     

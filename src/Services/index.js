@@ -42,7 +42,7 @@ export const getOwnerFromServer=(id)=>{
 //מחיקת נכס
 export const DeletePropFromServer=(id)=>{
     console.log("DeleteFromServer")
-    return axios.delete(`http://localhost:8080/property/deleteProp/${id}`);
+    return axios.put(`http://localhost:8080/property/deleteProp/${id}`);
 }
 
 //imgs
@@ -97,3 +97,61 @@ export const AddRoomFromServer=(users)=>{
 export const getRoomFromServer=(id1,id2)=>{
     return axios.get(`http://localhost:8080/chat/getRoom/${id1}/${id2}`);
 }
+
+
+//דירה
+//הוספת דירה
+export const addPropToServer=(det)=>{
+    return axios.post("http://localhost:8080/property/addProp",det)
+}
+
+
+
+//filtering-סינונים
+//עיר
+export const getPropByCityFromServer=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByCity/${id}`);
+} 
+//חדר
+export const getPropByRoom=(roomnum)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByRoom/${roomnum}`);
+}
+//מחיר
+export const getPropByPriceFromServer=(minprice,maxprice)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByPrice/${minprice}/${maxprice}`);
+} 
+//מטר רבוע
+export const getPropBySize=(minsize,maxsize)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsBySize/${minsize}/${maxsize}`);
+}
+//סוג דירה
+export const getPropByType=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeProp/${id}`);
+}
+//סוג מכירה
+//למכירה או להשכרה
+export const getPropByTypeSale=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeSale/${id}`);
+}
+//מצב
+export const getPropByStatus=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByStatus/${id}`);
+}
+//קומה
+export const getPropByFloor=(minfloor,maxfloor)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByFloor/${minfloor}/${maxfloor}`);
+}
+//שנה
+export const getPropByYear=(fromyear,untilyear)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByYears/${fromyear}/${untilyear}`);
+}
+
+
+
+//statistic-סטטיסטיקות
+
+//מספר דירות למכירה או להשכרה
+export const getNumPropToSaleOrRent=(idsale)=>{
+    return axios.get(`http://localhost:8080/statistic/numPropToSale/${idsale}`);
+}
+

@@ -32,3 +32,8 @@ export const ADDED_MASSAGE="ADDED_MASSAGE";//שליחת הודעה הוספה ל
 export const ADDED_LIKE="ADDED_LIKE";
 export const DELETED_LIKE="DELETED_LIKE";
 export const SAVE_ARR_LIKE="SAVE_ARR_LIKE";
+
+
+//filter
+export const SAVE_FROM_YEARS="SAVE_FROM_YEARS";
+export const SAVE_UNTIL_YEARS="SAVE_UNTIL_YEARS";

@@ -1,5 +1,5 @@
-/* filter-----סינוןןןןןן */
-.filter-details{
+/* filter-----סינוןןןןןן
+/* .filter-details{
 width: 30%;
 height: 300px;
 
@@ -12,10 +12,76 @@ height: 300px;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-}
+} */
 /* filter-----סינוןןןןןן */
 
+/* #title{
+  
+  text-shadow: 0 0 3px #FF0000;
+  font-size:xx-large;
+}
+#title2{
+  text-shadow: 0 0 3px #FF0000;
+  font-size: large;
+}
+#div-title{
+  /* margin-left: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  float: left; */
 
+
+
+  #img-logo{
+    width: 6vw;
+    height: 5vw;
+  }
+  .title-div{
+    display: flex;
+  }
+  .title-div-txt{
+    margin-left: 35%;
+    display: flex;
+    text-align: center;
+    /* font-size: 50px; */
+    background: linear-gradient(to left,
+            /* violet,
+            indigo,
+            blue,
+            green, */
+            yellow,
+            orange,
+            red);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  #title{
+    font-size: 50px;
+    font-family: none;
+  }
+  #title2{
+    font-family: none;
+      font-style: oblique;
+      padding-top:18%;
+      font-size: 25px;
+  }
+  /* filter-----סינוןןןןןן */
+  .filter-details{
+  width: 30%;
+  height: 300px;
+  
+    background: #d98181;
+  }
+  .filter a {
+    float: right;
+    color: #4f5b9d;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  /* filter-----סינוןןןןןן */
+  
 /* ======================עיצוב סרגל כלים============================== */
 .topnav {
     background-color: rgb(185, 86, 5);

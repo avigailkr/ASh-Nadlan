@@ -31,13 +31,14 @@ const nav=useNavigate();
             Phone:details.phone
         }
         console.log(user)
+
          AddUserServer(user).then((res)=>{
             alert(res.data.mass)
             dis(AddUser(user));
             nav("/property");
 
 
-         }).catch(alert(err=>alert(err)))
+         }).catch(err=>alert(err))
 
       
         
