@@ -19,4 +19,11 @@ export const SaveArrProp = (arr) => {
   };
 };
 
+export const AddToArrProp = (arr) => {
+  return {
+    type: TypeAction.ADD_TO_ARR_PROPERTY,
+    payload: arr,
+  };
+};
+
 

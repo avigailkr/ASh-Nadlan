@@ -25,6 +25,12 @@ const PropReducer=(state=initialState,action)=>{
               return {
                 ...state,
                 arr:action.payload
+              } 
+              case TypeAction.ADD_TO_ARR_PROPERTY:
+                // איך מוסיפים דירות למערך הדירות שלא הופיעו כבר בסינון???????????????
+              return {
+                ...state,
+                arr:action.payload
               }
   }
   return state;

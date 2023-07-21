@@ -125,8 +125,11 @@ export const getPropBySize=(minsize,maxsize)=>{
     return axios.get(`http://localhost:8080/filter/getAllPropsBySize/${minsize}/${maxsize}`);
 }
 //סוג דירה
-export const getPropByType=(id)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeProp/${id}`);
+export const getPropByType=(name)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeProp/${name}`);
+}
+export const getNamesType=()=>{
+    return axios.get("http://localhost:8080/filter/getAllTypeProp");
 }
 //סוג מכירה
 //למכירה או להשכרה

@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import BetweenYear from '../BetweenYear';
 import { getPropByYear } from '../../../../Services';
 import { useDispatch, useSelector } from 'react-redux';
-import { SaveArrProp } from '../../../../store/Actions/PropAction';
+import { AddToArrProp, SaveArrProp } from '../../../../store/Actions/PropAction';
 import { useEffect } from 'react';
 import { saveFromYear, saveUntilYear } from '../../../../store/Actions/FilterAction';
 
@@ -33,10 +33,11 @@ export default function ButBetweenYear() {
   const filter = () => {
     let from=selectyears.from;
     let until=selectyears.until;
-
+    if(from==null) from=2000;
+    if(until==null) until=2023;
     getPropByYear(from,until).then((res)=>{
       console.log(res.data)
-      dis(SaveArrProp(res.data))
+      dis(AddToArrProp(res.data))
     }).catch(err=>alert(err))
     handleClose();
   };

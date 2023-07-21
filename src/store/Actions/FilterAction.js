@@ -13,3 +13,9 @@ export const saveUntilYear = (year) => {
     payload: year
   };
 };
+export const saveType = (arr) => {
+  return {
+    type: TypeAction.SAVE_TYPE,
+    payload: arr
+  };
+};

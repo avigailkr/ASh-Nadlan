@@ -2,7 +2,8 @@ import * as TypeAction from "../ActionTypes";
 
 const initialState = {
         from:null,
-        until:null
+        until:null,
+        type:[]
     
 
 }
@@ -19,6 +20,12 @@ const FilterReducer=(state=initialState,action)=>{
                 return{
                     ...state,
                     until:action.payload
+                }
+                case TypeAction.SAVE_TYPE:
+                  console.log(initialState.type)
+                return{
+                    ...state,
+                    type:action.payload
                 }
                 
                 

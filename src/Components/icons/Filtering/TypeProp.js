@@ -7,6 +7,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { saveType } from '../../../store/Actions/FilterAction';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getNamesType } from '../../../Services';
+import { useState } from 'react';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,18 +24,7 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'בחר הכל',
-  'קומות',
-  'עליית גג',
-  'קרקע',
-  'וילה',
-  'בניין',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+
 
 function getStyles(name, personName, theme) {
   return {
@@ -42,11 +36,24 @@ function getStyles(name, personName, theme) {
 }
 
 export default function TypeProp() {
-     
+  const [names,setNames]=useState([]);
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const dis=useDispatch();
+ 
+  useEffect(()=>{
+    let arr=[]
+    getNamesType().then(res=>{
+      for(let i=0;i<res.data.length;i++)
+      {arr.push(res.data[i].Name)}
+      setNames(arr);
+      console.log(names)
+    }).catch(err=>alert(err))
+  },[])
+
 
   const handleChange = (event) => {
+    dis(saveType(event.target.value))
     const {
       target: { value },
     } = event;
@@ -54,12 +61,14 @@ export default function TypeProp() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+
+    
   };
 
   return (
-    <div className='filter-details'>
+    <div >
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">City</InputLabel>
+        <InputLabel id="demo-multiple-chip-label">Type</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
@@ -78,7 +87,7 @@ export default function TypeProp() {
         >
           {names.map((name) => (
             <MenuItem
-              key={name}
+              key={name+"1"}
               value={name}
               style={getStyles(name, personName, theme)}
             >

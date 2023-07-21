@@ -31,7 +31,6 @@ height: 300px;
   float: left; */
 
 
-
   #img-logo{
     width: 6vw;
     height: 5vw;
@@ -66,12 +65,7 @@ height: 300px;
       font-size: 25px;
   }
   /* filter-----סינוןןןןןן */
-  .filter-details{
-  width: 30%;
-  height: 300px;
-  
-    background: #d98181;
-  }
+
   .filter a {
     float: right;
     color: #4f5b9d;
