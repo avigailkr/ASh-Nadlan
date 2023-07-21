@@ -12,17 +12,43 @@ import Option from '@mui/joy/Option';
 import Radio, { radioClasses } from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
 import Sheet from '@mui/joy/Sheet';
+import { getAllTypeFromServer } from '../../Services';
+import { useDispatch, useSelector } from 'react-redux';
+import { SaveArrType } from '../../store/Actions/PropAction';
+import { useEffect } from 'react';
 
 const StepTwo = ({ prevStep, nextStep, values }) => {
-    const [type, setType] = useState("");
+    const [type, setType] = useState(1);
     const [mr, setmr] = useState("");
-    const [room, setRoom] = useState("");
+    const [room, setRoom] = useState("1");
     const [halfRoom, setHalfRoom] = useState(true);
-    const [floor, setFloor] = useState("");
-    const [inFloor, setInFloor] = useState("");
-    const [date, setDate] = useState("");
+    const [floor, setFloor] = useState("1");
+    const [inFloor, setInFloor] = useState("1");
+    const [date, setDate] = useState(1);
     const [price, setPrice] = useState(0);
+    const [showPrice, setShowPrice] = useState(true);
   
+    let dis=useDispatch();
+
+    useEffect(()=>{
+      getAllTypeFromServer().then(res=>{
+          dis(SaveArrType(res.data))
+          console.log(res.data)
+      }).catch(er=>alert("error in bring arr property from server"))
+  },[])
+  
+  let arrType=useSelector(x=>x.prop.arrType);
+
+
+  const setId =(v)=>{
+    let d=["מיידי","גמיש","עתידי"];
+    d.map((i,index)=>{
+      if(i==v){ 
+         setDate(index+1);
+      }
+     
+    })
+  }
     const handlePrev = (e) => {
       e.preventDefault();
       prevStep();
@@ -30,7 +56,7 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
   
     const handleNext = (e) => {
       e.preventDefault();
-      nextStep({ ...values, type, mr, room, halfRoom, floor, inFloor, date,  price});
+      nextStep({ ...values, type, mr, room, halfRoom, floor, inFloor, date,  price, showPrice});
       
     };
     
@@ -40,28 +66,15 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
      <Steps level={1}/>
       
       <form onSubmit={handleNext} className="form__step">
-      <br></br>
+      {/* <div> */}
           <label dir="rtl">
             סוג הנכס:
           </label>
-      
-         <Select value={Option.value} defaultValue="דירה" size='md' sx={{mb:2, minWidth: 120 }} onChange={(e)=>setType(e.target.innerText)}>
-          <Option value="דירה" >דירה</Option>
-          <Option value="בית פרטי">בית פרטי</Option>
-          <Option value="בניין">בניין</Option>
-          <Option value="דירת גן">דירת גן</Option>
-          <Option value="קוטג">קוטג</Option>
-          <Option value="דו-משפחתי">דו-משפחתי</Option>
-          <Option value="דופלקס">דופלקס</Option>
-          <Option value="מגרש">מגרש</Option>
-          <Option value="פנטהוז">פנטהוז</Option>
-          <Option value="דירת גג">דירת גג</Option>
-          <Option value="יחידת דיור">יחידת דיור</Option>
-          <Option value="דירת נופש">דירת נופש</Option>
-          <Option value="סטודיו/לופט">סטודיו/לופט</Option>
-          <Option value="דירה מחולקת">דירה מחולקת</Option>
-          <Option value="אחר">אחר</Option>
-
+         
+         <Select value={Option.value} defaultValue="דירה" size='md' sx={{mb:2, minWidth: 120 }} onChange={(e)=> setType(e.target.id)}>
+          {arrType.map((item)=>{
+            return <Option id={item.Id} key={item.Id} value={item.Name} >{item.Name}</Option>
+          })}
         </Select>
        
           {/* <input
@@ -193,16 +206,15 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
   <RadioGroup
     row="true"
     aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="גמיש"
     orientation="horizontal"
     dir="rtl"
     name="radio-buttons-group"
     sx={{mb:1,mt:2}}
-    onChange={(e)=>setDate(e.target.value)}
+    onChange={(e)=>setId(e.target.value)}
   >
-    <FormControlLabel sx={{m:2}} value="מיידי" control={<Radio />} label="מיידי"  />
-    <FormControlLabel sx={{m:2}} value="גמיש" control={<Radio />} label="גמיש" />
-    <FormControlLabel sx={{m:2}} value="עתידי" control={<Radio />} label="עתידי" />
+    <FormControlLabel sx={{m:2}} value="מיידי" id="1" control={<Radio />} label="מיידי"  />
+    <FormControlLabel sx={{m:2}} value="גמיש" id="2" control={<Radio />} label="גמיש" />
+    <FormControlLabel sx={{m:2}} value="עתידי" id="3" control={<Radio />} label="עתידי" />
   </RadioGroup>
        
           <label>
@@ -211,17 +223,27 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
       
         <input type="number" min="0" max="100000000" step="1" required="required" id="priceInput"
          pattern="[0-9]{3},[0-9]{3},[0-9]{3}" placeholder='₪' onChange={(e) => setPrice(e.target.value)}/>
-
+ <div className='div-adress'>
+ <div id="d-p">
+          <label>
+            להציג מחיר
+          </label>
+        
+        <Checkbox defaultChecked onChange={(e) => setShowPrice(!showPrice)}/>
+</div>
+<div>
           <label>
             פלוס 1/2 חדר
           </label>
         
-        
         <Checkbox defaultChecked onChange={(e) => setHalfRoom(!halfRoom)}/>
-
-        
+</div>
+</div>
+       <div className="div-but">
         <button type="submit" className="form__button">הבא</button>
         <button type="button" onClick={handlePrev}  className="form__button">הקודם</button>
+        </div>
+        {/* </div> */}
       </form>
       </div>
     );

@@ -12,8 +12,12 @@ import IconButton from '@mui/material/IconButton';
 // import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 // import DirectionsIcon from '@mui/icons-material/Directions';
-
-
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import { getAllCityisFromServer } from "../../Services";
+import { useDispatch, useSelector } from "react-redux";
+import { SaveArrCity } from "../../store/Actions/PropAction";
+import { useEffect } from "react";
 
 const StepOne = ({ nextStep }) => {
   //useState for a form 
@@ -22,18 +26,30 @@ const StepOne = ({ nextStep }) => {
   const [show, setShow]=useState(true);
   const [adress, setAdress]=useState("");
   const [adress2,setAdress2]=useState("israel");
+  const [city, setCity]=useState(1)
 
- 
+let dis=useDispatch();
+
+  useEffect(()=>{
+    getAllCityisFromServer().then(res=>{
+        dis(SaveArrCity(res.data))
+        console.log(res.data)
+    }).catch(er=>alert("error in bring arr property from server"))
+},[])
+
+let arrCity=useSelector(x=>x.prop.arrCity);
+
+
   //function submit 
   const handleNext = (e) => {
     e.preventDefault();
-   let status="";
+   let isSale="";
     if(flag)
-     status="rent";
+    isSale=2;
     else
-    status="sale";
+    isSale=1;
 
-    nextStep({status, adress});
+    nextStep({isSale, adress, city});
   };
 
   //function on click button color change 
@@ -56,15 +72,9 @@ const StepOne = ({ nextStep }) => {
     else
     setFlag1(!flag1);
   };
-
-  
   
   //function to search --> substring from string the "," tav and put "+" insted
 const search=()=>{
-  // const tav=",";
-  // const regex=new RegExp(tav, "g");
-  // const newStr=adress.replace(regex,"+");
-  // setAdress(newStr);
   setAdress2(adress)
 
 }
@@ -78,7 +88,7 @@ const search=()=>{
    <Steps level={0}/> 
     
     <form onSubmit={handleNext} className="form__step">
-      <label className="labels">
+      <label id="isSale">
         ?מוכרים או משכירים
         </label>
          <Stack direction="row" spacing={2}>
@@ -88,20 +98,34 @@ const search=()=>{
      </Stack>
       
       <br/>
-      <label className="labels">
+      <label id="adress">
      :כתובת הנכס
       </label>
+
+      <div className="div-adress">
+        <div>
+         <p>עיר</p>
+         
+         <Select value={Option.value}  size='md' sx={{mb:2, minWidth:95, ml:4 }} onChange={(e)=>{setCity(e.target.id)}}>
+          {arrCity.map((item, index)=>{return <> 
+          <Option id={item.Id} value={item.Name} >{item.Name}</Option>
+          </>})}
+        </Select>
+</div>
+<div>
+   <p>רחוב</p>
       <TextField id="outlined-basic"
-       label="לדוגמא: גפן3, נתניה, ישראל" 
+       label="לדוגמא: זבוטינסקי 20"
        multiline
        dir="rtl"
        maxRows={2}
        size="small"
        variant="outlined" 
-       
+       Width={90}
        onChange={(e)=>{setAdress(e.target.value)}}
        />
-
+       </div>
+</div>
        <p id="l-map" onClick={showing} >:חיפוש במפה</p>
 
     <Paper
@@ -133,7 +157,9 @@ const search=()=>{
         </iframe>
 
       <br/>
+      <div className="div-but">
       <button type="submit" className="form__button">הבא</button>
+      </div>
     </form>
     </div>
   );

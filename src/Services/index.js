@@ -71,6 +71,10 @@ export const getMyLikeFromServer=(id,idprop)=>{
     return axios.get(`http://localhost:8080/like/getAllLikeById/${id}/${idprop}`);
 }
 
+//שליפת כל הדירות שאהב יוזר מסויים
+export const getAllLikeByIdFromServer=(idUser)=>{
+    return axios.get(`http://localhost:8080/like/getAllLikeByIdUser/${idUser}`)
+}
 
 //chat
 //שיחה בין 2 משתמשים
@@ -96,4 +100,29 @@ export const AddRoomFromServer=(users)=>{
 //שליפת חדר-בדיקה אם יש ל2 משתמשים חדר
 export const getRoomFromServer=(id1,id2)=>{
     return axios.get(`http://localhost:8080/chat/getRoom/${id1}/${id2}`);
+}
+
+
+
+//דירה
+//הוספת דירה
+export const addPropToServer=(det)=>{
+    return axios.post("http://localhost:8080/property/addProp",det)
+}
+
+
+//ערים
+//כל הערים
+export const getAllCityisFromServer=()=>{
+    return axios.get("http://localhost:8080/property/getAllCityis");
+}
+
+//כל סוגי הנכסים
+export const getAllTypeFromServer=()=>{
+    return axios.get("http://localhost:8080/property/getAllTypeProp");
+}
+
+//סטטוס
+export const getStatusFromServer=()=>{
+    return axios.get("http://localhost:8080/property/getStatus");
 }

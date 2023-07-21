@@ -1,9 +1,9 @@
 /* ======================עיצוב סרגל כלים============================== */
 .topnav {
-    background-color: rgb(5, 185, 11);
+    background-color: rgb(10, 180, 199);
     overflow: hidden;
-    
   }
+
   /* Style the links inside the navigation bar */
   .topnav a{
     float: right;
@@ -587,14 +587,23 @@ input[type=submit]:hover{
     
   } */
 
-  /*---------- עיצוב לוח---------  */
-  /* #arrBoard{
-    
-  } */
+  /*------------------------------- עיצוב לוח----------------------------  */
+  /* #arrBoard{ */
+/* display: flex;   */
+/* } */
+.div-board{
+  width: 20%;
+  float: left;
+  margin: 12px;
+  margin-top: 10vh;
+  display: flex;
+  flex-wrap: wrap;
+}
   #table-div{
     size: 70px;
     display:flex;
-    position: fixed;
+    flex-wrap: wrap;
+    /* position:absolute; */
     }
     #th-board{
       display: block;
@@ -615,7 +624,7 @@ input[type=submit]:hover{
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      height: 30vh;
     }
     
     .form__step {
@@ -624,10 +633,10 @@ input[type=submit]:hover{
       align-items: center;
       justify-content: center;
       width: 80vw;
-      height: 150vh;
+      height: 145vh;
       margin-left: 10vw;
-      margin-bottom:5vh ;
-      margin-top: 5vh;
+      margin-bottom:2vh ;
+      margin-top: 2vh;
       padding: 2rem;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -651,21 +660,23 @@ input[type=submit]:hover{
     
     .form__button {
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
+      padding: 0.3rem 2rem;
       border: none;
       border-radius: 5px;
       background-color: #007bff;
       color: #fff;
       cursor: pointer;
+      width: 15%;
+      height: 35px;
+      margin-right: 10%;
+      /* position: sticky;
+      bottom: 0; */
     }
-    /* .form__button[type=""]{
-     
-  
-    } */
     
     .form__button[type="button"] {
-      background-color: #ccc;
-      margin-top: 5vh;
+      background-color: #4fa2fa;
+      /* margin-top: 5vh; */
+     
     }
     
     .form__step p {
@@ -704,11 +715,14 @@ input[type=submit]:hover{
   
   }
   
-  
-  /* .labels{
-    margin-top: 2.5vh;
-    margin-bottom: 2vh;
-  } */
+  #isSale{
+   margin-bottom:5vh;
+  }
+
+  #adress{
+    margin-top: 2vh;
+  }
+
   /* mappppppppppppppppppppppppppppppppppppp */
   #gmap_canvas{
     border:none
@@ -757,15 +771,15 @@ input[type=submit]:hover{
       justify-content: center;
       align-items: center;
       border: 2px dashed #1475fc;
-      height: 300PX;
-      width: 500px;
+      height: 400PX;
+      width: 600px;
       cursor: pointer;
       border-radius: 5px;
     
     }
     .uploded-row{
-      width:505px;
-      margin: 10px 0;
+      width:605px;
+      margin: 2vh 0 47vh 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -773,8 +787,51 @@ input[type=submit]:hover{
       border-radius: 5px;
       background-color: #e9f0ff;
     }
+    #up{
+      margin-top: 20vh;
+    }
     .uploud-content{
       display: flex;
       align-items: center;
   
+    }
+    #mn{
+     font-size:x-large;
+     margin-bottom: 4vh;
+    }
+    .fht{
+      margin-right: 10vw;
+      
+    }
+    #inputName{
+      width:20%;
+      margin-bottom: 5vh;
+    }
+
+    .div-adress{
+      display: flex;
+      flex-direction:row-reverse;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    }
+    #d-p{
+      margin-left: 30px;
+    }
+    .div-but{
+      display: flex;
+      width: 100%;
+      position: sticky;
+      bottom: 0;
+    }
+    #div-upImgs{
+      display: flex;
+      flex-wrap: wrap;
+      height: 77vh;
+      width: 42vw;
+      margin-top: 5vh;
+    }
+  .div-upImg{
+      width: 10vw;
+      height: 11vh;
+     
     }

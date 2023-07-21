@@ -33,7 +33,7 @@ import { SaveArrProp } from "../store/Actions/PropAction";
     }, []); 
     return <>
     <div className="all-apartment">
-        {arrProp.map((item,index)=>{return <div className="div-apartment" key={item.id} >
+        {arrProp.map((item,index)=>{return <div className="div-apartment"  key={item.id} >
           <CardProp props={item} idcard={index} />
            
       </div>} )}

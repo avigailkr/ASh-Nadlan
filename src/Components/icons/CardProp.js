@@ -52,7 +52,7 @@ export default function CardProp(props) {
   let dis = useDispatch();
   let userSelect = useSelector(state => state.user.selectedUser);
   let idProp = props.props.Id;
-  let idPropOwner = props.props.IdUser;
+  let idPropOwner = props.props.Id;
   let [owner, setOwner] = useState(null);
   let [isLoved, setIsLoved] = useState(0);
   let [arrImg, setarrImg] = useState([]);
@@ -146,7 +146,7 @@ if(owner!={}){
 //console.log(owner.Mail.text.slice(0, 3))
 nameSlice='l';
 }
-
+// console.log(owner)
   return (
    
     <Card sx={{maxWidth: 299}}>

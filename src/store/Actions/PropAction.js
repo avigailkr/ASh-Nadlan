@@ -19,4 +19,29 @@ export const SaveArrProp = (arr) => {
   };
 };
 
+export const AddCity =(city)=>{
+  return {
+    type: TypeAction.ADDED_CITY,
+    payload: city,
+  };
+};
+export const SaveArrCity = (arrCity) =>{
+  return {
+    type: TypeAction.SAVE_ARR_CITY,
+    payload: arrCity,
+  };
+};
+export const SaveArrType = (arrType) =>{
+  return {
+    type: TypeAction.SAVE_ARR_TYPE,
+    payload: arrType,
+  };
+};
+export const SaveArrStatus = (arrStatus) =>{
+  return {
+    type: TypeAction.SAVE_ARR_STATUS,
+    payload: arrStatus,
+  };
+};
+
 

@@ -31,3 +31,13 @@ export const ADDED_MASSAGE="ADDED_MASSAGE";//שליחת הודעה הוספה ל
 export const ADDED_LIKE="ADDED_LIKE";
 export const DELETED_LIKE="DELETED_LIKE";
 export const SAVE_ARR_LIKE="SAVE_ARR_LIKE";
+
+//city
+export const ADDED_CITY="ADDED_CITY";
+export const SAVE_ARR_CITY="SAVE_ARR_CITY";
+
+//type
+export const SAVE_ARR_TYPE="SAVE_ARR_TYPE";
+
+//status
+export const SAVE_ARR_STATUS="SAVE_ARR_STATUS";
