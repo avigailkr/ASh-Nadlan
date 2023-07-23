@@ -24,39 +24,28 @@ let user=useSelector(state=>state.user.selectedUser);
 const dis=useDispatch();
 
 useEffect(()=>{
-    getAllLikeByIdFromServer(user.Id).then(res=>{
+  getAllLikeByIdFromServer(user.Id).then(res=>{
         dis(SaveArrLike(res.data))
-        //console.log(res.data)
+        console.log("@@@@@@@")
+        console.log(res.data)
+        console.log("@@@@@")
     }).catch(er=>alert("error in bring arr property from server"))
 },[])
 
 const ArrLike=useSelector(x=>x.like.arr);
 console.log("ArrLike");
-console.log(ArrLike);
+//console.log(ArrLike);
 // console.log("arrrrrrrrrrr")
 // console.log(Arrprop)
 // let r=false;
-
-// const checkLike=(it)=>{
-//     getMyLikeFromServer(user.Id,it.Id).then(res=>{
-//         console.log(res.data.length)})
-//     //     if(res.data.length > 0) 
-//     //    setIsFound(true)
-//     //    else
-//     //    setIsFound(false)
-//     //     })
-//      .catch(er=>alert("error check like"))
-     
-//      return isFound;
-// }
-
 
     return<>
     <h1>לוח דירות</h1>
     
     <div id="table-div">
-        {ArrLike.map((item,index)=>{return <div className="div-apartment"  key={item.id} >
+        {ArrLike.map((item,index)=>{return <div className="div-apartment"  key={item.Id} >
         <CardProp props={item} idcard={index} />
+        {/* {console.log(item)} */}
        </div>})}
 </div>
 
