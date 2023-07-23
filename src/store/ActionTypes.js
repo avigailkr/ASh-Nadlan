@@ -4,6 +4,7 @@ export const ADDED_USER="ADDED_USER";
 export const DELETED_USER="DELETED_USER";
 export const SAVE_ARR_USER="SAVE_ARR_USER";
 export const SAVE_USER="SAVE_USER";
+// export const SAVE_ISACTIVE="SAVE_ISACTIVE";
 export const Exit="Exit";
 
 
@@ -12,6 +13,7 @@ export const ADDED_PROPERTY="ADDED_PROPERTY";
 // export const SELECTED_PROPERTY="SELECTED_PROPERTY";
 export const DELETED_PROPERTY="DELETED_PROPERTY";
 export const SAVE_ARR_PROPERTY="SAVE_ARR_PROPERTY";
+export const ADD_TO_ARR_PROPERTY="ADD_TO_ARR_PROPERTY";
 // export const SAVE_PROPERTY="SAVE_PROPERTY";
 
 
@@ -36,8 +38,20 @@ export const SAVE_ARR_LIKE="SAVE_ARR_LIKE";
 export const ADDED_CITY="ADDED_CITY";
 export const SAVE_ARR_CITY="SAVE_ARR_CITY";
 
+
+
+
 //type
 export const SAVE_ARR_TYPE="SAVE_ARR_TYPE";
 
+//filter
+export const SAVE_FROM_YEARS="SAVE_FROM_YEARS";
+export const SAVE_UNTIL_YEARS="SAVE_UNTIL_YEARS";
+export const SAVE_TYPE="SAVE_TYPE";
+export const SAVE_FROM_SIZE="SAVE_FROM_SIZE";
+export const SAVE_UNTIL_SIZE="SAVE_UNTIL_SIZE";
+
 //status
 export const SAVE_ARR_STATUS="SAVE_ARR_STATUS";
+
+
