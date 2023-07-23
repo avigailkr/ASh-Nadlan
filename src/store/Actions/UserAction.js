@@ -31,6 +31,12 @@ export const SaveUser = (u) => {
     payload: u,
   };
 };
+// export const SaveIsActive = (flag) => {
+//   return {
+//     type: TypeAction.SAVE_USER,
+//     payload: flag,
+//   };
+// };
 
 export const Exite = () => {
   console.log("property")

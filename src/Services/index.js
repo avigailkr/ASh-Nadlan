@@ -27,8 +27,8 @@ export const UpdateUser=(user)=>{
     return axios.put(`http://localhost:8080/user/updateUser`,user)
 }
 //חסימת משתמש
-export const ChacimaUser=(id)=>{       
-    return axios.put(`http://localhost:8080/user/ChacimaUser/${id}`)
+export const ChacimaUser=(id,flag)=>{       
+    return axios.put(`http://localhost:8080/user/ChacimaUser/${id}/${flag}`)
 }
 //props
 //כל הנכסים
@@ -42,7 +42,7 @@ export const getOwnerFromServer=(id)=>{
 //מחיקת נכס
 export const DeletePropFromServer=(id)=>{
     console.log("DeleteFromServer")
-    return axios.delete(`http://localhost:8080/property/deleteProp/${id}`);
+    return axios.put(`http://localhost:8080/property/deleteProp/${id}`);
 }
 
 //imgs
@@ -70,11 +70,15 @@ export const AddLikeFromServer=(newlike)=>{
 export const getMyLikeFromServer=(id,idprop)=>{
     return axios.get(`http://localhost:8080/like/getPropLikeById/${id}/${idprop}`);
 }
-
+// //שליפת כל הדירות שאהבתי 
+// export const getAllMyLikeFromServer=(id)=>{
+//     return axios.get(`http://localhost:8080/like/getAllLikeById/${id}`);
+// }
 //שליפת כל הדירות שאהב יוזר מסויים
 export const getAllLikeByIdFromServer=(idUser)=>{
     return axios.get(`http://localhost:8080/like/getAllLikeById/${idUser}`)
 }
+
 
 //chat
 //שיחה בין 2 משתמשים
@@ -102,14 +106,11 @@ export const getRoomFromServer=(id1,id2)=>{
     return axios.get(`http://localhost:8080/chat/getRoom/${id1}/${id2}`);
 }
 
-
-
 //דירה
 //הוספת דירה
 export const addPropToServer=(det)=>{
     return axios.post("http://localhost:8080/property/addProp",det)
 }
-
 
 //ערים
 //כל הערים
@@ -126,3 +127,56 @@ export const getAllTypeFromServer=()=>{
 export const getStatusFromServer=()=>{
     return axios.get("http://localhost:8080/property/getStatus");
 }
+
+
+//filtering-סינונים
+//עיר
+export const getPropByCityFromServer=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByCity/${id}`);
+} 
+//חדר
+export const getPropByRoom=(roomnum)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByRoom/${roomnum}`);
+}
+//מחיר
+export const getPropByPriceFromServer=(minprice,maxprice)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByPrice/${minprice}/${maxprice}`);
+} 
+//מטר רבוע
+export const getPropBySize=(minsize,maxsize)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsBySize/${minsize}/${maxsize}`);
+}
+//סוג דירה
+export const getPropByType=(name)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeProp/${name}`);
+}
+export const getNamesType=()=>{
+    return axios.get("http://localhost:8080/filter/getAllTypeProp");
+}
+//סוג מכירה
+//למכירה או להשכרה
+export const getPropByTypeSale=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeSale/${id}`);
+}
+//מצב
+export const getPropByStatus=(id)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByStatus/${id}`);
+}
+//קומה
+export const getPropByFloor=(minfloor,maxfloor)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByFloor/${minfloor}/${maxfloor}`);
+}
+//שנה
+export const getPropByYear=(fromyear,untilyear)=>{
+    return axios.get(`http://localhost:8080/filter/getAllPropsByYears/${fromyear}/${untilyear}`);
+}
+
+
+
+//statistic-סטטיסטיקות
+
+//מספר דירות למכירה או להשכרה
+export const getNumPropToSaleOrRent=(idsale)=>{
+    return axios.get(`http://localhost:8080/statistic/numPropToSale/${idsale}`);
+}
+

@@ -11,7 +11,11 @@ return<><div className="topnav">
 {selectUser!=null && <><Link to="addProp">להעלאת מודעה</Link>
 <Link to="board">לוח</Link>
 <Link to="forum">פורומים</Link>
-<Link to="statistic">סטטיסטיקה</Link></>}
+<Link to="statistic">סטטיסטיקה</Link>
+<Link to="users">משתמשים</Link>
+</>
+
+}
 <Link to="help">עזרה</Link>
 <Link to="about">אודות</Link>
 <MenuListComposition/>

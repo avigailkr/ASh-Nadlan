@@ -11,7 +11,8 @@ const initialState = {
 const PropReducer=(state=initialState,action)=>{
   switch(action.type){
           case TypeAction.DELETED_PROPERTY:
-              let arr1 = state.arr.filter((item) => { return item.id !== action.payload })
+              let arr1 = state.arr.filter((item) => { return item.Id != action.payload })
+              
               return {
                   ...state,
                   arr: arr1
@@ -21,12 +22,18 @@ const PropReducer=(state=initialState,action)=>{
                   ...state,
                 arr: [...state.arr,action.payload] 
               }
-          case TypeAction.SAVE_ARR_PROPERTY:
+              case TypeAction.SAVE_ARR_PROPERTY:
+              return {
+                ...state,
+                arr:action.payload
+              } 
+              case TypeAction.ADD_TO_ARR_PROPERTY:
+                // איך מוסיפים דירות למערך הדירות שלא הופיעו כבר בסינון???????????????
               return {
                 ...state,
                 arr:action.payload
               }
-          case TypeAction.ADDED_CITY:
+              case TypeAction.ADDED_CITY:
               return {
                 ...state,
                 arrCity: [...state.arrCity,action.payload]
@@ -45,8 +52,8 @@ const PropReducer=(state=initialState,action)=>{
             return{
               ...state,
               arrStatus:action.payload
-            }
-  }
+            }  
+}
   return state;
 
 }

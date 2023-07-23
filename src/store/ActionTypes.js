@@ -39,8 +39,6 @@ export const ADDED_CITY="ADDED_CITY";
 export const SAVE_ARR_CITY="SAVE_ARR_CITY";
 
 
-
-
 //type
 export const SAVE_ARR_TYPE="SAVE_ARR_TYPE";
 
