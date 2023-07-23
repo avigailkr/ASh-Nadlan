@@ -7,8 +7,10 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import TextField from '@mui/material/TextField';
 import "../style.css";
 import  {UpdateUser}  from "../../Services";
+import { SaveUser } from "../../store/Actions/UserAction";
 const MyProfile=()=>{
     const selectUser = useSelector(state => state.user.selectedUser);//שליפה של המשתמש הנוכחי שהתחבר
+    const dis=useDispatch()
     console.log("MyProfile");
     console.log(selectUser);
 //     const dis=useDispatch();
@@ -21,6 +23,8 @@ const MyProfile=()=>{
             console.log("update")
             console.log(props)
             UpdateUser(props).then(res=>console.log(res)).catch(err=>alert(err))
+            //dis(SaveUser(props))
+
      }
 
      function exite(){

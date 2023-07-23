@@ -62,13 +62,11 @@ export default function CardProp(props) {
     //כל התמונות של דירה זו
     getAllImgsByIdFromServer(idProp).then((res) => {
       setarrImg(res.data);
-      
     }).catch(err => alert(err))
 
 
     getOwnerFromServer(idPropOwner).then(res => {
       setOwner(res.data[0])
-      console.log(res.data[0])
     }).catch(err => alert(err))
 
     userSelect != null &&
