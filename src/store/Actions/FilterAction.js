@@ -19,3 +19,15 @@ export const saveType = (arr) => {
     payload: arr
   };
 };
+export const saveFromSize = (size1) => {
+  return {
+    type: TypeAction.SAVE_FROM_SIZE,
+    payload: size1
+  };
+};
+  export const saveUntilSize = (size2) => {
+    return {
+      type: TypeAction.SAVE_UNTIL_SIZE,
+      payload: size2
+    };
+  };

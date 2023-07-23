@@ -1,9 +1,11 @@
 import * as TypeAction from "../ActionTypes";
 
 const initialState = {
-        from:null,
-        until:null,
-        type:[]
+        fromyear:null,
+        untilyear:null,
+        type:[],
+        fromsize:null,
+        untilsize:null
     
 
 }
@@ -14,18 +16,22 @@ const FilterReducer=(state=initialState,action)=>{
               case TypeAction.SAVE_FROM_YEARS:
                 return{
                     ...state,
-                    from:action.payload
+                    fromyear:action.payload
                 }
                 case TypeAction.SAVE_UNTIL_YEARS:
                 return{
                     ...state,
-                    until:action.payload
+                    untilyear:action.payload
                 }
-                case TypeAction.SAVE_TYPE:
-                  console.log(initialState.type)
+                case TypeAction.SAVE_FROM_SIZE:
                 return{
                     ...state,
-                    type:action.payload
+                    fromsize:action.payload
+                }
+                case TypeAction.SAVE_UNTIL_SIZE:
+                return{
+                    ...state,
+                    untilsize:action.payload
                 }
                 
                 

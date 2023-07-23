@@ -31,8 +31,8 @@ export default function ButBetweenYear() {
     setOpen(false);
   };
   const filter = () => {
-    let from=selectyears.from;
-    let until=selectyears.until;
+    let from=selectyears.fromyear;
+    let until=selectyears.untilyear;
     if(from==null) from=2000;
     if(until==null) until=2023;
     getPropByYear(from,until).then((res)=>{

@@ -10,6 +10,7 @@ import { getPropByType } from '../../../../Services';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToArrProp, SaveArrProp } from '../../../../store/Actions/PropAction';
 import { useEffect } from 'react';
+import { saveType } from '../../../../store/Actions/FilterAction';
 export default function ButTypeProp() {
   const [open, setOpen] = React.useState(false);
   let dis=useDispatch();
@@ -20,6 +21,7 @@ export default function ButTypeProp() {
   };
 
   const handleClose = () => {
+    dis(saveType([]))
     setOpen(false);
   };
   const filter = () => {
@@ -28,11 +30,14 @@ export default function ButTypeProp() {
     for(let i=0;i<selecttype.length;i++){
       console.log(selecttype[i])
     getPropByType(selecttype[i]).then((res)=>{
+      //איך מבקשים ממנו להביא את כל הבחירות שבחרו שנמצאות בתוך מערך הסוג ?????????
       console.log("type")
       console.log(res.data)
       dis(AddToArrProp(res.data))
+      
     }).catch(err=>alert(err))
   }
+  
     handleClose();
   };
 

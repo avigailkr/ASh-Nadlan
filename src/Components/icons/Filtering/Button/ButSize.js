@@ -104,10 +104,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Size from '../Size';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPropBySize } from '../../../../Services';
+import { AddToArrProp } from '../../../../store/Actions/PropAction';
 
 export default function ButSize() {
   const [open, setOpen] = React.useState(false);
-
+  const selectsize=useSelector(state=>state.filter)
+  const dis=useDispatch();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -115,7 +119,15 @@ export default function ButSize() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const filter = () => {
+    let fromsize=selectsize.fromsize;
+    let untilsize=selectsize.untilsize;
+    getPropBySize(fromsize,untilsize).then(res=>{
+      console.log(res.data)
+      dis(AddToArrProp(res.data))
+    }).catch(err=>alert(err))
+    handleClose();
+  };
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -137,7 +149,7 @@ export default function ButSize() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>ביטול</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={filter} autoFocus>
             סנן
           </Button>
         </DialogActions>

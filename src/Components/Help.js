@@ -1,7 +1,9 @@
+import { useEffect } from "react";
+import { getAllMyLikeFromServer } from "../Services";
 
 const Help=()=>{  
     
-  
+  useEffect(()=>{getAllMyLikeFromServer(2).then(res=>console.log(res.data))})
     
     return <>
         <h1>לעזרה</h1>

@@ -53,6 +53,7 @@ export default function TypeProp() {
 
 
   const handleChange = (event) => {
+    
     dis(saveType(event.target.value))
     const {
       target: { value },
