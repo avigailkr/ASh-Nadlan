@@ -41,4 +41,5 @@ import { SaveArrProp } from "../store/Actions/PropAction";
 
     </>
 }
+
 export default Property;

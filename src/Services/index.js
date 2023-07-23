@@ -68,12 +68,12 @@ export const AddLikeFromServer=(newlike)=>{
 }
 //שליפת  דירה שאהבתי 
 export const getMyLikeFromServer=(id,idprop)=>{
-    return axios.get(`http://localhost:8080/like/getAllLikeById/${id}/${idprop}`);
+    return axios.get(`http://localhost:8080/like/getPropLikeById/${id}/${idprop}`);
 }
 
 //שליפת כל הדירות שאהב יוזר מסויים
 export const getAllLikeByIdFromServer=(idUser)=>{
-    return axios.get(`http://localhost:8080/like/getAllLikeByIdUser/${idUser}`)
+    return axios.get(`http://localhost:8080/like/getAllLikeById/${idUser}`)
 }
 
 //chat
