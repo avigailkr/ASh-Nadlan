@@ -145,6 +145,12 @@ export default function CardProp(props) {
       nav(`/answer`);
   };
 
+
+  //details of property
+  const goTodetails=()=>{
+    console.log("gotodetails");
+    nav("DetailsProperty");
+  }
   const [expanded, setExpanded] = React.useState(false);
 
   // {arrImg.length!=0 &&  console.log(arrImg[0].ImgSrc)}
@@ -204,7 +210,7 @@ export default function CardProp(props) {
         <IconButton aria-label="add to favorites" id="butfavor" onClick={() => { userSelect != null && funfavorites() }} >
           {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
-        <Link href="#">ראה עוד</Link>
+        <label onClick={goTodetails}>ראה עוד</label>
 
 
         {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">

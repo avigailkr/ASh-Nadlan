@@ -17,6 +17,7 @@ import MyProfile from './Components/icons/MyProfile';
 import Exit from './Components/Exit';
 import { useSelector } from 'react-redux';
 import Form from './Components/AddProp/Form';
+import DetailsProperty from './Components/DetailsProperty';
 
 // import ChatF from './Components/ChatF';
 function App() {
@@ -46,6 +47,7 @@ function App() {
 <Route path="login" element={<Login/>}/>
 <Route path="register" element={<Register/>}/>
 <Route path="myprofile" element={<MyProfile/>}/>
+<Route path="DetailsProperty" element={<DetailsProperty/>} />
 <Route path="exit" element={<Exit/>}/>
 </Routes>
 {/* <Collage/> */}

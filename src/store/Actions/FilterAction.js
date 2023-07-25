@@ -1,5 +1,24 @@
 import * as TypeAction from "../ActionTypes";
 
+
+export const saveCity = (city) => {
+  return {
+    type: TypeAction.SAVE_CITY,
+    payload: city
+  };
+};
+export const saveRoom = (room) => {
+  return {
+    type: TypeAction.SAVE_ROOM,
+    payload: room
+  };
+};
+export const saveTpeySale = (type) => {
+  return {
+    type: TypeAction.SAVE_TYPE_SALE,
+    payload: type
+  };
+};
 //שמירת טווח שנים
 export const saveFromYear = (year) => {
   return {

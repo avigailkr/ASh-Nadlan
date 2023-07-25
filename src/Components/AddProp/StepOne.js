@@ -18,6 +18,7 @@ import { getAllCityisFromServer } from "../../Services";
 import { useDispatch, useSelector } from "react-redux";
 import { SaveArrCity } from "../../store/Actions/PropAction";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 const StepOne = ({ nextStep }) => {
   //useState for a form 
@@ -27,6 +28,10 @@ const StepOne = ({ nextStep }) => {
   const [adress, setAdress]=useState("");
   const [adress2,setAdress2]=useState("israel");
   const [city, setCity]=useState(1)
+
+//react hook form
+// const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
 
 let dis=useDispatch();
 
@@ -86,7 +91,7 @@ const search=()=>{
   return (<div className="addProp-main">
    
    <Steps level={0}/> 
-    
+   
     <form onSubmit={handleNext} className="form__step">
       <label id="isSale">
         ?מוכרים או משכירים
@@ -123,6 +128,7 @@ const search=()=>{
        variant="outlined" 
        Width={90}
        onChange={(e)=>{setAdress(e.target.value)}}
+       
        />
        </div>
 </div>

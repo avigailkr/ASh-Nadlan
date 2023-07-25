@@ -122,6 +122,9 @@ export default function ButSize() {
   const filter = () => {
     let fromsize=selectsize.fromsize;
     let untilsize=selectsize.untilsize;
+    console.log(
+      fromsize+" "+untilsize
+    )
     getPropBySize(fromsize,untilsize).then(res=>{
       console.log(res.data)
       dis(AddToArrProp(res.data))
@@ -140,7 +143,7 @@ export default function ButSize() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"בחר טווח שטח רבוע"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
