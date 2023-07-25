@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
     const selectUser = useSelector(state => state.user.selectedUser);//שליפה של המשתמש הנוכחי שהתחבר
 console.log("selectUser")
 console.log(selectUser)
-return<><div class="topnav">
-<Link class="active" to="property">דירות</Link>
+return<><div className="topnav">
+<Link className="active" to="property">דירות</Link>
 {selectUser!=null && <><Link to="addProp">להעלאת מודעה</Link>
 <Link to="board">לוח</Link>
 <Link to="forum">פורומים</Link>

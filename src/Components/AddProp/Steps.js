@@ -22,8 +22,6 @@ const Steps=({level})=>{
       <Stepper activeStep={level} dir="rtl" >
         {steps.map((index) => (
           <Step  key={index} >
-           
-            {console.log(index)}
             <StepLabel className="stepsMUI"></StepLabel>
           </Step>
         ))}

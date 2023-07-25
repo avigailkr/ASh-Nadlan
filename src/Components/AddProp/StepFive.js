@@ -4,6 +4,8 @@ import Steps from "./Steps";
 import { addPropToServer } from "../../Services";
 import { useSelector, useDispatch } from "react-redux";
 
+
+
 const StepFive = ({ prevStep, values }) => {
   let user=useSelector(state=>state.user.selectedUser);
   let dis=useDispatch();
@@ -11,7 +13,7 @@ const StepFive = ({ prevStep, values }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(values);
-      alert("send!")
+     
 
       let date1=new Date();
       let date = date1.getFullYear() + '-' + (date1.getMonth() + 1) + '-' + date1.getDate();
@@ -20,9 +22,14 @@ const StepFive = ({ prevStep, values }) => {
       values.IdUser=user.Id;
       
       console.log(date);
-      // addPropToServer(values).then((res)=>{
+       addPropToServer(values).then((res)=>{
+         alert(res.data)
+       }).catch(err=>alert(err));
 
-      // }).catch(err=>alert(err));
+      // v`Price`, v`IdCity`, v`Adress`, v`Sqm`, v`Mmd`, v`IdKindProp`, v`IdTypeSale`, v`InsertDate`,
+      //  v`IdUser`, v`ShowPrice`, v`Floor`, v`InFloor`, v`RoomNum`, `Active`, v`IdStatus`,
+      //   v`Description`, v`ImgUrl`, v`IdEnterDate`
+      
     };
   
     const handlePrev = (e) => {
@@ -49,8 +56,10 @@ const StepFive = ({ prevStep, values }) => {
       </label>
       <input type="number" id="inputName" onChange={(e)=>values.phoneNumber=e.target.value}/>
         
+      <div className="div-but">
         <button type="submit" className="form__button">שלח</button>
         <button type="button" onClick={handlePrev}  className="form__button">הקודם</button>
+      </div>
       </form>
       </div>
     );

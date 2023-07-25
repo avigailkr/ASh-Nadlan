@@ -11,25 +11,25 @@ import { useParams } from "react-router-dom";//לשליפת פרמטרים שנ�
 import socketIoClient from  'socket.io-client'; 
 import React from 'react';
 
-let socket=null;
+// let socket=null;
 
 const Chat=()=>{
     let dis=useDispatch();
     
-    if(socket===null)
-    socket=socketIoClient('http://localhost:8080')
+    // if(socket===null)
+    // socket=socketIoClient('http://localhost:8080')
   
-    socket.on('SET_USERNAME',username=>{//הוספת המשתמש
-        dis(AddUserServer(username))
-    });
+    // // socket.on('SET_USERNAME',username=>{//הוספת המשתמש
+    // //     dis(AddUserServer(username))
+    // // });
 
   
 
-    let myref=React.createRef();//שרואים את ההודעה האחרונה בלי להוריד למטה
-    socket.on('CREATE_MASSAGE',massageObject=>{//הוספת הודעה
-        dis(addMassage(massageObject))
-      myref.current.scrollTop=this.myref.current.clientHeight;//כל פעם שיש הודעה חדשה נראה אותה ולא נצטרך לגלול
-    })
+    // let myref=React.createRef();//שרואים את ההודעה האחרונה בלי להוריד למטה
+    // socket.on('CREATE_MASSAGE',massageObject=>{//הוספת הודעה
+    //     dis(addMassage(massageObject))
+    //   myref.current.scrollTop=this.myref.current.clientHeight;//כל פעם שיש הודעה חדשה נראה אותה ולא נצטרך לגלול
+    // })
   
     
 
@@ -46,9 +46,6 @@ const Chat=()=>{
         dis(selectedRoom(null))//תאפס את מס החדר
         dis(saveArrChat([]))//ואת מערך ההודעות
 
-
-        console.log(userSelect.Id)
-        console.log(ownerProp)
         //מביא  חדר מהשרתid
             getRoomFromServer(userSelect.Id,ownerProp).then((res)=>{
                 //עד שהפונקציה תעדכן בסטייט את החדר היא בינתיים ריקה ותוסיף חדר למרות שיש 
@@ -68,12 +65,11 @@ const Chat=()=>{
 
 function add(){
     console.log("add")
-   
         let users={
             id1:userSelect.Id,
             id2:ownerProp}
    
-        AddRoomFromServer(users).then(res=>{ 
+        AddRoomFromServer(users).then(res=>{
                     dis(selectedRoom(res.data[0].Id))
                     chat(res.data[0].Id)
                 } ).catch(err=>alert(err))
@@ -89,11 +85,16 @@ function chat(id){
    
 
    getOwnerFromServer(ownerProp).then(res=>{
+    console.log("res in chat")
+    console.log(res.data[0])
     let name=res.data[0].Name;
+    console.log(name)
+
     setNameownerProp(name);
 }
     ).catch()
 }
+
 
 function isDelete(){
     // alert("isDelete")
@@ -110,7 +111,7 @@ if (window.confirm('Are you sure you want to delete?')) {
     console.log('Thing was not saved to the database.');
   }
   
- deleteAllMass();
+// deleteAllMass();
 }
     function deleteAllMass()
     {
@@ -127,7 +128,7 @@ return<>{
  <div className="chat"> 
  <DeleteSweepIcon id="deleteAllMass" onClick={isDelete}/>
  <p className="litel">chat with {nameownerProp}</p>
-  <Massage  refProp={myref} /> 
+  <Massage  /*refProp={myref}*/ /> 
 <CreateMasseg/>
 </div>
 </div>

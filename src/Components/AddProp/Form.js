@@ -11,13 +11,12 @@ const Form = () => {
     const [step, setStep] = useState(1);
     const [values, setValues] = useState({});
   
-
-
+// console.log(values);
+       
     const nextStep = (values) => {
       setValues({ ...values, ...values });
       setStep(step + 1);
     };
-    
  
     const prevStep = () => {
       setStep(step - 1);

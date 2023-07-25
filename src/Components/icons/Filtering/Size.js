@@ -14,13 +14,13 @@ export default function EdgeLabelSlider() {
     dis(saveUntilSize(value.target.value[1]))
     //  return `${value}`;
     }
-    let min=0;
-    let max=1000;
+    // let min=0;
+    // let max=1000;
   return (
     <Box sx={{m:3, width: 300 }}>
       <Slider
         track={false}
-        defaultValue={[min, max]}
+        defaultValue={[0, 1000]}//למה הוא נתקע על 100???????????
         getAriaLabel={() => 'Amount'}
         onChange={valueText}
        // getAriaValueText={valueText}
@@ -31,7 +31,7 @@ export default function EdgeLabelSlider() {
           },
           {
             value: 100,
-            label: '1000',
+            label: '100',
           },
         ]}
         valueLabelDisplay="on"

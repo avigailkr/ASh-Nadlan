@@ -34,6 +34,13 @@ export const ADDED_LIKE="ADDED_LIKE";
 export const DELETED_LIKE="DELETED_LIKE";
 export const SAVE_ARR_LIKE="SAVE_ARR_LIKE";
 
+//city
+export const ADDED_CITY="ADDED_CITY";
+export const SAVE_ARR_CITY="SAVE_ARR_CITY";
+
+
+//type
+export const SAVE_ARR_TYPE="SAVE_ARR_TYPE";
 
 //filter
 export const SAVE_FROM_YEARS="SAVE_FROM_YEARS";
@@ -41,3 +48,18 @@ export const SAVE_UNTIL_YEARS="SAVE_UNTIL_YEARS";
 export const SAVE_TYPE="SAVE_TYPE";
 export const SAVE_FROM_SIZE="SAVE_FROM_SIZE";
 export const SAVE_UNTIL_SIZE="SAVE_UNTIL_SIZE";
+export const SAVE_ROOM="SAVE_ROOM";
+export const SAVE_TYPE_SALE="SAVE_TYPE_SALE";
+export const SAVE_CITY="SAVE_CITY";
+
+
+//statistic
+export const SAVE_STATISTIC_CITY="SAVE_STATISTIC_CITY";
+export const SAVE_STATISTIC_TYPE_SALE="SAVE_STATISTIC_TYPE_SALE";
+export const SAVE_STATISTIC_FROM_YEAR="SAVE_STATISTIC_FROM_YEAR";
+export const SAVE_STATISTIC_UNTIL_YEAR="SAVE_STATISTIC_UNTIL_YEAR";
+
+//status
+export const SAVE_ARR_STATUS="SAVE_ARR_STATUS";
+
+

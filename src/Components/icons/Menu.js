@@ -9,12 +9,36 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 
+
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';//אייקון תפריט
+import Login from '../Login';
+import { useDispatch } from 'react-redux';
+import { AddUserServer, getLogin } from '../../Services';
+import { AddUser, SaveUser } from '../../store/Actions/UserAction';
+
+
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 export default function Menu() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const nav=useNavigate();
+//   <TextField
+//   error
+//   id="standard-error-helper-text"
+//   label="Error"
+//   defaultValue="Hello World"
+//   helperText="Incorrect entry."
+//   variant="standard"
+// />
+
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -22,23 +46,9 @@ export default function Menu() {
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
      console.log(event);
-
-    
-
     }
-
     setOpen(false);
   };
-
-  function funregister(){
-    nav("/register")
-
-  }
-  function funreconnectedr(){
-    nav("/login");
-    
-  }
-
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -47,7 +57,9 @@ export default function Menu() {
       setOpen(false);
     }
   }
-
+  function myArea(){
+    nav("/myarea")
+  }
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -58,7 +70,79 @@ export default function Menu() {
     prevOpen.current = open;
   }, [open]);
 
-  return (
+
+
+
+  //loginnnnnnnnnnnnnn
+  const [openLogin, setOpenLogin] = useState(false);
+  const [email,setEmail]=useState('');
+  const [password,setPassword]=useState(0);
+  const dis=useDispatch();
+  function openAreaLogin(){
+    setOpenLogin(true)
+  }
+  const closeAreaLogin = () => {
+    setOpenLogin(false);
+  };
+  const login = () => {
+let details={
+    email:email,
+    password:password
+}
+getLogin(details).then((res)=>{
+    console.log("login")
+    console.log(res.data.user.Active.data[0])
+    if(res.data.user.Active.data[0]==1)
+    {
+        dis(SaveUser(res.data.user));
+        nav("/property");
+    }
+    else
+    alert("אופס... משתמש זה חסום אנא פנה למנהל האתר")
+    
+}).catch(()=>{
+    alert(err=>alert(err.mass))
+    openAreaRegister()})
+    closeAreaLogin();
+  };
+  
+  //loginnnnnnnnnnnnnn
+
+
+
+  //registerrrrrrrrr
+  const [openRegister, setOpenRegister] = useState(false);
+  const [name,setName]=useState('');
+  const [phone,setPhone]=useState('');
+  function openAreaRegister(){
+    setOpenRegister(true);
+  }
+  const closeAreaRegister = () => {
+    setOpenRegister(false);
+  };
+  const register2=()=>{
+   
+    const user={
+        Name:name,
+        Mail:email,
+        Phone:phone,
+        Password:password
+    }
+    console.log(user)
+
+     AddUserServer(user).then((res)=>{
+        alert(res.data.mass)
+        dis(AddUser(user));
+        nav("/property");
+
+
+     }).catch(err=>alert(err))
+     closeAreaRegister()
+  
+    
+}
+  //registerrrrrrrrrr
+  return <>
     <Stack direction="row" spacing={2}>
       <div>
         <Button
@@ -97,8 +181,10 @@ export default function Menu() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={funregister} value="register">הרשמה</MenuItem>
-                    <MenuItem onClick={funreconnectedr} value="connect">התחברות</MenuItem>
+                    <MenuItem onClick={openAreaRegister} value="register">הרשמה</MenuItem>
+                    <MenuItem onClick={openAreaLogin} value="connect">התחברות</MenuItem>
+                    <MenuItem onClick={myArea} value="myarea">לאזור האישי</MenuItem>
+
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -107,5 +193,115 @@ export default function Menu() {
         </Popper>
       </div>
     </Stack>
-  );
+
+
+
+
+
+    {openLogin && <div>
+      <Dialog open={openLogin} onClose={closeAreaLogin}>
+        <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{
+            console.log(e.target.value)
+            setEmail(e.target.value)}}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Password"
+            type="password"
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{
+                console.log(e.target.value)
+                setPassword(e.target.value)}}
+          />
+        </DialogContent>
+        <DialogActions>
+        <Button id="butReg" onClick={()=>{
+          closeAreaLogin();
+          openAreaRegister();
+          }}>הרשמה</Button>
+          <Button onClick={closeAreaLogin}>ביטול</Button>
+          <Button onClick={login}>התחבר</Button>
+        </DialogActions>
+      </Dialog>
+    </div>}
+
+
+
+
+    {openRegister && <div>
+      <Dialog open={openRegister} onClose={closeAreaRegister}>
+        <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{
+            console.log(e.target.value)
+            setEmail(e.target.value)}}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Password"
+            type="password"
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{
+                console.log(e.target.value)
+                setPassword(e.target.value)}}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            type="name"
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{
+            console.log(e.target.value)
+            setName(e.target.value)}}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Phone"
+            type="phone"
+            fullWidth
+            variant="standard"
+            onChange={(e)=>{
+                console.log(e.target.value)
+                setPhone(e.target.value)}}
+          />
+        </DialogContent>
+        <DialogActions>
+        <Button id="butlog" onClick={()=>{closeAreaRegister();
+        openAreaLogin();
+        }}>התחברות</Button>
+          <Button onClick={closeAreaRegister}>ביטול</Button>
+          <Button onClick={register2}>הצטרפות</Button>
+        </DialogActions>
+      </Dialog>
+    </div>}
+    </>
 }

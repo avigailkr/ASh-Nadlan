@@ -11,10 +11,11 @@ import  PropReducer  from './store/Reducer/PropReducer';
 import  LikeReducer  from './store/Reducer/LikeReducer';
 import ChatReducer from './store/Reducer/ChatReducer';
 import FilterReducer from './store/Reducer/FilterReducer';
+import StatisticReducer from './store/Reducer/StatisticReducer';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={createStore(combineReducers({user:UserReducer,prop:PropReducer,like:LikeReducer,chat:ChatReducer,filter:FilterReducer}))}>
+    <Provider store={createStore(combineReducers({user:UserReducer,prop:PropReducer,like:LikeReducer,chat:ChatReducer,filter:FilterReducer,statistic:StatisticReducer}))}>
     <BrowserRouter>
     <App />
     </BrowserRouter>
