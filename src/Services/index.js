@@ -30,10 +30,18 @@ export const UpdateUser=(user)=>{
 export const ChacimaUser=(id,flag)=>{       
     return axios.put(`http://localhost:8080/user/ChacimaUser/${id}/${flag}`)
 }
+//שליחת הודעה 
+export const sendEmail=()=>{
+    return axios.get("http://localhost:8080/user/sendemail");
+}
 //props
 //כל הנכסים
 export const getAllPropertysFromServer=()=>{
     return axios.get("http://localhost:8080/property/getAllPropertys");
+}
+// כל הנכסים של אדם מסויים
+export const getAllPropertysByIdFromServer=(id)=>{
+    return axios.get(`http://localhost:8080/property/getAllPropsByUserId/${id}`);
 }
 //שליפת בעל הנכס
 export const getOwnerFromServer=(id)=>{
@@ -104,10 +112,18 @@ export const AddRoomFromServer=(users)=>{
     return axios.post("http://localhost:8080/chat/addRoom",users);
 }
 //שליפת חדר-בדיקה אם יש ל2 משתמשים חדר
-export const getRoomFromServer=(id1,id2)=>{
-    return axios.get(`http://localhost:8080/chat/getRoom/${id1}/${id2}`);
+export const getRoomFromServer=(owner,user)=>{
+    return axios.get(`http://localhost:8080/chat/getRoom/${owner}/${user}`);
 }
 
+//שליפת כל המשתמשים שהתכתבו עם בעל דירה מסויים
+export const getAllMyClientsFromServer=(ownerid)=>{
+    return axios.get(`http://localhost:8080/chat/getAllMyClients/${ownerid}`);
+}
+//שליפת כל בעלי הדירות שהתכתבתי שמשתמש מסויים התכתב איתם
+export const getAllMyOwnerFromServer=(userid)=>{
+    return axios.get(`http://localhost:8080/chat/getAllMyOwner/${userid}`);
+}
 //דירה
 //הוספת דירה
 export const addPropToServer=(det)=>{

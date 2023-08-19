@@ -42,7 +42,7 @@ const PropReducer=(state=initialState,action)=>{
             return {
               ...state,
               arrCity:action.payload
-            }
+            } 
           case TypeAction.SAVE_ARR_TYPE:
             return {
               ...state,

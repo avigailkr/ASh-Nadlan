@@ -47,7 +47,7 @@ const Chat=()=>{
         dis(saveArrChat([]))//ואת מערך ההודעות
 
         //מביא  חדר מהשרתid
-            getRoomFromServer(userSelect.Id,ownerProp).then((res)=>{
+            getRoomFromServer(ownerProp,userSelect.Id).then((res)=>{
                 //עד שהפונקציה תעדכן בסטייט את החדר היא בינתיים ריקה ותוסיף חדר למרות שיש 
                 //ולכן נשתמש בתשובה שחוזרת מהשרת שהיא אמיתית ונשלח אותה לפונקציה צאט
                 if(res.data.length!=0) 
@@ -66,8 +66,8 @@ const Chat=()=>{
 function add(){
     console.log("add")
         let users={
-            id1:userSelect.Id,
-            id2:ownerProp}
+            owner:ownerProp,
+            user:userSelect.Id}
    
         AddRoomFromServer(users).then(res=>{
                     dis(selectedRoom(res.data[0].Id))
@@ -126,11 +126,12 @@ if (window.confirm('Are you sure you want to delete?')) {
 return<>{
 <div className="root-chat">
  <div className="chat"> 
- <DeleteSweepIcon id="deleteAllMass" onClick={isDelete}/>
- <p className="litel">chat with {nameownerProp}</p>
+ <p className="litel">chat with {nameownerProp}</p> 
+ <DeleteSweepIcon id="deleteAllMassArea" onClick={isDelete}/>
   <Massage  /*refProp={myref}*/ /> 
-<CreateMasseg/>
+
 </div>
+<CreateMasseg/>
 </div>
 }
 </>

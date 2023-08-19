@@ -22,7 +22,7 @@ export const SAVE_ARR_MASSAGES="SAVE_ARR_MASSAGES";//שמירת מערך ההו�
 export const SELECTED_ROOM="SELECTED_ROOM";//חדר נבחר
 export const DELETED_CHAT="DELETED_CHAT";//מחיקת כל ההתכתבות
 export const ADDED_MASSAGE="ADDED_MASSAGE";//שליחת הודעה הוספה למערך
-
+export const SAVE_NAME_CLIENT="SAVE_NAME_CLIENT";//answer
 //chat
 // export const SELECTED_ROOM="SELECTED_ROOM";
 // export const ADDED_ROOM="ADDED_ROOM";

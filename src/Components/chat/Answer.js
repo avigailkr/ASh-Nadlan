@@ -7,54 +7,31 @@ import { wait } from "@testing-library/user-event/dist/utils";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { addMassage, deleteChat, saveArrChat, selectedRoom } from "../../store/Actions/ChatAction";
-import { useParams } from "react-router-dom";//לשליפת פרמטרים שנשלחו בראוטר
+import { useNavigate, useParams } from "react-router-dom";//לשליפת פרמטרים שנשלחו בראוטר
 import socketIoClient from  'socket.io-client'; 
 import React from 'react';
-
-let socket=null;
+import EastIcon from '@mui/icons-material/East';
+import Button from '@mui/material/Button';
+// let socket=null;
 
 const Answer=()=>{
-    let dis=useDispatch();
-    
-    if(socket===null)
-    socket=socketIoClient('http://localhost:8080')
-  
-    socket.on('SET_USERNAME',username=>{//הוספת המשתמש
-        dis(AddUserServer(username))
-    });
-
-  
-
-    let myref=React.createRef();//שרואים את ההודעה האחרונה בלי להוריד למטה
-    socket.on('CREATE_MASSAGE',massageObject=>{//הוספת הודעה
-        dis(addMassage(massageObject))
-      myref.current.scrollTop=this.myref.current.clientHeight;//כל פעם שיש הודעה חדשה נראה אותה ולא נצטרך לגלול
-    })
-  
-    
-
     //כאשר נשלח פרמטרים בניתוב לפה 
     // שולף את הפרמטרים בניתובuseParams
-   
-    let [nameownerProp,setNameownerProp]=useState(" ");//שם בעל הנכס
-    const userSelect = useSelector(state => state.user.selectedUser);//משתמש נוכחי
+    let dis=useDispatch();
+    let [username,setUserName]=useState(" ");//שם בעל הנכס
+    const userSelect = useSelector(state => state.user.selectedUser);// בעל הדירות ומשתמש נוכחי
     let idroom=useSelector(state => state.chat.selectedRoom);//חדר
-
-    
+    let { userid } = useParams();
+    const nav=useNavigate();
     useEffect(()=>{
         dis(selectedRoom(null))//תאפס את מס החדר
         dis(saveArrChat([]))//ואת מערך ההודעות
-//קונה ואאז מוכר וכאן הפוך
-//
-
-        console.log(userSelect.Id)
-      
         //מביא  חדר מהשרתid
         //כגרע אביגיל או כל אחת אחרת ’מיד עונה לצאטים רק אלה ששילת כתבה להם
         //אחר כך תצטרכו להציג למוכר רשימת לקוחות
         //והוא יבחר למי לענות תשובה\
         //id למי שהוא יבחר אז תשנו את ה
-            getRoomFromServer(2,userSelect.Id).then((res)=>{
+            getRoomFromServer(userSelect.Id,userid).then((res)=>{
                 //עד שהפונקציה תעדכן בסטייט את החדר היא בינתיים ריקה ותוסיף חדר למרות שיש 
                 //ולכן נשתמש בתשובה שחוזרת מהשרת שהיא אמיתית ונשלח אותה לפונקציה צאט
                 if(res.data.length!=0) 
@@ -66,37 +43,21 @@ const Answer=()=>{
                     
                   }).catch(err=>alert(err))
                 },[])
-                
-               
+                getOwnerFromServer(userid).then(res=>{
+                  let name=res.data[0].Name;
+                  setUserName(name);
+              }
+                  ).catch()
+            
   
 
-// function add(){
-//     console.log("add")
-   
-//         let users={
-//             id1:userSelect.Id,
-//             id2:ownerProp}
-   
-//         AddRoomFromServer(users).then(res=>{ 
-//                     dis(selectedRoom(res.data[0].Id))
-//                     chat(res.data[0].Id)
-//                 } ).catch(err=>alert(err))
-// }
-
-function chat(id){
+function chat(idroom){
  //כאשר נגיע לשליפת ההודעות לא תיהיה בעיה עם חדר שלא נפתח
- getChatFromServer(id).then((res)=>{
+ //שולף את כל ההודעות של חדר זה
+ getChatFromServer(idroom).then((res)=>{
     console.log(res.data)
     //כאשר אתה מביא את ההתכתבות מהשרת תשמור אותו במערך בסטייט הכללי
    dis(saveArrChat(res.data))}).catch(err=>alert(err))  
-   
-   
-
-//    getOwnerFromServer(ownerProp).then(res=>{
-//     let name=res.data[0].Name;
-//     setNameownerProp(name);
-// }
-//     ).catch()
 }
 
 function isDelete(){
@@ -126,14 +87,17 @@ if (window.confirm('Are you sure you want to delete?')) {
         }).catch(err=>{console.log(err)
             console.log(err);})
     }
-return<>{
+return<>
+{
 <div className="root-chat">
  <div className="chat"> 
  <DeleteSweepIcon id="deleteAllMass" onClick={isDelete}/>
- <p className="litel">chat with {nameownerProp}</p>
-  <Massage  refProp={myref} /> 
+ <p className="litel">chat with {username}</p>
+ {/* refProp={myref} */}
+  <Massage /> 
 <CreateMasseg/>
 </div>
+  <Button className="but-return" onClick={()=>{nav("/myarea")}}><EastIcon/>לאזור האישי</Button>
 </div>
 }
 </>
