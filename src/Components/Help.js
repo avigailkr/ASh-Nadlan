@@ -10,6 +10,7 @@ const Help=()=>{
         <p>
             פנה למנהל האתר במייל
         </p>
+        
         <p>
         shila.juhhb@gmail.com
         </p>
