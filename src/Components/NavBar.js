@@ -23,5 +23,4 @@ return<><div className="topnav">
 </>
 
  }
- 
  export default NavBar;
