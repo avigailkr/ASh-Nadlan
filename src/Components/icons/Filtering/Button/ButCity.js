@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import City from '../City'
 import { getPropByCityFromServer } from '../../../../Services';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddToArrProp } from '../../../../store/Actions/PropAction';
+import { AddToArrProp, SaveArrProp } from '../../../../store/Actions/PropAction';
 export default function ButCity() {
   const [open, setOpen] = React.useState(false);
   const selectcity=useSelector(state=>state.filter.city);
@@ -27,7 +27,7 @@ console.log("selectcity")
 console.log(selectcity)
     getPropByCityFromServer(selectcity).then(res=>{
       console.log(res.data)
-      dis(AddToArrProp(res.data))
+      dis(SaveArrProp(res.data))
     }).catch(err=>alert(err))
 
     handleClose();

@@ -81,8 +81,8 @@ height: 300px;
 }
 /* כותרת */
   #img-logo{
-    width: 10vw;
-    position:absolute;
+    width: 6vw;
+    height: 5vw;
   }
   .title-div{
     display: flex;
@@ -334,7 +334,7 @@ color: #717171;
       border-radius: 20px;
       padding: 20px;
       background-color: #ddedff;
-      margin-top: 3%;
+      margin-top: 6%;
     }
     .litel{
       
@@ -344,17 +344,22 @@ color: #717171;
   }
     .massages{
       /* height: calc(100%-50px); */
-      height: 82%;
+      height: 68%;
       overflow-y: auto;
       padding-right: 20px;
     }
-    .massagesArea{
+    .massagesArea,.massagesboard{
       /* height: calc(100%-50px); */
-      height: 348px;
-      margin-top: -27%;
+      height: 327px;
       margin-left: 42%;
       overflow-y: auto;
       padding-right: 13px;
+    }
+    .massagesboard{
+      margin-top: -47%;
+    }
+    .massagesArea{
+      margin-top: -35%;
     }
     .create-massage{
     /* width: 38%;

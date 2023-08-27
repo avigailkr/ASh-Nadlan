@@ -44,10 +44,10 @@ let [isDelete,setIsDelete]=useState(false);//שם בעל הנכס
 const [open, setOpen] = useState(false);//מחיקה דיאלוג 
 const selectNameClient=useSelector(state=>state.chat.client)
 const [filteredList, setFilteredList] = useState(arrmyclient);
+let arrMass=useSelector(state=>state.chat.arr);//מערך ההתכתבות עם משתמש מסויים
 
 useEffect(()=>{//שליפת כל הדירות שלי   
-  console.log("filteredList")
-  
+  dis(saveArrChat([]))
 
     getAllPropertysByIdFromServer(selectuser.Id).then(res=>{
    setArrMyProp(res.data)}
@@ -62,47 +62,6 @@ useEffect(()=>{//שליפת כל הדירות שלי
    ).catch(err=>{alert(err)})
           },[])
 
-// const Search = styled('div')(({ theme }) => ({
-//     position: 'relative',
-//     borderRadius: theme.shape.borderRadius,
-//     backgroundColor: alpha(theme.palette.common.white, 0.15),
-//     '&:hover': {
-//       backgroundColor: alpha(theme.palette.common.white, 0.25),
-//     },
-//     marginLeft: 0,
-//     width: '100%',
-//     [theme.breakpoints.up('sm')]: {
-//       marginLeft: theme.spacing(1),
-//       width: 'auto',
-//     },
-//   }));
-  
-//   const SearchIconWrapper = styled('div')(({ theme }) => ({
-//     padding: theme.spacing(0, 2),
-//     height: '100%',
-//     position: 'absolute',
-//     pointerEvents: 'none',
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   }));
-  
-//   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//     color: 'inherit',
-//     '& .MuiInputBase-input': {
-//       padding: theme.spacing(1, 1, 1, 0),
-//       // vertical padding + font size from searchIcon
-//       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//       transition: theme.transitions.create('width'),
-//       width: '100%',
-//       [theme.breakpoints.up('sm')]: {
-//         width: '12ch',
-//         '&:focus': {
-//           width: '20ch',
-//         },
-//       },
-//     },
-//   }));
 function search(e){
         // Access input value
         const query = e.target.value;
@@ -121,24 +80,7 @@ function search(e){
       setOpen(false);
       setIsDelete(false);
     };
-// function isDelete(){
-  
-//     alert("isDelete")
-//    alert("האם אתה בטוח שאתה רוצה למחוק"?{deleteAllMass}:'cancel')
-//    return <>
-//     <h1>האם אתה בטוח שאתה רוצה למחוק</h1>
-//     <input type="button" onClick={deleteAllMass}>אישור</input>
-//  <input type="button">ביטול</input></>
-// if (window.confirm('Are you sure you want to delete?')) {
-//     // Save it!
-//     console.log('Thing was saved to the database.');
-//   } else {
-//     // Do nothing!
-//     console.log('Thing was not saved to the database.');
-//   }
-  
-//  deleteAllMass();
-// }
+
 function isdelete() {
       setIsDelete(true)
       setOpen(true)
@@ -159,8 +101,9 @@ function isdelete() {
     return<>
 
  <div className="chatArea">   
- <p className="litel">chat with {selectNameClient}</p>
- <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete}/>
+ {arrMass.length!=0 && <p className="litel">chat with {selectNameClient}</p>}
+ {arrMass.length==0 && <p className="litel">chat with customers</p>}
+ {arrMass.length!=0 && <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete}/>}
  <div className="chat-list">
  <List
       sx={{
@@ -231,16 +174,16 @@ function isdelete() {
   } 
 
   {/* קטע ההודעות */}
- <MassageMyArea />
+  {arrMass.length!=0 && <MassageMyArea />}
 
  {/* יצירת הודעה עם כפתור שלח */}
-  <CreateMassegArea /> 
+ {arrMass.length!=0 && <CreateMassegArea /> }
 </div>
 
 
 <div className="div-myprop">
     <h1 className="myprop-txt">הדירות שלי</h1>
-{arrmyprop.map((item,index)=>{return <div className="div-apartment" key={item.Id} >
+{arrmyprop.filter(x=>x.ActiveMyArea.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
   <CardMyArea props={item} idcard={index} />
       </div>} )}
       </div>

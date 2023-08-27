@@ -29,7 +29,7 @@ import * as React from "react";
   import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
   import { hover } from "@testing-library/user-event/dist/hover";
   import { useDispatch, useSelector } from "react-redux";
-  import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
+  import { ActivePropFromServer, DeletePropFromServer, NotActivePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
   import { useState } from "react";
   import { useEffect } from "react";
   
@@ -41,7 +41,6 @@ import Divider from '@mui/joy/Divider';
 import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import DeleteForever from '@mui/icons-material/DeleteForever';
-import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 
 import Switch from '@mui/joy/Switch';
 
@@ -50,13 +49,17 @@ import Switch from '@mui/joy/Switch';
   import DialogActions from '@mui/material/DialogActions';
   import DialogContent from '@mui/material/DialogContent';
   import DialogContentText from '@mui/material/DialogContentText';
-import { DeleteProp } from "../../../store/Actions/PropAction";
-
+import { AddProp, DeleteProp } from "../../../store/Actions/PropAction";
+import IosShareIcon from '@mui/icons-material/IosShare';
 import Chacima from "../Chacima";
-
+import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
 //icon update
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
+import { SaveUser } from "../../../store/Actions/UserAction";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -79,16 +82,26 @@ import EditIcon from '@mui/icons-material/Edit';
     let [isLoved, setIsLoved] = useState(0);
     let [arrImg, setarrImg] = useState([]);
     let [index, setindex] = useState(0);
-    let [isDelete, setIsDelete] = useState(false);
-  
-  
+    // let [isDelete, setIsDelete] = useState(false);
+  let useselect=useSelector(x=>x.user.selectedUser)
     const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
+
     const handleClickOpen = () => {
       setOpen(true);
     };
     const handleClose = () => {
       setOpen(false);
-      setIsDelete(false);
+      // setIsDelete(false);
+    };
+    const handleClose2 = () => {
+      setOpen2(false);
+      // setIsDelete(false);
+    };
+    const handleClose3 = () => {
+      setOpen2(false);
+      // setIsDelete(false);
     };
   
     useEffect(() => {
@@ -130,19 +143,40 @@ import EditIcon from '@mui/icons-material/Edit';
   
       //console.log(index)
     }
-    function isdelete() {
-      setIsDelete(true)
-    }
+    
     function deleteOk(){
-      DeletePropFromServer(idProp).then((res) => {
-        alert("נמחק בהצלחה")
+      NotActivePropFromServer(idProp).then((res) => {
+        alert("הוסר בהצלחה")
         dis(DeleteProp(idProp));
-  
+        // window.location.reload(true)
+        // dis(SaveUser(useselect))
+        nav("/property")
       }).catch(err => alert(err));
 
       handleClose();
     }
-  
+    function updateOk(){
+      ActivePropFromServer(idProp).then((res) => {
+        alert("הועלה בהצלחה")
+        dis(AddProp(props.props));
+        // window.location.reload(true)
+        // dis(SaveUser(useselect))
+        nav("/property")
+      }).catch(err => alert(err));
+
+      handleClose2();
+    }
+  function deletepropfromWebsite(){
+    DeletePropFromServer(idProp).then((res) => {
+        alert("נמחק בהצלחה")
+        dis(DeleteProp(idProp));
+        // window.location.reload(true)
+        // dis(SaveUser(useselect))
+        nav("/property")
+      }).catch(err => alert(err));
+
+      handleClose2();
+    }
     const bull = (
       <Box component="span" sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
       >
@@ -156,7 +190,63 @@ import EditIcon from '@mui/icons-material/Edit';
 
     return <>
       <Card sx={{ maxWidth: 299 }}>
-       
+      {/* <Button
+        variant="outlined"
+        color="danger"
+        endDecorator={<DeleteForever />}
+        onClick={() => setOpen3(true)}
+      >
+        
+      </Button> */}
+
+          {/* // color="primary"
+          // disabled={false}
+          // underline="none"
+          // variant="plain"
+          // onClick={() => setOpen3(true)} */}
+      
+        <Link
+        sx={{marginLeft:25,fontSize:15,paddingTop:-2}}
+        disabled={false}
+  component="button"
+  underline="none"
+  variant="plain"
+  onClick={() => setOpen3(true)}
+>
+  להסרה<DeleteForever sx={{paddingTop:1}}/>
+</Link>
+      {/* <DeleteIcon onClick={() => setOpen3(true)}/> */}
+      <Modal open={open3} onClose={() => setOpen3(false)}>
+        <ModalDialog
+          variant="outlined"
+          role="alertdialog"
+          aria-labelledby="alert-dialog-modal-title"
+          aria-describedby="alert-dialog-modal-description"
+        >
+          <Typography
+            id="alert-dialog-modal-title"
+            level="h2"
+            startDecorator={<WarningRoundedIcon />}
+          >
+            !אזהרה
+          </Typography>
+          <Divider />
+          <Typography id="alert-dialog-modal-description" textColor="text.tertiary">
+          מודעה זו תוסר לצמיתות מהאתר
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', pt: 2 }}>
+            <Button variant="plain" color="neutral" onClick={() => setOpen3(false)}>
+              ביטול
+            </Button>
+            <Button variant="solid" color="danger" onClick={() => {setOpen3(false)
+            deletepropfromWebsite()}}>
+             אישור
+            </Button>
+          </Box>
+        </ModalDialog>
+      </Modal>
+
+
         <div className="div-imges">
 
         
@@ -180,41 +270,16 @@ import EditIcon from '@mui/icons-material/Edit';
         </CardContent>
   
         <CardActions  disableSpacing >
-        
-          {/* <Link href="#" >ראה עוד</Link>
-          {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
 
-            <DeleteForeverIcon onClick={isdelete} />
-          </IconButton>} */}
-<Switch
-        slotProps={{
-          track: {
-            children: (
-              <React.Fragment>
-                <Typography component="span" level="inherit" sx={{ ml: '3px' }}>
-                  On
-                </Typography>
-                <Typography component="span" level="inherit" sx={{ mr: '3px' }}>
-                  Off
-                </Typography>
-              </React.Fragment>
-            ),
-          },
-        }}
-        sx={{
-          '--Switch-thumbSize': '20px',
-          '--Switch-trackWidth': '57px',
-          '--Switch-trackHeight': '24px',
-        }}
-      />
-<Button
+{props.props.Active.data[0]==1 &&<Button
         variant="outlined"
         color="danger"
-        endDecorator={<DeleteForever />}
+        endDecorator={<VisibilityOffIcon />}
         onClick={() => setOpen(true)}
       >
-        Discard
+        להסרת המודעה
       </Button>
+  }
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog
           variant="outlined"
@@ -227,11 +292,11 @@ import EditIcon from '@mui/icons-material/Edit';
             component="h2"
             startDecorator={<WarningRoundedIcon />}
           >
-            דירה זו תמחק מהאתר
+            מודעה זו תוסר מהאתר   
           </Typography>
           <Divider />
           <Typography id="alert-dialog-modal-description" textColor="text.tertiary">
-            האם אתה בטוח שברצונך להסיר דירה זו מהאתר
+            האם אתה בטוח שברצונך להסיר מודעה זו מהאתר
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', pt: 2 }}>
             <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
@@ -240,6 +305,47 @@ import EditIcon from '@mui/icons-material/Edit';
             <Button variant="solid" color="danger" onClick={() => {setOpen(false)
             deleteOk()}}>
               להסרה
+            </Button>
+          </Box>
+        </ModalDialog>
+      </Modal>
+
+
+
+      {props.props.Active.data[0]==0 && <Button
+        variant="outlined"
+        color="success"
+        endDecorator={<IosShareIcon />}
+        onClick={() => setOpen2(true)}
+      >
+        להעלאת המודעה
+      </Button>}
+
+      <Modal open={open2} onClose={() => setOpen2(false)}>
+        <ModalDialog
+          variant="outlined"
+          role="alertdialog"
+          aria-labelledby="alert-dialog-modal-title"
+          aria-describedby="alert-dialog-modal-description"
+        >
+          <Typography
+            id="alert-dialog-modal-title"
+            component="h2"
+            startDecorator={<WarningRoundedIcon />}
+          >
+            משתמשים יוכלו לצפות במודעה זו
+          </Typography>
+          <Divider />
+          <Typography id="alert-dialog-modal-description" textColor="text.tertiary">
+            האם אתה בטוח שברצונך להעלות מודעה זו מהאתר
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', pt: 2 }}>
+            <Button variant="plain" color="neutral" onClick={() => setOpen2(false)}>
+              ביטול
+            </Button>
+            <Button variant="solid" color="danger" onClick={() => {setOpen2(false)
+            updateOk()}}>
+              להעלאה
             </Button>
           </Box>
         </ModalDialog>
@@ -260,7 +366,7 @@ import EditIcon from '@mui/icons-material/Edit';
         </Collapse>
       </Card>
       
-      {isDelete && <div>
+      {/* {isDelete && <div>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -281,6 +387,6 @@ import EditIcon from '@mui/icons-material/Edit';
         </DialogActions>
       </Dialog>
     </div>
-  }
+  } */}
     </>
   }

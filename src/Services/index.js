@@ -48,8 +48,19 @@ export const getOwnerFromServer=(id)=>{
     return axios.get(`http://localhost:8080/property/getOwner/${id}`);
 }
 //מחיקת נכס
-export const DeletePropFromServer=(id)=>{
+//נפיכתו ללא פעיל
+export const NotActivePropFromServer=(id)=>{
     console.log("DeleteFromServer")
+    return axios.put(`http://localhost:8080/property/NotActiveProp/${id}`);
+}
+//העלאת נכס
+//הפיכתו לפעיל
+export const ActivePropFromServer=(id)=>{
+    return axios.put(`http://localhost:8080/property/activeProp/${id}`);
+}
+//האזור האישי-מחיקת נכס
+//נפיכתו ללא פעיל
+export const DeletePropFromServer=(id)=>{
     return axios.put(`http://localhost:8080/property/deleteProp/${id}`);
 }
 

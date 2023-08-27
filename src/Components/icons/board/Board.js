@@ -53,8 +53,10 @@ export default function Board() {
   const [filteredList, setFilteredList] = useState(arrmyclient);
   let user = useSelector((state) => state.user.selectedUser);
   const ArrLike = useSelector((x) => x.like.arr);
+  let arrMass=useSelector(state=>state.chat.arr);//מערך ההתכתבות עם משתמש מסויים
 
   useEffect(() => {
+dis(saveArrChat([]))
     //שליפת כל הדירות שאהבתי
     getAllLikeByIdFromServer(user.Id)
       .then((res) => {
@@ -72,48 +74,7 @@ export default function Board() {
         alert(err);
       });
   }, []);
-
-  // const Search = styled('div')(({ theme }) => ({
-  //     position: 'relative',
-  //     borderRadius: theme.shape.borderRadius,
-  //     backgroundColor: alpha(theme.palette.common.white, 0.15),
-  //     '&:hover': {
-  //       backgroundColor: alpha(theme.palette.common.white, 0.25),
-  //     },
-  //     marginLeft: 0,
-  //     width: '100%',
-  //     [theme.breakpoints.up('sm')]: {
-  //       marginLeft: theme.spacing(1),
-  //       width: 'auto',
-  //     },
-  //   }));
-
-  //   const SearchIconWrapper = styled('div')(({ theme }) => ({
-  //     padding: theme.spacing(0, 2),
-  //     height: '100%',
-  //     position: 'absolute',
-  //     pointerEvents: 'none',
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //   }));
-
-  //   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  //     color: 'inherit',
-  //     '& .MuiInputBase-input': {
-  //       padding: theme.spacing(1, 1, 1, 0),
-  //       // vertical padding + font size from searchIcon
-  //       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-  //       transition: theme.transitions.create('width'),
-  //       width: '100%',
-  //       [theme.breakpoints.up('sm')]: {
-  //         width: '12ch',
-  //         '&:focus': {
-  //           width: '20ch',
-  //         },
-  //       },
-  //     },
-  //   }));
+  
   function search(e) {
     // Access input value
     const query = e.target.value;
@@ -152,12 +113,13 @@ export default function Board() {
 
     handleClose();
   }
-//style={{ backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat" }}
+ 
   return (
     <div id="board-div">
       <div className="chatArea">
-        <p className="litel">chat with {selectNameClient}</p>
-        <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />
+      {arrMass.length!=0 && <p className="litel">chat with {selectNameClient}</p>}      
+      {arrMass.length==0 && <p className="litel">chat with ownersprop</p>}
+      {arrMass.length!=0 && <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />}
         <div className="chat-list">
           <List
             sx={{
@@ -241,10 +203,11 @@ export default function Board() {
         )}
 
         {/* קטע ההודעות */}
-        <MassageMyBoard />
+       {arrMass.length!=0 &&  <MassageMyBoard />}
 
         {/* יצירת הודעה עם כפתור שלח */}
-        <CreateMassegBoard />
+       { arrMass.length!=0 &&  <CreateMassegBoard />}
+        
       </div>
 
       <h1>לוח דירות</h1>
@@ -262,15 +225,6 @@ export default function Board() {
         {/* </div> */}
       </div>
 
-      {/* <div id="calender-div">
-    <LocalizationProvider   dateAdapter={AdapterDayjs}>
-      <DemoContainer  components={['DateCalendar', 'DateCalendar', 'DateCalendar']}>
-        <DemoItem >
-          <DateCalendar id="calen" defaultValue={dayjs('2022-04-17')} />
-        </DemoItem>
-      </DemoContainer>
-    </LocalizationProvider>
-</div> */}
     </div>
   );
 }

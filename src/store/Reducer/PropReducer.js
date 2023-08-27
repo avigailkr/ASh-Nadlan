@@ -26,7 +26,8 @@ const PropReducer=(state=initialState,action)=>{
               case TypeAction.SAVE_ARR_PROPERTY:
               return {
                 ...state,
-                arr:action.payload
+                arr:action.payload,
+                arrSourc:action.payload
               } 
               case TypeAction.ADD_TO_ARR_PROPERTY:
                 // איך מוסיפים דירות למערך הדירות שלא הופיעו כבר בסינון???????????????
@@ -43,7 +44,7 @@ const PropReducer=(state=initialState,action)=>{
             return {
               ...state,
               arrCity:action.payload
-            }
+            } 
           case TypeAction.SAVE_ARR_TYPE:
             return {
               ...state,
@@ -54,11 +55,6 @@ const PropReducer=(state=initialState,action)=>{
               ...state,
               arrStatus:action.payload
             }  
-          case TypeAction.SAVE_PROPERTY:
-            return{
-              ...state,
-              details:action.payload
-            }
 }
   return state;
 

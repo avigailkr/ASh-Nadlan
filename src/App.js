@@ -36,6 +36,7 @@ import MyArea from "./Components/icons/myarea/MyArea";
 import OnePeople from "./Components/icons/myarea/OnePeople";
 import Board from "./Components/icons/board/Board";
 import { Email } from "./Email";
+import FormField from "./Components/FormField";
 
 
 // import ChatF from './Components/ChatF';
@@ -74,6 +75,7 @@ function App() {
 
       {/* <div id="div-title"><h1 id="title"> אש נדלן</h1><h2 id="title2">89654 הושכרו    3898 נמכרו</h2></div><br/> */}
       <NavBar />
+      {/* <FormField/> */}
       {/* index-
      localhost:3000 כאשר אין ניתוב
       תציג את הדירות */}

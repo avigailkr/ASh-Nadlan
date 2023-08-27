@@ -115,7 +115,7 @@ import * as React from "react";
         setindex(0);
       else setindex(index + 1);
   
-      
+      //console.log(index)
     }
     const funfavorites = () => {
       let like = {

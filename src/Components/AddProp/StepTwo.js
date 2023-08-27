@@ -253,6 +253,6 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
         {/* </div> */}
       </form>
       </div>
-    ;
+    );
   };
   export default StepTwo;
