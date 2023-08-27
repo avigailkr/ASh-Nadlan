@@ -42,6 +42,7 @@ const DetailsProperty =()=>{
 return <>
 <h1>פרטי הנכס</h1>
     {/* <label className="label-det">פרטים</label> */}
+    <div></div>
     <p>כתובת: {details.Adress}</p>
     <p>מחיר:  {details.Price}</p>
     <p>שטח במ"ר:{details.Sqm}</p>
