@@ -25,19 +25,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 export default function Menu() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const nav=useNavigate();
-//   <TextField
-//   error
-//   id="standard-error-helper-text"
-//   label="Error"
-//   defaultValue="Hello World"
-//   helperText="Incorrect entry."
-//   variant="standard"
-// />
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -114,14 +107,15 @@ getLogin(details).then((res)=>{
   const [openRegister, setOpenRegister] = useState(false);
   const [name,setName]=useState('');
   const [phone,setPhone]=useState('');
+  const form=useRef()
   function openAreaRegister(){
     setOpenRegister(true);
   }
   const closeAreaRegister = () => {
     setOpenRegister(false);
   };
-  const register2=()=>{
-   
+  const register2=(e)=>{
+    sendEmail(e)
     const user={
         Name:name,
         Mail:email,
@@ -141,6 +135,19 @@ getLogin(details).then((res)=>{
   
     
 }
+const sendEmail = (e) => {
+  console.log("sendEmail")
+  console.log(form.current)
+  console.log(e)
+  e.preventDefault();
+
+  emailjs.sendForm('service_dddlq4q', 'template_7dy0nh5',form.current, 'h8uvQnkZ5XPOub0E6')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
+};
   //registerrrrrrrrrr
   return <>
     <Stack direction="row" spacing={2}>
@@ -245,6 +252,7 @@ getLogin(details).then((res)=>{
       <Dialog open={openRegister} onClose={closeAreaRegister}>
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
         <DialogContent>
+        <form ref={form}>
           <TextField
             autoFocus
             margin="dense"
@@ -253,6 +261,7 @@ getLogin(details).then((res)=>{
             type="email"
             fullWidth
             variant="standard"
+            name='user_email'
             onChange={(e)=>{
             console.log(e.target.value)
             setEmail(e.target.value)}}
@@ -277,6 +286,7 @@ getLogin(details).then((res)=>{
             type="name"
             fullWidth
             variant="standard"
+            name='user_name'
             onChange={(e)=>{
             console.log(e.target.value)
             setName(e.target.value)}}
@@ -293,13 +303,14 @@ getLogin(details).then((res)=>{
                 console.log(e.target.value)
                 setPhone(e.target.value)}}
           />
+          </form>
         </DialogContent>
         <DialogActions>
         <Button id="butlog" onClick={()=>{closeAreaRegister();
         openAreaLogin();
         }}>התחברות</Button>
           <Button onClick={closeAreaRegister}>ביטול</Button>
-          <Button onClick={register2}>הצטרפות</Button>
+          <Button onClick={(e)=>{register2(e)}}>הצטרפות</Button>
         </DialogActions>
       </Dialog>
     </div>}

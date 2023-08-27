@@ -28,7 +28,6 @@ const StepOne = ({ nextStep }) => {
   const [adress2,setAdress2]=useState("ישראל");
   const [city, setCity]=useState(1)
 
-
 let dis=useDispatch();
 
   useEffect(()=>{

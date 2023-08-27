@@ -26,12 +26,27 @@ export const deleteChat = () => {
 
 //שמירת מערך ההודעות
 export const saveArrChat = (arr) => {
+  console.log("arr")
+  console.log(arr)
   return {
     type: TypeAction.SAVE_ARR_MASSAGES,
     payload: arr
   };
 };
-
+// //שמירת מערך ההודעות
+// export const saveStartAnswer = (flag) => {
+//   return {
+//     type: TypeAction.START_ANSWER,
+//     payload: flag
+//   };
+// };
+export const saveNameClient = (name) => {
+ 
+  return {
+    type: TypeAction.SAVE_NAME_CLIENT,
+    payload: name
+  };
+};
 
 
 

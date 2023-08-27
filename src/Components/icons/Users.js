@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 import Chacima from "./Chacima";
+import Switch, { switchClasses } from '@mui/joy/Switch';
+
 //import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 //import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 //import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -55,7 +57,7 @@ function createData(
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-
+   
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -109,6 +111,8 @@ function Row(props) {
                       <TableCell>{historyRow.city}</TableCell>
                       <TableCell>{historyRow.issaleorrent==0?<p>תפוס</p>:<p>פנוי</p>}</TableCell>
                       <TableCell>{historyRow.inserdate}</TableCell>
+
+
                       {/* <TableCell align="right">{historyRow.amount}</TableCell>
                       <TableCell align="right">
                         {Math.round(historyRow.amount * row.price * 100) / 100}
@@ -146,6 +150,8 @@ export default function Users() {
   let users = useSelector((state) => state.user.arr);
   let props = useSelector((state) => state.prop.arr);
   let [rows, setRows] = useState([]);
+  const [checked, setChecked] = React.useState(false);
+
   //let rows=[]
   let fullarr = [];
   useEffect(() => {
@@ -165,7 +171,7 @@ export default function Users() {
             item.Name,
             item.Mail,
             item.Phone,
-            item.Active,
+            i.Active,
             i.Id,
             i.Price,
             i.IdCity,
@@ -207,7 +213,28 @@ export default function Users() {
           <TableBody>
             {console.log("rows")}
             {console.log(rows)}
-            {rows != [] && rows.map((row) => <Row key={row.id} row={row} />)}
+            {rows != [] && rows.map((row) => {<Row key={row.id} row={row} />
+            // { <Switch
+            //   color={checked ? 'success' : 'danger'}
+            //   checked={checked}
+            //   onChange={(event) => setChecked(event.target.checked)}
+            //   sx={{
+            //     '--Switch-thumbSize': '16px',
+            //     '--Switch-trackWidth': '40px',
+            //     '--Switch-trackHeight': '24px',
+            //     '--Switch-trackBackground': '#EE5E52',
+            //     '&:hover': {
+            //       '--Switch-trackBackground': '#EE5E52',
+            //     },
+            //     [`&.${switchClasses.checked}`]: {
+            //       '--Switch-trackBackground': '#5CB176',
+            //       '&:hover': {
+            //         '--Switch-trackBackground': '#5CB176',
+            //       },
+            //     },
+            //   }}
+            // />}
+          })}
           </TableBody>
         </Table>
       </TableContainer>

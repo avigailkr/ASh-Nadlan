@@ -58,22 +58,22 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 
   const handleNext = (e) => {
     e.preventDefault();
-    //object pluse => to string order to send the server
+   //object pluse => to string order to send the server
 
-    let added="";
+   let added="";
 
-    for (const key in plus) {
-      console.log(plus[key])
-      console.log(`${key}: ${plus[key]}`);
-      if(plus[key]){
-        added+=" ";
-        added+=key;
+   for (const key in plus) {
+     console.log(plus[key])
+     console.log(`${key}: ${plus[key]}`);
+     if(plus[key]){
+       added+=" ";
+       added+=key;
 
-        console.log(added);
-      }
-  }
-    nextStep({ ...values, added, sito, rihut,discription });
-  };
+       console.log(added);
+     }
+ }
+   nextStep({ ...values, added, sito, rihut,discription });
+ };
 
   return (<div className="addProp-main">
     <Steps level={3}/>

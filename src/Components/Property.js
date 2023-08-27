@@ -13,6 +13,7 @@ import Filter from './icons/Filtering/Filter';
  const Property=()=>{
   const dis=useDispatch();
   const arrProp=useSelector(state=>state.prop.arr);
+  
   useEffect(() => {
       getAllPropertysFromServer().then((res)=>{
         dis(SaveArrProp(res.data));
@@ -23,12 +24,18 @@ import Filter from './icons/Filtering/Filter';
       }).catch(err=>alert(err));
     }, []); 
     return <>
-
+    <div id="all-filters"><Filter /></div> 
     <div className="all-apartment">
-      <Filter/>
-        {arrProp.map((item,index)=>{return <div className="div-apartment" key={item.Id} >
+
+    {/* למה החליפה לפילטר ולא מאפ
+    {arrProp.map((item,index)=>{return <div className="div-apartment" key={item.Id} >
          
-         {item.Active.data[0]==1 &&   <CardProp props={item} idcard={index} />}
+         {item.Active.data[0]==1 &&   <CardProp props={item} idcard={index} />} */}
+          
+
+        {arrProp.filter(x=>x.Active.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
+         
+         {<CardProp props={item} idcard={index} />}
           
       </div>} )}
     </div>

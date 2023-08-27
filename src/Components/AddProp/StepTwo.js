@@ -17,7 +17,6 @@ import { getAllTypeFromServer } from '../../Services';
 import { useDispatch, useSelector } from 'react-redux';
 import { SaveArrType } from '../../store/Actions/PropAction';
 import { useEffect } from 'react';
-// import {FormInputProps} from './formInputProps'
 
 const StepTwo = ({ prevStep, nextStep, values }) => {
     const [type, setType] = useState(1);
@@ -80,6 +79,12 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
             return <Option id={item.Id} key={item.Id} value={item.Name} >{item.Name}</Option>
           })}
         </Select>
+       
+          {/* <input
+            type="url"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          /> */}
        
          <label>
         שטח במ"ר:
@@ -240,12 +245,6 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
         
         <Checkbox defaultChecked onChange={(e) => setHalfRoom(!halfRoom)}/>
 </div>
-{/* <FormContainer
-            defaultValues={{name: ''}}
-            onSuccess={data => console.log(data)}
-        >
-            <TextFieldElement name="name" label="Name" required/>
-        </FormContainer> */}
 </div>
        <div className="div-but">
         <button type="submit" className="form__button">הבא</button>

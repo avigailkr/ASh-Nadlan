@@ -25,6 +25,7 @@ const nav=useNavigate();
 
   const handleCloseLogin = () => {
     setOpenLogin(false);
+    nav("/property")
   };
   
   const login = () => {
@@ -33,8 +34,6 @@ let details={
     password:password
 }
 getLogin(details).then((res)=>{
-    console.log("login")
-    console.log(res.data.user.Active.data[0])
     if(res.data.user.Active.data[0]==1)
     {
         dis(SaveUser(res.data.user));
