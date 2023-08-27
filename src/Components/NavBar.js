@@ -9,7 +9,7 @@ console.log(selectUser)
 return<><div className="topnav">
 <Link className="active" to="property">דירות</Link>
 {selectUser!=null && <><Link to="addProp">להעלאת מודעה</Link>
-<Link to="board">לוח</Link>
+<Link to="board">דירות שאהבתי</Link>
 <Link to="forum">פורומים</Link>
 <Link to="statistic">סטטיסטיקה</Link>
 <Link to="users">משתמשים</Link>

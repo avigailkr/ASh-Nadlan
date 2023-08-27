@@ -9,6 +9,7 @@ import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';//אייקון פרופיל
+import { colors } from '@mui/material';
 
 
 
@@ -53,7 +54,7 @@ export default function Profile() {
   }, [open]);
 
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" spacing={2} >
       {/* <Paper>
         <MenuList>
           <MenuItem>Profile</MenuItem>

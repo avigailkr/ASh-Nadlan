@@ -26,7 +26,7 @@ import Filter from './icons/Filtering/Filter';
     return <>
     <div id="all-filters"><Filter /></div> 
     <div className="all-apartment">
-        {arrProp.filter(x=>x.Active.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
+        {arrProp.filter(x=>x.Active.data[0]==1 && x.ActiveMyArea.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
          
          {<CardProp props={item} idcard={index} />}
           
