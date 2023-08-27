@@ -13,6 +13,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import "./style.css";
+import CardBoard from "./CardBoard"
 
 
 export default function Board(){
@@ -44,7 +45,7 @@ console.log("ArrLike");
     
     <div id="table-div">
         {ArrLike.map((item,index)=>{return <div className="div-apartment"  key={item.Id} >
-        <CardProp props={item} idcard={index} />
+        <CardBoard props={item} idcard={index} />
         {/* {console.log(item)} */}
        </div>})}
 </div>

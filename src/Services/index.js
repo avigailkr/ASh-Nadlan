@@ -194,3 +194,10 @@ export const getNumPropToSaleOrRent=(idsale)=>{
 export const getNumPropByYear=(idcity,idtypesale,year)=>{
     return axios.get(`http://localhost:8080/statistic/statisticCountProperty/${idcity}/${idtypesale}/${year}`);
 }
+
+//שליפת פרטי דירה על פי אי די
+export const getDetailsOfPropById = (id)=>{
+    console.log("iiiiiiiiiiiiiddddddddddddddddddd")
+    console.log(id)
+    return axios.get(`http://localhost:8080/property/getDetailsProp/${id}`)
+}

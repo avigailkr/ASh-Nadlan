@@ -50,3 +50,9 @@ export const AddToArrProp = (arr) => {
       payload: arrStatus,
     };
 };
+export const SaveDetailsProp =(det) =>{
+  return{
+    type:TypeAction.SAVE_PROPERTY,
+    payload:det,
+  };
+}

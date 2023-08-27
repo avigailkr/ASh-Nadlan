@@ -29,7 +29,7 @@ function createData(
   idprop,
   price,
   city,
-  isSale,
+  issaleorrent,
   inserDate
 ) {
   return {
@@ -45,7 +45,7 @@ function createData(
         idprop: idprop,
         price: price,
         city: city,
-        issale: isSale,
+        issaleorrent: issaleorrent,
         inserdate: inserDate,
       },
     ],
@@ -73,6 +73,7 @@ function Row(props) {
           {row.id}
         </TableCell>
         {/* <TableCell align="right">{row.id}</TableCell> */}
+        {console.log(row)}
         <TableCell align="left">{row.tz}</TableCell>
         <TableCell align="left">{row.name}</TableCell>
         <TableCell align="left">{row.mail}</TableCell>
@@ -92,7 +93,7 @@ function Row(props) {
                     <TableCell>Id</TableCell>
                     <TableCell>Price</TableCell>
                     <TableCell>City</TableCell>
-                    <TableCell>IsSale</TableCell>
+                    <TableCell>IsSaleOrRent</TableCell>
                     <TableCell>InsertDate</TableCell>
                     {/* <TableCell align="right">Amount</TableCell>
                     <TableCell align="right">Total price ($)</TableCell> */}
@@ -106,7 +107,7 @@ function Row(props) {
                       </TableCell>
                       <TableCell>{historyRow.price}</TableCell>
                       <TableCell>{historyRow.city}</TableCell>
-                      <TableCell>{historyRow.issale.data[0]}</TableCell>
+                      <TableCell>{historyRow.issaleorrent==0?<p>תפוס</p>:<p>פנוי</p>}</TableCell>
                       <TableCell>{historyRow.inserdate}</TableCell>
                       {/* <TableCell align="right">{historyRow.amount}</TableCell>
                       <TableCell align="right">
@@ -168,7 +169,7 @@ export default function Users() {
             i.Id,
             i.Price,
             i.IdCity,
-            i.IsSale,
+            i.IsSaleOrRent,
             i.InsertDate
           );
           fullarr.push(obj);

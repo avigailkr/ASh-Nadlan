@@ -21,9 +21,7 @@ import Filter from './icons/Filtering/Filter';
       getAllUsersFromServer().then((res)=>{
         dis(SaveArrUser(res.data));
       }).catch(err=>alert(err));
-
     }, []); 
-
     return <>
 
     <div className="all-apartment">
