@@ -37,6 +37,7 @@ import OnePeople from "./Components/icons/myarea/OnePeople";
 import Board from "./Components/icons/board/Board";
 import { Email } from "./Email";
 import FormField from "./Components/FormField";
+import Infomation from "./Components/infomation/Infomation";
 
 
 // import ChatF from './Components/ChatF';
@@ -75,6 +76,7 @@ function App() {
 
       {/* <div id="div-title"><h1 id="title"> אש נדלן</h1><h2 id="title2">89654 הושכרו    3898 נמכרו</h2></div><br/> */}
       <NavBar />
+     
       {/* <FormField/> */}
       {/* index-
      localhost:3000 כאשר אין ניתוב
@@ -110,6 +112,8 @@ function App() {
         <Route path="statistic2" element={<Statistic2 />} />
         <Route path="statistic3" element={<Statistic3 />} />
         <Route path="statistic4" element={<Statistic4 />} />
+
+        <Route path="information" element={<Infomation/>}/>
       </Routes>
       {/* <Collage/> */}
     </div>

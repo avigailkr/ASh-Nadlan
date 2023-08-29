@@ -87,8 +87,8 @@ height: 300px;
   .title-div{
     display: flex;
   }
-  .title-div-txt{
-    margin-left: 35%;
+ .title-div-txt{
+  margin-left: 35%;
     display: flex;
     text-align: center;
     /* font-size: 50px; */
@@ -103,6 +103,7 @@ height: 300px;
     -webkit-background-clip: text;
     color: transparent;
   }
+
   #title{
     font-size: 50px;
     font-family: none;
@@ -113,6 +114,42 @@ height: 300px;
       padding-top:18%;
       font-size: 25px;
   }
+  /* information - מידע */
+  .txt-steps-information{
+    font-family: system-ui;
+    margin-left: 36%;
+    width: 60%;
+    text-align: right;
+  }
+  .a1-information{
+    margin-left: 68%;
+  }
+  .a1-information,.a2-information{
+     /* font-size: larger; */
+     font-family: system-ui;
+     /* margin-left: 84%; */
+     text-align: right;
+  }
+ 
+    .title-steps-information{
+      background: linear-gradient(to left,
+      /* violet,
+      indigo,
+      blue,
+      green, */
+      rgb(97, 147, 223),
+      orange,
+      red);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-right: 4%;
+  text-align: right;
+    }
+    .img-information{
+      margin-left: 33%;
+      height: 378px;
+      width: 59%;
+    }
   /* filter-----סינוןןןןןן */
 
   .filter a {
