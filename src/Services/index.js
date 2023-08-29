@@ -74,6 +74,14 @@ export const getAllImgsByIdFromServer=(idprop)=>{
 //     return axios.get(`http://localhost:8080/apartment/getAllApartmentsByUserId/${id}`);
 // }
 
+//שולחים קוד מזהה ומקבלים שם עיר
+export const getCityByIdFromServer=(idcity)=>{
+    return axios.get(`http://localhost:8080/property/getNameCity/${idcity}`);
+}
+//שולחים קוד מזהה ומקבלים סוג הנכס 
+export const getTypeByIdFromServer=(idtype)=>{
+    return axios.get(`http://localhost:8080/property/getNameType/${idtype}`);
+}
 
 
 //like
@@ -220,4 +228,9 @@ export const getNumPropToSaleOrRent=(idsale)=>{
 // מספר דירות למכירה או להשכרה בשנה מסויימת לפי עיר
 export const getNumPropByYear=(idcity,idtypesale,year)=>{
     return axios.get(`http://localhost:8080/statistic/statisticCountProperty/${idcity}/${idtypesale}/${year}`);
+}
+
+//שליפת פרטי דירה על פי אי די
+export const getDetailsOfPropById = (id)=>{
+    return axios.get(`http://localhost:8080/property/getDetailsProp/${id}`)
 }

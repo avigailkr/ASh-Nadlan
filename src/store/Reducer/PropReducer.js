@@ -2,8 +2,11 @@ import * as TypeAction from "../ActionTypes";
 
 const initialState = {
     arr: [],
-    arrSourc:[],
-    message: null
+    arrCity: [],
+    arrType: [],
+    arrStatus:[],
+    message: null,
+    details:{}
 }
 
 const PropReducer=(state=initialState,action)=>{

@@ -54,7 +54,7 @@ export default function Profile() {
   }, [open]);
 
   return (
-    <Stack direction="row" spacing={2} >
+    <Stack direction="row" spacing={2}>
       {/* <Paper>
         <MenuList>
           <MenuItem>Profile</MenuItem>

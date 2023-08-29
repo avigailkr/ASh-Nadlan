@@ -16,7 +16,7 @@ likeRouter.get("/getPropLikeById/:id/:idprop",async (req,res)=>{
 
 //שליפת כל הדירות שאהבתי
 likeRouter.get("/getAllLikeById/:id",async (req,res)=>{
-    try{
+    try{ 
     const query=`SELECT p.Id,Price,IdCity,Adress,Sqm,Mmd,IdKindProp,IdTypeSale,InsertDate,Floor,IdUser,ShowPrice,InFloor,RoomNum,Active,IdStatus,Description,ImgUrl,IdEnterDate,IsSaleOrRent,UpdateDate,LastDateSaleOrRent,LevelInterest FROM nadlan.property p right join nadlan.like l on p.Id=l.IdApartment 
     where l.IdUserLike=${req.params.id}`;
     const rows= await promiseQuery(query);

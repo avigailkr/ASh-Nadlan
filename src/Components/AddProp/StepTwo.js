@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useForm} from 'react-hook-form'
 import { useState } from "react";
 import "../style.css";
 import Steps from "./Steps";
@@ -28,6 +29,8 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     const [price, setPrice] = useState(0);
     const [showPrice, setShowPrice] = useState(true);
   
+   let{register,handleSubmit, formState:{isValid, errors}}=useForm({mode:"all"});
+
     let dis=useDispatch();
 
     useEffect(()=>{
@@ -62,10 +65,10 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     
     console.log("type  "+type, "mr  "+mr, "room  "+room, "halfroom  "+halfRoom, "floor  "+floor, "inFloor  "+inFloor, "date  "+date,  "price  "+price)
     
-    return (<div className="addProp-main">
+    return <div className="addProp-main">
      <Steps level={1}/>
       
-      <form onSubmit={handleNext} className="form__step">
+      <form className="form__step" onSubmit={handleNext}>
       {/* <div> */}
           <label dir="rtl">
             סוג הנכס:
@@ -88,13 +91,17 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
          </label>
          
          <TextField
-          onChange={(e)=>setmr(e.target.value)}
+         onChange={(e)=>setmr(e.target.value)}
          dir="ltr"
-          sx={{ mb: 2, width: '15ch' }}
-          InputProps={{
+        sx={{ mb: 2, width: '15ch' }}
+       InputProps={{
             startAdornment: 'מ"ר',
-          }}>
-          </TextField>
+        }}
+        > 
+        </TextField>
+       
+
+         
        
             <label>
             מספר חדרים:
@@ -246,6 +253,6 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
         {/* </div> */}
       </form>
       </div>
-    );
+   
   };
   export default StepTwo;

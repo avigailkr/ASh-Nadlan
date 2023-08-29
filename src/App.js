@@ -2,6 +2,7 @@ import "./App.css";
 import "./Components/style.css";
 import NavBar from "./Components/NavBar";
 import Property from "./Components/Property";
+import DetailsProperty from './Components/DetailsProperty';
 import Forum from "./Components/Forum";
 import Answer from "./Components/chat/Answer";
 import IndexStatistic from "./Components/icons/Statistic/IndexStatistic";
@@ -84,6 +85,8 @@ function App() {
         <Route path="addProp" element={<Form />} />
         <Route path="board" element={<Board />} />
         <Route path="forum" element={<Forum />} />
+        <Route path="DetailsProperty/:idProp" element={<DetailsProperty/>} />
+
 
         <Route path="help" element={<Help />} />
         <Route path="about" element={<About />} />

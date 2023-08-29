@@ -18,16 +18,16 @@ export default function Add() {
     setChecked([checked[0], event.target.checked]);
   };
    
-  
   const children = (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       <FormControlLabel
-        label="מחירים שירדו לאחרונה"
-        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-      />
-      <FormControlLabel
         label=" דירות שהועלו לאחרונה"
         control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+      /> 
+      <FormControlLabel
+        label= "חדר מוגן"
+
+        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
       />
     </Box>
   );

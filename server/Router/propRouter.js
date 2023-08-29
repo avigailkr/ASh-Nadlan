@@ -16,7 +16,7 @@ propRouter.get("/getAllPropertys",async (req,res)=>{
 
 })
 //שליפת כל הדירות של משתמש מסויים
-propRouter.get("/getAllApartmentsByUserId/:id",async (req,res)=>{
+propRouter.get("/getAllPropsByUserId/:id",async (req,res)=>{
     try{
     const queryString=`SELECT * FROM  nadlan.property WHERE IdUser=${req.params.id}`;
     const rows= await promiseQuery(queryString);
@@ -35,8 +35,20 @@ propRouter.get("/getOwner/:id",async (req,res)=>{
         console.log(e)
         res.send(e.sqlMessage)
 }})
-//מחיקת דירה
-propRouter.put("/deleteProp/:id",async(req,res)=>{
+//העלאת מודעה
+//הפיכת הדירה לפעילה
+propRouter.put("/activeProp/:id",async(req,res)=>{
+    const id=req.params.id;
+    const query=`UPDATE nadlan.property SET
+    Active=True
+    WHERE Id=${id}
+`;
+    const result=await promiseQuery(query);
+    res.send(result);
+})
+//הסרת מודעה 
+//הפיכת הדירה ללא פעילה
+propRouter.put("/NotActiveProp/:id",async(req,res)=>{
     const id=req.params.id;
     const query=`UPDATE nadlan.property SET
     Active=False
@@ -45,8 +57,21 @@ propRouter.put("/deleteProp/:id",async(req,res)=>{
     const result=await promiseQuery(query);
     res.send(result);
 })
-//הוספת דירה
 
+//מחיקת דירה מהאזור האישי
+propRouter.put("/deleteProp/:id",async(req,res)=>{
+    const id=req.params.id;
+    const query=`UPDATE nadlan.property SET
+    ActiveMyArea=False
+    WHERE Id=${id}
+`;
+    const result=await promiseQuery(query);
+    res.send(result);
+})
+
+
+
+//הוספת דירה
 propRouter.post("/addProp",async (req,res)=>{
     const prop=req.body;
     console.log(prop)
@@ -122,8 +147,34 @@ propRouter.get("/getAllCityis", async (req, res)=>{
     res.send(e.sqlMessage)
      }
     })
+//פונקציה המקבלת קוד עיר ומחזירה את שם העיר
+propRouter.get("/getNameCity/:id",async (req, res)=>{
+    try{
+    const id=req.params.id;
+    const query=`SELECT Name FROM nadlan.city where Id=${id}`
+    const rows=await promiseQuery(query);
+    res.send(rows);
+    }
+    catch(e){
+   console.log(e)
+   res.send(e.sqlMessage)
+    }
+   })
     
-    
+   //פונקציה המקבלת קוד סוג הנכס ומחזירה את סוג הנכס 
+propRouter.get("/getNameType/:id",async (req, res)=>{
+    try{
+    const id=req.params.id;
+    const query=`SELECT Name FROM nadlan.kindprop where Id=${id}`
+    const rows=await promiseQuery(query);
+    res.send(rows);
+    }
+    catch(e){
+   console.log(e)
+   res.send(e.sqlMessage)
+    }
+   })
+
     // propRouter.put("/updateTask/:id",async (req,res)=>{
     //     const id=req.params.id;
     //     const task=req.body;

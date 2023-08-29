@@ -30,7 +30,7 @@ import * as React from "react";
   import Chacima from "./Chacima";
   import { hover } from "@testing-library/user-event/dist/hover";
   import { useDispatch, useSelector } from "react-redux";
-  import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../Services";
+  import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getCityByIdFromServer, getMyLikeFromServer, getOwnerFromServer, getTypeByIdFromServer } from "../../Services";
   import { useState } from "react";
   import { useEffect } from "react";
   import { DeleteProp } from "../../store/Actions/PropAction";
@@ -69,7 +69,8 @@ import * as React from "react";
     let [arrImg, setarrImg] = useState([]);
     let [index, setindex] = useState(0);
     let [isDelete, setIsDelete] = useState(false);
-  
+    let [city, setCity] = useState('');
+    let [kind, setKind] = useState('');
   
     const [open, setOpen] = React.useState(true);
     const handleClickOpen = () => {
@@ -86,7 +87,7 @@ import * as React from "react";
         setarrImg(res.data);
       }).catch(err => alert(err))
   
-  
+  //פרטי בעל הדירה
       getOwnerFromServer(idPropOwner).then(res => {
         setOwner(res.data[0])
       }).catch(err => alert(err))
@@ -96,6 +97,19 @@ import * as React from "react";
         getMyLikeFromServer(userSelect.Id, idProp).then((res) => {
           setIsLoved(res.data.length);
         }).catch(err => alert(err));
+
+     //שם העיר
+        getCityByIdFromServer(props.props.IdCity).then(res => {
+          res.data.length==1 &&
+          setCity(res.data[0].Name)
+
+        }).catch(err => alert(err))
+      //סוג הנכס
+      getTypeByIdFromServer(props.props.IdCity).then(res => {
+          res.data.length==1 &&
+          setKind(res.data[0].Name)
+
+        }).catch(err => alert(err))
     }, [])
   
   
@@ -174,6 +188,13 @@ import * as React from "react";
         nav(`/answer`);
     };
   
+     //details of property
+  const goTodetails=()=>{
+    console.log("gotodetails");
+    console.log(idProp)
+    nav(`/DetailsProperty/${idProp}`);
+  }
+
     const [expanded, setExpanded] = React.useState(false);
   
     // {arrImg.length!=0 &&  console.log(arrImg[0].ImgSrc)}
@@ -220,9 +241,13 @@ import * as React from "react";
           <Typography variant="body2" color="text.secondary">
             {props.props && (
               <>
-                {props.props.kind} {bull} {props.props.RoomNum} חד'{bull}{" "}
+                {city} 
+                <br/><>
+                {kind} {bull} {props.props.RoomNum} חד'{bull}{" "}
                 {props.props.Sqm} מ"ר
               </>
+              </>
+              
             )}
           </Typography>
         </CardContent>
@@ -233,8 +258,7 @@ import * as React from "react";
            nav("/login") }} >
             {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
           </IconButton>
-          <Link href="#" >ראה עוד</Link>
-  
+          <label onClick={()=>{goTodetails(idProp)}}>ראה עוד</label>  
   
           {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
             <DeleteForeverIcon onClick={isdelete} />

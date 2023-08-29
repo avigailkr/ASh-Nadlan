@@ -58,8 +58,22 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 
   const handleNext = (e) => {
     e.preventDefault();
-    nextStep({ ...values, plus, sito, rihut,discription });
-  };
+   //object pluse => to string order to send the server
+
+   let added="";
+
+   for (const key in plus) {
+     console.log(plus[key])
+     console.log(`${key}: ${plus[key]}`);
+     if(plus[key]){
+       added+=" ";
+       added+=key;
+
+       console.log(added);
+     }
+ }
+   nextStep({ ...values, added, sito, rihut,discription });
+ };
 
   return (<div className="addProp-main">
     <Steps level={3}/>
@@ -174,6 +188,7 @@ const StepFour = ({ prevStep, nextStep, values }) => {
           id="outlined-multiline-flexible"
           multiline
           dir="rtl"
+          sx={{width:200}}
           maxRows={5}
           onChange={(e)=>{setDiscription(e.target.value)}}
         />

@@ -24,8 +24,8 @@ const StepOne = ({ nextStep }) => {
   const [flag, setFlag] =useState(true);
   const [flag1, setFlag1]=useState(true);
   const [show, setShow]=useState(true);
-  const [adress, setAdress]=useState("");
-  const [adress2,setAdress2]=useState("israel");
+  const [adress, setAdress]=useState("ישראל");
+  const [adress2,setAdress2]=useState("ישראל");
   const [city, setCity]=useState(1)
 
 let dis=useDispatch();
@@ -37,7 +37,7 @@ let dis=useDispatch();
     }).catch(er=>alert("error in bring arr property from server"))
 },[])
 
-let arrCity=useSelector(x=>x.prop.arrCity);
+// let arrCity=useSelector(x=>x.prop.arrCity);
 
 
   //function submit 
@@ -74,10 +74,11 @@ let arrCity=useSelector(x=>x.prop.arrCity);
   };
   
   //function to search --> substring from string the "," tav and put "+" insted
-const search=()=>{
-  setAdress2(adress)
+// const search=(e)=>{
+//   setAdress2(adress)
+//   console.log(e)
 
-}
+// }
     
   const showing=()=>{
     setShow(!show)
@@ -86,12 +87,12 @@ const search=()=>{
   return (<div className="addProp-main">
    
    <Steps level={0}/> 
-    
+
     <form onSubmit={handleNext} className="form__step">
       <label id="isSale">
         ?מוכרים או משכירים
         </label>
-         <Stack direction="row" spacing={2}>
+         <Stack direction="row" spacing={2} >
           
       <Button  onClick={handleClick} value={flag} variant={flag ? "outlined": "contained"}>משכירים</Button>
       <Button onClick={handleClick1} value={flag1} variant={flag1 ? "outlined": "contained"} >מוכרים</Button>
@@ -102,7 +103,7 @@ const search=()=>{
      :כתובת הנכס
       </label>
 
-      <div className="div-adress">
+      {/* <div className="div-adress">
         <div>
          <p>עיר</p>
          
@@ -125,24 +126,24 @@ const search=()=>{
        onChange={(e)=>{setAdress(e.target.value)}}
        />
        </div>
-</div>
-       <p id="l-map" onClick={showing} >:חיפוש במפה</p>
+</div> */}
+       {/* <p id="l-map" onClick={showing} >:כתובת במפה</p> */}
 
     <Paper
       // component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 600 }}
     >
       {/* <IconButton sx={{ p: '10px' }} aria-label="menu">
         <MenuIcon />
       </IconButton> */}
       <InputBase
         sx={{ ml: 1, flex: 1 }}
-        placeholder="חיפוש כתובת במפה"
+        placeholder="הזן כתובת מלאה של הנכס"
         dir="rtl"
         inputProps={{ 'aria-label': 'search google maps' }}
         onChange={(e)=>{setAdress(e.target.value)}}
       />
-      <IconButton onClick={search} type="button" sx={{ p: '10px' }} aria-label="search">
+      <IconButton onClick={()=>{setAdress2(adress)}} type="button" sx={{ p: '10px' }} aria-label="search">
         <SearchIcon />
       </IconButton>
       <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
@@ -151,9 +152,9 @@ const search=()=>{
       </IconButton> */}
     </Paper>    
 
-        <iframe title="map" width="400" height="250" id="gmap_canvas" 
-
-         src={`https://maps.google.com/maps?q=${adress2}&t=&z=15&ie=UTF8&iwloc=&output=embed`}>
+        <iframe title="map" width="600" height="450" id="gmap_canvas" 
+         
+         src={`https://maps.google.com/maps?q=${adress2}&t=&z=15&ie=UTF8&iwloc=&output=embed`} >
         </iframe>
 
       <br/>
