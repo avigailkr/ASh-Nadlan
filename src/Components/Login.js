@@ -14,6 +14,16 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Register from './Register';
 
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { useForm } from 'react-hook-form';
+
+
+const schema = yup.object({
+  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
+   "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
+  email: yup.string().email('כתובת מייל שגויה')
+ }).required();
 
 export default function Login() {
   const [openLogin, setOpenLogin] = useState(true);
@@ -22,18 +32,27 @@ export default function Login() {
   const [errlogin,setErrLogin]=useState(false)
 const dis=useDispatch();
 const nav=useNavigate();
+const form = useForm();
+  const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
+  resolver: yupResolver(schema)
+   });
 
   const handleCloseLogin = () => {
     setOpenLogin(false);
     nav("/property")
   };
   
-  const login = () => {
+  const login = (e) => {
 let details={
-    email:email,
-    password:password
+    email:e.email,
+    password:e.password
 }
 getLogin(details).then((res)=>{
+  console.log("resssssssssssssssssssssssssss")
+  console.log(res.data)
+  if(!res.data.user)//כאשר אין משתמש כזה יציג הודעת שגיאה
+  alert(res.data.mass)
+   else {
     if(res.data.user.Active.data[0]==1)
     {
         dis(SaveUser(res.data.user));
@@ -41,9 +60,10 @@ getLogin(details).then((res)=>{
     }
     else
     alert("אופס... משתמש זה חסום אנא פנה למנהל האתר")
+  }
     
-}).catch(()=>{
-    alert(err=>alert(err.mass))
+}).catch((err)=>{
+    alert(err.mass)
     nav("/register");})
     handleCloseLogin();
   };
@@ -52,53 +72,25 @@ getLogin(details).then((res)=>{
       <Dialog open={openLogin} onClose={handleCloseLogin}>
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
         <DialogContent>
-         { errlogin==false ? <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-            console.log(e.target.value)
-            setEmail(e.target.value)}}
-          />:<TextField
-          error
-          helperText="שדה חובה"
-          autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-            console.log(e.target.value)
-            setEmail(e.target.value)}}
-         />
-          }
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Password"
-            type="password"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-                console.log(e.target.value)
-                setPassword(e.target.value)}
-                
-              }
+
+        <form ref={form}  onSubmit={handleSubmit(login)}>
+          <TextField autoFocus helperText={errors?.email?.message} 
+           margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
+          {...register('email')} 
           />
-        </DialogContent>
-        <DialogActions>
+          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
+          {...register('password')}
+          />
+<DialogActions>
         <Button id="butReg" onClick={()=>{handleCloseLogin();
           nav("/register")}}>הרשמה</Button>
           <Button onClick={handleCloseLogin}>ביטול</Button>
-          <Button onClick={login}>התחבר</Button>
+          <Button type="submit">התחבר</Button>
         </DialogActions>
+    </form>
+      
+        </DialogContent>
+        
       </Dialog>
     </div>
   );

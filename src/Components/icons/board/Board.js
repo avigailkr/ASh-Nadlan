@@ -136,7 +136,7 @@ dis(saveArrChat([]))
                     aria-label="show 4 new mails"
                     color="inherit"
                   >
-                    <Badge badgeContent={17} color="error">
+                    <Badge badgeContent={3} color="error">
                       <ChatIcon />
                     </Badge>
                   </IconButton>

@@ -1,27 +1,50 @@
-import Box from '@mui/joy/Box';
-import Slider from '@mui/joy/Slider';
 import * as React from 'react';
+import Box from '@mui/joy/Box';
+import Slider, { sliderClasses } from '@mui/joy/Slider';
+import { useDispatch } from 'react-redux';
+import { saveFromPrice, saveFromSize, saveUntilPrice, saveUntilSize } from '../../../store/Actions/FilterAction';
+import Input from '@mui/joy/Input';
+import Stack from '@mui/joy/Stack';
 
-function valueText(value) {
-  return `${value}°C`;
-}
 
-export default function Price() {
-  const [value, setValue] = React.useState([0, 137]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{m:3, width: 300}}>
-      <Slider
-        getAriaLabel={() => 'Temperature range'}
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        getAriaValueText={valueText}
+ export default function Price() {
+ const inputRef1 = React.useRef<HTMLInputElement | null>(null);
+ const inputRef2 = React.useRef<HTMLInputElement | null>(null);
+const dis=useDispatch();
+ function fromprice(event){
+dis(saveFromPrice(event.target.value))
+ }
+ function untilprice(event){
+dis(saveUntilPrice(event.target.value));
+ }
+  return<>
+     <Input
+        type="number"
+        defaultValue={0}
+        slotProps={{
+          input: {
+            ref: inputRef1,
+            min: 0,
+            max: 2000,
+            step: 100,
+          },
+        }}
+    onChange={fromprice}
       />
-    </Box>
-  );
-}
+      -
+      <Input
+        type="number"
+        defaultValue={50000}
+        slotProps={{
+          input: {
+            ref: inputRef2,
+            min: 0,
+            max: 2000,
+            step: 100,
+          },
+        }}
+        onChange={untilprice}
+      />
+  </>
+ }

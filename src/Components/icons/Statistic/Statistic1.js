@@ -1,11 +1,45 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getNumPropByYear } from '../../../Services';
 
 export default function Statistic1() {
+  let [xLabels,setxLabels] = useState([]);
+let [yLabels,setyLabels] = useState([]);
+const idcity=useSelector(state=>state.statistic.city);
+const idtypesale=useSelector(state=>state.statistic.typesale);
+const fromyear=useSelector(state=>state.statistic.fromyear);
+const untilyear=useSelector(state=>state.statistic.untilyear);
+
+
+useEffect(()=>{
+  console.log(idcity+" "+idtypesale+" "+fromyear+" "+untilyear)
+  let arryear=[];
+  let arryear2=[];
+  for(let i=fromyear;i<=fromyear+3;i++){
+    arryear.push(i)
+    setxLabels(arryear);
+
+    getNumPropByYear(idcity,idtypesale,i).then(res=>{
+      console.log(res.data[0]['count(*)']);
+      arryear2.push(res.data[0]['count(*)']);
+        setyLabels(arryear2);
+  }).catch(err=>alert(err))
+  }
+  
+  },[])
+
+
+      console.log("xLabels")
+      console.log(xLabels)
+      console.log("yLabels")
+      console.log(yLabels)
   return (
     <BarChart
-      xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
-      series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
+      xAxis={[{ scaleType: 'band', data: xLabels }]}
+      series={[{ data: yLabels }, { data: [1, 6, 3] }]}
       width={500}
       height={300}
     />

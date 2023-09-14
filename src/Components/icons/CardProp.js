@@ -105,7 +105,7 @@ import * as React from "react";
 
         }).catch(err => alert(err))
       //סוג הנכס
-      getTypeByIdFromServer(props.props.IdCity).then(res => {
+      getTypeByIdFromServer(props.props.IdKindProp).then(res => {
           res.data.length==1 &&
           setKind(res.data[0].Name)
 

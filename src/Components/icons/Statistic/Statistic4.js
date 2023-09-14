@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
+import { useSelector } from 'react-redux';
 
-export default function Statistic4() {
+export default function statistic4() {
+
+//   const idcity=useSelector
+// (state=>state.statistic.city);
+// const idtypesale=useSelector(state=>state.statistic.typesale);
+// const fromyear=useSelector(state=>state.statistic.fromyear);
+// const untilyear=useSelector(state=>state.statistic.untilyear);
+
   return (
     <BarChart
       xAxis={[
@@ -13,7 +21,7 @@ export default function Statistic4() {
       ]}
       series={[
         {
-          data: [2, 5, 3],
+          data: [1000, 5000, 3],
         },
       ]}
       width={500}

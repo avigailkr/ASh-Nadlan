@@ -38,6 +38,7 @@ import Board from "./Components/icons/board/Board";
 import { Email } from "./Email";
 import FormField from "./Components/FormField";
 import Infomation from "./Components/infomation/Infomation";
+import Err from "./Components/Err";
 
 
 // import ChatF from './Components/ChatF';
@@ -61,7 +62,10 @@ function App() {
       .catch((err) => alert(err));
   }, []);
 
-    
+  //שאלות  לילאל
+//סטטיסטיקההה?????????????????????????
+//למה בסינון מביא 9 דירות אבל מציג רק 3
+//בדיקות תקינות שלא ישלח עד שאין שגיאות
   return (
     <div className="App">
       <div className="title-div">
@@ -76,7 +80,7 @@ function App() {
 
       {/* <div id="div-title"><h1 id="title"> אש נדלן</h1><h2 id="title2">89654 הושכרו    3898 נמכרו</h2></div><br/> */}
       <NavBar />
-     
+     {/* <Err/> */}
       {/* <FormField/> */}
       {/* index-
      localhost:3000 כאשר אין ניתוב

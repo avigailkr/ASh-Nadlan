@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -9,11 +9,18 @@ import City from '../City'
 import { getPropByCityFromServer } from '../../../../Services';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToArrProp, SaveArrProp } from '../../../../store/Actions/PropAction';
+import { saveChooseCityFilter, saveCity, saveIsClearFilter } from '../../../../store/Actions/FilterAction';
+import { useState } from 'react';
+import { useEffect } from 'react';
 export default function ButCity() {
   const [open, setOpen] = React.useState(false);
-  const selectcity=useSelector(state=>state.filter.city);
   const dis=useDispatch();
-
+  const ischoose=useSelector(state=>state.filter.choosecity);//האם בחרתי אם כן תשנה כפתור למלא
+  
+function mychoose(){
+ dis(saveChooseCityFilter(true))
+  handleClose()
+}
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -21,21 +28,14 @@ export default function ButCity() {
   const handleClose = () => {
     setOpen(false);
   };
-  const filter = () => {
-
-console.log("selectcity")
-console.log(selectcity)
-    getPropByCityFromServer(selectcity).then(res=>{
-      console.log(res.data)
-      dis(SaveArrProp(res.data))
-    }).catch(err=>alert(err))
-
+  const cancel = () => {
+   dis(saveCity(null))
     handleClose();
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant={ischoose ? "soft" : "outlined"} onClick={handleClickOpen}>
         עיר
       </Button>
       <Dialog
@@ -53,8 +53,8 @@ console.log(selectcity)
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>ביטול</Button>
-          <Button onClick={filter} autoFocus>
+          <Button onClick={cancel}>ביטול</Button>
+          <Button onClick={mychoose} autoFocus>
             בצע
           </Button>
         </DialogActions>

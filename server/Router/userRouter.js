@@ -11,7 +11,7 @@ userRouter.post("/login",async (req,res)=>{
     console.log(details)
     let query;
     
-     query=`SELECT *  FROM nadlan.user where Mail='${details.email}' and Password=${details.password}`;//שולף שורות של משימות
+     query=`SELECT *  FROM nadlan.user where Mail='${details.email}' and Password='${details.password}'`;//שולף שורות של משימות
      
     const rows=await promiseQuery(query);
     if(rows.length==0)
@@ -31,9 +31,10 @@ userRouter.post("/addUser",async (req,res)=>{
     try{
       
         const user=req.body;
+        console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
         console.log(user)
         // INSERT INTO nadlan.user VALUES(0,'tgyjy',1233,89776,'gh',2,true)
-        const query=`INSERT INTO nadlan.user VALUES(0,'${user.Name}',${user.Password},'${user.Phone}','${user.Mail}',2,true)`;
+        const query=`INSERT INTO nadlan.user VALUES(0,'${user.Name}','${user.Password}','${user.Phone}','${user.Mail}',2,true)`;
         const result=await promiseQuery(query);
       //  const query2=`SELECT id FROM tasks.users WHERE tasks.email='${task.email}'`
       //  const result2=await promiseQuery(query2);

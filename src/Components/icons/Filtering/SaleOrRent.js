@@ -4,12 +4,16 @@ import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch } from 'react-redux';
 import { saveTpeySale } from '../../../store/Actions/FilterAction';
+import { getIdTypeSale } from '../../../Services';
 
 export default function SaleOrRent() {
   const dis=useDispatch()
   function change(event){
-   //console.log(event.target.innerText)
-   dis(saveTpeySale(event.target.innerText))
+    
+    getIdTypeSale(event.target.innerText).then(res=>{
+       dis(saveTpeySale(res.data[0].Id))
+    }).catch(err=>alert(err))
+      
   }
   return (
     <>  <Select

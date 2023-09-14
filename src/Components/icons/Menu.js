@@ -27,10 +27,28 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+
+const schema = yup.object({
+  name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x.length<=30 && x.length >= 2),
+  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
+   "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
+  email: yup.string().email('כתובת מייל שגויה'),
+  phone:yup.string().test('len',"מספר לא תקין",x => x.length<=10 && x.length >= 9)
+ }).required();
+
 export default function Menu() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const nav=useNavigate();
+
+  const form1 = useRef();
+  const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
+  resolver: yupResolver(schema)
+   });
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -77,10 +95,11 @@ export default function Menu() {
   const closeAreaLogin = () => {
     setOpenLogin(false);
   };
-  const login = () => {
+  const login = (e) => {
+    console.log(e)
 let details={
-    email:email,
-    password:password
+    email:e.email,
+    password:e.password
 }
 getLogin(details).then((res)=>{
     console.log("login")
@@ -108,6 +127,7 @@ getLogin(details).then((res)=>{
   const [name,setName]=useState('');
   const [phone,setPhone]=useState('');
   const form=useRef()
+  
   function openAreaRegister(){
     setOpenRegister(true);
   }
@@ -115,15 +135,15 @@ getLogin(details).then((res)=>{
     setOpenRegister(false);
   };
   const register2=(e)=>{
-    sendEmail(e)
+    
     const user={
-        Name:name,
-        Mail:email,
-        Phone:phone,
-        Password:password
+        Name:e.name,
+        Mail:e.email,
+        Phone:e.phone,
+        Password:e.password
     }
-    console.log(user)
-
+    if(e.email)sendEmail(e)//למה אי אפשר לעשות בתוך הוספת משתמש
+    
      AddUserServer(user).then((res)=>{
         alert(res.data.mass)
         dis(AddUser(user));
@@ -139,7 +159,7 @@ const sendEmail = (e) => {
   console.log("sendEmail")
   console.log(form.current)
   console.log(e)
-  e.preventDefault();
+  // e.preventDefault();
 
   emailjs.sendForm('service_dddlq4q', 'template_7dy0nh5',form.current, 'h8uvQnkZ5XPOub0E6')
     .then((result) => {
@@ -149,6 +169,7 @@ const sendEmail = (e) => {
     });
 };
   //registerrrrrrrrrr
+
   return <>
     <Stack direction="row" spacing={2}>
       <div>
@@ -205,34 +226,20 @@ const sendEmail = (e) => {
 
 
 
-    {openLogin && <div>
-      <Dialog open={openLogin} onClose={closeAreaLogin}>
+    {openLogin &&<> <Dialog open={openLogin} onClose={closeAreaLogin}>
+        
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
+        <form ref={form1}  onSubmit={handleSubmit(login)}>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-            console.log(e.target.value)
-            setEmail(e.target.value)}}
+        
+          <TextField autoFocus helperText={errors?.email?.message} 
+           margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
+          {...register('email')} 
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Password"
-            type="password"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-                console.log(e.target.value)
-                setPassword(e.target.value)}}
+          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
+          {...register('password')}
           />
+          
         </DialogContent>
         <DialogActions>
         <Button id="butReg" onClick={()=>{
@@ -240,79 +247,45 @@ const sendEmail = (e) => {
           openAreaRegister();
           }}>הרשמה</Button>
           <Button onClick={closeAreaLogin}>ביטול</Button>
-          <Button onClick={login}>התחבר</Button>
-        </DialogActions>
-      </Dialog>
-    </div>}
+          <Button type="submit">התחבר</Button>
+        </DialogActions> 
+        </form>
+      </Dialog> 
+      </>
+    }
 
 
 
 
-    {openRegister && <div>
+    {openRegister && <>
       <Dialog open={openRegister} onClose={closeAreaRegister}>
+        <form ref={form}  onSubmit={handleSubmit(register2)}>
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
         <DialogContent>
-        <form ref={form}>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-            name='user_email'
-            onChange={(e)=>{
-            console.log(e.target.value)
-            setEmail(e.target.value)}}
+          <TextField autoFocus helperText={errors?.email?.message} 
+           margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
+          {...register('email')} 
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Password"
-            type="password"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-                console.log(e.target.value)
-                setPassword(e.target.value)}}
+          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
+          {...register('password')}
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Name"
-            type="name"
-            fullWidth
-            variant="standard"
-            name='user_name'
-            onChange={(e)=>{
-            console.log(e.target.value)
-            setName(e.target.value)}}
+          <TextField helperText={errors?.name?.message} margin="dense" label="Name" type="name" fullWidth variant="standard" name='user_name'
+          {...register('name')}
           />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Phone"
-            type="phone"
-            fullWidth
-            variant="standard"
-            onChange={(e)=>{
-                console.log(e.target.value)
-                setPhone(e.target.value)}}
+          <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="phone" fullWidth variant="standard" name='phone'
+          {...register('phone')}
           />
-          </form>
+         
         </DialogContent>
         <DialogActions>
         <Button id="butlog" onClick={()=>{closeAreaRegister();
         openAreaLogin();
         }}>התחברות</Button>
           <Button onClick={closeAreaRegister}>ביטול</Button>
-          <Button onClick={(e)=>{register2(e)}}>הצטרפות</Button>
+          <Button type="submit">הצטרפות</Button>
         </DialogActions>
+         </form>
       </Dialog>
-    </div>}
+    </>}
     </>
 }

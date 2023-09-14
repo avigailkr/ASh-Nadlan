@@ -167,10 +167,15 @@ export const getStatusFromServer=()=>{
 
 
 //filtering-סינונים
-//עיר
-export const getPropByCityFromServer=(id)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByCity/${id}`);
+export const FilterFromServer=(obj)=>{
+    console.log("obj")
+    console.log(obj)
+    return axios.post('http://localhost:8080/filter/getAllPropsByFilter',obj);
 } 
+// //עיר
+// export const getPropByCityFromServer=(id)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByCity/${id}`);
+// } 
 //כל שמות הערים 
 export const getAllNameCitysFromServer=()=>{
     return axios.get(`http://localhost:8080/filter/getAllNamesCity`);
@@ -179,42 +184,51 @@ export const getAllNameCitysFromServer=()=>{
 export const getIdCityByNameFromServer=(name)=>{
     return axios.get(`http://localhost:8080/filter/getIdCity/'${name}'`);
 } 
-//חדר
-export const getPropByRoom=(roomnum)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByRoom/${roomnum}`);
-}
-//מחיר
-export const getPropByPriceFromServer=(minprice,maxprice)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByPrice/${minprice}/${maxprice}`);
-} 
-//מטר רבוע
-export const getPropBySize=(minsize,maxsize)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsBySize/${minsize}/${maxsize}`);
-}
+// //חדר
+// export const getPropByRoom=(roomnum)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByRoom/${roomnum}`);
+// }
+// //מחיר
+// export const getPropByPriceFromServer=(minprice,maxprice)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByPrice/${minprice}/${maxprice}`);
+// } 
+// //מטר רבוע
+// export const getPropBySize=(minsize,maxsize)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsBySize/${minsize}/${maxsize}`);
+// }
 //סוג דירה
-export const getPropByType=(name)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeProp/${name}`);
-}
+// export const getPropByType=(name)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByTypeProp/${name}`);
+// }
 export const getNamesType=()=>{
     return axios.get("http://localhost:8080/filter/getAllTypeProp");
 }
-//סוג מכירה
-//למכירה או להשכרה
-export const getPropByTypeSale=(id)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByTypeSale/${id}`);
+export const getIdType=(type)=>{
+    return axios.get(`http://localhost:8080/filter/getIdTypeProp/${type}`);
 }
-//מצב
-export const getPropByStatus=(id)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByStatus/${id}`);
+
+
+export const getIdTypeSale=(typesale)=>{
+    alert(typesale)
+    return axios.get(`http://localhost:8080/filter/getIdTypeSaleProp/${typesale}`);
 }
-//קומה
-export const getPropByFloor=(minfloor,maxfloor)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByFloor/${minfloor}/${maxfloor}`);
-}
-//שנה
-export const getPropByYear=(fromyear,untilyear)=>{
-    return axios.get(`http://localhost:8080/filter/getAllPropsByYears/${fromyear}/${untilyear}`);
-}
+// //סוג מכירה
+// //למכירה או להשכרה
+// export const getPropByTypeSale=(id)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByTypeSale/${id}`);
+// }
+// //מצב
+// export const getPropByStatus=(id)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByStatus/${id}`);
+// }
+// //קומה
+// export const getPropByFloor=(minfloor,maxfloor)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByFloor/${minfloor}/${maxfloor}`);
+// }
+// //שנה
+// export const getPropByYear=(fromyear,untilyear)=>{
+//     return axios.get(`http://localhost:8080/filter/getAllPropsByYears/${fromyear}/${untilyear}`);
+// }
 
 
 
