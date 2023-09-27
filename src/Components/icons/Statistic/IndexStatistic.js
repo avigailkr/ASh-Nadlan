@@ -7,36 +7,35 @@ import Statistic2 from "./Statistic2";
 import Statistic3 from "./Statistic3";
 import Statistic4 from "./Statistic4";
 import YearStatistic from "./YearStatistic";
+import { Button, Stack, colors } from "@mui/material";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const IndexStatistic = () => {
     //שדות להוספה בדאטה
 //פונקציה המקבלת שנה ומחזירה כמה דירות נתפסו
-
+const idcity=useSelector(state=>state.statistic.city);
     //תאריך מכירה או השכרה אחרון
     //ככה שאני יוכל לחשב כמה דירות נמכרו בשנה זו
     // ברגע שהמוכר מעדכן שהדירה תפוסה 
     //הוא מעדכן את התאריך
+let [isshows1,setisshows1]=useState(false)
+    function s1(){setisshows1(true)}
 
-    const nav=useNavigate()
-    function s1(){nav("/statistic1")}
-    function s2(){nav("/statistic2")}
-    function s3(){nav("/statistic3")}
-    function s4(){nav("/statistic4")}
+  return (<>      
+  <p id="title-static">הכנס נתונים כדי לצפות בסחר וממכר של דירות באזור מסויים</p>
+    <Stack spacing={3} direction="row" className='div-all-static'>
+    <Button onClick={s1} variant="outlined" href="#outlined-buttons" disabled={idcity==null?true:false}>
+        לצפייה
+      </Button>
+      {/* <input type="button" value="לצפייה" onClick={s1} disabled={idcity==null?true:false}/> */}
+      {/* <SaleOrRentStatistic /> */}
+      <YearStatistic /><CityStatic />
+</Stack>
 
-  return (
-    <>
-      <CityStatic />
-      <SaleOrRentStatistic/>
-      <YearStatistic/>
-      <input type="button" onClick={s1}/>
-      <input type="button" onClick={s2}/>
-      <input type="button" onClick={s3}/>
-      <input type="button" onClick={s4}/>
-      {/* <Statistic1 />
-      <Statistic2 />
-      <Statistic3 />
-      <Statistic4 /> */}
-    </>
+{isshows1 == true? <Statistic1/>:<p style={{color:"red"}}>בחר עיר *</p>}
+
+</>
   );
 };
 export default IndexStatistic;

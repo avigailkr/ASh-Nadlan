@@ -1086,3 +1086,38 @@ input[type=submit]:hover{
       margin-right: 21vw;
 
      }
+
+
+     /* static */
+    .filter-static{
+      
+    }
+    .div-static{
+
+    }
+    .div-all-static{
+      margin-top: 2%;
+      margin-left: 31%;
+    }
+    #filter-city-static{
+      height: 96px;
+    }
+    #static1{
+    margin-left: 35%;
+    }
+    #title-static{
+      background: linear-gradient(to left,
+      /* violet,
+      indigo,
+      blue,
+      green, */
+      #d86830,
+      rgb(239, 138, 16),
+      rgb(73, 179, 201));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: xx-large;
+  /* margin-right: 4%; */
+  /* text-align: right; */
+    }
+     /*  */
