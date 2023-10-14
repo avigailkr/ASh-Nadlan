@@ -52,7 +52,7 @@ export default function Board() {
   const selectNameClient = useSelector((state) => state.chat.client);
   const [filteredList, setFilteredList] = useState(arrmyclient);
   let user = useSelector((state) => state.user.selectedUser);
-  const ArrLike = useSelector((x) => x.like.arr);
+  let ArrLike = useSelector((x) => x.like.arr);
   let arrMass=useSelector(state=>state.chat.arr);//מערך ההתכתבות עם משתמש מסויים
 
   useEffect(() => {
@@ -213,7 +213,7 @@ dis(saveArrChat([]))
       <h1>לוח דירות</h1>
 
       <div id="table-div">
-        {ArrLike.filter((x) => x.Active != null && x.Active.data[0] == 1).map(
+        {ArrLike.length!=0 && ArrLike.filter((x) => x.Active != null && x.Active.data[0] == 1).map(
           (item, index) => {
             return (
               <div className="div-apartment" key={item.Id}>

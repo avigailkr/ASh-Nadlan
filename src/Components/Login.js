@@ -20,7 +20,7 @@ import { useForm } from 'react-hook-form';
 
 
 const schema = yup.object({
-  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
+  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])"," סיסמה חייבת להכיל מספרים ותווים").test('len',
    "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
   email: yup.string().email('כתובת מייל שגויה')
  }).required();

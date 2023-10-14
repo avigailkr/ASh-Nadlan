@@ -23,7 +23,7 @@ const schema = yup.object({
   password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
    "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
   email: yup.string().email('כתובת מייל שגויה'),
-  phone:yup.string().test('len',"מספר לא תקין",x => x.length<=10 && x.length >= 9)
+  phone:yup.string().matches("^([0-9])","מספר טלפון יכיל מספרים בלבד").test('len',"מספר לא תקין",x => x.length<=10 && x.length >= 9)
  }).required();
 
 export default function Register() {
