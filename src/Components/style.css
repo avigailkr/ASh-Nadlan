@@ -31,256 +31,71 @@ height: 300px;
   float: left; */
   
 /* helper text from mui */
-  .MuiFormHelperText-root {
-    color: #dc3208 !important;
-  }
+.MuiFormHelperText-root {
+  color: #dc3208 !important;
+}
 /* myarea-האזור שלי לאזור האישי */
-  #div-all-people{
-   width: 59%;
-  }
-  #div-myprop{
-    margin-top: -36%;
-    margin-left: 48%;
-    width: 52%;
-  }
-  #div-mychat{
-    margin-left: 0%;
-    width: 80%;
+#div-all-people{
+ width: 59%;
+}
+#div-myprop{
+  margin-top: -36%;
+  margin-left: 48%;
+  width: 52%;
+}
+#div-mychat{
+  margin-left: 0%;
+  width: 80%;
 
-  }
-  
-  #icon-update{
-    margin-left: 12%;
-    margin-bottom: 3%;
-  }
-  .myprop-txt{
-    margin-right: 54%;
-    font-family: 'Courier New', Courier, monospace;
-    background: linear-gradient(to left,
-            /* violet,
-            indigo,
-            blue,
-            green, */
-            rgb(128, 128, 81),
-            orange,
-            red);
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-  #selected-chat{
-    /* margin-left: 15%; */
+}
 
-  }
-  #selected-search{
-    /* margin-left: 17%; */
-  }
+#icon-update{
+  margin-left: 12%;
+  margin-bottom: 3%;
+}
+.myprop-txt{
+  margin-right: 54%;
+  font-family: 'Courier New', Courier, monospace;
+  background: linear-gradient(to left,
+          /* violet,
+          indigo,
+          blue,
+          green, */
+          rgb(128, 128, 81),
+          orange,
+          red);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+#selected-chat{
+  /* margin-left: 15%; */
+
+}
+#selected-search{
+  /* margin-left: 17%; */
+}
 #div-myprop{
 
 }
 /* return-חזרה לעמוד הקודם */
 .but-return{
-  margin-bottom: 46%;
-  margin-left: 28%;
-  margin-top: 1%;
+margin-bottom: 46%;
+margin-left: 28%;
+margin-top: 1%;
 }
 /* כותרת */
-  #img-logo{
-    width: 6vw;
-    height: 5vw;
-  }
-  .title-div{
-    display: flex;
-  }
- .title-div-txt{
-  margin-left: 35%;
-    display: flex;
-    text-align: center;
-    /* font-size: 50px; */
-    background: linear-gradient(to left,
-            /* violet,
-            indigo,
-            blue,
-            green, */
-            yellow,
-            orange,
-            red);
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-
-  #title{
-    font-size: 50px;
-    font-family: none;
-  }
-  #title2{
-    font-family: none;
-      font-style: oblique;
-      padding-top:18%;
-      font-size: 25px;
-  }
-  /* information - מידע */
-  .txt-steps-information{
-    font-family: system-ui;
-    margin-left: 36%;
-    width: 60%;
-    text-align: right;
-  }
-  .a1-information{
-    margin-left: 68%;
-  }
-  .a1-information,.a2-information{
-     /* font-size: larger; */
-     font-family: system-ui;
-     /* margin-left: 84%; */
-     text-align: right;
-  }
- 
-    .title-steps-information{
-      background: linear-gradient(to left,
-      /* violet,
-      indigo,
-      blue,
-      green, */
-      rgb(97, 147, 223),
-      orange,
-      red);
-  -webkit-background-clip: text;
-  color: transparent;
-  margin-right: 4%;
-  text-align: right;
-    }
-    .img-information{
-      margin-left: 33%;
-      height: 378px;
-      width: 59%;
-    }
-  /* filter-----סינוןןןןןן */
-
-  .filter a {
-    float: right;
-    color: #4f5b9d;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  #all-filters{
-    margin-top: 1%;
-    margin-left: 25%;
-  }
-  /* filter-----סינוןןןןןן */
-  
-/* ======================עיצוב סרגל כלים============================== */
-.topnav {
-    background-color: rgb(185, 86, 5);
-    overflow: hidden;
-    
-  }
-  /* Style the links inside the navigation bar */
-  .topnav a{
-    float: right;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    
-  }
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #1ae646b4;
-    color: white;
-  }
-
-  
-/* ========================================================================= */
-
-/* board-לוח */
-#board-div
-{
-  /* background-image:
-  url(
-./icons/board/p10.jpg);
-  background-size: "cover";
-  height: 100vh;
-  margin-top: -70px;
-  font-size:50px;
-  background-repeat:no-repeat; */
-  /* background-image:url("../"); */
-    /* backgroundImage:url("image/רקע לוח.png") */
+#img-logo{
+  width: 6vw;
+  height: 5vw;
 }
-/* הרשמה או התחברות לחצני בחירה*/
-.container {
-  position: relative;
-  width: 30%;
-  margin: 3px;
-  float: left;
-  margin-left: 13%;
+.title-div{
+  display: flex;
 }
-.image {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+.title-div-txt{
+margin-left: 35%;
+  display: flex;
   text-align: center;
-}
-.container:hover .image {
-  opacity: 0.3;
-}
-.container:hover .middle {
-  opacity: 1;
-}
-.text {
-  background-color: #04AA6D;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
-/* טופס הרשמה */
-.form{
-border:solid black 2px;
-}
-.input-form{
-  direction: rtl;
-  margin: 1%;
-  background-color: #04AA6D;
-  width: 30%;
-  padding: 1%;
-}
-
-/* תפריט */
-.div-option{
-  height: 742px;
-  background-color: darkgray;
-  margin-left: 0;
-  width: 20%;
-}
-.router-option{
-  font-size: 157%;
-  color: white;
-  margin: 100p;
-  padding-top: 67px;
-}
-
-.dialog-title{
-  text-align: center;
+  /* font-size: 50px; */
   background: linear-gradient(to left,
           /* violet,
           indigo,
@@ -293,24 +108,209 @@ border:solid black 2px;
   color: transparent;
 }
 
+#title{
+  font-size: 50px;
+  font-family: none;
+}
+#title2{
+  font-family: none;
+    font-style: oblique;
+    padding-top:18%;
+    font-size: 25px;
+}
+/* information - מידע */
+.txt-steps-information{
+  font-family: system-ui;
+  margin-left: 36%;
+  width: 60%;
+  text-align: right;
+}
+.a1-information{
+  margin-left: 68%;
+}
+.a1-information,.a2-information{
+   /* font-size: larger; */
+   font-family: system-ui;
+   /* margin-left: 84%; */
+   text-align: right;
+}
+
+  .title-steps-information{
+    background: linear-gradient(to left,
+    /* violet,
+    indigo,
+    blue,
+    green, */
+    rgb(97, 147, 223),
+    orange,
+    red);
+-webkit-background-clip: text;
+color: transparent;
+margin-right: 4%;
+text-align: right;
+  }
+  .img-information{
+    margin-left: 33%;
+    height: 378px;
+    width: 59%;
+  }
+/* filter-----סינוןןןןןן */
+
+.filter a {
+  float: right;
+  color: #4f5b9d;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+#all-filters{
+  margin-top: 1%;
+  margin-left: 25%;
+}
+/* filter-----סינוןןןןןן */
+
+/* ======================עיצוב סרגל כלים============================== */
+.topnav {
+  background-color: rgb(185, 86, 5);
+  overflow: hidden;
+  
+}
+/* Style the links inside the navigation bar */
+.topnav a{
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  
+}
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #1ae646b4;
+  color: white;
+}
+
+
+/* ========================================================================= */
+
+/* board-לוח */
+#board-div
+{
+/* background-image:
+url(
+./icons/board/p10.jpg);
+background-size: "cover";
+height: 100vh;
+margin-top: -70px;
+font-size:50px;
+background-repeat:no-repeat; */
+/* background-image:url("../"); */
+  /* backgroundImage:url("image/רקע לוח.png") */
+}
+/* הרשמה או התחברות לחצני בחירה*/
+.container {
+position: relative;
+width: 30%;
+margin: 3px;
+float: left;
+margin-left: 13%;
+}
+.image {
+opacity: 1;
+display: block;
+width: 100%;
+height: auto;
+transition: .5s ease;
+backface-visibility: hidden;
+}
+.middle {
+transition: .5s ease;
+opacity: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+text-align: center;
+}
+.container:hover .image {
+opacity: 0.3;
+}
+.container:hover .middle {
+opacity: 1;
+}
+.text {
+background-color: #04AA6D;
+color: white;
+font-size: 16px;
+padding: 16px 32px;
+}
+
+/* טופס הרשמה */
+.form{
+border:solid black 2px;
+}
+.input-form{
+direction: rtl;
+margin: 1%;
+background-color: #04AA6D;
+width: 30%;
+padding: 1%;
+}
+
+/* תפריט */
+.div-option{
+height: 742px;
+background-color: darkgray;
+margin-left: 0;
+width: 20%;
+}
+.router-option{
+font-size: 157%;
+color: white;
+margin: 100p;
+padding-top: 67px;
+}
+
+.dialog-title{
+text-align: center;
+background: linear-gradient(to left,
+        /* violet,
+        indigo,
+        blue,
+        green, */
+        yellow,
+        orange,
+        red);
+-webkit-background-clip: text;
+color: transparent;
+}
+
 
 
 
 /* ;;;;;;;;;;;;;;;;;;;;;;;;;עיצוב כרטיס דירה;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; */
 /* תגית תאריך לפני כמב זמן הועלתה הדירה */
 .div-timeDate{
-  margin-left: 42%;
-  background-color: palegoldenrod;
-  width: 58%;
+margin-left: 42%;
+background-color: palegoldenrod;
+width: 58%;
 }
 /* כל הדירות */
 .all-apartment{
-  padding-left: 7%;
+padding-left: 7%;
 }
 /* תמונות של הדירות במסך הבית */
 .img-Apar{
-  width: 27vw;
-  height: 22vw;
+width: 27vw;
+height: 22vw;
 
 }
 
@@ -325,192 +325,394 @@ color: #717171;
 }
 
 .div-apartment{
-  width: 282px;
-  float: left;
-  margin: 12px;
-  /* background-color: rgb(79, 5, 9); */
+width: 282px;
+float: left;
+margin: 12px;
+/* background-color: rgb(79, 5, 9); */
 }
 .but-chat{
-  margin-left: 32%;
-  /* text-align: center; */
-  width: 28%;
-  background-color: #3e85d1;
-  color: #fff;
-  border: none;
-  border-radius: 15px 15px 15px 15px;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: bold;
-  height: 39px;
+margin-left: 32%;
+/* text-align: center; */
+width: 28%;
+background-color: #3e85d1;
+color: #fff;
+border: none;
+border-radius: 15px 15px 15px 15px;
+cursor: pointer;
+font-size: 20px;
+font-weight: bold;
+height: 39px;
 
 }
 /* ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; */
 
 
 /* -----------------------chat---------------------- */
-  *{
-    box-sizing: border-box;
-    outline: none;
+*{
+  box-sizing: border-box;
+  outline: none;
+}
+.root-chat{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  background-color: #c5ddeb;
+}
+  .chat{
+    margin-left: 30%;
+    width: 100%;
+    max-width: 500px;
+    height: 713px;
+    margin: 0 outo;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #fff;
   }
-  .root-chat{
-    height: 100%;
+  .chatArea{
+    margin-left: 2%;
+    width: 100%;
+    max-width: 647px;
+    height: 496px;
+    margin: 0 outo;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #ddedff;
+    margin-top: 6%;
+  }
+  .litel{
+    
+    font-size: larger;
+    text-align: center;
+    font-family: cursive;
+}
+  .massages{
+    /* height: calc(100%-50px); */
+    height: 68%;
+    overflow-y: auto;
+    padding-right: 20px;
+  }
+  .massagesArea,.massagesboard{
+    /* height: calc(100%-50px); */
+    height: 327px;
+    margin-left: 42%;
+    overflow-y: auto;
+    padding-right: 13px;
+  }
+  .massagesboard{
+    margin-top: -47%;
+  }
+  .massagesArea{
+    margin-top: -35%;
+  }
+  .create-massage{
+  /* width: 38%;
+  margin-left: -40%;
+  height: 50px;
+  display: flex;
+  margin-top: 50%; */
+  width: 29%;
+  margin-left: -31%;
+  /* height: 50px; */
+  display: flex;
+  margin-top: 41%;
+     
+  }
+   .create-massageArea{
     display: flex;
-    align-items: center;
-    align-content: center;
-    background-color: #c5ddeb;
   }
-    .chat{
-      margin-left: 30%;
-      width: 100%;
-      max-width: 500px;
-      height: 713px;
-      margin: 0 outo;
-      border-radius: 20px;
-      padding: 20px;
-      background-color: #fff;
-    }
-    .chatArea{
-      margin-left: 2%;
-      width: 100%;
-      max-width: 647px;
-      height: 496px;
-      margin: 0 outo;
-      border-radius: 20px;
-      padding: 20px;
-      background-color: #ddedff;
-      margin-top: 6%;
-    }
-    .litel{
-      
-      font-size: larger;
-      text-align: center;
-      font-family: cursive;
+  .chat-list{
+    margin-top: -16%;
+    margin-left: -6%;
   }
-    .massages{
-      /* height: calc(100%-50px); */
-      height: 68%;
-      overflow-y: auto;
-      padding-right: 20px;
-    }
-    .massagesArea,.massagesboard{
-      /* height: calc(100%-50px); */
-      height: 327px;
-      margin-left: 42%;
-      overflow-y: auto;
-      padding-right: 13px;
-    }
-    .massagesboard{
-      margin-top: -47%;
-    }
-    .massagesArea{
-      margin-top: -35%;
-    }
-    .create-massage{
-    /* width: 38%;
-    margin-left: -40%;
+  #deleteAllMassArea{
+  margin-right: -86%;
+
+  }
+  .all-onepeople{
+    /* height: 100px; */
+  }
+  .create-massageArea input[type="text"],.create-massage input[type="text"]{
     height: 50px;
-    display: flex;
-    margin-top: 50%; */
-    width: 29%;
-    margin-left: -31%;
-    /* height: 50px; */
-    display: flex;
-    margin-top: 41%;
-       
-    }
-     .create-massageArea{
-      display: flex;
-    }
-    .chat-list{
-      margin-top: -16%;
-      margin-left: -6%;
-    }
-    #deleteAllMassArea{
-    margin-right: -86%;
-
-    }
-    .all-onepeople{
-      /* height: 100px; */
-    }
-    .create-massageArea input[type="text"],.create-massage input[type="text"]{
-      height: 50px;
-      line-height: 50px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 15px 0 0 15px;
-      width: 85%;
-    }
-    .create-massageArea input[type="submit"],.create-massage input[type="submit"]{
-      width: 15%;
-      background-color: #3e85d1;
-      color: #fff;
-      border: none;
-      border-radius: 0 15px 15px 0;
-      cursor: pointer;
-      font-size: 20px;
-      font-weight: bold;
-      height: 50px;
-      line-height: 50px;
-    }
-    .create-massageArea input[type="submit"],.create-massage input[type="submit"]:hover,
-    .create-massageArea input[type="submit"],.create-massage input[type="submit"]:focus{
-    opacity: 0.8;
-
+    line-height: 50px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 15px 0 0 15px;
+    width: 85%;
   }
-
-  .massage{
-    background-color: #e5e5e5;
-    color: #333;
-    border-radius: 0 10px 10px 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  .massage-user{
-    font-weight: bold;
-  }
-  .massage-massage--me{
+  .create-massageArea input[type="submit"],.create-massage input[type="submit"]{
+    width: 15%;
     background-color: #3e85d1;
-    border-radius: 10px 0 10px 10px;
-    color: #333;
-    padding: 10px;
-    margin-bottom: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 50px;
   }
-  /* ------------------------------------------------ */
+  .create-massageArea input[type="submit"],.create-massage input[type="submit"]:hover,
+  .create-massageArea input[type="submit"],.create-massage input[type="submit"]:focus{
+  opacity: 0.8;
+
+}
+
+.massage{
+  background-color: #e5e5e5;
+  color: #333;
+  border-radius: 0 10px 10px 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.massage-user{
+  font-weight: bold;
+}
+.massage-massage--me{
+  background-color: #3e85d1;
+  border-radius: 10px 0 10px 10px;
+  color: #333;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+/* ------------------------------------------------ */
 
 
 
-  /*222222222222222222222222222 ד222222222222222222222222222 דפדוף תמונות*/
-  * {box-sizing: border-box}
+/*222222222222222222222222222 ד222222222222222222222222222 דפדוף תמונות*/
+* {box-sizing: border-box}
 body {font-family: Verdana, sans-serif; margin:0}
 .mySlides {display: none;
-  animation-name: fade;
-  animation-duration: 1.5s;
+animation-name: fade;
+animation-duration: 1.5s;
 }
 img {vertical-align: middle;
-  width: 72%;}
+width: 72%;}
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
+max-width: 1000px;
+position: relative;
+margin: auto;
 }
 
 /* Next & previous buttons */
 .prev, .next {
+cursor: pointer;
+position: absolute;
+top: 50%;
+width: auto;
+padding: 16px;
+margin-top: -22px;
+color: white;
+font-weight: bold;
+font-size: 18px;
+transition: 0.6s ease;
+border-radius: 0 3px 3px 0;
+user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+right: 0;
+border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+color: #f2f2f2;
+font-size: 15px;
+padding: 8px 12px;
+position: absolute;
+bottom: 8px;
+width: 100%;
+text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+color: #f2f2f2;
+font-size: 12px;
+padding: 8px 12px;
+position: absolute;
+top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+cursor: pointer;
+height: 15px;
+width: 15px;
+margin: 0 2px;
+background-color: #bbb;
+border-radius: 50%;
+display: inline-block;
+transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+background-color: #717171;
+}
+
+
+
+@keyframes fade {
+from {opacity: .4} 
+to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+.prev, .next,.text {font-size: 11px}
+}
+
+.mySlides-fade{
+width: 100%;
+}
+/* .slideshow-container{
+
+} */
+/* 2222222222222222222222222222222222222222222222222222222222222222222 */
+
+
+
+/* ---------------------form--------------------------------- */
+/* .form-field{
+color:#3e85d1;
+font-size: larger;
+font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+direction: rtl;
+
+} */
+
+/* .form-field-title{
+font-size:large;
+text-align: center;
+
+} */
+.form-field input[type=text]{
+/* width: 84%;
+background-color:rgb(149, 200, 230);
+padding: 14px 20px;
+margin: 8px 0; */
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+
+}
+
+.form-field input[type=submit]{
+/* width: 97%; 
+color: white;
+width: 82%;
+background-color: rgb(149, 200, 230);
+padding: 18px 5px;
+margin: 8px 0; */
+width: 64%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+width: 40%;
+
+}
+
+input[type=submit]:hover{
+/* background-color:#525fc4 ; */
+background-color: #45a049;
+}
+#form,#form-Login{
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+width: 40%;
+margin-left: 36%;
+margin-top: 2%;
+/* border: solid ; */
+}
+#form-Login{
+display: block;
+}
+#form{
+display: block;
+}
+.form-error{
+border: solid  red;
+}
+.form-good{
+border: solid  greenyellow;
+}
+.error1{
+color: red;
+}
+.close-form{
+margin-left: 92%;
+color:rgb(174, 54, 54) ;
+}
+
+
+/* ---------------------------------------------------------- */
+
+
+
+/* collage */
+
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: auto;
   padding: 16px;
-  margin-top: -22px;
+  margin-top: -50px;
   color: white;
   font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
+  font-size: 20px;
   border-radius: 0 3px 3px 0;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Position the "next button" to the right */
@@ -520,19 +722,9 @@ img {vertical-align: middle;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Number text (1/3 etc) */
@@ -544,579 +736,387 @@ img {vertical-align: middle;
   top: 0;
 }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}
-
-.mySlides-fade{
-width: 100%;
-}
-/* .slideshow-container{
-
-} */
-  /* 2222222222222222222222222222222222222222222222222222222222222222222 */
-
-
-
-  /* ---------------------form--------------------------------- */
-/* .form-field{
-color:#3e85d1;
-font-size: larger;
-font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-direction: rtl;
-
-} */
-
-/* .form-field-title{
-  font-size:large;
+/* Container for image text */
+.caption-container {
   text-align: center;
-  
-} */
-.form-field input[type=text]{
-  /* width: 84%;
-  background-color:rgb(149, 200, 230);
-  padding: 14px 20px;
-  margin: 8px 0; */
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-
-}
-
-.form-field input[type=submit]{
-  /* width: 97%; 
+  background-color: #222;
+  padding: 2px 16px;
   color: white;
-  width: 82%;
-  background-color: rgb(149, 200, 230);
-  padding: 18px 5px;
-  margin: 8px 0; */
-  width: 64%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 40%;
-
 }
 
-input[type=submit]:hover{
-  /* background-color:#525fc4 ; */
-  background-color: #45a049;
-}
-#form,#form-Login{
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  width: 40%;
-  margin-left: 36%;
-  margin-top: 2%;
-  /* border: solid ; */
-}
-#form-Login{
-  display: block;
-}
-#form{
-  display: block;
-}
-.form-error{
-  border: solid  red;
-}
-.form-good{
-  border: solid  greenyellow;
-}
-.error1{
-  color: red;
-}
-.close-form{
-  margin-left: 92%;
-  color:rgb(174, 54, 54) ;
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
 
-  /* ---------------------------------------------------------- */
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
 
-
-
-  /* collage */
-
-  body {
-    font-family: Arial;
-    margin: 0;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
-  img {
-    vertical-align: middle;
-  }
-  
-  /* Position the image container (needed to position the left and right arrows) */
-  .container {
-    position: relative;
-  }
-  
-  /* Hide the images by default */
-  .mySlides {
-    display: none;
-  }
-  
-  /* Add a pointer when hovering over the thumbnail images */
-  .cursor {
-    cursor: pointer;
-  }
-  
-  /* Next & previous buttons */
-  .prev,
-  .next {
-    cursor: pointer;
-    position: absolute;
-    top: 40%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  /* Number text (1/3 etc) */
-  .numbertext {
-    color: #f2f2f2;
-    font-size: 12px;
-    padding: 8px 12px;
-    position: absolute;
-    top: 0;
-  }
-  
-  /* Container for image text */
-  .caption-container {
-    text-align: center;
-    background-color: #222;
-    padding: 2px 16px;
-    color: white;
-  }
-  
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Six columns side by side */
-  .column {
-    float: left;
-    width: 16.66%;
-  }
-  
-  /* Add a transparency effect for thumnbail images */
-  .demo {
-    opacity: 0.6;
-  }
-  
-  .active,
-  .demo:hover {
-    opacity: 1;
-  }
-  /*  */
+.active,
+.demo:hover {
+  opacity: 1;
+}
+/*  */
 
 
-  /* הפרופילללללללללללללללללללללללל שלייייייי */
+/* הפרופילללללללללללללללללללללללל שלייייייי */
 #details{
-  display:block;
+display:block;
 }
 
 #detailsToSetting{
-  display:none;
+display:none;
 }
 .but-update{
-  background-color: #d9d9df;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 12%;
-  height: 40%;
+background-color: #d9d9df;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+width: 12%;
+height: 40%;
 }
 
-  #but-set{
-    margin-left: 88%;
-    margin-top: 1%;
-  }
-  /* פרופילללללללללללל שלייייייייייי */
+#but-set{
+  margin-left: 88%;
+  margin-top: 1%;
+}
+/* פרופילללללללללללל שלייייייייייי */
 
 
-  /* 00000000000000000000000000000000000000הזזת תמונותתתתתתתתתת 000000000*/
-  .arrow1{
-    
-    position: absolute;
-    margin-left: 8px;
-    margin-top: 40vh;
+/* 00000000000000000000000000000000000000הזזת תמונותתתתתתתתתת 000000000*/
+/* .arrow1{
+  
+  position: absolute;
+  margin-left: 8px;
+  margin-top: 40vh;
 
-  }
-  .arrow2{
-    position: absolute;
-    margin-left: 15vw;
-    margin-bottom: 47.5vh;
-  }
-  .imges{
-        /* margin: 20px; */
-    /* margin-left: 40px; */
-    width: 100%;
-    height: 268px;
-  }
-  /* .div-imges{
-    display: flex; 
-    position: absolute;
-  } */
+}
+.arrow2{
+  position: absolute;
+  margin-left: 15vw;
+  margin-bottom: 47.5vh;
+} */
+.imges{
+      /* margin: 20px; */
+  /* margin-left: 40px; */
+  width: 100%;
+  height: 268px;
+}
+/* .div-imges{
+  display: flex; 
+  position: absolute;
+} */
 
-  /* 00000000000000000000000000000000 */
+/* 00000000000000000000000000000000 */
 
 
-  /* #chacima{
-    
-  } */
+/* #chacima{
+  
+} */
 
-  /*------------------------------- עיצוב לוח----------------------------  */
-  /* #arrBoard{ */
+/*------------------------------- עיצוב לוח----------------------------  */
+/* #arrBoard{ */
 /* display: flex;   */
 /* } */
 .div-board{
-  width: 20%;
-  float: left;
-  margin: 12px;
-  margin-top: 10vh;
-  display: flex;
-  flex-wrap: wrap;
+width: 20%;
+float: left;
+margin: 12px;
+margin-top: 10vh;
+display: flex;
+flex-wrap: wrap;
 }
 #table-div{
-  size: 70px;
-  display:flex;
-  flex-wrap: wrap;
-  /* position:absolute; */
+size: 70px;
+display:flex;
+flex-wrap: wrap;
+/* position:absolute; */
+}
+  #th-board{
+    display: block;
   }
-    #th-board{
-      display: block;
-    }
-    #calen{
-      margin-left: 70%;
-     
-    }
-    /* #calender-div{
-     
-    } */
-  
-  
-  
-    /* -------------------------AddProperty------------------------------- */
-    .form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 30vh;
-    }
-    
-    .form__step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 80vw;
-      height: 145vh;
-      margin-left: 10vw;
-      margin-bottom:2vh ;
-      margin-top: 2vh;
-      padding: 2rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    
-    .form__step label {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    
-    .form__step input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    
-    .form__button {
-      margin-top: 1rem;
-      padding: 0.3rem 2rem;
-      border: none;
-      border-radius: 5px;
-      background-color: #007bff;
-      color: #fff;
-      cursor: pointer;
-      width: 15%;
-      height: 35px;
-      margin-right: 10%;
-      /* position: sticky;
-      bottom: 0; */
-    }
-    
-    .form__button[type="button"] {
-      background-color: #4fa2fa;
-      /* margin-top: 5vh; */
-     
-    }
-    
-    .form__step p {
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-  
-    /* .div-form1{
-  margin: 10%;
-    } */
-    
-    #ulStep{
-      display: flex;
-      list-style-type: none;
-     
-    }
-    .stepsMUI{
-      size: 5vw;
-    }
-    .steper{
-      position:absolute;
-      margin-top: 10vh;
-    }
-  /* button css */
-  .button {
-    background-color: #008CBA;
-    border: none;
-    color: white;
-    padding: 10px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  
-  }
-  
-  #isSale{
-    margin-bottom:5vh;
-   }
- 
-   #adress{
-     margin-top: 2vh;
-   }
-  
-  /* .labels{
-    margin-top: 2.5vh;
-    margin-bottom: 2vh;
-  } */
-  /* mappppppppppppppppppppppppppppppppppppp */
-  #gmap_canvas{
-    border:none
-  
-  }
-  .addProp-main{
-    margin-right: 65vw;
+  #calen{
+    margin-left: 70%;
    
-    }
-    #l-map{
-     margin-top: 2vh;
-     margin-left: 30vw;
-    }
-    table,tr{
-     border-bottom: rgb(95, 91, 91) ;
-    }
-    #priceInput::before{
-        content: '₪';
-        position: absolute;
-        top: 0;
-        left: 40px;
-        z-index: 1;
-    }
-    .levelIn{
-      display: flex;
-      flex-wrap: wrap;
-      direction: rtl;
-    }
-    #leabelLevelIn1{
-      position: absolute;
-      margin-right: 5vw;
-      margin-bottom: 4vh;
-    }
-    #leabelLevelIn2{
-      position: absolute;
-      margin-right: 17vw; 
-    }
-    #priceInput{
-      width:20%;
-      margin-bottom: 3vh;
-    }
+  }
+  /* #calender-div{
+   
+  } */
+
+
+
+  /* -------------------------AddProperty------------------------------- */
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+  }
   
-    #DivfileInput{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border: 2px dashed #1475fc;
-      height: 400PX;
-      width: 600px;
-      cursor: pointer;
-      border-radius: 5px;
-    
-    }
-    .uploded-row{
-      width:605px;
-      margin: 2vh 0 47vh 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      border-radius: 5px;
-      background-color: #e9f0ff;
-    }
-    #up{
-      margin-top: 20vh;
-    }
-    .uploud-content{
-      display: flex;
-      align-items: center;
+  .form__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    height: 145vh;
+    margin-left: 10vw;
+    margin-bottom:2vh ;
+    margin-top: 2vh;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
   
-    }
-    #mn{
-      font-size:x-large;
-      margin-bottom: 4vh;
-     }
-     .fht{
-       margin-right: 10vw;
-       
-     }
-     #inputName{
-       width:20%;
-       margin-bottom: 5vh;
-     }
+  
+  .form__step label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .form__step input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form__button {
+    margin-top: 1rem;
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    width: 15%;
+    height: 35px;
+    margin-right: 10%;
+    /* position: sticky;
+    bottom: 0; */
+  }
+  
+  .form__button[type="button"] {
+    background-color: #4fa2fa;
+    /* margin-top: 5vh; */
+   
+  }
+  
+  .form__step p {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  /* .div-form1{
+margin: 10%;
+  } */
+  
+  #ulStep{
+    display: flex;
+    list-style-type: none;
+   
+  }
+  .stepsMUI{
+    size: 5vw;
+  }
+  .steper{
+    position:absolute;
+    margin-top: 10vh;
+  }
+/* button css */
+.button {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+
+#isSale{
+  margin-bottom:5vh;
+ }
+
+ #adress{
+   margin-top: 2vh;
+ }
+
+/* .labels{
+  margin-top: 2.5vh;
+  margin-bottom: 2vh;
+} */
+/* mappppppppppppppppppppppppppppppppppppp */
+#gmap_canvas{
+  border:none
+
+}
+.addProp-main{
+  margin-right: 65vw;
  
-     .div-adress{
-       display: flex;
-       flex-direction:row-reverse;
-     margin-bottom: 30px;
+  }
+  #l-map{
+   margin-top: 2vh;
+   margin-left: 30vw;
+  }
+  table,tr{
+   border-bottom: rgb(95, 91, 91) ;
+  }
+  #priceInput::before{
+      content: '₪';
+      position: absolute;
+      top: 0;
+      left: 40px;
+      z-index: 1;
+  }
+  .levelIn{
+    display: flex;
+    flex-wrap: wrap;
+    direction: rtl;
+  }
+  #leabelLevelIn1{
+    position: absolute;
+    margin-right: 5vw;
+    margin-bottom: 4vh;
+  }
+  #leabelLevelIn2{
+    position: absolute;
+    margin-right: 17vw; 
+  }
+  #priceInput{
+    width:20%;
+    margin-bottom: 3vh;
+  }
+
+  #DivfileInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #1475fc;
+    height: 400PX;
+    width: 600px;
+    cursor: pointer;
+    border-radius: 5px;
+  
+  }
+  .uploded-row{
+    width:605px;
+    margin: 2vh 0 47vh 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 5px;
+    background-color: #e9f0ff;
+  }
+  #up{
+    margin-top: 20vh;
+  }
+  .uploud-content{
+    display: flex;
+    align-items: center;
+
+  }
+  #mn{
+    font-size:x-large;
+    margin-bottom: 4vh;
+   }
+   .fht{
+     margin-right: 10vw;
+     
+   }
+   #inputName{
+     width:20%;
+     margin-bottom: 5vh;
+   }
+
+   .div-adress{
+     display: flex;
+     flex-direction:row-reverse;
+   margin-bottom: 30px;
+   flex-wrap: wrap;
+   }
+   #d-p{
+     margin-left: 30px;
+   }
+   .div-but{
+     display: flex;
+     width: 100%;
+     position: sticky;
+     bottom: 0;
+   }
+   #div-upImgs{
+     display: flex;
      flex-wrap: wrap;
-     }
-     #d-p{
-       margin-left: 30px;
-     }
-     .div-but{
-       display: flex;
-       width: 100%;
-       position: sticky;
-       bottom: 0;
-     }
-     #div-upImgs{
-       display: flex;
-       flex-wrap: wrap;
-       height: 77vh;
-       width: 42vw;
-       margin-top: 5vh;
-     }
-   .div-upImg{
-       width: 10vw;
-       height: 11vh;
-      
-     }
-     #butReg{
-      margin-right: 21vw;
-     }
-     #butlog{
-      margin-right: 21vw;
+     height: 77vh;
+     width: 42vw;
+     margin-top: 5vh;
+   }
+ .div-upImg{
+     width: 10vw;
+     height: 11vh;
+    
+   }
+   #butReg{
+    margin-right: 21vw;
+   }
+   #butlog{
+    margin-right: 21vw;
 
-     }
+   }
 
 
-     /* static */
-    .filter-static{
-      
-    }
-    .div-static{
+   /* static */
+  .filter-static{
+    
+  }
+  .div-static{
 
-    }
-    .div-all-static{
-      margin-top: 2%;
-      margin-left: 31%;
-    }
-    #filter-city-static{
-      height: 96px;
-    }
-    #static1{
-    margin-left: 35%;
-    }
-    #title-static{
-      background: linear-gradient(to left,
-      /* violet,
-      indigo,
-      blue,
-      green, */
-      #d86830,
-      rgb(239, 138, 16),
-      rgb(73, 179, 201));
-  -webkit-background-clip: text;
-  color: transparent;
-  font-size: xx-large;
-  /* margin-right: 4%; */
-  /* text-align: right; */
-    }
-     /*  */
+  }
+  .div-all-static{
+    margin-top: 2%;
+    margin-left: 31%;
+  }
+  #filter-city-static{
+    height: 96px;
+  }
+  #static1{
+  margin-left: 35%;
+  }
+  #title-static{
+    background: linear-gradient(to left,
+    /* violet,
+    indigo,
+    blue,
+    green, */
+    #d86830,
+    rgb(239, 138, 16),
+    rgb(73, 179, 201));
+-webkit-background-clip: text;
+color: transparent;
+font-size: xx-large;
+/* margin-right: 4%; */
+/* text-align: right; */
+  }
+   /*  */

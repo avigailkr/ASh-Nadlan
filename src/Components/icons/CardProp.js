@@ -235,14 +235,14 @@ import { LegendToggleSharp } from "@mui/icons-material";
         }
   
         <div className="div-imges">
-         <IconButton className="arrow1" aria-label="arrow to left">
+         <IconButton className="arrow1" aria-label="arrow to left" sx={{position: "absolute" , mt:10}}>
              <ArrowBackIosIcon  onClick={back} />  
          </IconButton>
           
           {arrImg.length != [] && <img className="imges" src={arrImg[index]} />}
 
-          <IconButton className="arrow2" aria-label="arrow to right">
-              <ArrowForwardIosIcon color={"#bbb"} onClick={next} />
+          <IconButton className="arrow2"  onClick={next} aria-label="arrow to right" sx={{position: "absolute" }}>
+              <ArrowForwardIosIcon sx={{color:"red"}} />
           </IconButton>
         </div>
         <CardContent>
