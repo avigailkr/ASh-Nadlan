@@ -22,9 +22,8 @@ export default function CityStatic() {
 
   },[])
   function change(event){
-    // alert(event.target.innerText)
     getIdCityByNameFromServer(event.target.innerText).then(res=>{
-        console.log(res.data[0].Id)
+       alert(res.data[0].Id)
         dis(saveStatisticCity(res.data[0].Id))
       }).catch(err=>alert(err))
    
@@ -33,7 +32,8 @@ export default function CityStatic() {
   return (
     <Autocomplete
       disablePortal
-      id="combo-box-demo"
+      id="filter-city-static"
+      className='filter-static'
       options={arrname}
       sx={{width: 300 }}
       renderInput={(params,i) => <TextField {...params} label="City" id="city"/>}

@@ -30,11 +30,10 @@ import * as React from "react";
   import Chacima from "./Chacima";
   import { hover } from "@testing-library/user-event/dist/hover";
   import { useDispatch, useSelector } from "react-redux";
-  import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../Services";
+  import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer, bringImagesFromServer } from "../../Services";
   import { useState } from "react";
   import { useEffect } from "react";
   import { DeleteProp } from "../../store/Actions/PropAction";
-  
   
   
   //delete
@@ -45,6 +44,7 @@ import * as React from "react";
   import DialogContent from '@mui/material/DialogContent';
   import DialogContentText from '@mui/material/DialogContentText';
   import DialogTitle from '@mui/material/DialogTitle';
+import { LegendToggleSharp } from "@mui/icons-material";
   
   
   const ExpandMore = styled((props) => {
@@ -69,6 +69,7 @@ import * as React from "react";
     let [arrImg, setarrImg] = useState([]);
     let [index, setindex] = useState(0);
     let [isDelete, setIsDelete] = useState(false);
+    let [imgServer, setImgServer]=useState([]);
   
   
     const [open, setOpen] = React.useState(true);
@@ -82,10 +83,26 @@ import * as React from "react";
   
     useEffect(() => {
       //כל התמונות של דירה זו
-      getAllImgsByIdFromServer(idProp).then((res) => {
-        setarrImg(res.data);
-      }).catch(err => alert(err))
+      // getAllImgsByIdFromServer(idProp).then((res) => {
+      //   setarrImg(res.data);
+      // }).catch(err => alert(err))
+
+      //bring all images from server the sql table images
+      bringImagesFromServer(idProp).then((res)=>{
+        console.log(res.data);
+        let a=[];
+        for(let i=0 ; i<res.data.length ; i++){
+          arrImg.push(`http://localhost:8080/images/${res.data[i].Name}`)
+        }
+        setarrImg(arrImg);
+     }).catch(err=>alert(err))
   
+      // let par=[];
+     //bring all images from images file in server
+    //  bringImagesFileFromServer().then((res)=>{
+    //         console.log(res.data);
+
+    //  })
   
       getOwnerFromServer(idPropOwner).then(res => {
         setOwner(res.data[0])
@@ -115,7 +132,7 @@ import * as React from "react";
         setindex(0);
       else setindex(index + 1);
   
-      //console.log(index)
+      
     }
     const funfavorites = () => {
       let like = {
@@ -189,6 +206,8 @@ import * as React from "react";
     if (owner != null) {
       nameSlice = `${owner.Mail.slice(0, 1)}`;
     }
+
+
     return <>
       <Card sx={{ maxWidth: 299 }}>
         {
@@ -216,10 +235,15 @@ import * as React from "react";
         }
   
         <div className="div-imges">
-          <ArrowBackIosIcon className="arrow1" onClick={back} />
-          {/* `../../image/${arrImg[index].ImgSrc}` */}
-          {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc} />}
-          <ArrowForwardIosIcon className="arrow2" onClick={next} />
+         <IconButton className="arrow1" aria-label="arrow to left">
+             <ArrowBackIosIcon  onClick={back} />  
+         </IconButton>
+          
+          {arrImg.length != [] && <img className="imges" src={arrImg[index]} />}
+
+          <IconButton className="arrow2" aria-label="arrow to right">
+              <ArrowForwardIosIcon color={"#bbb"} onClick={next} />
+          </IconButton>
         </div>
         <CardContent>
           {/*----------------------------------------- bull-נשלח לפונקציה

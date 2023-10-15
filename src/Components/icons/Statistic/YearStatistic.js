@@ -35,6 +35,7 @@ export default function YearStatistic() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
+          className='filter-static'
           value={year1}
           label="Age"
           onChange={handleChange1}
@@ -71,6 +72,7 @@ export default function YearStatistic() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
+          className='filter-static'
           value={year2}
           label="Age"
           onChange={handleChange2}

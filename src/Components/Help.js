@@ -4,16 +4,16 @@ import { getAllLikeByIdFromServer } from "../Services";
 const Help=()=>{  
     const [num, setNum]=useState([1, 2, 3, 4, 5, 6]);
     const [pic, setPic]=useState(["p1.jpg", "p2.jpg", "p3.jpg","p4.jpg", "p5.jpg", "p6.jpg"]);
-
-    plusSlides=(n) => {
+    let  slideIndex=null;
+    const plusSlides=(n) => {
         showSlides(slideIndex += n);
       }
       
-    currentSlide=(n) => {
+      const currentSlide=(n) => {
         showSlides(slideIndex = n);
       }
       
-    showSlides=(n) => {
+      const showSlides=(n) => {
         let i;
         let slides = document.getElementsByClassName("mySlides");
         let dots = document.getElementsByClassName("demo");
@@ -59,23 +59,19 @@ const Help=()=>{
  
  <div class="mySlides">
     <div class="numbertext">{index} / {pic.length}</div>
-    <img src={item} style="width:100%">
+    <img src={item} style="width:100%"/>
   </div>
 })}
     
   <a class="prev" onclick="plusSlides(-1)">❮</a>
   <a class="next" onclick="plusSlides(1)">❯</a>
 
-  {/* <div class="caption-container">
-    <p id="caption"></p>
-  </div> */}
 
 {
     pic.map((item)=>{
-
 <div class="row">
     <div class="column">
-      <img class="demo cursor" src={item} style="width:100%" onclick="currentSlide(1)">
+      <img class="demo cursor" src={item} style="width:100%" onclick="currentSlide(1)"/>
     </div>
 </div>
     })

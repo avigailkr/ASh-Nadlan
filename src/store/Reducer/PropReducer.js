@@ -2,6 +2,7 @@ import * as TypeAction from "../ActionTypes";
 
 const initialState = {
     arr: [],
+    arrsource:[],
     arrCity: [],
     arrType: [],
     arrStatus:[],
@@ -26,8 +27,18 @@ const PropReducer=(state=initialState,action)=>{
               case TypeAction.SAVE_ARR_PROPERTY:
               return {
                 ...state,
+
+                arr:action.payload
+                // ,arrSourc:action.payload
+              } 
+               case TypeAction.SAVE_ARR_SOURCE:
+              return {
+                ...state,
+                arrsource:action.payload,
+                // ,arrSourc:action.payload
                 arr:action.payload,
                 arrSourc:action.payload
+
               } 
               case TypeAction.ADD_TO_ARR_PROPERTY:
                 // איך מוסיפים דירות למערך הדירות שלא הופיעו כבר בסינון???????????????

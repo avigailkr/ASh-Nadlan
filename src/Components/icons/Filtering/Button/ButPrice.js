@@ -1,15 +1,25 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Price from '../Price';
+import { saveChoosePriceFilter, saveFromPrice, saveUntilPrice } from '../../../../store/Actions/FilterAction';
+import { useDidMount } from '@withvoid/melting-pot';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 export default function ButPrice() {
   const [open, setOpen] = React.useState(false);
+const dis=useDispatch();
+const ischoose=useSelector(state=>state.filter.chooseprice);//האם בחרתי אם כן תשנה כפתור למלא
 
+function mychoose(){
+  dis(saveChoosePriceFilter(true))
+  handleClose()
+}
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -18,9 +28,14 @@ export default function ButPrice() {
     setOpen(false);
   };
 
+  function cancel(){
+    dis(saveFromPrice(0))
+    dis(saveUntilPrice(5000000000000))
+    handleClose();
+  }
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant={ischoose? "soft" : "outlined"} onClick={handleClickOpen}>
         מחיר
       </Button>
       <Dialog
@@ -38,9 +53,9 @@ export default function ButPrice() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>ביטול</Button>
-          <Button onClick={handleClose} autoFocus>
-            סנן
+          <Button onClick={cancel}>ביטול</Button>
+          <Button onClick={mychoose} autoFocus>
+            בצע
           </Button>
         </DialogActions>
       </Dialog>

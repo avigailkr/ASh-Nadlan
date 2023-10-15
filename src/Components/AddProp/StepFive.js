@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import "../style.css";
 import Steps from "./Steps";
-import { addPropToServer } from "../../Services";
+import { addPropToServer, getFromServerIdProp, uploadImage } from "../../Services";
 import { useSelector, useDispatch } from "react-redux";
+import { json } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
 const StepFive = ({ prevStep, values }) => {
   let user=useSelector(state=>state.user.selectedUser);
   let dis=useDispatch();
+  const [idProp,setIdProp]=useState(0);  
 
-    const handleSubmit = (e) => {
+ 
+// // שליפת האי די
+//        getFromServerIdProp().then( (res)=>{
+//         console.log(res.data[0].id);
+//       setIdProp(res.data[0].id);
+//       }) .catch(err=>alert(err));
+
+
+    const handleSubmit = async (e) => {
       e.preventDefault();
       console.log(values);
      
@@ -20,16 +31,28 @@ const StepFive = ({ prevStep, values }) => {
 
       values.InsertDate=date;
       values.IdUser=user.Id;
-      
-      console.log(date);
-       addPropToServer(values).then((res)=>{
-         alert(res.data)
-       }).catch(err=>alert(err));
 
-      // v`Price`, v`IdCity`, v`Adress`, v`Sqm`, v`Mmd`, v`IdKindProp`, v`IdTypeSale`, v`InsertDate`,
-      //  v`IdUser`, v`ShowPrice`, v`Floor`, v`InFloor`, v`RoomNum`, `Active`, v`IdStatus`,
-      //   v`Description`, v`ImgUrl`, v`IdEnterDate`
-      
+        //שליחת פרטי הדירה
+       addPropToServer(values).then((res)=>{
+       console.log(res.data[0].Id);
+       setIdProp(res.data[0].Id);
+
+        //יצירת אובייקט לשליחת נתונים
+        const formData = new FormData(); 
+         
+        for (let i = 0; i < values.image.length; i++) {
+          // 'images' name of the formData values must match the action method param on your controller
+          formData.append("idProp", idProp);
+          formData.append("image", values.image[i]);       
+//שליחה לשרת שיוסיף את התמונות לטבלת התמונות
+         uploadImage(formData).then((res)=>{
+         console.log(res.data);
+        }).catch(err=>alert(err));
+         formData.delete("image");
+      }
+        
+     }).catch(err=>alert(err))
+
     };
   
     const handlePrev = (e) => {

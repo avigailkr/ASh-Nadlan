@@ -18,7 +18,12 @@ export const SaveArrProp = (arr) => {
     payload: arr,
   };
 };
-
+export const SaveArrSource = (arr) => {
+  return {
+    type: TypeAction.SAVE_ARR_SOURCE,
+    payload: arr,
+  };
+};
 export const AddToArrProp = (arr) => {
   return {
     type: TypeAction.ADD_TO_ARR_PROPERTY,

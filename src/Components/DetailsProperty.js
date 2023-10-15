@@ -4,15 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { SaveDetailsProp } from "../store/Actions/PropAction";
 import { useParams } from "react-router-dom";
 import { SaveArrType, SaveArrStatus } from "../store/Actions/PropAction";
-import { getAllTypeFromServer, getStatusFromServer } from "../Services";
+import { getAllTypeFromServer, getStatusFromServer, bringImagesFromServer } from "../Services";
+import ImageGallery from "react-image-gallery";
+// import "react-image-gallery/styles/css/image-gallery.css";
+import "react-image-gallery/styles/scss/image-gallery.scss";
+import "./style.css";
 
 const DetailsProperty =()=>{
-
+const [imgs,setImgs]=useState([]);
     let dis=useDispatch();
 
     let {idProp}=useParams();
      const id=idProp;
     console.log(id);
+
+
+
+
     useEffect(()=>{
     getDetailsOfPropById(id).then((res)=>{
         dis(SaveDetailsProp(res.data[0]));
@@ -30,6 +38,15 @@ const DetailsProperty =()=>{
         console.log(res.data)
     }).catch(er=>alert("error in bring arr property from server"))
 
+
+    bringImagesFromServer(idProp).then((res)=>{
+      console.log(res.data);
+      console.log(imgs);
+
+      if(imgs.length==0){
+        setImage(res.data)
+      } 
+   }).catch(err=>alert(err))
     },[])
 
     let details=useSelector(x=>x.prop.details);
@@ -39,10 +56,29 @@ const DetailsProperty =()=>{
 
     let arrStatus=useSelector(x=>x.prop.arrStatus);
 
+
+const setImage = (res)=>{
+  console.log(res)
+  for(let i=0 ; i<res.length; i++){
+    imgs.push(
+      {
+        original:`http://localhost:8080/images/${res[i].Name}`, thumbnailHeight:80,
+        thumbnail:`http://localhost:8080/images/${res[i].Name}`,sizes:100,
+      }
+    )
+  }
+  console.log(imgs)
+}
+   
+
 return <>
 <h1>פרטי הנכס</h1>
     {/* <label className="label-det">פרטים</label> */}
-    <div></div>
+    
+         <div className="divImageGallery">
+         <ImageGallery items={imgs} showIndex={true} />
+         </div>
+         {/* <p>{details.ImgUrl}</p> */}
     <p>כתובת: {details.Adress}</p>
     <p>מחיר:  {details.Price}</p>
     <p>שטח במ"ר:{details.Sqm}</p>
@@ -64,7 +100,7 @@ return <>
     <p>{details.Description}</p>
     
     <p>{details.IdEnterDate}</p>
-      {/* <p>{details.ImgUrl}</p> */}
+    
 
 
 </>

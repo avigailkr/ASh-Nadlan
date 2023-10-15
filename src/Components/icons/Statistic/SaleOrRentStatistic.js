@@ -22,6 +22,7 @@ export default function SaleOrRentStatistic() {
     onChange={change}
       placeholder="Select a pet…"
       indicator={<KeyboardArrowDown />}
+      className='filter-static'
       sx={{m:4,
         width: 240,
         [`& .${selectClasses.indicator}`]: {

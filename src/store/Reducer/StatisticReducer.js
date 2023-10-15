@@ -1,16 +1,15 @@
 import * as TypeAction from "../ActionTypes";
 
 const initialState = {
-  city: null,
-  untilyear: null,
-  fromyear:null,
+  city: null,  
+  fromyear:2018,
+  untilyear: 2023,
   typesale: null
 };
 
 const StatisticReducer = (state = initialState, action) => {
   switch (action.type) {
     case TypeAction.SAVE_STATISTIC_CITY:
-        alert("rrrrrrrrr"+action.payload)
       return {
         ...state,
         city: action.payload,

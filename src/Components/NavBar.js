@@ -18,6 +18,7 @@ return<><div className="topnav">
 }
 <Link to="help">עזרה</Link>
 <Link to="about">אודות</Link>
+<Link to="information">מידע נוסף</Link>
 <MenuListComposition/>
 </div>
 </>

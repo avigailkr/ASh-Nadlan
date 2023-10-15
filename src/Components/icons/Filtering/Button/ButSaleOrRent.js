@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -9,13 +9,20 @@ import SaleOrRent from '../SaleOrRent';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPropByTypeSale } from '../../../../Services';
 import { AddToArrProp } from '../../../../store/Actions/PropAction';
+import { DinnerDining } from '@mui/icons-material';
+import { saveChooseTypeSaleFilter, saveTpeySale } from '../../../../store/Actions/FilterAction';
+import { useState } from 'react';
 
 export default function ButSaleOrRent() {
   const [open, setOpen] = React.useState(false);
   const selecttypesale=useSelector(state=>state.filter.typesale);
   const dis=useDispatch();
-  let idtype=null;
+  const ischoose=useSelector(state=>state.filter.choosetypesale);//האם בחרתי אם כן תשנה כפתור למלא
 
+  function mychoose(){
+    dis(saveChooseTypeSaleFilter(true))
+    handleClose()
+  }
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,24 +30,14 @@ export default function ButSaleOrRent() {
   const handleClose = () => {
     setOpen(false);
   };
-  const filter = () => {
-    if(selecttypesale=='השכרה')
-    idtype=2
-    else
-    idtype=1
-console.log("selecttypesale")
-console.log(selecttypesale+" "+idtype)
-
-getPropByTypeSale(idtype).then(res=>{
-  console.log(res.data)
-  dis(AddToArrProp(res.data))
-}).catch(err=>alert(err))
+  const cancel = () => {
+    dis(saveTpeySale(null))
     handleClose();
   };
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant={ischoose? "soft" : "outlined"} onClick={handleClickOpen}>
         למכירה או להשכרה
       </Button>
       <Dialog
@@ -58,9 +55,9 @@ getPropByTypeSale(idtype).then(res=>{
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>ביטול</Button>
-          <Button onClick={filter} autoFocus>
-            סנן
+          <Button onClick={cancel}>ביטול</Button>
+          <Button onClick={mychoose} autoFocus>
+            בצע
           </Button>
         </DialogActions>
       </Dialog>

@@ -65,6 +65,8 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     
     console.log("type  "+type, "mr  "+mr, "room  "+room, "halfroom  "+halfRoom, "floor  "+floor, "inFloor  "+inFloor, "date  "+date,  "price  "+price)
     
+
+
     return <div className="addProp-main">
      <Steps level={1}/>
       
@@ -253,6 +255,6 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
         {/* </div> */}
       </form>
       </div>
-    );
+
   };
   export default StepTwo;

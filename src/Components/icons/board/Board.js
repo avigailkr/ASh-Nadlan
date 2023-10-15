@@ -52,7 +52,8 @@ export default function Board() {
   const selectNameClient = useSelector((state) => state.chat.client);
   const [filteredList, setFilteredList] = useState(arrmyclient);
   let user = useSelector((state) => state.user.selectedUser);
-  const ArrLike = useSelector((x) => x.like.arr);
+
+ 
   let arrMass=useSelector(state=>state.chat.arr);//מערך ההתכתבות עם משתמש מסויים
 
   useEffect(() => {
@@ -61,6 +62,7 @@ dis(saveArrChat([]))
     getAllLikeByIdFromServer(user.Id)
       .then((res) => {
         dis(SaveArrLike(res.data));
+        console.log(res.data);
       })
       .catch((er) => alert("error in bring arr property from server"));
 
@@ -74,7 +76,10 @@ dis(saveArrChat([]))
         alert(err);
       });
   }, []);
-  
+
+   const ArrLike = useSelector((x) => x.like.arr);
+   console.log(ArrLike);
+
   function search(e) {
     // Access input value
     const query = e.target.value;
@@ -117,6 +122,11 @@ dis(saveArrChat([]))
   return (
     <div id="board-div">
       <div className="chatArea">
+
+        //מה שהיה לפני השינוי
+        {/* <p className="litel">chat with {selectNameClient}</p>
+        <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />         */}
+
       {arrMass.length!=0 && <p className="litel">chat with {selectNameClient}</p>}      
       {arrMass.length==0 && <p className="litel">chat with ownersprop</p>}
       {arrMass.length!=0 && <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />}
@@ -136,7 +146,7 @@ dis(saveArrChat([]))
                     aria-label="show 4 new mails"
                     color="inherit"
                   >
-                    <Badge badgeContent={17} color="error">
+                    <Badge badgeContent={3} color="error">
                       <ChatIcon />
                     </Badge>
                   </IconButton>
@@ -222,7 +232,7 @@ dis(saveArrChat([]))
             );
           }
         )}
-        {/* </div> */}
+    
       </div>
 
     </div>
