@@ -1145,4 +1145,9 @@ input[type=submit]:hover{
   .fullscreen .image-gallery-slide img {
       max-height: 100vh;
   }
-  
+  .pDate{
+    text-align: right;
+  }
+  .desc{
+    margin-top:20vh ;
+  }
