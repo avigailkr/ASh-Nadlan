@@ -1147,7 +1147,11 @@ input[type=submit]:hover{
   }
   .pDate{
     text-align: right;
+    margin-right: 5vw;
   }
   .desc{
-    margin-top:20vh ;
+    margin-top:15vh ;
+  }
+  .mapDet{
+    position: absolute;
   }

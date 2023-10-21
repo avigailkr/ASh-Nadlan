@@ -80,10 +80,10 @@ let isBilding=false;
     let arrStatus=useSelector(x=>x.prop.arrStatus);
     
 const checkDesc = ()=>{
-  if(det.Description != null && det.Description != "")
-  return true;
-  else
+  if(det.Description === null || det.Description == " ")
   return false;
+  else
+  return true;
 }
 
 const setImage = (res)=>{
@@ -115,7 +115,12 @@ const setImage = (res)=>{
 return <>
 <h1>פרטי הנכס</h1>
     {/* <label className="label-det">פרטים</label> */}
-   <p className='pDate'>הועלה בתאריך: {moment(det.InsertDate).utc().format('DD/MM//YYYY')}</p>
+   <p className='pDate'>הועלה בתאריך: {moment(det.InsertDate).utc().format('DD/MM/YYYY')}</p>
+   
+   <iframe title="map" width="300" height="450" className="mapDet" 
+         
+         src={`https://maps.google.com/maps?q=${det.Adress}&t=&z=15&ie=UTF8&iwloc=&output=embed`} >
+        </iframe>
 
          <div className="divImageGallery">
          <ImageGallery items={imgs} />
@@ -123,9 +128,9 @@ return <>
 
  {/* details of property */}
 
-{checkDesc==true && 
+{checkDesc()==true && 
 <div className='desc'>
-  <h3>תיאור:</h3>
+  <h3>תיאור: </h3>
   <p>{det.Description}</p>
 </div>
 }
@@ -134,7 +139,7 @@ return <>
       <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
     <div>
-    <List dir="rtl" sx={{ width: '100%', maxWidth: 360, ml:75, mt:10}}>
+    <List dir="rtl" sx={{ width: '100%', maxWidth: 360, ml:75, mt:5}}>
       <ListItem>
         <ListItemAvatar>
           <Avatar>
@@ -250,7 +255,7 @@ return <>
 
         <Grid item xs={12} md={6}>
         <div>
-         <List dir="rtl" sx={{ width: '100%', maxWidth: 360, ml:90, mt:10 }}>
+         <List dir="rtl" sx={{ width: '100%', maxWidth: 360, ml:90, mt:5 }}>
       <ListItem>
         <ListItemAvatar>
           <Avatar>
