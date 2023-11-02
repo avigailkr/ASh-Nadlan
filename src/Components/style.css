@@ -88,11 +88,12 @@ height: 300px;
 }
 /* כותרת */
   #img-logo{
-    width: 6vw;
-    height: 5vw;
+    width: 12vw;
+    height: 25vh;
   }
   .title-div{
     display: flex;
+    margin-right: 30vw;
   }
  .title-div-txt{
   margin-left: 35%;
@@ -336,7 +337,7 @@ color: #717171;
   /* background-color: rgb(79, 5, 9); */
 }
 .but-chat{
-  margin-left: 32%;
+  margin-left: 19%;
   /* text-align: center; */
   width: 28%;
   background-color: #3e85d1;
@@ -880,7 +881,7 @@ input[type=submit]:hover{
       height: 145vh;
       margin-left: 10vw;
       margin-bottom:2vh ;
-      margin-top: 2vh;
+      margin-top: 5vh;
       padding: 2rem;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -940,10 +941,10 @@ input[type=submit]:hover{
     .stepsMUI{
       size: 5vw;
     }
-    .steper{
+    /* .steper{
       position:absolute;
       margin-top: 10vh;
-    }
+    } */
   /* button css */
   .button {
     background-color: #008CBA;
@@ -1027,7 +1028,8 @@ input[type=submit]:hover{
     }
     .uploded-row{
       width:605px;
-      margin: 2vh 0 47vh 0;
+      /* margin: 2vh 0 47vh 0; */
+
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1035,8 +1037,9 @@ input[type=submit]:hover{
       border-radius: 5px;
       background-color: #e9f0ff;
     }
-    #up{
-      margin-top: 20vh;
+    .up{
+      margin-top: 10vh;
+      margin-bottom: 10vh;
     }
     .uploud-content{
       display: flex;
@@ -1127,10 +1130,12 @@ input[type=submit]:hover{
     }
      /*  */
 
-     .image-gallery {
-      width: 40%;
-      height: 90vh;
-      margin-left:45%;
+
+
+   .image-gallery {
+      width: 35vw;
+      height: 80vh;
+      margin-left:20%;
   }
   
   .image-gallery-slide img {
@@ -1140,18 +1145,68 @@ input[type=submit]:hover{
       object-fit: cover;
       overflow: hidden;
       object-position: center center;
+
   }
   
   .fullscreen .image-gallery-slide img {
       max-height: 100vh;
-  }
+  } 
+
+
   .pDate{
     text-align: right;
     margin-right: 5vw;
   }
   .desc{
-    margin-top:15vh ;
+    margin-top:7vh ;
+    margin-right: 9vw;
+    text-align: right;
   }
   .mapDet{
+    margin-left: 20vw;
+    /* margin-top: 5vh; */
+    /* position:absolute; */
+
+  }
+  /* .divImageGallery{
+    
+  } */
+  .firstrow{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+    height: 100vh;
+  }
+  .div-end{
+    margin-top:40vh;
+    margin-bottom: 50vh;
+  }
+  .owner-div{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .but-chat2{
+    margin-left: 55vw;
     position: absolute;
+    margin-top: 7vh;
+
+    width: 8%;
+    background-color: #3e85d1;
+    color: #fff;
+    border: none;
+    border-radius: 15px 15px 15px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    height: 39px;
+  }
+  .nameOwner{
+    position: absolute;
+    margin-top: 9vh;
+    margin-left: 83vw;
+  }
+  .textChat{
+    position: absolute;
+    margin-top: 8.5vh;
+    margin-left: 64vw;
   }

@@ -11,7 +11,7 @@ import FormHelperText from '@mui/joy/FormHelperText';
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { getStatusFromServer } from "../../Services";
+import { getStatusFromServer,bringIdPropFromServer } from "../../Services";
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SaveArrStatus } from "../../store/Actions/PropAction";
@@ -19,14 +19,14 @@ import TextField from '@mui/material/TextField';
 
 const StepFour = ({ prevStep, nextStep, values }) => {
   const [plus, setPlus] = useState(
-    [
-    {Id:1,מרפסת:false},
-    {Id:2,סורגים:false}, 
-    {Id:3,ממד:false}, 
-    {Id:4,מחסן:false}, 
-    {Id:5,מעלית:false},
-    {Id:6,חניה:false},
-  ]
+    []
+    // {Id:1,מרפסת:false},
+    // {Id:2,סורגים:false}, 
+    // {Id:3,ממד:false}, 
+    // {Id:4,מחסן:false}, 
+    // {Id:5,מעלית:false},
+    // {Id:6,חניה:false},
+  
   );
   // const 
   // const [lastName, setLastName] = useState("");
@@ -34,6 +34,8 @@ const StepFour = ({ prevStep, nextStep, values }) => {
   const [sito, setSito] = useState(1);
   const [rihut, setRihut] = useState("ללא"); 
   const [discription, setDiscription]= useState("")
+    const [idProp,setIdProp]=useState("");  
+    let ind=0;
 
   let dis=useDispatch();
 
@@ -42,6 +44,11 @@ const StepFour = ({ prevStep, nextStep, values }) => {
           dis(SaveArrStatus(res.data))
           console.log(res.data)
       }).catch(er=>alert("error in bring arr property from server"))
+
+      bringIdPropFromServer().then((res)=>{
+        console.log(res.data[0].Id);
+        setIdProp(res.data[0].Id);
+      }).catch(err=>alert(err))
   },[])
   
   let arrStatus=useSelector(x=>x.prop.arrStatus);
@@ -74,14 +81,14 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 //        console.log(added);
 //      }
 //  }
-   nextStep({ ...values, plus, sito, rihut,discription });
+   nextStep({ ...values, plus, sito, rihut,discription,idProp });
  };
 
   return (<div className="addProp-main">
-    <Steps level={3}/>
+    
 
     <form onSubmit={handleNext} className="form__step">
-      
+      <Steps level={3}/>
       <label id="mn">
       :מאפיינים נוספים     
        </label>
@@ -125,9 +132,10 @@ const StepFour = ({ prevStep, nextStep, values }) => {
                     }
                     //put in plus all options that selected.
                     let valu=event.target.value;
-                    
-                      plus[valu]=(!plus[valu])
+                   
+                      plus.push(index+1);
                      console.log(plus)
+          
                   }}
                   slotProps={{
                     action: ({ checked }) => ({

@@ -34,7 +34,11 @@ import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllIm
 import { useState } from "react";
 import { useEffect } from "react";
 import { DeleteProp } from "../store/Actions/PropAction";
-import Chacima from "./icons/Chacima";
+import MenuCard from "./icons/MenuCard";
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import { grey} from '@mui/material/colors';
+import Button from '@mui/material/Button';
 
 
 const ExpandMore = styled((props) => {
@@ -135,6 +139,13 @@ export default function CardBoard(props) {
 
   const nav = useNavigate();
 
+ //details of property
+ const goTodetails=()=>{
+  console.log("gotodetails");
+  console.log(idProp)
+  nav(`/DetailsProperty/${idProp}`)
+}
+
   const fun = () => {
     console.log("chatttttttttttttttttt");
 
@@ -170,7 +181,7 @@ export default function CardBoard(props) {
           }
           action={
             <IconButton aria-label="settings">
-              <Chacima id={owner.Id} owner1={owner} />
+              <MenuCard id={owner.Id} owner1={owner} />
             </IconButton>
           }
 
@@ -184,10 +195,15 @@ export default function CardBoard(props) {
       }
 
       <div className="div-imges">
-        <ArrowBackIosIcon className="arrow1" onClick={back} />
-        {/* `../../image/${arrImg[index].ImgSrc}` */}
+        
+      <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
+             <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
+         </IconButton>
+          <IconButton className="arrow2" onClick={next} aria-label="arrow to right" sx={{position:"absolute", mt:15, ml:30}} >
+              <ArrowForwardIosRoundedIcon sx={{color:grey[50]}}/>
+          </IconButton>
         {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc} />}
-        <ArrowForwardIosIcon className="arrow2" onClick={next} />
+      
       </div>
       <CardContent>
         {/*----------------------------------------- bull-נשלח לפונקציה
@@ -207,9 +223,7 @@ export default function CardBoard(props) {
         <IconButton aria-label="add to favorites" id="butfavor" onClick={() => { userSelect != null && funfavorites() }} >
           {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
-        <Link href="#">ראה עוד</Link>
-
-
+        <Button variant="text" onClick={()=>{goTodetails(idProp)}}>ראה עוד</Button>
         {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
           <DeleteForeverIcon onClick={deleteProp} />
         </IconButton>}
@@ -222,30 +236,3 @@ export default function CardBoard(props) {
     </Card>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-{/* <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <Chacima />
-          </IconButton>
-        }
-
-        // getUserByIdFromServer-שליפת השם והמייל של המוכר מהשרת 
-        title={props.props.userId}
-        subheader="September 14, 2016"
-      /> */}

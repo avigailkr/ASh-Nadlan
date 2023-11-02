@@ -9,7 +9,7 @@ import * as React from "react";
   import Avatar from "@mui/material/Avatar";
   import IconButton from "@mui/material/IconButton";
   import Typography from "@mui/material/Typography";
-  import { red } from "@mui/material/colors";
+  import { red, grey} from "@mui/material/colors";
   import FavoriteIcon from "@mui/icons-material/Favorite";
   import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
   import ShareIcon from "@mui/icons-material/Share";
@@ -29,14 +29,13 @@ import * as React from "react";
   // import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
   import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
   import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-  import Chacima from "./Chacima";
+  import MenuCard from "./MenuCard";
   import { hover } from "@testing-library/user-event/dist/hover";
   import { useDispatch, useSelector } from "react-redux";
   import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer, bringImagesFromServer } from "../../Services";
   import { useState } from "react";
   import { useEffect } from "react";
   import { DeleteProp } from "../../store/Actions/PropAction";
-  import { grey} from '@mui/material/colors';
 
   
   //delete
@@ -47,8 +46,9 @@ import * as React from "react";
   import DialogContent from '@mui/material/DialogContent';
   import DialogContentText from '@mui/material/DialogContentText';
   import DialogTitle from '@mui/material/DialogTitle';
-import { LegendToggleSharp } from "@mui/icons-material";
-  
+  import { LegendToggleSharp } from "@mui/icons-material";
+  import Stack from '@mui/material/Stack';
+
   
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -198,7 +198,7 @@ import { LegendToggleSharp } from "@mui/icons-material";
   const goTodetails=()=>{
     console.log("gotodetails");
     console.log(idProp)
-    nav(`/DetailsProperty/${idProp}`);
+    nav(`/DetailsProperty/${idProp}/${idPropOwner}`);
   }
 
     const [expanded, setExpanded] = React.useState(false);
@@ -224,7 +224,7 @@ import { LegendToggleSharp } from "@mui/icons-material";
             }
             action={
               <IconButton aria-label="settings">
-                <Chacima id={owner.Id} owner1={owner} />
+                <MenuCard id={owner.Id} owner1={owner} />
               </IconButton>
             }
   
@@ -268,7 +268,7 @@ import { LegendToggleSharp } from "@mui/icons-material";
            nav("/login") }} >
             {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
           </IconButton>
-          <label onClick={()=>{goTodetails(idProp)}}>ראה עוד</label>  
+          <Button variant="text" onClick={()=>{goTodetails(idProp)}}>ראה עוד</Button>
   
           {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
             <DeleteForeverIcon onClick={isdelete} />

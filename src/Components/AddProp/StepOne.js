@@ -86,9 +86,10 @@ let dis=useDispatch();
   
   return (<div className="addProp-main">
    
-   <Steps level={0}/> 
+   
 
     <form onSubmit={handleNext} className="form__step">
+      <Steps level={0}/> 
       <label id="isSale">
         ?מוכרים או משכירים
         </label>

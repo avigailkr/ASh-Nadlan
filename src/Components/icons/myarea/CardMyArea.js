@@ -51,7 +51,7 @@ import Switch from '@mui/joy/Switch';
   import DialogContentText from '@mui/material/DialogContentText';
 import { AddProp, DeleteProp } from "../../../store/Actions/PropAction";
 import IosShareIcon from '@mui/icons-material/IosShare';
-import Chacima from "../Chacima";
+import MenuCard from "../MenuCard";
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 //icon update

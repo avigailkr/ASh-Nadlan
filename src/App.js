@@ -18,7 +18,6 @@ import MyProfile from "./Components/icons/MyProfile";
 import Exit from "./Components/Exit";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "./Components/AddProp/Form";
-import Chacima from "./Components/icons/Chacima";
 import Users from "./Components/icons/Users";
 import City from "./Components/icons/Filtering/City";
 import Size from "./Components/icons/Filtering/Size";
@@ -42,7 +41,7 @@ import Infomation from "./Components/infomation/Infomation";
 import Err from "./Components/Err";
 import { bringAllImagesFromServer } from "./Services";
 import { SaveArrImg } from "./store/Actions/ImgAction";
-
+import uplaoded from "./Components/uplaoded";
 
 
 // import ChatF from './Components/ChatF';
@@ -104,7 +103,7 @@ function App() {
         <Route path="addProp" element={<Form />} />
         <Route path="board" element={<Board />} />
         <Route path="forum" element={<Forum />} />
-        <Route path="DetailsProperty/:idProp" element={<DetailsProperty/>} />
+        <Route path="DetailsProperty/:idProp/:idPropOwner" element={<DetailsProperty/>} />
 
 
         <Route path="help" element={<Help />} />
@@ -131,6 +130,7 @@ function App() {
         <Route path="statistic4" element={<Statistic4 />} />
 
         <Route path="information" element={<Infomation/>}/>
+        <Route path="uplaoded" element={<uplaoded />}/>
       </Routes>
       {/* <Collage/> */}
     </div>

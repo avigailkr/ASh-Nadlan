@@ -28,10 +28,13 @@ const onFileChange = (files) => {
   
 
   return (<div className="addProp-main">
-     <Steps level={2}/>
+   
 
     <form onSubmit={handleNext} className="form__step">
-      <label id="up">
+        <Steps level={2}/>
+
+        <div className="up">
+      <label >
        העלאת תמונות        
       </label>
 
@@ -48,12 +51,6 @@ const onFileChange = (files) => {
         <img src={URL.createObjectURL(img)} width={150} height={135} alt={img.name}/>
         </div>
        })
-      //  :
-      //   alert("אפשר להעלות עד 8 תמונות לדירה!")&&
-      //   image.map((img)=>{return <div className="div-upImg">
-      //   <img src={URL.createObjectURL(img)} width={150} height={135} alt={img.name}/>
-      //   </div>
-      //  })
         }
 
       </div>
@@ -71,11 +68,13 @@ const onFileChange = (files) => {
           <MdDelete onClick={()=>{setImage([])}}/>
         </span>
       </section>
-      
+    </div>
+
       <div className="div-but">
       <button type="submit" className="form__button">הבא</button>
       <button type="button" onClick={handlePrev}  className="form__button">הקודם</button>
       </div>
+
     </form>
     </div>
   );
