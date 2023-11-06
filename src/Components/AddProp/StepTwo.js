@@ -68,9 +68,10 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
 
 
     return <div className="addProp-main">
-     <Steps level={1}/>
+     
       
       <form className="form__step" onSubmit={handleNext}>
+        <Steps level={1}/>
       {/* <div> */}
           <label dir="rtl">
             סוג הנכס:
@@ -82,11 +83,64 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           })}
         </Select>
        
-          {/* <input
-            type="url"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          /> */}
+        {type==3 && 
+       <div className='levelIn'>
+        <label id='leabelLevelIn1'>
+        קומה
+        </label>
+        
+        <Select defaultValue="1" size='md' sx={{ m: 3, minWidth: 120 }} onChange={(e)=>setFloor(e.target.innerText)}>
+           <Option value="1">1</Option>
+           <Option value="2">2</Option>
+           <Option value="3">3</Option>
+           <Option value="4">4</Option>
+           <Option value="5">5</Option>
+           <Option value="6">6</Option>
+           <Option value="7">7</Option>
+           <Option value="8">8</Option>
+           <Option value="9">9</Option>
+           <Option value="10">10</Option>
+           <Option value="11">11</Option>
+           <Option value="12">12</Option>
+           <Option value="13">13</Option>
+           <Option value="14">14</Option>
+           <Option value="15">15</Option>
+           <Option value="16">16</Option>
+           <Option value="17">17</Option>
+           <Option value="18">18</Option>
+           <Option value="19">19</Option>
+           <Option value="20+">20+</Option>
+
+        </Select>
+   
+   
+          <label id='leabelLevelIn2'>
+           מתוך
+          </label>
+          <Select defaultValue="1" size='md' sx={{ m: 3, minWidth: 120 }} onChange={(e)=>setInFloor(e.target.innerText)}>
+          <Option value="1">1</Option>
+           <Option value="2">2</Option>
+           <Option value="3">3</Option>
+           <Option value="4">4</Option>
+           <Option value="5">5</Option>
+           <Option value="6">6</Option>
+           <Option value="7">7</Option>
+           <Option value="8">8</Option>
+           <Option value="9">9</Option>
+           <Option value="10">10</Option>
+           <Option value="11">11</Option>
+           <Option value="12">12</Option>
+           <Option value="13">13</Option>
+           <Option value="14">14</Option>
+           <Option value="15">15</Option>
+           <Option value="16">16</Option>
+           <Option value="17">17</Option>
+           <Option value="18">18</Option>
+           <Option value="19">19</Option>
+           <Option value="20+">20+</Option>
+           </Select>
+           </div>
+  }
        
          <label>
         שטח במ"ר:
@@ -152,63 +206,8 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
             value={photo}
             onChange={(e) => setPhoto(e.target.value)}
           /> */}
-       <div className='levelIn'>
-        <label id='leabelLevelIn1'>
-        קומה
-        </label>
-        
-        <Select defaultValue="1" size='md' sx={{ m: 3, minWidth: 120 }} onChange={(e)=>setFloor(e.target.innerText)}>
-           <Option value="1">1</Option>
-           <Option value="2">2</Option>
-           <Option value="3">3</Option>
-           <Option value="4">4</Option>
-           <Option value="5">5</Option>
-           <Option value="6">6</Option>
-           <Option value="7">7</Option>
-           <Option value="8">8</Option>
-           <Option value="9">9</Option>
-           <Option value="10">10</Option>
-           <Option value="11">11</Option>
-           <Option value="12">12</Option>
-           <Option value="13">13</Option>
-           <Option value="14">14</Option>
-           <Option value="15">15</Option>
-           <Option value="16">16</Option>
-           <Option value="17">17</Option>
-           <Option value="18">18</Option>
-           <Option value="19">19</Option>
-           <Option value="20+">20+</Option>
 
-        </Select>
-   
-   
-          <label id='leabelLevelIn2'>
-           מתוך
-          </label>
-          <Select defaultValue="1" size='md' sx={{ m: 3, minWidth: 120 }} onChange={(e)=>setInFloor(e.target.innerText)}>
-          <Option value="1">1</Option>
-           <Option value="2">2</Option>
-           <Option value="3">3</Option>
-           <Option value="4">4</Option>
-           <Option value="5">5</Option>
-           <Option value="6">6</Option>
-           <Option value="7">7</Option>
-           <Option value="8">8</Option>
-           <Option value="9">9</Option>
-           <Option value="10">10</Option>
-           <Option value="11">11</Option>
-           <Option value="12">12</Option>
-           <Option value="13">13</Option>
-           <Option value="14">14</Option>
-           <Option value="15">15</Option>
-           <Option value="16">16</Option>
-           <Option value="17">17</Option>
-           <Option value="18">18</Option>
-           <Option value="19">19</Option>
-           <Option value="20+">20+</Option>
-           </Select>
-           </div>
-
+ 
          <label> 
           :תאריך כניסה
          </label>

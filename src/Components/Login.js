@@ -19,12 +19,21 @@ import * as yup from "yup";
 import { useForm } from 'react-hook-form';
 
 
-const schema = yup.object({
-  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
-   "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
+// const schema = yup.object({
+//   password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
+//    "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
+//   email: yup.string().email('כתובת מייל שגויה')
+//  }).required();
+
+
+const schema = yup.object({ 
+  password: yup.string().required("שדה חובה").test('len',"אורך לא תקין", x => x.length <= 10 && x.length >= 4)
+   ,
   email: yup.string().email('כתובת מייל שגויה')
  }).required();
 
+
+ 
 export default function Login() {
   const [openLogin, setOpenLogin] = useState(true);
   const [email,setEmail]=useState('');
@@ -95,6 +104,3 @@ getLogin(details).then((res)=>{
     </div>
   );
 }
-
-
-

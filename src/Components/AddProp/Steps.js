@@ -18,7 +18,7 @@ const steps = [
 
 const Steps=({level})=>{
     return<>
-     <Box className="steper" sx={{ width: '70%', display:"inline", }}>
+     <Box className="steper" sx={{ width: '70%', display:"inline", mb:5, mt:5}}>
       <Stepper activeStep={level} dir="rtl" >
         {steps.map((index) => (
           <Step  key={index} >

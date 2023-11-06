@@ -149,6 +149,9 @@ export const addPropToServer= async (det)=>{
     const res=await axios.post("http://localhost:8080/property/addProp",det);
     return res;
 }
+export const bringIdPropFromServer= async ()=>{
+   return axios.get("http://localhost:8080/property/getLastIdProp");
+}
 
 //ערים
 //כל הערים
@@ -281,3 +284,8 @@ export const bringAllImagesFromServer =()=>{
 // export const bringImagesFileFromServer = ()=>{
 //     return axios.get("http://localhost:8080/images");
 // }
+
+export const uplaodAddDetails =(id,det)=>{
+    return axios.post(`http://localhost:8080/property/addDetails/${id}/${det}` );
+
+}
