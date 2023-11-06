@@ -285,6 +285,7 @@ export const bringAllImagesFromServer =()=>{
 //     return axios.get("http://localhost:8080/images");
 // }
 
-export const uplaodAddDetails =(det)=>{
-    return axios.post(`http://localhost:8080/property/addDetails`,det)
+export const uplaodAddDetails =(id,det)=>{
+    return axios.post(`http://localhost:8080/property/addDetails/${id}/${det}` );
+
 }

@@ -238,6 +238,7 @@ import * as React from "react";
         }
   
         <div className="div-imges">
+        {arrImg.length != [] ? <>
          <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
              <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
          </IconButton>
@@ -245,8 +246,10 @@ import * as React from "react";
               <ArrowForwardIosRoundedIcon sx={{color:grey[50]}}/>
           </IconButton>
 
-          {arrImg.length != [] && <img className="imges" src={arrImg[index]} />}
-
+           <img className="imges" src={arrImg[index]} />
+           </>
+           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+           }
           
         </div>
         <CardContent>

@@ -30,7 +30,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { hover } from "@testing-library/user-event/dist/hover";
 import { useDispatch, useSelector } from "react-redux";
-import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer,getOwnerFromServer } from "../Services";
+import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer,getOwnerFromServer, bringImagesFromServer } from "../Services";
 import { useState } from "react";
 import { useEffect } from "react";
 import { DeleteProp } from "../store/Actions/PropAction";
@@ -65,11 +65,19 @@ export default function CardBoard(props) {
 
   useEffect(() => {
     //כל התמונות של דירה זו
-    getAllImgsByIdFromServer(idProp).then((res) => {
-      setarrImg(res.data);
-      console.log(res.data)
-    }).catch(err => alert(err))
+    // getAllImgsByIdFromServer(idProp).then((res) => {
+    //   setarrImg(res.data);
+    //   console.log(res.data)
+    // }).catch(err => alert(err))
 
+    bringImagesFromServer(idProp).then((res)=>{
+      console.log(res.data);
+      let a=[];
+      for(let i=0 ; i<res.data.length ; i++){
+        arrImg.push(`http://localhost:8080/images/${res.data[i].Name}`)
+      }
+      setarrImg(arrImg);
+   }).catch(err=>alert(err))
 
     getOwnerFromServer(idPropOwner).then(res => {
       setOwner(res.data[0])
@@ -196,14 +204,18 @@ export default function CardBoard(props) {
 
       <div className="div-imges">
         
-      <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
+      {arrImg.length != [] ? <>
+         <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
              <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
          </IconButton>
           <IconButton className="arrow2" onClick={next} aria-label="arrow to right" sx={{position:"absolute", mt:15, ml:30}} >
               <ArrowForwardIosRoundedIcon sx={{color:grey[50]}}/>
           </IconButton>
-        {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc} />}
-      
+
+           <img className="imges" src={arrImg[index]} />
+           </>
+           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+           }
       </div>
       <CardContent>
         {/*----------------------------------------- bull-נשלח לפונקציה

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { json } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
+import uplaoded from "../uplaoded";
 
 
 
@@ -46,18 +47,23 @@ const StepFive = ({ prevStep, values }) => {
 //שליחה לשרת שיוסיף את התמונות לטבלת התמונות
          uploadImage(formData).then((res)=>{
          console.log(res.data);
-         nav("/uplaoded");
+         nav(`/uplaoded`);
         }).catch(err=>alert(err));
          formData.delete("image");
       }
         
      }).catch(err=>alert(err))
 
-     const formDat=new FormData();
-     formDat.append("idProp", values.idProp);
-     formDat.append("arrDetails", values.plus);
-     uplaodAddDetails(formDat).then(res=>{
-      console.log(res.data);
+let iP=values.idProp;
+let ard=[];
+ard=values.plus;
+
+    //  const formDat=new FormData();
+    //  formDat.append("idProp", iP);
+    //  formDat.append("arrDetails", ard);
+    //  alert( values.plus)
+     uplaodAddDetails(iP,ard).then(res=>{
+       console.log(res.data);
      }).catch(err=>alert(err))
     };
   

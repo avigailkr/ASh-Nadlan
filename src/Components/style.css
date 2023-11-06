@@ -400,7 +400,7 @@ color: #717171;
     }
     .massagesArea,.massagesboard{
       /* height: calc(100%-50px); */
-      height: 327px;
+      height: 250px;
       margin-left: 42%;
       overflow-y: auto;
       padding-right: 13px;
@@ -409,7 +409,7 @@ color: #717171;
       margin-top: -47%;
     }
     .massagesArea{
-      margin-top: -35%;
+      margin-top: -60%;
     }
     .create-massage{
     /* width: 38%;
@@ -430,6 +430,7 @@ color: #717171;
     .chat-list{
       margin-top: -16%;
       margin-left: -6%;
+      margin-bottom: 20vh
     }
     #deleteAllMassArea{
     margin-right: -86%;
@@ -463,7 +464,9 @@ color: #717171;
     opacity: 0.8;
 
   }
-
+.create-massageArea{
+  margin-top: 5vh;
+}
   .massage{
     background-color: #e5e5e5;
     color: #333;
@@ -1209,4 +1212,15 @@ input[type=submit]:hover{
     position: absolute;
     margin-top: 8.5vh;
     margin-left: 64vw;
+  }
+  .divNotImg{
+    width: 100%;
+    height: 268px;
+    border:1px solid gray;
+  }
+  .pp{
+    margin-top: 20vh;
+    margin-left: 5vw;
+    position: absolute;
+    
   }

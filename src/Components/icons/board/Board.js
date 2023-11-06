@@ -123,7 +123,7 @@ dis(saveArrChat([]))
     <div id="board-div">
       <div className="chatArea">
 
-        //מה שהיה לפני השינוי
+        {/* מה שהיה לפני השינוי */}
         {/* <p className="litel">chat with {selectNameClient}</p>
         <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />         */}
 
