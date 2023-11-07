@@ -191,9 +191,13 @@ return <>
 
 {checkDesc()==true && 
 <div className='desc'>
-  <h3>:תיאור</h3>
+  <h3 >:תיאור</h3>
   <p>{det.Description}</p>
 </div>
+}
+
+{<h4>פרטים נוספים- </h4>
+   //שליפה מ2 הטבלאות והצגתן ניראלי בג'ויין
 }
 
          <Box sx={{ flexGrow: 1, maxWidth: 400 }}>
@@ -409,11 +413,7 @@ return <>
 
       </Grid>
     </Box>
-    {/* <div className="det">
-
-    <p>{det.Description}</p>
-    
-    </div> */}
+   
 
 </>
 

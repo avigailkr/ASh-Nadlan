@@ -237,14 +237,14 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
             להציג מחיר
           </label>
         
-        <Checkbox defaultChecked onChange={(e) => setShowPrice(!showPrice)}/>
+        <Checkbox  onChange={(e) => setShowPrice(!showPrice)}/>
 </div>
 <div>
           <label>
             פלוס 1/2 חדר
           </label>
         
-        <Checkbox defaultChecked onChange={(e) => setHalfRoom(!halfRoom)}/>
+        <Checkbox onChange={(e) => setHalfRoom(!halfRoom)}/>
 </div>
 </div>
        <div className="div-but">

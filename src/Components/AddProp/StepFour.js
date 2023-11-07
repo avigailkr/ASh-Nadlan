@@ -18,25 +18,14 @@ import { SaveArrStatus } from "../../store/Actions/PropAction";
 import TextField from '@mui/material/TextField';
 
 const StepFour = ({ prevStep, nextStep, values }) => {
-  const [plus, setPlus] = useState(
-    []
-    // {Id:1,מרפסת:false},
-    // {Id:2,סורגים:false}, 
-    // {Id:3,ממד:false}, 
-    // {Id:4,מחסן:false}, 
-    // {Id:5,מעלית:false},
-    // {Id:6,חניה:false},
-  
-  );
-  // const 
-  // const [lastName, setLastName] = useState("");
+  const [plus, setPlus] = useState([]);
   const [value, setValue] = useState([]);
   const [sito, setSito] = useState(1);
   const [rihut, setRihut] = useState("ללא"); 
   const [discription, setDiscription]= useState("")
     const [idProp,setIdProp]=useState("");  
     let ind=0;
-
+    console.log(plus)
   let dis=useDispatch();
 
     useEffect(()=>{
@@ -67,20 +56,7 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 
   const handleNext = (e) => {
     e.preventDefault();
-   //object pluse => to string order to send the server
-
-  //  let added="";
-
-//    for (const key in plus) {
-//      console.log(plus[key])
-//      console.log(`${key}: ${plus[key]}`);
-//      if(plus[key]){
-//        added+=" ";
-//        added+=key;
-
-//        console.log(added);
-//      }
-//  }
+  
    nextStep({ ...values, plus, sito, rihut,discription,idProp });
  };
 
@@ -130,12 +106,11 @@ const StepFour = ({ prevStep, nextStep, values }) => {
                     } else {
                       setValue((val) => val.filter((text) => text !== item));
                     }
-                    //put in plus all options that selected.
-                    let valu=event.target.value;
-                   
+                     //בדיקות תקינות: שלוחצים שוב על הכפתור זה לא מוסיף שוב 
+                            
                       plus.push(index+1);
-                     console.log(plus)
-          
+                
+                 
                   }}
                   slotProps={{
                     action: ({ checked }) => ({

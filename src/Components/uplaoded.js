@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 
-const uplaoded =()=>{
+export default function uplaoded() {
+
+
+    console.log("uploaded yes!")
 return<>
 <h1>הדירה פורסמה באתר בהצלחה!</h1>
+<p>לוגו</p>
 </>
 
 }
-export default uplaoded;

@@ -64,16 +64,6 @@ function App() {
       .then((res) => setRent(res.data[0]["count(*)"]))
       .catch((err) => alert(err));
 
-    //הבאת התמונות של הדירות
-    // bringAllImagesFromServer().then((res)=>{
-    //     console.log(res.data);
-    //     let a=[];
-    //     for(let i=0 ; i<res.data.length ; i++){
-    //       a.push(`http://localhost:8080/images/${res.data[i].Name}`)
-    //     }
-    //     console.log(a);
-    //     dis(SaveArrImg(a));
-    //  }).catch(err=>alert(err))
   }, []);
 
   
