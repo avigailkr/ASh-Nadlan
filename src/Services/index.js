@@ -149,9 +149,12 @@ export const addPropToServer= async (det)=>{
     const res=await axios.post("http://localhost:8080/property/addProp",det);
     return res;
 }
+<<<<<<< HEAD
 export const bringIdPropFromServer= async ()=>{
    return axios.get("http://localhost:8080/property/getLastIdProp");
 }
+=======
+>>>>>>> 973775d (17.10.23 a)
 
 //ערים
 //כל הערים
@@ -284,6 +287,7 @@ export const bringAllImagesFromServer =()=>{
 // export const bringImagesFileFromServer = ()=>{
 //     return axios.get("http://localhost:8080/images");
 // }
+<<<<<<< HEAD
 
 export const uplaodAddDetails =(id,det)=>{
     return axios.post(`http://localhost:8080/property/addDetails/${id}/${det}` );
@@ -293,3 +297,5 @@ export const uplaodAddDetails =(id,det)=>{
 export const getAddDetails=(id)=>{
     return axios.get(`http://localhost:8080/property/getAddDetails/${id}`);
 }
+=======
+>>>>>>> 973775d (17.10.23 a)

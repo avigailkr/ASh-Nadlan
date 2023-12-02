@@ -1,4 +1,5 @@
 import * as React from "react";
+<<<<<<< HEAD
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -34,6 +35,45 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 //delete
+=======
+  import { styled } from "@mui/material/styles";
+  import Card from "@mui/material/Card";
+  import CardHeader from "@mui/material/CardHeader";
+  import CardMedia from "@mui/material/CardMedia";
+  import CardContent from "@mui/material/CardContent";
+  import CardActions from "@mui/material/CardActions";
+  import Collapse from "@mui/material/Collapse";
+  import Avatar from "@mui/material/Avatar";
+  import IconButton from "@mui/material/IconButton";
+  import Typography from "@mui/material/Typography";
+  import { red } from "@mui/material/colors";
+  import FavoriteIcon from "@mui/icons-material/Favorite";
+  import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+  import ShareIcon from "@mui/icons-material/Share";
+  import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+  import MoreVertIcon from "@mui/icons-material/MoreVert";
+  import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
+  import "../../style.css";
+  import Link from '@mui/material/Link';
+  //---------- שם נקודה בין שתי מילים- נקודה אמצעית-----------------------
+  import Box from "@mui/material/Box";
+  //-----------------------------פח------------------------
+  import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+  //-------------------- חצים
+  //back
+  import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+  //next
+  import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+  import { hover } from "@testing-library/user-event/dist/hover";
+  import { useDispatch, useSelector } from "react-redux";
+  import { ActivePropFromServer, DeletePropFromServer, NotActivePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
+  import { useState } from "react";
+  import { useEffect } from "react";
+  
+  
+  
+  //delete
+>>>>>>> 973775d (17.10.23 a)
 import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
 import Modal from '@mui/joy/Modal';
@@ -43,6 +83,7 @@ import DeleteForever from '@mui/icons-material/DeleteForever';
 import Switch from '@mui/joy/Switch';
 
 
+<<<<<<< HEAD
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -50,6 +91,15 @@ import DialogContentText from '@mui/material/DialogContentText';
 import { AddProp, DeleteProp } from "../../../store/Actions/PropAction";
 import IosShareIcon from '@mui/icons-material/IosShare';
 import MenuCard from "../MenuCard";
+=======
+  import Dialog from '@mui/material/Dialog';
+  import DialogActions from '@mui/material/DialogActions';
+  import DialogContent from '@mui/material/DialogContent';
+  import DialogContentText from '@mui/material/DialogContentText';
+import { AddProp, DeleteProp } from "../../../store/Actions/PropAction";
+import IosShareIcon from '@mui/icons-material/IosShare';
+import Chacima from "../Chacima";
+>>>>>>> 973775d (17.10.23 a)
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 //icon update
@@ -101,6 +151,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
       setOpen2(false);
       // setIsDelete(false);
     };
+<<<<<<< HEAD
   const update=true;
 const updateProp=()=>{
   nav(`/DetailsProperty/${idProp}/${idPropOwner}/${update}`)
@@ -115,6 +166,15 @@ const updateProp=()=>{
         }
         setarrImg(arrImg);
      }).catch(err=>alert(err))
+=======
+  
+    useEffect(() => {
+      //כל התמונות של דירה זו
+      getAllImgsByIdFromServer(idProp).then((res) => {
+        setarrImg(res.data);
+        console.log(res.data)
+      }).catch(err => alert(err))
+>>>>>>> 973775d (17.10.23 a)
   
   
       getOwnerFromServer(idPropOwner).then(res => {
@@ -136,7 +196,13 @@ const updateProp=()=>{
       if (index == 0)
         setindex(lengthArrImg - 1);
       else setindex(index - 1);
+<<<<<<< HEAD
       }
+=======
+  
+      //console.log(index)
+    }
+>>>>>>> 973775d (17.10.23 a)
     function next() {
       if (arrImg.length == 0) return;
       let lengthArrImg = arrImg.length;//3
@@ -144,8 +210,14 @@ const updateProp=()=>{
         setindex(0);
       else setindex(index + 1);
   
+<<<<<<< HEAD
       
     }
+=======
+      //console.log(index)
+    }
+    
+>>>>>>> 973775d (17.10.23 a)
     function deleteOk(){
       NotActivePropFromServer(idProp).then((res) => {
         alert("הוסר בהצלחה")
@@ -168,7 +240,10 @@ const updateProp=()=>{
 
       handleClose2();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 973775d (17.10.23 a)
   function deletepropfromWebsite(){
     DeletePropFromServer(idProp).then((res) => {
         alert("נמחק בהצלחה")
@@ -180,7 +255,10 @@ const updateProp=()=>{
 
       handleClose2();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 973775d (17.10.23 a)
     const bull = (
       <Box component="span" sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
       >
@@ -194,6 +272,24 @@ const updateProp=()=>{
 
     return <>
       <Card sx={{ maxWidth: 299 }}>
+<<<<<<< HEAD
+=======
+      {/* <Button
+        variant="outlined"
+        color="danger"
+        endDecorator={<DeleteForever />}
+        onClick={() => setOpen3(true)}
+      >
+        
+      </Button> */}
+
+          {/* // color="primary"
+          // disabled={false}
+          // underline="none"
+          // variant="plain"
+          // onClick={() => setOpen3(true)} */}
+      
+>>>>>>> 973775d (17.10.23 a)
         <Link
         sx={{marginLeft:25,fontSize:15,paddingTop:-2}}
         disabled={false}
@@ -238,6 +334,7 @@ const updateProp=()=>{
 
         <div className="div-imges">
 
+<<<<<<< HEAD
         {arrImg.length != [] ? <>
          <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
              <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
@@ -251,6 +348,14 @@ const updateProp=()=>{
            :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
            }
          
+=======
+        
+          <ArrowBackIosIcon className="arrow1" onClick={back} />
+          {/* `../../image/${arrImg[index].ImgSrc}` */}
+          
+          {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc}  />}
+          <ArrowForwardIosIcon className="arrow2" onClick={next} />
+>>>>>>> 973775d (17.10.23 a)
         </div>
         <CardContent>
           {/*----------------------------------------- bull-נשלח לפונקציה
@@ -349,8 +454,12 @@ const updateProp=()=>{
 
        
 
+<<<<<<< HEAD
           <Fab color="secondary" aria-label="edit" id="icon-update"  onClick={updateProp}>
 
+=======
+          <Fab color="secondary" aria-label="edit" id="icon-update" >
+>>>>>>> 973775d (17.10.23 a)
         <EditIcon />
       </Fab>
 

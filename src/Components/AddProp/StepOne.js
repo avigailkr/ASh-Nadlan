@@ -86,10 +86,16 @@ let dis=useDispatch();
   
   return (<div className="addProp-main">
    
+<<<<<<< HEAD
    
 
     <form onSubmit={handleNext} className="form__step">
       <Steps level={0}/> 
+=======
+   <Steps level={0}/> 
+
+    <form onSubmit={handleNext} className="form__step">
+>>>>>>> 973775d (17.10.23 a)
       <label id="isSale">
         ?מוכרים או משכירים
         </label>

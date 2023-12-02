@@ -68,10 +68,16 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
 
 
     return <div className="addProp-main">
+<<<<<<< HEAD
      
       
       <form className="form__step" onSubmit={handleNext}>
         <Steps level={1}/>
+=======
+     <Steps level={1}/>
+      
+      <form className="form__step" onSubmit={handleNext}>
+>>>>>>> 973775d (17.10.23 a)
       {/* <div> */}
           <label dir="rtl">
             סוג הנכס:
@@ -83,6 +89,7 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           })}
         </Select>
        
+<<<<<<< HEAD
         {type==3 && 
        <div className='levelIn'>
         <label id='leabelLevelIn1'>
@@ -141,6 +148,13 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
            </Select>
            </div>
   }
+=======
+          {/* <input
+            type="url"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          /> */}
+>>>>>>> 973775d (17.10.23 a)
        
          <label>
         שטח במ"ר:
@@ -206,8 +220,68 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
             value={photo}
             onChange={(e) => setPhoto(e.target.value)}
           /> */}
+<<<<<<< HEAD
 
  
+=======
+       <div className='levelIn'>
+        <label id='leabelLevelIn1'>
+        קומה
+        </label>
+        
+        <Select defaultValue="1" size='md' sx={{ m: 3, minWidth: 120 }} onChange={(e)=>setFloor(e.target.innerText)}>
+           <Option value="1">1</Option>
+           <Option value="2">2</Option>
+           <Option value="3">3</Option>
+           <Option value="4">4</Option>
+           <Option value="5">5</Option>
+           <Option value="6">6</Option>
+           <Option value="7">7</Option>
+           <Option value="8">8</Option>
+           <Option value="9">9</Option>
+           <Option value="10">10</Option>
+           <Option value="11">11</Option>
+           <Option value="12">12</Option>
+           <Option value="13">13</Option>
+           <Option value="14">14</Option>
+           <Option value="15">15</Option>
+           <Option value="16">16</Option>
+           <Option value="17">17</Option>
+           <Option value="18">18</Option>
+           <Option value="19">19</Option>
+           <Option value="20+">20+</Option>
+
+        </Select>
+   
+   
+          <label id='leabelLevelIn2'>
+           מתוך
+          </label>
+          <Select defaultValue="1" size='md' sx={{ m: 3, minWidth: 120 }} onChange={(e)=>setInFloor(e.target.innerText)}>
+          <Option value="1">1</Option>
+           <Option value="2">2</Option>
+           <Option value="3">3</Option>
+           <Option value="4">4</Option>
+           <Option value="5">5</Option>
+           <Option value="6">6</Option>
+           <Option value="7">7</Option>
+           <Option value="8">8</Option>
+           <Option value="9">9</Option>
+           <Option value="10">10</Option>
+           <Option value="11">11</Option>
+           <Option value="12">12</Option>
+           <Option value="13">13</Option>
+           <Option value="14">14</Option>
+           <Option value="15">15</Option>
+           <Option value="16">16</Option>
+           <Option value="17">17</Option>
+           <Option value="18">18</Option>
+           <Option value="19">19</Option>
+           <Option value="20+">20+</Option>
+           </Select>
+           </div>
+
+>>>>>>> 973775d (17.10.23 a)
          <label> 
           :תאריך כניסה
          </label>
@@ -237,14 +311,22 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
             להציג מחיר
           </label>
         
+<<<<<<< HEAD
         <Checkbox  onChange={(e) => setShowPrice(!showPrice)}/>
+=======
+        <Checkbox defaultChecked onChange={(e) => setShowPrice(!showPrice)}/>
+>>>>>>> 973775d (17.10.23 a)
 </div>
 <div>
           <label>
             פלוס 1/2 חדר
           </label>
         
+<<<<<<< HEAD
         <Checkbox onChange={(e) => setHalfRoom(!halfRoom)}/>
+=======
+        <Checkbox defaultChecked onChange={(e) => setHalfRoom(!halfRoom)}/>
+>>>>>>> 973775d (17.10.23 a)
 </div>
 </div>
        <div className="div-but">

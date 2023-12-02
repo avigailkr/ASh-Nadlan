@@ -740,13 +740,16 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
         <ListItemText sx={{textAlign:"right", display:'inline'}} primary='שטח במ"ר:'
         secondary={
           update==="true"?
-        <FormControl dir="ltr" fullWidth sx={{ m: 1 , width:110}}>
-          <OutlinedInput
-          sx={{height:40}}
-            startAdornment={<InputAdornment position="start">מ"ר</InputAdornment>}
-          />
-        </FormControl>
-          
+
+          <TextField
+         onChange={(e)=>setmr(e.target.value)}
+         dir="ltr"
+        sx={{ mt: 2, width: '15ch' }}z
+       InputProps={{
+            startAdornment: 'מ"ר',
+        }}
+        > 
+        </TextField>
         :
           <React.Fragment>
             <Typography

@@ -18,7 +18,11 @@ const steps = [
 
 const Steps=({level})=>{
     return<>
+<<<<<<< HEAD
      <Box className="steper" sx={{ width: '70%', display:"inline", mb:5, mt:5}}>
+=======
+     <Box className="steper" sx={{ width: '70%', display:"inline", }}>
+>>>>>>> 973775d (17.10.23 a)
       <Stepper activeStep={level} dir="rtl" >
         {steps.map((index) => (
           <Step  key={index} >

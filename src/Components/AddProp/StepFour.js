@@ -11,21 +11,44 @@ import FormHelperText from '@mui/joy/FormHelperText';
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+<<<<<<< HEAD
 import { getStatusFromServer,bringIdPropFromServer } from "../../Services";
+=======
+import { getStatusFromServer } from "../../Services";
+>>>>>>> 973775d (17.10.23 a)
 import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SaveArrStatus } from "../../store/Actions/PropAction";
 import TextField from '@mui/material/TextField';
 
 const StepFour = ({ prevStep, nextStep, values }) => {
+<<<<<<< HEAD
   const [plus, setPlus] = useState([]);
+=======
+  const [plus, setPlus] = useState(
+    [
+    {Id:1,מרפסת:false},
+    {Id:2,סורגים:false}, 
+    {Id:3,ממד:false}, 
+    {Id:4,מחסן:false}, 
+    {Id:5,מעלית:false},
+    {Id:6,חניה:false},
+  ]
+  );
+  // const 
+  // const [lastName, setLastName] = useState("");
+>>>>>>> 973775d (17.10.23 a)
   const [value, setValue] = useState([]);
   const [sito, setSito] = useState(1);
   const [rihut, setRihut] = useState("ללא"); 
   const [discription, setDiscription]= useState("")
+<<<<<<< HEAD
     const [idProp,setIdProp]=useState("");  
     let ind=0;
     console.log(plus)
+=======
+
+>>>>>>> 973775d (17.10.23 a)
   let dis=useDispatch();
 
     useEffect(()=>{
@@ -33,11 +56,14 @@ const StepFour = ({ prevStep, nextStep, values }) => {
           dis(SaveArrStatus(res.data))
           console.log(res.data)
       }).catch(er=>alert("error in bring arr property from server"))
+<<<<<<< HEAD
 
       bringIdPropFromServer().then((res)=>{
         console.log(res.data[0].Id);
         setIdProp(res.data[0].Id);
       }).catch(err=>alert(err))
+=======
+>>>>>>> 973775d (17.10.23 a)
   },[])
   
   let arrStatus=useSelector(x=>x.prop.arrStatus);
@@ -56,6 +82,7 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 
   const handleNext = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
   
    nextStep({ ...values, plus, sito, rihut,discription,idProp });
  };
@@ -65,6 +92,30 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 
     <form onSubmit={handleNext} className="form__step">
       <Steps level={3}/>
+=======
+   //object pluse => to string order to send the server
+
+  //  let added="";
+
+//    for (const key in plus) {
+//      console.log(plus[key])
+//      console.log(`${key}: ${plus[key]}`);
+//      if(plus[key]){
+//        added+=" ";
+//        added+=key;
+
+//        console.log(added);
+//      }
+//  }
+   nextStep({ ...values, plus, sito, rihut,discription });
+ };
+
+  return (<div className="addProp-main">
+    <Steps level={3}/>
+
+    <form onSubmit={handleNext} className="form__step">
+      
+>>>>>>> 973775d (17.10.23 a)
       <label id="mn">
       :מאפיינים נוספים     
        </label>
@@ -106,12 +157,20 @@ const StepFour = ({ prevStep, nextStep, values }) => {
                     } else {
                       setValue((val) => val.filter((text) => text !== item));
                     }
+<<<<<<< HEAD
                      //בדיקות תקינות: שלוחצים שוב על הכפתור זה לא מוסיף שוב 
                       
                          plus.push(index+1)
       
                 
                  
+=======
+                    //put in plus all options that selected.
+                    let valu=event.target.value;
+                    
+                      plus[valu]=(!plus[valu])
+                     console.log(plus)
+>>>>>>> 973775d (17.10.23 a)
                   }}
                   slotProps={{
                     action: ({ checked }) => ({
