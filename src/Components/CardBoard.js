@@ -30,7 +30,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { hover } from "@testing-library/user-event/dist/hover";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
 import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer,getOwnerFromServer, bringImagesFromServer } from "../Services";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -40,13 +39,6 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { grey} from '@mui/material/colors';
 import Button from '@mui/material/Button';
-=======
-import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer,getOwnerFromServer } from "../Services";
-import { useState } from "react";
-import { useEffect } from "react";
-import { DeleteProp } from "../store/Actions/PropAction";
-import Chacima from "./icons/Chacima";
->>>>>>> 973775d (17.10.23 a)
 
 
 const ExpandMore = styled((props) => {
@@ -73,7 +65,6 @@ export default function CardBoard(props) {
 
   useEffect(() => {
     //כל התמונות של דירה זו
-<<<<<<< HEAD
     // getAllImgsByIdFromServer(idProp).then((res) => {
     //   setarrImg(res.data);
     //   console.log(res.data)
@@ -87,13 +78,6 @@ export default function CardBoard(props) {
       }
       setarrImg(arrImg);
    }).catch(err=>alert(err))
-=======
-    getAllImgsByIdFromServer(idProp).then((res) => {
-      setarrImg(res.data);
-      console.log(res.data)
-    }).catch(err => alert(err))
-
->>>>>>> 973775d (17.10.23 a)
 
     getOwnerFromServer(idPropOwner).then(res => {
       setOwner(res.data[0])
@@ -163,7 +147,6 @@ export default function CardBoard(props) {
 
   const nav = useNavigate();
 
-<<<<<<< HEAD
  //details of property
  const goTodetails=()=>{
   console.log("gotodetails");
@@ -171,8 +154,6 @@ export default function CardBoard(props) {
   nav(`/DetailsProperty/${idProp}`)
 }
 
-=======
->>>>>>> 973775d (17.10.23 a)
   const fun = () => {
     console.log("chatttttttttttttttttt");
 
@@ -208,11 +189,7 @@ export default function CardBoard(props) {
           }
           action={
             <IconButton aria-label="settings">
-<<<<<<< HEAD
               <MenuCard id={owner.Id} owner1={owner} />
-=======
-              <Chacima id={owner.Id} owner1={owner} />
->>>>>>> 973775d (17.10.23 a)
             </IconButton>
           }
 
@@ -226,7 +203,6 @@ export default function CardBoard(props) {
       }
 
       <div className="div-imges">
-<<<<<<< HEAD
         
       {arrImg.length != [] ? <>
          <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
@@ -240,12 +216,6 @@ export default function CardBoard(props) {
            </>
            :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
            }
-=======
-        <ArrowBackIosIcon className="arrow1" onClick={back} />
-        {/* `../../image/${arrImg[index].ImgSrc}` */}
-        {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc} />}
-        <ArrowForwardIosIcon className="arrow2" onClick={next} />
->>>>>>> 973775d (17.10.23 a)
       </div>
       <CardContent>
         {/*----------------------------------------- bull-נשלח לפונקציה
@@ -265,13 +235,7 @@ export default function CardBoard(props) {
         <IconButton aria-label="add to favorites" id="butfavor" onClick={() => { userSelect != null && funfavorites() }} >
           {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
-<<<<<<< HEAD
         <Button variant="text" onClick={()=>{goTodetails(idProp)}}>ראה עוד</Button>
-=======
-        <Link href="#">ראה עוד</Link>
-
-
->>>>>>> 973775d (17.10.23 a)
         {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
           <DeleteForeverIcon onClick={deleteProp} />
         </IconButton>}
@@ -283,35 +247,4 @@ export default function CardBoard(props) {
       </Collapse>
     </Card>
   );
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
-
-
-
-
-
-
-
-
-{/* <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <Chacima />
-          </IconButton>
-        }
-
-        // getUserByIdFromServer-שליפת השם והמייל של המוכר מהשרת 
-        title={props.props.userId}
-        subheader="September 14, 2016"
-      /> */}
->>>>>>> 973775d (17.10.23 a)

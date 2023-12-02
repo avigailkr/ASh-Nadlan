@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import { useDispatch, useSelector } from "react-redux";
 // import {useForm} from "react-hook-form";
 // import Avatar from '@mui/material/Avatar';
@@ -60,8 +59,6 @@
 // export default MyProfile;
 
 
-=======
->>>>>>> 973775d (17.10.23 a)
 import { useDispatch, useSelector } from "react-redux";
 import {useForm} from "react-hook-form";
 import Avatar from '@mui/material/Avatar';
@@ -71,7 +68,6 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import TextField from '@mui/material/TextField';
 import "../style.css";
 import  {UpdateUser}  from "../../Services";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { setRef } from "@mui/material";
@@ -84,10 +80,6 @@ const MyProfile=()=>{
     let [name,setname]=useState(selectUser.Name);
     let [phone,setphone]=useState(selectUser.Phone);
     let nav=useNavigate();
-=======
-const MyProfile=()=>{
-    const selectUser = useSelector(state => state.user.selectedUser);//שליפה של המשתמש הנוכחי שהתחבר
->>>>>>> 973775d (17.10.23 a)
     console.log("MyProfile");
     console.log(selectUser);
 //     const dis=useDispatch();
@@ -99,7 +91,6 @@ const MyProfile=()=>{
      function updatedetails(props){
             console.log("update")
             console.log(props)
-<<<<<<< HEAD
             UpdateUser(props).then(res=>{
               setname(props.name);
               setmail(props.email);
@@ -108,16 +99,12 @@ const MyProfile=()=>{
       document.getElementById("detailse").style.display="block";
             }).catch(err=>alert(err))
 
-=======
-            UpdateUser(props).then(res=>console.log(res)).catch(err=>alert(err))
->>>>>>> 973775d (17.10.23 a)
      }
 
      function exite(){
       document.getElementById("detailsToSetting").style.display="none";
       document.getElementById("detailse").style.display="block";
      }
-<<<<<<< HEAD
 
      function onFileChange(e){
       console.log("onFileChange111111111111111111111111111")
@@ -136,14 +123,10 @@ const MyProfile=()=>{
 
 
 
-=======
-     const t=useForm();
->>>>>>> 973775d (17.10.23 a)
     return<>
     <button id="but-set"  onClick={setting}><BorderColorIcon/></button>
         <Avatar sx={{ bgcolor: red[500],width: 106, height: 106,marginLeft:90}} aria-label="recipe"> 
     {selectUser.Mail[0]}
-<<<<<<< HEAD
     {/* <img src={URL.createObjectURL(image)} /> */}
   </Avatar>
 
@@ -151,16 +134,6 @@ const MyProfile=()=>{
      <h1>{mail}</h1><br/>
   {name}<br/>
   {phone}<br/>
-=======
-  </Avatar>
-
-  <div id="detailse">
-
-     <h1>{selectUser.Mail}</h1><br/>
-  {selectUser.Name}<br/>
-  {selectUser.Phone}<br/>
-  {selectUser.Tz}<br/>
->>>>>>> 973775d (17.10.23 a)
   </div>
 
 
@@ -169,7 +142,6 @@ const MyProfile=()=>{
      <TextField  id="Mail" label="Mail" defaultValue={selectUser.Mail} helperText=" " variant="filled" {...t.register("email") } /><br/>
      <TextField  id="Name" label="Name" defaultValue={selectUser.Name} helperText=" " variant="filled" {...t.register("name") }/><br/>
      <TextField  id="Phone" label="Phone" defaultValue={selectUser.Phone} helperText=" " variant="filled" {...t.register("phone") }/><br/>
-<<<<<<< HEAD
      {/* <label id="up">
        העלאת תמונות        
       </label>
@@ -197,9 +169,6 @@ const MyProfile=()=>{
 </div>*/}
 <input type="file" onChange={(e)=>{onFileChange(e)}}/>
 
-=======
-     <TextField  id="Tz" label="Tz" defaultValue={selectUser.Tz} helperText=" " variant="filled" {...t.register("tz") }/><br/>
->>>>>>> 973775d (17.10.23 a)
      <input type="submit"  value="עדכן"  className="but-update"/><br/>
      <input type="button"  value="ביטול" onClick={exite} className="but-update"/>
    </form> </div>

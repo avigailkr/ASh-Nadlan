@@ -88,20 +88,12 @@ height: 300px;
 }
 /* כותרת */
   #img-logo{
-<<<<<<< HEAD
     width: 12vw;
     height: 25vh;
   }
   .title-div{
     display: flex;
     margin-right: 30vw;
-=======
-    width: 6vw;
-    height: 5vw;
-  }
-  .title-div{
-    display: flex;
->>>>>>> 973775d (17.10.23 a)
   }
  .title-div-txt{
   margin-left: 35%;
@@ -345,11 +337,7 @@ color: #717171;
   /* background-color: rgb(79, 5, 9); */
 }
 .but-chat{
-<<<<<<< HEAD
   margin-left: 19%;
-=======
-  margin-left: 32%;
->>>>>>> 973775d (17.10.23 a)
   /* text-align: center; */
   width: 28%;
   background-color: #3e85d1;
@@ -412,11 +400,7 @@ color: #717171;
     }
     .massagesArea,.massagesboard{
       /* height: calc(100%-50px); */
-<<<<<<< HEAD
       height: 250px;
-=======
-      height: 327px;
->>>>>>> 973775d (17.10.23 a)
       margin-left: 42%;
       overflow-y: auto;
       padding-right: 13px;
@@ -425,11 +409,7 @@ color: #717171;
       margin-top: -47%;
     }
     .massagesArea{
-<<<<<<< HEAD
       margin-top: -60%;
-=======
-      margin-top: -35%;
->>>>>>> 973775d (17.10.23 a)
     }
     .create-massage{
     /* width: 38%;
@@ -450,10 +430,7 @@ color: #717171;
     .chat-list{
       margin-top: -16%;
       margin-left: -6%;
-<<<<<<< HEAD
       margin-bottom: 20vh
-=======
->>>>>>> 973775d (17.10.23 a)
     }
     #deleteAllMassArea{
     margin-right: -86%;
@@ -487,13 +464,9 @@ color: #717171;
     opacity: 0.8;
 
   }
-<<<<<<< HEAD
 .create-massageArea{
   margin-top: 5vh;
 }
-=======
-
->>>>>>> 973775d (17.10.23 a)
   .massage{
     background-color: #e5e5e5;
     color: #333;
@@ -911,11 +884,7 @@ input[type=submit]:hover{
       height: 145vh;
       margin-left: 10vw;
       margin-bottom:2vh ;
-<<<<<<< HEAD
       margin-top: 5vh;
-=======
-      margin-top: 2vh;
->>>>>>> 973775d (17.10.23 a)
       padding: 2rem;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -975,17 +944,10 @@ input[type=submit]:hover{
     .stepsMUI{
       size: 5vw;
     }
-<<<<<<< HEAD
     /* .steper{
       position:absolute;
       margin-top: 10vh;
     } */
-=======
-    .steper{
-      position:absolute;
-      margin-top: 10vh;
-    }
->>>>>>> 973775d (17.10.23 a)
   /* button css */
   .button {
     background-color: #008CBA;
@@ -1050,7 +1012,6 @@ input[type=submit]:hover{
       position: absolute;
       margin-right: 17vw; 
     }
-<<<<<<< HEAD
     #leabelLevelIn11{
       position: absolute;
       margin-top: 1.3vw;
@@ -1060,8 +1021,6 @@ input[type=submit]:hover{
       position: absolute;
       margin-top: 5vw; 
     }
-=======
->>>>>>> 973775d (17.10.23 a)
     #priceInput{
       width:20%;
       margin-bottom: 3vh;
@@ -1079,7 +1038,6 @@ input[type=submit]:hover{
       border-radius: 5px;
     
     }
-<<<<<<< HEAD
     #DivfileInput2{
       display: flex;
       flex-direction: column;
@@ -1098,11 +1056,6 @@ input[type=submit]:hover{
       width:605px;
       /* margin: 2vh 0 47vh 0; */
 
-=======
-    .uploded-row{
-      width:605px;
-      margin: 2vh 0 47vh 0;
->>>>>>> 973775d (17.10.23 a)
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1110,14 +1063,9 @@ input[type=submit]:hover{
       border-radius: 5px;
       background-color: #e9f0ff;
     }
-<<<<<<< HEAD
     .up{
       margin-top: 10vh;
       margin-bottom: 10vh;
-=======
-    #up{
-      margin-top: 20vh;
->>>>>>> 973775d (17.10.23 a)
     }
     .uploud-content{
       display: flex;
@@ -1158,21 +1106,15 @@ input[type=submit]:hover{
        height: 77vh;
        width: 42vw;
        margin-top: 5vh;
-<<<<<<< HEAD
        /* margin-right: 20vw; */
 
-=======
->>>>>>> 973775d (17.10.23 a)
      }
    .div-upImg{
        width: 10vw;
        height: 11vh;
       
      }
-<<<<<<< HEAD
      
-=======
->>>>>>> 973775d (17.10.23 a)
      #butReg{
       margin-right: 21vw;
      }
@@ -1217,19 +1159,12 @@ input[type=submit]:hover{
     }
      /*  */
 
-<<<<<<< HEAD
 
 
    .image-gallery {
       width: 35vw;
       height: 80vh;
       margin-left:20%;
-=======
-     .image-gallery {
-      width: 40%;
-      height: 90vh;
-      margin-left:45%;
->>>>>>> 973775d (17.10.23 a)
   }
   
   .image-gallery-slide img {
@@ -1239,15 +1174,11 @@ input[type=submit]:hover{
       object-fit: cover;
       overflow: hidden;
       object-position: center center;
-<<<<<<< HEAD
 
-=======
->>>>>>> 973775d (17.10.23 a)
   }
   
   .fullscreen .image-gallery-slide img {
       max-height: 100vh;
-<<<<<<< HEAD
   } 
 
 
@@ -1338,7 +1269,3 @@ input[type=submit]:hover{
 #priceInput2{
   width: 10vw;
 }
-=======
-  }
-  
->>>>>>> 973775d (17.10.23 a)

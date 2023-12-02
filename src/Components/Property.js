@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 // import { useState,useEffect,useRef } from "react";
 // import OneProperty from "./OneProperty";
 // import "./style.css";
@@ -46,8 +45,6 @@
 // }
 // export default Property;
 
-=======
->>>>>>> 973775d (17.10.23 a)
 import { useState,useEffect,useRef } from "react";
 import OneProperty from "./OneProperty";
 import "./style.css";
@@ -70,11 +67,8 @@ import Filter from './icons/Filtering/Filter';
       }).catch(err=>alert(err));
 
       getAllUsersFromServer().then((res)=>{
-<<<<<<< HEAD
         // console.log("users from server")
         // console.log(res.data)
-=======
->>>>>>> 973775d (17.10.23 a)
         dis(SaveArrUser(res.data));
       }).catch(err=>alert(err));
     }, []); 

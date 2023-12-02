@@ -11,12 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';//אייקון תפריט
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
-=======
-import Login from '../Login';
-import { useDispatch } from 'react-redux';
->>>>>>> 973775d (17.10.23 a)
 import { AddUserServer, getLogin } from '../../Services';
 import { AddUser, SaveUser } from '../../store/Actions/UserAction';
 
@@ -36,7 +31,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 
-<<<<<<< HEAD
 // const schema = yup.object({
 //   name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x.length<=30 && x.length >= 2)
 //   ,  
@@ -60,25 +54,13 @@ const schema = yup.object({
    ,
   // mail: yup.string().email('כתובת מייל שגויה'),
   phone:yup.string().test('len',"מספר לא תקין",x => x!=null && (x.length<=10 && x.length >= 9))
-=======
-const schema = yup.object({
-  name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x.length<=30 && x.length >= 2),
-  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
-   "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
-  email: yup.string().email('כתובת מייל שגויה'),
-  phone:yup.string().test('len',"מספר לא תקין",x => x.length<=10 && x.length >= 9)
->>>>>>> 973775d (17.10.23 a)
  }).required();
 
 export default function Menu() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const nav=useNavigate();
-<<<<<<< HEAD
   const selectUser = useSelector(state => state.user.selectedUser);//שליפה של המשתמש הנוכחי שהתחבר
-=======
-
->>>>>>> 973775d (17.10.23 a)
   const form1 = useRef();
   const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
   resolver: yupResolver(schema)
@@ -114,23 +96,11 @@ export default function Menu() {
 
     prevOpen.current = open;
   }, [open]);
-<<<<<<< HEAD
 //loginnnnnnnnnnnnnn
   const [openLogin, setOpenLogin] = useState(false);
   const dis=useDispatch();
   let mailInput=useRef(null);
   let passInput=useRef(null);
-=======
-
-
-
-
-  //loginnnnnnnnnnnnnn
-  const [openLogin, setOpenLogin] = useState(false);
-  const [email,setEmail]=useState('');
-  const [password,setPassword]=useState(0);
-  const dis=useDispatch();
->>>>>>> 973775d (17.10.23 a)
   function openAreaLogin(){
     setOpenLogin(true)
   }
@@ -138,11 +108,8 @@ export default function Menu() {
     setOpenLogin(false);
   };
   const login = (e) => {
-<<<<<<< HEAD
     alert("loginnnnn")
     console.log("loginnnnn")
-=======
->>>>>>> 973775d (17.10.23 a)
     console.log(e)
 let details={
     email:e.email,
@@ -164,17 +131,8 @@ getLogin(details).then((res)=>{
     openAreaRegister()})
     closeAreaLogin();
   };
-<<<<<<< HEAD
   //loginnnnnnnnnnnnnn
 //registerrrrrrrrr
-=======
-  
-  //loginnnnnnnnnnnnnn
-
-
-
-  //registerrrrrrrrr
->>>>>>> 973775d (17.10.23 a)
   const [openRegister, setOpenRegister] = useState(false);
   const [name,setName]=useState('');
   const [phone,setPhone]=useState('');
@@ -187,7 +145,6 @@ getLogin(details).then((res)=>{
     setOpenRegister(false);
   };
   const register2=(e)=>{
-<<<<<<< HEAD
     const user={
       Name:form.current.user_name.value,
       Mail:form.current.user_email.value,
@@ -196,16 +153,6 @@ getLogin(details).then((res)=>{
   } 
   if(form.current.user_name)sendEmail()
  
-=======
-    
-    const user={
-        Name:e.name,
-        Mail:e.email,
-        Phone:e.phone,
-        Password:e.password
-    }
-    if(e.email)sendEmail(e)//למה אי אפשר לעשות בתוך הוספת משתמש
->>>>>>> 973775d (17.10.23 a)
     
      AddUserServer(user).then((res)=>{
         alert(res.data.mass)
@@ -218,15 +165,7 @@ getLogin(details).then((res)=>{
   
     
 }
-<<<<<<< HEAD
 const sendEmail = () => {
-=======
-const sendEmail = (e) => {
-  console.log("sendEmail")
-  console.log(form.current)
-  console.log(e)
-  // e.preventDefault();
->>>>>>> 973775d (17.10.23 a)
 
   emailjs.sendForm('service_dddlq4q', 'template_7dy0nh5',form.current, 'h8uvQnkZ5XPOub0E6')
     .then((result) => {
@@ -261,41 +200,26 @@ const sendEmail = (e) => {
           disablePortal
         >
           {({ TransitionProps, placement }) => (
-<<<<<<< HEAD
             <Grow 
             // sx={{ zIndex: 'tooltip' }}
-=======
-            <Grow
->>>>>>> 973775d (17.10.23 a)
               {...TransitionProps}
               style={{
                 transformOrigin:
                   placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
-<<<<<<< HEAD
               <Paper                    
 >
-=======
-              <Paper>
->>>>>>> 973775d (17.10.23 a)
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
-<<<<<<< HEAD
                      >
                     <MenuItem onClick={openAreaRegister} value="register">הרשמה</MenuItem>
                     <MenuItem onClick={openAreaLogin} value="connect">התחברות</MenuItem>
                    {selectUser!=null && <MenuItem onClick={myArea} value="myarea">לאזור האישי</MenuItem>}
-=======
-                  >
-                    <MenuItem onClick={openAreaRegister} value="register">הרשמה</MenuItem>
-                    <MenuItem onClick={openAreaLogin} value="connect">התחברות</MenuItem>
-                    <MenuItem onClick={myArea} value="myarea">לאזור האישי</MenuItem>
->>>>>>> 973775d (17.10.23 a)
 
                   </MenuList>
                 </ClickAwayListener>
@@ -313,7 +237,6 @@ const sendEmail = (e) => {
     {openLogin &&<> <Dialog open={openLogin} onClose={closeAreaLogin}>
         
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
-<<<<<<< HEAD
 
         <form ref={form1}  onSubmit={handleSubmit(login)}>
         <DialogContent>
@@ -323,15 +246,6 @@ const sendEmail = (e) => {
           {...register('email')} 
           />
           
-=======
-        <form ref={form1}  onSubmit={handleSubmit(login)}>
-        <DialogContent>
-        
-          <TextField autoFocus helperText={errors?.email?.message} 
-           margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
-          {...register('email')} 
-          />
->>>>>>> 973775d (17.10.23 a)
           <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
           {...register('password')}
           />
@@ -343,7 +257,6 @@ const sendEmail = (e) => {
           openAreaRegister();
           }}>הרשמה</Button>
           <Button onClick={closeAreaLogin}>ביטול</Button>
-<<<<<<< HEAD
           <Button type="submit" >התחבר</Button>
           {/* <input type="button" value="התחבר" /> */}
         </DialogActions> 
@@ -354,44 +267,21 @@ const sendEmail = (e) => {
       </>
     }
 {openRegister && <>
-=======
-          <Button type="submit">התחבר</Button>
-        </DialogActions> 
-        </form>
-      </Dialog> 
-      </>
-    }
-
-
-
-
-    {openRegister && <>
->>>>>>> 973775d (17.10.23 a)
       <Dialog open={openRegister} onClose={closeAreaRegister}>
         <form ref={form}  onSubmit={handleSubmit(register2)}>
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
         <DialogContent>
           <TextField autoFocus helperText={errors?.email?.message} 
            margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
-<<<<<<< HEAD
           // {...register('email')} 
-=======
-          {...register('email')} 
->>>>>>> 973775d (17.10.23 a)
           />
           <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
           {...register('password')}
           />
           <TextField helperText={errors?.name?.message} margin="dense" label="Name" type="name" fullWidth variant="standard" name='user_name'
-<<<<<<< HEAD
           // {...register('name')}
           />
           <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="number" fullWidth variant="standard" name='phone'
-=======
-          {...register('name')}
-          />
-          <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="phone" fullWidth variant="standard" name='phone'
->>>>>>> 973775d (17.10.23 a)
           {...register('phone')}
           />
          
@@ -407,8 +297,4 @@ const sendEmail = (e) => {
       </Dialog>
     </>}
     </>
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 973775d (17.10.23 a)
