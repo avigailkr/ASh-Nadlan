@@ -1012,6 +1012,15 @@ input[type=submit]:hover{
       position: absolute;
       margin-right: 17vw; 
     }
+    #leabelLevelIn11{
+      position: absolute;
+      margin-top: 1.3vw;
+      margin-bottom: 4vh;
+    }
+    #leabelLevelIn22{
+      position: absolute;
+      margin-top: 5vw; 
+    }
     #priceInput{
       width:20%;
       margin-bottom: 3vh;
@@ -1028,6 +1037,20 @@ input[type=submit]:hover{
       cursor: pointer;
       border-radius: 5px;
     
+    }
+    #DivfileInput2{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed #1475fc;
+      height: 400PX;
+      width: 600px;
+      cursor: pointer;
+      border-radius: 5px;
+      position: absolute;
+      margin-left:27vw;
+      margin-top: 11vh;
     }
     .uploded-row{
       width:605px;
@@ -1083,12 +1106,15 @@ input[type=submit]:hover{
        height: 77vh;
        width: 42vw;
        margin-top: 5vh;
+       /* margin-right: 20vw; */
+
      }
    .div-upImg{
        width: 10vw;
        height: 11vh;
       
      }
+     
      #butReg{
       margin-right: 21vw;
      }
@@ -1181,7 +1207,7 @@ input[type=submit]:hover{
     height: 100vh;
   }
   .div-end{
-    margin-top:40vh;
+    margin-top:10vh;
     margin-bottom: 50vh;
   }
   .owner-div{
@@ -1224,3 +1250,22 @@ input[type=submit]:hover{
     position: absolute;
     
   }
+  .container-update 
+  { position: relative; 
+    width: 100px;
+     height: 100px;
+     float: left;
+      margin-left: 10px; 
+    }
+.checkbox-update
+ { position: absolute; 
+  bottom: 0px; 
+  right: 0px; 
+}
+.checbox:checked + .div-upImg {
+  border: 1px solid #ccc;
+}
+
+#priceInput2{
+  width: 10vw;
+}

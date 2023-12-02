@@ -41,8 +41,8 @@ import Infomation from "./Components/infomation/Infomation";
 import Err from "./Components/Err";
 import { bringAllImagesFromServer } from "./Services";
 import { SaveArrImg } from "./store/Actions/ImgAction";
-import uplaoded from "./Components/uplaoded";
-
+import Uplaoded from "./Components/Uplaoded";
+import Update from "./Components/icons/myarea/Update";
 
 // import ChatF from './Components/ChatF';
 function App() {
@@ -93,7 +93,7 @@ function App() {
         <Route path="addProp" element={<Form />} />
         <Route path="board" element={<Board />} />
         <Route path="forum" element={<Forum />} />
-        <Route path="DetailsProperty/:idProp/:idPropOwner" element={<DetailsProperty/>} />
+        <Route path="DetailsProperty/:idProp/:idPropOwner/:update" element={<DetailsProperty/>} />
 
 
         <Route path="help" element={<Help />} />
@@ -120,7 +120,9 @@ function App() {
         <Route path="statistic4" element={<Statistic4 />} />
 
         <Route path="information" element={<Infomation/>}/>
-        <Route path="uplaoded" element={<uplaoded />}/>
+        <Route path="uplaoded" element={<Uplaoded />}/>
+        <Route path="Update" element={<Update />}/>
+
       </Routes>
       {/* <Collage/> */}
     </div>

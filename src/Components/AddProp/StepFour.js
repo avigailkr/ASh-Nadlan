@@ -107,8 +107,9 @@ const StepFour = ({ prevStep, nextStep, values }) => {
                       setValue((val) => val.filter((text) => text !== item));
                     }
                      //בדיקות תקינות: שלוחצים שוב על הכפתור זה לא מוסיף שוב 
-                            
-                      plus.push(index+1);
+                      
+                         plus.push(index+1)
+      
                 
                  
                   }}

@@ -46,9 +46,9 @@ import * as React from "react";
   import DialogContent from '@mui/material/DialogContent';
   import DialogContentText from '@mui/material/DialogContentText';
   import DialogTitle from '@mui/material/DialogTitle';
-  import { LegendToggleSharp } from "@mui/icons-material";
-  import Stack from '@mui/material/Stack';
-
+import { LegendToggleSharp } from "@mui/icons-material";
+import Stack from '@mui/material/Stack';
+  
   
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -76,6 +76,7 @@ import * as React from "react";
   
   
     const [open, setOpen] = React.useState(true);
+
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -85,10 +86,6 @@ import * as React from "react";
     };
   
     useEffect(() => {
-      //כל התמונות של דירה זו
-      // getAllImgsByIdFromServer(idProp).then((res) => {
-      //   setarrImg(res.data);
-      // }).catch(err => alert(err))
 
       //bring all images from server the sql table images
       bringImagesFromServer(idProp).then((res)=>{
@@ -99,13 +96,6 @@ import * as React from "react";
         }
         setarrImg(arrImg);
      }).catch(err=>alert(err))
-  
-      // let par=[];
-     //bring all images from images file in server
-    //  bringImagesFileFromServer().then((res)=>{
-    //         console.log(res.data);
-
-    //  })
   
       getOwnerFromServer(idPropOwner).then(res => {
         setOwner(res.data[0])
@@ -125,9 +115,7 @@ import * as React from "react";
       if (index == 0)
         setindex(lengthArrImg - 1);
       else setindex(index - 1);
-  
-      //console.log(index)
-    }
+      }
     function next() {
       if (arrImg.length == 0) return;
       let lengthArrImg = arrImg.length;//3
@@ -193,12 +181,13 @@ import * as React from "react";
       if (userSelect != null)
         nav(`/answer`);
     };
-  
+    const update=false;
+
      //details of property
   const goTodetails=()=>{
     console.log("gotodetails");
     console.log(idProp)
-    nav(`/DetailsProperty/${idProp}/${idPropOwner}`);
+    nav(`/DetailsProperty/${idProp}/${idPropOwner}/${update}`);
   }
 
     const [expanded, setExpanded] = React.useState(false);
@@ -238,7 +227,7 @@ import * as React from "react";
         }
   
         <div className="div-imges">
-        {arrImg.length != [] ? <>
+{arrImg.length != [] ? <>
          <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
              <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
          </IconButton>
@@ -246,7 +235,7 @@ import * as React from "react";
               <ArrowForwardIosRoundedIcon sx={{color:grey[50]}}/>
           </IconButton>
 
-           <img className="imges" src={arrImg[index]} />
+          <img className="imges" src={arrImg[index]} />
            </>
            :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
            }
@@ -271,7 +260,7 @@ import * as React from "react";
            nav("/login") }} >
             {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
           </IconButton>
-          <Button variant="text" onClick={()=>{goTodetails(idProp)}}>ראה עוד</Button>
+          <Button variant="text" onClick={()=>{goTodetails(idProp)}}>ראה עוד</Button>  
   
           {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
             <DeleteForeverIcon onClick={isdelete} />

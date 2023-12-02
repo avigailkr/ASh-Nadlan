@@ -6,14 +6,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { json } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
-import uplaoded from "../uplaoded";
+import Uplaoded from "../Uplaoded";
+
+import PropTypes from 'prop-types';
+import LinearProgress from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 
-
-const StepFive = ({ prevStep, values }) => {
+function  StepFive ({ prevStep, values }) {
   let user=useSelector(state=>state.user.selectedUser);
   let dis=useDispatch();
-
   const nav = useNavigate();
  
 // // שליפת האי די
@@ -47,7 +50,7 @@ const StepFive = ({ prevStep, values }) => {
 //שליחה לשרת שיוסיף את התמונות לטבלת התמונות
          uploadImage(formData).then((res)=>{
          console.log(res.data);
-         nav(`/uplaoded`);
+         nav(`/Uplaoded`);
         }).catch(err=>alert(err));
          formData.delete("image");
       }
@@ -71,6 +74,7 @@ ard=values.plus;
       e.preventDefault();
       prevStep();
     };
+
   
     return (<div className="addProp-main">
        
@@ -84,7 +88,8 @@ ard=values.plus;
       <label>
       אם ברצונך להעלות את הדירה לאתר המשך לפרסם
       </label>
-      </div>
+</div>
+  
 
       <div className="div-but">
         <button type="submit" className="form__button">פרסם</button>
@@ -93,6 +98,8 @@ ard=values.plus;
       </form>
       </div>
     );
+
   };
 
-export default StepFive;
+
+  export default StepFive;

@@ -1,41 +1,39 @@
 import * as React from "react";
-  import { styled } from "@mui/material/styles";
-  import Card from "@mui/material/Card";
-  import CardHeader from "@mui/material/CardHeader";
-  import CardMedia from "@mui/material/CardMedia";
-  import CardContent from "@mui/material/CardContent";
-  import CardActions from "@mui/material/CardActions";
-  import Collapse from "@mui/material/Collapse";
-  import Avatar from "@mui/material/Avatar";
-  import IconButton from "@mui/material/IconButton";
-  import Typography from "@mui/material/Typography";
-  import { red } from "@mui/material/colors";
-  import FavoriteIcon from "@mui/icons-material/Favorite";
-  import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-  import ShareIcon from "@mui/icons-material/Share";
-  import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-  import MoreVertIcon from "@mui/icons-material/MoreVert";
-  import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
-  import "../../style.css";
-  import Link from '@mui/material/Link';
-  //---------- שם נקודה בין שתי מילים- נקודה אמצעית-----------------------
-  import Box from "@mui/material/Box";
-  //-----------------------------פח------------------------
-  import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-  //-------------------- חצים
-  //back
-  import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-  //next
-  import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-  import { hover } from "@testing-library/user-event/dist/hover";
-  import { useDispatch, useSelector } from "react-redux";
-  import { ActivePropFromServer, DeletePropFromServer, NotActivePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
-  import { useState } from "react";
-  import { useEffect } from "react";
-  
-  
-  
-  //delete
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red,grey } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
+import "../../style.css";
+import Link from '@mui/material/Link';
+//---------- שם נקודה בין שתי מילים- נקודה אמצעית-----------------------
+import Box from "@mui/material/Box";
+//-----------------------------פח------------------------
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+//-------------------- חצים
+//back
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+//next
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import { hover } from "@testing-library/user-event/dist/hover";
+import { useDispatch, useSelector } from "react-redux";
+import { ActivePropFromServer, bringImagesFromServer, DeletePropFromServer, NotActivePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
+import { useState } from "react";
+import { useEffect } from "react";
+
+//delete
 import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
 import Modal from '@mui/joy/Modal';
@@ -45,10 +43,10 @@ import DeleteForever from '@mui/icons-material/DeleteForever';
 import Switch from '@mui/joy/Switch';
 
 
-  import Dialog from '@mui/material/Dialog';
-  import DialogActions from '@mui/material/DialogActions';
-  import DialogContent from '@mui/material/DialogContent';
-  import DialogContentText from '@mui/material/DialogContentText';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 import { AddProp, DeleteProp } from "../../../store/Actions/PropAction";
 import IosShareIcon from '@mui/icons-material/IosShare';
 import MenuCard from "../MenuCard";
@@ -103,13 +101,20 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
       setOpen2(false);
       // setIsDelete(false);
     };
-  
+  const update=true;
+const updateProp=()=>{
+  nav(`/DetailsProperty/${idProp}/${idPropOwner}/${update}`)
+}
+
     useEffect(() => {
-      //כל התמונות של דירה זו
-      getAllImgsByIdFromServer(idProp).then((res) => {
-        setarrImg(res.data);
-        console.log(res.data)
-      }).catch(err => alert(err))
+      bringImagesFromServer(idProp).then((res)=>{
+        console.log(res.data);
+        let a=[];
+        for(let i=0 ; i<res.data.length ; i++){
+          arrImg.push(`http://localhost:8080/images/${res.data[i].Name}`)
+        }
+        setarrImg(arrImg);
+     }).catch(err=>alert(err))
   
   
       getOwnerFromServer(idPropOwner).then(res => {
@@ -131,9 +136,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
       if (index == 0)
         setindex(lengthArrImg - 1);
       else setindex(index - 1);
-  
-      //console.log(index)
-    }
+      }
     function next() {
       if (arrImg.length == 0) return;
       let lengthArrImg = arrImg.length;//3
@@ -141,9 +144,8 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
         setindex(0);
       else setindex(index + 1);
   
-      //console.log(index)
+      
     }
-    
     function deleteOk(){
       NotActivePropFromServer(idProp).then((res) => {
         alert("הוסר בהצלחה")
@@ -166,6 +168,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
       handleClose2();
     }
+
   function deletepropfromWebsite(){
     DeletePropFromServer(idProp).then((res) => {
         alert("נמחק בהצלחה")
@@ -177,6 +180,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
       handleClose2();
     }
+
     const bull = (
       <Box component="span" sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
       >
@@ -190,21 +194,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
     return <>
       <Card sx={{ maxWidth: 299 }}>
-      {/* <Button
-        variant="outlined"
-        color="danger"
-        endDecorator={<DeleteForever />}
-        onClick={() => setOpen3(true)}
-      >
-        
-      </Button> */}
-
-          {/* // color="primary"
-          // disabled={false}
-          // underline="none"
-          // variant="plain"
-          // onClick={() => setOpen3(true)} */}
-      
         <Link
         sx={{marginLeft:25,fontSize:15,paddingTop:-2}}
         disabled={false}
@@ -249,12 +238,19 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
         <div className="div-imges">
 
-        
-          <ArrowBackIosIcon className="arrow1" onClick={back} />
-          {/* `../../image/${arrImg[index].ImgSrc}` */}
-          
-          {arrImg.length != [] && <img className="imges" src={"image/" + arrImg[index].ImgSrc}  />}
-          <ArrowForwardIosIcon className="arrow2" onClick={next} />
+        {arrImg.length != [] ? <>
+         <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
+             <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
+         </IconButton>
+          <IconButton className="arrow2" onClick={next} aria-label="arrow to right" sx={{position:"absolute", mt:15, ml:30}} >
+              <ArrowForwardIosRoundedIcon sx={{color:grey[50]}}/>
+          </IconButton>
+
+           <img className="imges" src={arrImg[index]} />
+           </>
+           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+           }
+         
         </div>
         <CardContent>
           {/*----------------------------------------- bull-נשלח לפונקציה
@@ -353,7 +349,8 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
        
 
-          <Fab color="secondary" aria-label="edit" id="icon-update" >
+          <Fab color="secondary" aria-label="edit" id="icon-update"  onClick={updateProp}>
+
         <EditIcon />
       </Fab>
 

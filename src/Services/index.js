@@ -289,3 +289,7 @@ export const uplaodAddDetails =(id,det)=>{
     return axios.post(`http://localhost:8080/property/addDetails/${id}/${det}` );
 
 }
+
+export const getAddDetails=(id)=>{
+    return axios.get(`http://localhost:8080/property/getAddDetails/${id}`);
+}

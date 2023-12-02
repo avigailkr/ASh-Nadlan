@@ -19,11 +19,14 @@ import * as yup from "yup";
 
 
 const schema = yup.object({
-  name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x.length<=30 && x.length >= 2),
-  password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים").test('len',
-   "אורך לא תקין", x => x.length <= 10 && x.length >= 2),
-  email: yup.string().email('כתובת מייל שגויה'),
-  phone:yup.string().test('len',"מספר לא תקין",x => x.length<=10 && x.length >= 9)
+  // name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x!=null && (x.length<=30 && x.length >= 2))
+  //  ,
+  password: yup.string().required("שדה חובה")
+  // .matches("^(?=.*[a-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים")
+.test('len',"אורך לא תקין", x => x!=null && (x.length <= 10 && x.length >= 4))
+   ,
+  // mail: yup.string().email('כתובת מייל שגויה'),
+  phone:yup.string().test('len',"מספר לא תקין",x => x!=null && (x.length<=10 && x.length >= 9))
  }).required();
 
 export default function Register() {
@@ -40,11 +43,9 @@ export default function Register() {
     setOpenRegister(false);
     nav("/property")
   };
-  const sendEmail = (e) => {
+  const sendEmail = () => {
     console.log("sendEmail")
     console.log(form.current)
-    console.log(e)
-    // e.preventDefault();
 
     emailjs.sendForm('service_dddlq4q', 'template_7dy0nh5',form.current, 'h8uvQnkZ5XPOub0E6')
       .then((result) => {
@@ -54,21 +55,19 @@ export default function Register() {
       });
   };
   const registerfun=(e)=>{
-console.log(e)
     const user={
-        Name:e.name,
-        Mail:e.email,
+        Name:form.current.user_name.value,
+        Mail:form.current.user_email.value,
         Phone:e.phone,
         Password:e.password
     } 
-    if(e.email)sendEmail(e)//למה אי אפשר לעשות בתוך הוספת משתמש
+    if(form.current.user_name)sendEmail()
      AddUserServer(user).then((res)=>{
-        alert(res.data.mass)
         dis(AddUser(user));
         nav("/property");
      }).catch(err=>alert(err))
+     
      handleCloseRegister();
-    
 }
   
   return (
@@ -79,17 +78,17 @@ console.log(e)
         <DialogContent>
 
 <form ref={form}  onSubmit={handleSubmit(registerfun)}>
-          <TextField autoFocus helperText={errors?.email?.message} 
-           margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
-          {...register('email')} 
+          <TextField autoFocus helperText={errors?.mail?.message} 
+           margin="dense" label="Email Address" type="text" fullWidth variant="standard" name='user_email' defaultValue="shilat.bedani@gmail.com"
+          // {...register('mail')} 
           />
-          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
+          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="text" fullWidth variant="standard" defaultValue="12345"
           {...register('password')}
           />
-          <TextField helperText={errors?.name?.message} margin="dense" label="Name" type="name" fullWidth variant="standard" name='user_name'
-          {...register('name')}
+          <TextField helperText={errors?.name?.message} margin="dense" label="Name" type="text" fullWidth variant="standard" name='user_name'defaultValue="אביגיל"
+          //  {...register('name')}
           />
-          <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="phone" fullWidth variant="standard" name='phone'
+          <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="number" fullWidth variant="standard" name='phone'defaultValue="0598833767"
           {...register('phone')}
           />
 
@@ -108,12 +107,3 @@ console.log(e)
     </div>
   );
 }
-
-
-// register={register('email', {
-              //   onChange: (e) => setEmail(e.target.value)
-              // })}
-
-
-{/* {errors ? <div style={{ color: "red" }}>{errors.email ?
-errors.email.message : null}</div> : null} */}
