@@ -293,3 +293,11 @@ export const uplaodAddDetails =(id,det)=>{
 export const getAddDetails=(id)=>{
     return axios.get(`http://localhost:8080/property/getAddDetails/${id}`);
 }
+
+export const deleteImgFromServer=(id)=>{
+    return axios.delete(`http://localhost:8080/img/deleteImg/${id}`)
+}
+
+export const updateProp = (id, prop)=>{
+    return axios.put(`http://localhost:8080/property/updateProp/${id}`, prop)
+}

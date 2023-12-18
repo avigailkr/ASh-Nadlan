@@ -57,7 +57,7 @@ import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
 import { SaveUser } from "../../../store/Actions/UserAction";
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import ImageIcon from '@mui/icons-material/Image';
 
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -238,7 +238,8 @@ const updateProp=()=>{
 
         <div className="div-imges">
 
-        {arrImg.length != [] ? <>
+        {arrImg && arrImg.length ? 
+        <>
          <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
              <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
          </IconButton>
@@ -248,8 +249,14 @@ const updateProp=()=>{
 
            <img className="imges" src={arrImg[index]} />
            </>
-           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
-           }
+        :
+              <div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+             
+              //  <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
+              //   <ImageIcon/>  
+              //  </IconButton>
+          }
+           
          
         </div>
         <CardContent>

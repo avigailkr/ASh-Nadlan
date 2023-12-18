@@ -48,8 +48,10 @@ let arrMass=useSelector(state=>state.chat.arr);//מערך ההתכתבות עם 
 
 useEffect(()=>{//שליפת כל הדירות שלי   
   dis(saveArrChat([]))
-
+    console.log(selectuser.Id);
     getAllPropertysByIdFromServer(selectuser.Id).then(res=>{
+      console.log(res.data)
+
    setArrMyProp(res.data)}
    
    ).catch(err=>{alert(err)})
@@ -183,7 +185,9 @@ function isdelete() {
 
 <div className="div-myprop">
     <h1 className="myprop-txt">הדירות שלי</h1>
-{arrmyprop.filter(x=>x.ActiveMyArea.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
+{/* {arrmyprop.filter(x=>x.ActiveMyArea.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} > */}
+{arrmyprop.map((item,index)=>{return <div className="div-apartment" key={item.Id} >
+
   <CardMyArea props={item} idcard={index} />
       </div>} )}
       </div>

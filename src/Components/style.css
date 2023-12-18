@@ -406,7 +406,7 @@ color: #717171;
       padding-right: 13px;
     }
     .massagesboard{
-      margin-top: -47%;
+      margin-top: -69%;
     }
     .massagesArea{
       margin-top: -60%;
@@ -922,6 +922,26 @@ input[type=submit]:hover{
     }
     
     .form__button[type="button"] {
+      background-color: #4fa2fa;
+      /* margin-top: 5vh; */
+     
+    }
+    .form__button2 {
+      margin-top: 1.5rem;
+      padding: 0.3rem 2rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      width: 10%;
+      height: 35px;
+      margin-right: 85%;
+      /* position: sticky;
+      bottom: 0; */
+    }
+    
+    .form__button2[type="button"] {
       background-color: #4fa2fa;
       /* margin-top: 5vh; */
      

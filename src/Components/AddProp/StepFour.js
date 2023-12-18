@@ -49,6 +49,7 @@ const StepFour = ({ prevStep, nextStep, values }) => {
     })
   }
 
+
   const handlePrev = (e) => {
     e.preventDefault();
     prevStep();
@@ -59,7 +60,6 @@ const StepFour = ({ prevStep, nextStep, values }) => {
   
    nextStep({ ...values, plus, sito, rihut,discription,idProp });
  };
-
   return (<div className="addProp-main">
     
 
@@ -107,11 +107,12 @@ const StepFour = ({ prevStep, nextStep, values }) => {
                       setValue((val) => val.filter((text) => text !== item));
                     }
                      //בדיקות תקינות: שלוחצים שוב על הכפתור זה לא מוסיף שוב 
-                      
+                     let tmp= plus.indexOf(index+1)
+                     tmp <0?
                          plus.push(index+1)
-      
-                
-                 
+                      :
+                      plus.splice(tmp, 1)
+                                                            
                   }}
                   slotProps={{
                     action: ({ checked }) => ({
@@ -136,7 +137,7 @@ const StepFour = ({ prevStep, nextStep, values }) => {
     </label>
     <RadioGroup
     row="true"
-    defaultValue="חדש מהקבלן"
+    defaultValue="בחר"
     orientation="horizontal"
     dir="rtl"
     sx={{mb:2}}
@@ -162,9 +163,9 @@ const StepFour = ({ prevStep, nextStep, values }) => {
     sx={{mb:2}}
     onChange={(e)=>setRihut(e.target.value)}
   >
-    <FormControlLabel sx={{m:2}} value="מלא" control={<Radio />} label="מלא"  />
-    <FormControlLabel sx={{m:2}} value="חלקי" control={<Radio />} label="חלקי" />
-    <FormControlLabel sx={{m:2}} value="ללא" control={<Radio />} label="ללא" />
+    <FormControlLabel sx={{m:2}} value="1" control={<Radio />} label="מלא"  />
+    <FormControlLabel sx={{m:2}} value="2" control={<Radio />} label="חלקי" />
+    <FormControlLabel sx={{m:2}} value="3" control={<Radio />} label="ללא" />
   </RadioGroup>
 
   <label>

@@ -7,6 +7,7 @@ import { json } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
 import Uplaoded from "../Uplaoded";
+import { SaveDetailsProp } from "../../store/Actions/PropAction";
 
 import PropTypes from 'prop-types';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -18,14 +19,8 @@ function  StepFive ({ prevStep, values }) {
   let user=useSelector(state=>state.user.selectedUser);
   let dis=useDispatch();
   const nav = useNavigate();
- 
-// // שליפת האי די
-//        getFromServerIdProp().then( (res)=>{
-//         console.log(res.data[0].id);
-//       setIdProp(res.data[0].id);
-//       }) .catch(err=>alert(err));
 
-
+  
     const handleSubmit = async (e) => {
       e.preventDefault();
       console.log(values);
@@ -55,6 +50,8 @@ function  StepFive ({ prevStep, values }) {
          formData.delete("image");
       }
         
+      dis(SaveDetailsProp(values))
+
      }).catch(err=>alert(err))
 
 let iP=values.idProp;
@@ -75,7 +72,8 @@ ard=values.plus;
       prevStep();
     };
 
-  
+  console.log(values)
+
     return (<div className="addProp-main">
        
         

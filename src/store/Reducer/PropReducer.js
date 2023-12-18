@@ -66,6 +66,11 @@ const PropReducer=(state=initialState,action)=>{
               ...state,
               arrStatus:action.payload
             }  
+          case TypeAction.SAVE_PROPERTY:
+            return{
+              ...state,
+              details:action.payload
+            }
 }
   return state;
 

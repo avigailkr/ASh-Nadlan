@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { SaveDetailsProp } from "../store/Actions/PropAction";
 import { useParams } from "react-router-dom";
 import { SaveArrType, SaveArrStatus } from "../store/Actions/PropAction";
-import { getAllTypeFromServer, getStatusFromServer, bringImagesFromServer , getOwnerFromServer, getAddDetails} from "../Services";
+import { getAllTypeFromServer, getStatusFromServer, bringImagesFromServer , getOwnerFromServer,
+   getAddDetails, deleteImgFromServer} from "../Services";
 import ImageGallery from "react-image-gallery";
 // import "react-image-gallery/styles/css/image-gallery.css";
 import "react-image-gallery/styles/scss/image-gallery.scss";
@@ -52,6 +53,13 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import Done from '@mui/icons-material/Done';
+import  {Box as JoyBox, Checkbox as JoyCheckbox, List as JoyList, ListItem as JoyListItem,}  from '@mui/joy';
+import { updateProp } from '../Services';
 
 const DetailsProperty = () => {
 const [imgs,setImgs] = useState([]);
@@ -60,8 +68,8 @@ const [det, setDet] = useState({HalfRoom:{type: 'Buffer', data: Array([0])}})
 let [owner, setOwner] = useState(null);
 const [details, setDetails] = useState([]);
 const [selectedImages, setSelectedImages] = useState([]);
-const [idImg1, setIdImg1]= useState([]);
-const [idImg2, setIdImg2]= useState([]);
+const [DImg, setDImg]= useState([]);
+const [UDImg, setUDImg]= useState([]);
 
 //verible for update
 const [type, setType] = useState(1);
@@ -75,10 +83,23 @@ const [adress, setAdress]=useState("ישראל");
 const [adress2,setAdress2]=useState("ישראל");
 const [price, setPrice] = useState(0);
 const [mr, setmr] = useState("");
+const [isRent, setIsRent]=useState(true);
+const [plus, setPlus] = useState([]);
+const [value, setValue] = useState([]);
+const [rihut, setRihut] = useState("ללא"); 
+const [discription, setDiscription]= useState("")
+const [values, setValues] = useState({});
+const [status, setStatus]= useState("");
 
+// const [level, setLevel]=useState("");
+// const [inLevel, setInLevel]=useState("");
+// const [roomNum, setRomNum]=useState("");
 let stringDet=""; 
 let userSelect = useSelector(state => state.user.selectedUser);
 
+const PropDetails=useSelector(x=>x.prop.details);
+
+  console.log(PropDetails);
 // let idPropOwner = props.props.IdUser;
 
 const nav = useNavigate();
@@ -138,8 +159,6 @@ let isBilding=false;
    setDetails(res.data);
   }).catch(err => alert(err))
 
- 
-
     },[])
 
     let arrType=useSelector(x=>x.prop.arrType);
@@ -158,8 +177,8 @@ const setImage = (res)=>{
   for(let i=0 ; i<res.length; i++){
     imgs.push(
       {
-        original:`http://localhost:8080/images/${res[i].Name}`, thumbnailHeight:80,id:i+1,
-        thumbnail:`http://localhost:8080/images/${res[i].Name}`,sizes:100,id:i+1,
+        original:`http://localhost:8080/images/${res[i].Name}`, thumbnailHeight:80,id:res[i].Id,
+        thumbnail:`http://localhost:8080/images/${res[i].Name}`,sizes:100,id:res[i].Id,
       }
     )
   }
@@ -173,16 +192,17 @@ for(let i=0 ; i<res.length; i++){
   
   imgs.push(
    {
-     img: `http://localhost:8080/images/${res[i].Name}`,
+     img: `http://localhost:8080/images/${res[i].Name}`, id:res[i].Id,
    }
   )
 }
 console.log(imgs)
  }
    
-// const details=useSelector(x=>x.prop.details);
-  console.log(det.HalfRoom);
 
+// setLevel(PropDetails.Floor)
+// setInLevel(PropDetails.InFloor)
+// setRomNum(PropDetails.RoomNum)
   const func1=()=>{
     if(det.IdEnterDate==1)
     return "מיידי";
@@ -237,68 +257,64 @@ console.log("delete function")
     // checkbox.checked = !checkbox.checked;
   };
 
-  const hendelClickDelete1 = (id, checked) =>{
-    console.log(checked)
-    console.log(id);
-    console.log(idImg1)
-    if(checked==true)
-    idImg1.push(id);
-    else
-    {
-      let index=idImg1.indexOf(id);
-      idImg1.splice(index, 1);
-    }
-    console.log(idImg1)
 
-    
-  }
-
-  const hendelClickDelete2 = (id, checked) =>{
-    if(checked==true)
-    idImg2.push(id);
-    else
-    {
-      let index=idImg2.indexOf(id);
-      idImg2.splice(index, 1);
-    }
-    console.log(idImg2)
-  }
   const hendelDelete = () =>{
- 
-    console.log(idImg1)
-    console.log(idImg2)
 
-    for (let i = 0; i < idImg1.length; i++) {
-      // const index = imgs.findIndex((img) => img.id === idImg1[i]);
-      const index=idImg1[i];
-      console.log(index);
-      // if (index >= 0) {
-        imgs.splice(index, 1);
-        setImgs(imgs);
-      // }
-    }
+  const tmpImgs = imgs.filter((img) => !DImg.includes(img));
+  setImgs(tmpImgs);
+
+  const tmpImgs2 = upImgs.filter((img) => !UDImg.includes(img));
+  setUpImgs(tmpImgs2);
+  
+
+  for (let i = 0; i < DImg.length; i++) {
     
-    console.log(imgs);
-
-    // if(idImg2.length!=0)
-    // for(let i=0; i<idImg1.length; i++){
-    //   upImgs.splice(parseInt(idImg2[i]), 1)
-    // }
-    // console.log(idImg2)
-
+    deleteImgFromServer(DImg[i].id).then(res => {
+      console.log(res.data);
+    }).catch(err => alert(err));
+  }
 
   }
 
   const setId =(v)=>{
     let d=["מיידי","גמיש","עתידי"];
     d.map((i,index)=>{
-      if(i==v){ 
+      if(i===v){ 
          setDate(index+1);
       }
      
     })
   }
 
+  const handleSubmit=()=>{
+    setValues({type, floor, inFloor, room, halfRoom, sito, date, adress, price, mr,
+       isRent, plus, value, rihut, discription
+    })
+    updateProp(PropDetails.Id, values).then(res=>{
+      console.log(res.data);
+    }).catch(err => alert(err))
+  }
+
+  
+// const FunStutus=(p)=>{
+//   switch(p){
+//     case "1":
+//       setStatus("חדש מהקבלן") 
+//     case "2":
+//       setStatus("חדש") 
+//     case "3":
+//       setStatus("משופץ") 
+//     case "4":
+//       setStatus("שמור")
+//     case "5":
+//       setStatus("ישן")
+//   }
+
+// }
+// FunStutus(PropDetails.IdStatus);
+console.log(PropDetails.IdStatus)
+    
+  
 return <>
 <h1>פרטי הנכס</h1>
    <p className='pDate'>הועלה בתאריך: {moment(det.InsertDate).utc().format('DD/MM/YYYY')}</p>
@@ -322,20 +338,20 @@ return <>
 
 <div id="DivfileInput2" >
 
- {imgs.length!=0 ?
+ {imgs.length!==0 ?
  <div id="div-upImgs">
   
  {
  imgs.map((img, index)=>{return <div className="div-upImg" onClick={handleClick}>
-   <Checkbox sx={{position:"absolute"}} className='checbox' id={index} onClick={(e)=>hendelClickDelete1(e.target.id, e.target.checked)}/>
+   <Checkbox sx={{position:"absolute"}} className='checbox' id={index} onClick={(e)=>{DImg.push(img);}}/>
   <img src={img.img} width={150} height={135} alt={img.name} id={index}/>
   </div>
  })
 }
 
-{upImgs.length!=0 &&
+{upImgs.length!==0 &&
  upImgs.map((img, index)=>{return <div className="div-upImg" onClick={handleClick}>
-  <Checkbox  sx={{position:"absolute"}} className='checbox' id={index} onClick={(e)=>hendelClickDelete2(e.target.id, e.target.checked)}/>
+  <Checkbox  sx={{position:"absolute"}} className='checbox' id={index} onClick={(e)=>{UDImg.push(img)}}/>
  <img src={URL.createObjectURL(img)} width={150} height={135} alt={img.name} id={index}/>
  </div>
  })
@@ -371,6 +387,11 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
 
 
  {/* details of property */}
+
+ {
+  update==="true"?
+""
+:
 <div className='owner-div'>
 
 {owner &&
@@ -384,25 +405,30 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
    {/* {owner && <p className='nameOwner'>{owner.Name}</p>} */}
    {<p className='textChat'>:התכתבות עם בעל הנכס</p>}
    
-      {userSelect && userSelect.Id != idPropOwner && <input type="button" className="but-chat2" onClick={fun} value="chat" />}
-      {userSelect && userSelect.Id == idPropOwner && <input type="button" className="but-chat2" onClick={answer} value="answer" />}
+      {userSelect && userSelect.Id !== idPropOwner && <input type="button" className="but-chat2" onClick={fun} value="chat" />}
+      {userSelect && userSelect.Id === idPropOwner && <input type="button" className="but-chat2" onClick={answer} value="answer" />}
 </div>
+}
 
-{checkDesc()==true && 
+
+{
+update==="true"?
+""
+ :
+checkDesc()===true && 
 <div className='desc'>
   <h3 >:תיאור</h3>
   <p>{det.Description}</p>
 
-
 {stringDet===""?<>
-<h4>:פרטים נוספים </h4>
-{details.map((item, index)=>{
-  stringDet+=item.Name+" • "
-})}
-<p>{stringDet} </p>
-</>
-:
-""
+  <h4>:פרטים נוספים </h4>
+  {details.map((item, index)=>{
+    stringDet+=item.Name+" • "
+  })}
+  <p>{stringDet} </p>
+  </>
+  :
+  ""
 }
 </div>
 
@@ -420,7 +446,7 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
           </Avatar>
         </ListItemAvatar>
         {arrType.map((item)=>{
-          item.Name=="בניין"?isBilding=true:isBilding=false;
+          item.Name==="בניין"?isBilding=true:isBilding=false;
            return item.Id===det.IdKindProp &&
           
           
@@ -433,13 +459,18 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
                   return <Option id={item.Id} key={item.Id} value={item.Name} >{item.Name}</Option>
                 })}
               </Select>
-              {type==3 && 
+              {type==="3" && 
                 <div className='levelIn'>
                  <label id='leabelLevelIn11'>
                  קומה
                  </label>
                  
-                 <Select defaultValue="1" size='md' sx={{mt:1, mr:4, minWidth: 90 }} onChange={(e)=>setFloor(e.target.innerText)}>
+                 <Select size='md' defaultValue={PropDetails.Floor?`${PropDetails.Floor}`:"בחר"} sx={{mt:1, mr:4, minWidth: 90 }}
+                  onChange={(e)=>{
+                    if (e && e.target) {
+                      setFloor(e.target.innerText)
+                     }
+                    }}>
                  <Option value="1">1</Option>
                    <Option value="2">2</Option>
                    <Option value="3">3</Option>
@@ -466,7 +497,12 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
                    <label id='leabelLevelIn22'>
                     מתוך
                    </label>
-                   <Select defaultValue="1" size='md' sx={{mt:1,mr:4, minWidth: 90 }} onChange={(e)=>setInFloor(e.target.innerText)}>
+                   <Select size='md' defaultValue={PropDetails.InFloor?`${PropDetails.InFloor}`:"בחר"} sx={{mt:1,mr:4, minWidth: 90 }}
+                    onChange={(e)=>{
+                      if (e && e.target) {
+                        setInFloor(e.target.innerText)
+                       }
+                      }}>
                    <Option value="1">1</Option>
                       <Option value="2">2</Option>
                       <Option value="3">3</Option>
@@ -524,7 +560,13 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
         secondary={
           update==="true"?
           <>
-          <Select defaultValue="1" size='md' sx={{mt:1,mb:2, minWidth:90 }} onChange={(e)=>setRoom(e.target.innerText)}>     
+          <Select defaultValue={`${PropDetails.RoomNum}`} size='md' sx={{mt:1,mb:2, minWidth:90 }}
+          onChange={(e) => {
+           if (e && e.target) {
+             setRoom(e.target.innerText);
+            }
+          }}
+         >     
               <Option value="1">1</Option>      
               <Option value="2">2</Option>              
               <Option value="3">3</Option>              
@@ -545,7 +587,10 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
             פלוס 1/2 חדר
             </Typography>
         
-        <Checkbox sx={{position:"absolute", mr:1, mt:-1.5}} onChange={(e) => setHalfRoom(!halfRoom)}/>
+        <Checkbox 
+        sx={{position:"absolute", mr:1, mt:-1.5}} 
+        checked={PropDetails.HalfRoom===0?false:true} 
+        onChange={(e) => setHalfRoom(!halfRoom)}/>
           </>
           :
           <React.Fragment>
@@ -556,7 +601,7 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
               variant="body2"
               color="text.primary"
             >
-             {det.HalfRoom['data'][0]==1?`${det.RoomNum} + חצי חדר`:det.RoomNum}
+             {det.HalfRoom['data'][0]===1?`${det.RoomNum} + חצי חדר`:det.RoomNum}
             </Typography>
             
           </React.Fragment>
@@ -573,13 +618,35 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
         <ListItemText sx={{textAlign:"right", display:'inline'}} primary="מצב הנכס:"
         secondary={
           update==="true"?
-          <Select defaultValue="שמור" size='md' sx={{mt:1,mb:2, minWidth: 120 }} onChange={(e)=>setSito(e.target.innerText)}> 
+          <Select 
+          defaultValue={()=>{
+            switch (PropDetails.IdStatus) {
+              case 1:
+                return "חדש מהקבלן";
+              case 2:
+                return "חדש";
+              case 3:
+                return "משופץ";
+              case 4:
+                return "שמור";
+              case 5:
+                return "ישן";
+              default:
+                return null;
+            }
+          } }
+           size='md' sx={{mt:1,mb:2, minWidth: 120 }} 
+          onChange={(e)=>{
+            if (e && e.target) {
+               setSito(e.target.innerText)
+             }
+           }}> 
            
-             <Option value="חדש מהקבלן">חדש מהקבלן</Option>              
-             <Option value="חדש">חדש</Option>              
-             <Option value="משופץ">משופץ</Option>              
-             <Option value="שמור">שמור</Option>
-             <Option value="ישן">ישן</Option>
+             <Option value="1">חדש מהקבלן</Option>              
+             <Option value="2">חדש</Option>              
+             <Option value="3">משופץ</Option>              
+             <Option value="4">שמור</Option>
+             <Option value="5">ישן</Option>
 
           </Select>
           :
@@ -611,7 +678,12 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
         <ListItemText sx={{textAlign:"right", display:'inline'}} primary="מועד כניסה:"
         secondary={ 
           update==="true"?
-          <Select defaultValue="מיידי" size='md' sx={{mt:1,mb:2, minWidth: 120 }} onChange={(e)=>setId(e.target.innerHTML)}>           
+          <Select defaultValue={`${det.IdEnterDate===1?("מיידי"):(det.IdEnterDate===2?("גמיש"):(det.IdEnterDate===3?("עתידי"):("בחר")))}`} size='md' sx={{mt:1,mb:2, minWidth: 120 }} 
+          onChange={(e)=>{
+            if (e && e.target) {  
+                setId(e.target.innerHTML)           
+            }
+            }}>
              <Option value="מיידי" id="1">מיידי</Option>              
              <Option value="גמיש"  id="2">גמיש</Option>              
              <Option value="עתידי" id="3">עתידי</Option>              
@@ -658,8 +730,9 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
       sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 200 }}>
           <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="הזן כתובת מלאה"
+          placeholder="לדוג': רמבם 2, חיפה "
           dir="rtl"
+          defaultValue={PropDetails.Adress}
           inputProps={{ 'aria-label': 'search google maps' }}
           onChange={(e)=>{setAdress(e.target.value)}}
         />
@@ -700,19 +773,22 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
            <FormControl dir="ltr" fullWidth sx={{ m: 1 , width:120}}>
           <OutlinedInput
           sx={{height:40}}
+          defaultValue={PropDetails.Price}
             startAdornment={<InputAdornment position="start">₪</InputAdornment>}
           />
         </FormControl>
 
         <Typography 
           textAlign="right"
-          sx={{ display: 'inline' }}
+          sx={{ display: 'inline', mr:1 }}
           component="span"
           variant="body2">
             להציג מחיר
             </Typography>
         
-        <Checkbox sx={{position:"absolute", mr:1, mt:-1.5}} onChange={(e) => setHalfRoom(!halfRoom)}/>
+        <Checkbox sx={{position:"absolute", mr:1, mt:-1.5}} 
+        checked={PropDetails.ShowPrice===0?false:true}
+        onChange={(e) => setHalfRoom(!halfRoom)}/>
           </>
           :
           <React.Fragment>
@@ -742,6 +818,7 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
           update==="true"?
         <FormControl dir="ltr" fullWidth sx={{ m: 1 , width:110}}>
           <OutlinedInput
+          defaultValue={PropDetails.Sqm}
           sx={{height:40}}
             startAdornment={<InputAdornment position="start">מ"ר</InputAdornment>}
           />
@@ -772,12 +849,26 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
  <HomeIcon />
           </Avatar>
         </ListItemAvatar>
-        {det.IdTypeSale===1?
-        <ListItemText sx={{textAlign:"right", display:'inline'}} primary="למכירה"/>
-        :
-        <ListItemText sx={{textAlign:"right", display:'inline'}} primary="להשכרה"/>
-        }
+        {update==="true"?
         
+          // <Stack direction="column" spacing={1} >
+          //  <Button  onClick={handleClick1} value={flag} variant={flag ? "outlined": "contained"}>משכירים</Button>
+          //  <Button onClick={handleClick2} value={flag1} variant={flag1 ? "outlined": "contained"} >מוכרים</Button>
+          // </Stack>
+          <RadioGroup 
+    defaultValue="להשכרה"
+    onChange={()=>{setIsRent(!isRent)}}
+  >
+    <FormControlLabel value="להשכרה" control={<Radio />} label="להשכרה" />
+    <FormControlLabel value="למכירה" control={<Radio />} label="למכירה" />
+  </RadioGroup>
+        :
+         det.IdTypeSale===1?
+         <ListItemText sx={{textAlign:"right", display:'inline'}} primary="למכירה"/>
+         :
+         <ListItemText sx={{textAlign:"right", display:'inline'}} primary="להשכרה"/>
+        
+        }
       </ListItem>
     </List>
     </div>
@@ -786,6 +877,117 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
       </Grid>
     </Box>
    
+
+{  update==="true"&&
+<>
+<Typography sx={{mt:-59, ml:30, position:"absolute"}}>
+פרטים נוספים 
+</Typography>
+
+<Typography sx={{mt:-54, ml:34.5, position:"absolute", fontSize:14}}>
+  :סמן אופציות נוספות הקיימות בנכס
+</Typography>
+      
+    <JoyBox role="group" aria-labelledby="rank" sx={{ ml:10, mt:-50, position:"inherit"}}>
+<JoyList
+  orientation="horizontal"
+  wrap
+  sx={{
+    '--List-gap': '8px',
+    '--ListItem-radius': '20px',
+    '--ListItem-minHeight': '32px',
+  }}
+>
+  {['מרפסת','סורגים', 'ממד', 'מחסן', 'מעלית', 'חניה'].map(
+    (item, index) => (
+      <JoyListItem key={item}>
+        {value.includes(item) && (
+          <Done
+            fontSize="md"
+            color="primary"
+            sx={{ ml: -0.5, mr: 0.5, zIndex: 2, pointerEvents: 'none' }}
+          />
+        )}
+
+        <JoyCheckbox
+          size="sm"
+          disableIcon
+          overlay
+          value={item}
+          label={item}
+          checked={value.includes(item)}
+          variant={value.includes(item) ? 'soft' : 'outlined'}
+          onChange={(event) => {
+            if (event.target.checked) {                     
+              setValue((val) => [...val, item]);
+            } else {
+              setValue((val) => val.filter((text) => text !== item));
+            }
+             //בדיקות תקינות: שלוחצים שוב על הכפתור זה לא מוסיף שוב 
+             let tmp= plus.indexOf(index+1)
+             tmp <0?
+                 plus.push(index+1)
+              :
+              plus.splice(tmp, 1)
+                                                    
+          }}
+          slotProps={{
+            action: ({ checked }) => ({
+              sx: checked
+                ? {
+                    border: '1px solid',
+                    borderColor: 'primary.500',
+                  }
+                : {},
+            }),
+          }}
+        />
+      </JoyListItem>
+    ),
+  )}
+</JoyList>
+</JoyBox>
+
+
+<Typography sx={{mt:5, ml:33, position:"absolute"}}>  
+:ריהוט
+</Typography>
+
+<RadioGroup
+    row="true"
+    defaultValue="ללא"
+    orientation="horizontal"
+    dir="rtl"
+    sx={{mt:8, mr:105}}
+    onChange={(e)=>setRihut(e.target.value)}
+  >
+    <FormControlLabel sx={{m:2}} value="מלא" control={<Radio />} label="מלא"  />
+    <FormControlLabel sx={{m:2}} value="חלקי" control={<Radio />} label="חלקי" />
+    <FormControlLabel sx={{m:2}} value="ללא" control={<Radio />} label="ללא" />
+  </RadioGroup>
+
+
+  <Typography sx={{mt:4, ml:25, position:"absolute"}}>  
+  תיאור הדירה (אופציונאלי)
+</Typography>
+      
+      <TextField
+          id="outlined-multiline-flexible"
+          multiline
+          dir="rtl"
+          defaultValue={PropDetails.Description}
+          sx={{width:350, mr:88, mt:10}}
+          maxRows={5}
+          onChange={(e)=>{setDiscription(e.target.value)}}
+        />
+
+        
+<button className="form__button2" onClick={handleSubmit}>עדכן</button>
+
+</> 
+
+  }
+
 
 </>
 

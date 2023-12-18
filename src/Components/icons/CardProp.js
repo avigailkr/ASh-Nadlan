@@ -48,7 +48,7 @@ import * as React from "react";
   import DialogTitle from '@mui/material/DialogTitle';
 import { LegendToggleSharp } from "@mui/icons-material";
 import Stack from '@mui/material/Stack';
-  
+import ImageIcon from '@mui/icons-material/Image';
   
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -179,7 +179,7 @@ import Stack from '@mui/material/Stack';
       console.log("chatttttttttttttttttt");
   
       if (userSelect != null)
-        nav(`/answer`);
+      nav(`/myarea`);
     };
     const update=false;
 
@@ -227,7 +227,8 @@ import Stack from '@mui/material/Stack';
         }
   
         <div className="div-imges">
-{arrImg.length != [] ? <>
+    {arrImg && arrImg.length ? (
+     <>
          <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
              <ArrowBackIosRoundedIcon sx={{color:grey[50], textShadow:10}}/>  
          </IconButton>
@@ -237,7 +238,15 @@ import Stack from '@mui/material/Stack';
 
           <img className="imges" src={arrImg[index]} />
            </>
-           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+           ) : (
+            arrImg.length === 0 ? (
+              <div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+              ) : (
+              <IconButton className="arrow1" onClick={back} aria-label="arrow to left" sx={{position:"absolute", mt:15}} >
+                <ImageIcon/>  
+               </IconButton>
+              )
+           )
            }
           
         </div>
