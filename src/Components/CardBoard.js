@@ -236,9 +236,9 @@ export default function CardBoard(props) {
           {isLoved == 0 ? <FavoriteBorderIcon /> : <FavoriteIcon />}
         </IconButton>
         <Button variant="text" onClick={()=>{goTodetails(idProp)}}>ראה עוד</Button>
-        {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
+        {/* {(userSelect && userSelect.IdTypeUser == 1) && <IconButton aria-label="delete">
           <DeleteForeverIcon onClick={deleteProp} />
-        </IconButton>}
+        </IconButton>} */}
         {userSelect && userSelect.Id != idPropOwner && <input type="button" className="but-chat" onClick={fun} value="chat" />}
         {userSelect && userSelect.Id == idPropOwner && <input type="button" className="but-chat" onClick={answer} value="answer" />}
       </CardActions>

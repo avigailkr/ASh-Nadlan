@@ -92,7 +92,7 @@ function App() {
         <Route path="property" element={<Property />} />
         <Route path="addProp" element={<Form />} />
         <Route path="board" element={<Board />} />
-        <Route path="forum" element={<Forum />} />
+        {/* <Route path="forum" element={<Forum />} /> */}
         <Route path="DetailsProperty/:idProp/:idPropOwner/:update" element={<DetailsProperty/>} />
 
 

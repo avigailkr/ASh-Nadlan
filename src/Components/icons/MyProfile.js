@@ -125,7 +125,8 @@ const MyProfile=()=>{
 
     return<>
     <button id="but-set"  onClick={setting}><BorderColorIcon/></button>
-        <Avatar sx={{ bgcolor: red[500],width: 106, height: 106,marginLeft:90}} aria-label="recipe"> 
+        <Avatar sx={{ bgcolor: red[500],width: 106, height: 106,marginLeft:90}}
+ aria-label="recipe"> 
     {selectUser.Mail[0]}
     {/* <img src={URL.createObjectURL(image)} /> */}
   </Avatar>
@@ -167,7 +168,7 @@ const MyProfile=()=>{
 
 
 </div>*/}
-<input type="file" onChange={(e)=>{onFileChange(e)}}/>
+{/* <input type="file" onChange={(e)=>{onFileChange(e)}}/> */}
 
      <input type="submit"  value="עדכן"  className="but-update"/><br/>
      <input type="button"  value="ביטול" onClick={exite} className="but-update"/>

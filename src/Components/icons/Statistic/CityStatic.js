@@ -23,7 +23,7 @@ export default function CityStatic() {
   },[])
   function change(event){
     getIdCityByNameFromServer(event.target.innerText).then(res=>{
-       alert(res.data[0].Id)
+      //  alert(res.data[0].Id)
         dis(saveStatisticCity(res.data[0].Id))
       }).catch(err=>alert(err))
    

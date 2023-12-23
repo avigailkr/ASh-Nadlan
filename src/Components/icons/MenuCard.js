@@ -9,12 +9,23 @@ import { ChacimaUser, NotActivePropFromServer } from '../../Services';
 import { useDispatch } from 'react-redux';
 import { DeleteProp } from '../../store/Actions/PropAction';
 
-
+import Button from '@mui/material/Button';
+  import Dialog from '@mui/material/Dialog';
+  import DialogActions from '@mui/material/DialogActions';
+  import DialogContent from '@mui/material/DialogContent';
+  import DialogContentText from '@mui/material/DialogContentText';
+  import DialogTitle from '@mui/material/DialogTitle';
+import { LegendToggleSharp } from "@mui/icons-material";
+import Stack from '@mui/material/Stack';
+  
+  
 
 const ITEM_HEIGHT = 48;
 
 export default function MenuCard(props) {
   let [active,setActive]=useState(" ")
+  let [isDelete, setIsDelete] = useState(false);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dis=useDispatch();
@@ -25,6 +36,7 @@ export default function MenuCard(props) {
   const handleClose=()=>{
     setAnchorEl(null);
   }
+
   const block = () => {
     if(active=="חסימה"){
       ChacimaUser(props.owner1.Id,"true").then(res=>console.log(res.data)).catch(err=>alert(err))
@@ -55,6 +67,17 @@ const deletead=()=>{
 }
   
  },[])
+
+ const [openDelete, setOpenDelete] = React.useState(true);
+ function isdelete() {
+  setIsDelete(true)
+  setOpenDelete(true);
+}
+function handleCloseDelete () {
+  setOpenDelete(false);
+  setIsDelete(false);
+  setAnchorEl(null);//לסגור את התפריט
+}
   return (
     <div>
       <IconButton
@@ -86,11 +109,46 @@ const deletead=()=>{
           <MenuItem onClick={block}>
             {active}
           </MenuItem>}
-        {  <MenuItem onClick={deletead}>
+        {  <MenuItem onClick={isdelete}>
           להסרת המודעה
         </MenuItem>
         }
       </Menu>
+
+
+
+
+
+      {isDelete && <div>
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
+        Open alert dialog
+      </Button> */}
+      <Dialog
+        open={openDelete}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        {/* <DialogTitle id="alert-dialog-title">
+          {"אתה בטוח שברצונך למחוק את הדירה"}
+        </DialogTitle> */}
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           אתה בטוח שברצונך למחוק את הדירה
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDelete}>ביטול</Button>
+          <Button onClick={deletead} autoFocus>
+            מחק
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  }
+
+
+
     </div>
   );
 }
