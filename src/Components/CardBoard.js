@@ -30,7 +30,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { hover } from "@testing-library/user-event/dist/hover";
 import { useDispatch, useSelector } from "react-redux";
-import { AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer,getOwnerFromServer, bringImagesFromServer } from "../Services";
+import {getTypeByIdFromServer, getCityByIdFromServer, AddLikeFromServer, DeleteLikeFromServer, DeletePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer,getOwnerFromServer, bringImagesFromServer } from "../Services";
 import { useState } from "react";
 import { useEffect } from "react";
 import { DeleteProp } from "../store/Actions/PropAction";
@@ -57,12 +57,15 @@ export default function CardBoard(props) {
   let dis = useDispatch();
   let userSelect = useSelector(state => state.user.selectedUser);
   let idProp = props.props.Id;
+  let idCity= props.props.IdCity;
+  let idType= props.props.IdKindProp;
   let idPropOwner = props.props.IdUser;
   let [owner, setOwner] = useState(null);
   let [isLoved, setIsLoved] = useState(0);
   let [arrImg, setarrImg] = useState([]);
   let [index, setindex] = useState(0);
-
+  let [cityname,setCityName]= useState(" ");
+  let [typename,setTypeName]= useState(" ");
   useEffect(() => {
     //כל התמונות של דירה זו
     // getAllImgsByIdFromServer(idProp).then((res) => {
@@ -89,6 +92,17 @@ export default function CardBoard(props) {
       getMyLikeFromServer(userSelect.Id, idProp).then((res) => {
         setIsLoved(res.data.length);
       }).catch(err => alert(err));
+
+      //שולחים קוד סוג נכס ומקבלים את שם הנכס
+getTypeByIdFromServer(idType).then((res)=>{
+  // console.log(res)
+  setTypeName(res.data[0].Name)
+}).catch(err=>alert(err))
+//שולחים קוד עיר ומקבלים את שם העיר
+      getCityByIdFromServer(idCity).then((res)=>{
+        setCityName(res.data[0].Name)
+      }).catch(err=>alert(err))
+
   }, [])
 
 
@@ -217,18 +231,21 @@ export default function CardBoard(props) {
            :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
            }
       </div>
+      
       <CardContent>
-        {/*----------------------------------------- bull-נשלח לפונקציה
-        שתשים נקודה בין בל מילה------------------------------------------------- */}
-        <Typography variant="body2" color="text.secondary">
-          {props.props && (
-            <>
-              {props.props.kind} {bull} {props.props.RoomNum} חד'{bull}{" "}
-              {props.props.Sqm} מ"ר
-            </>
-          )}
-        </Typography>
-      </CardContent>
+          {/*----------------------------------------- bull-נשלח לפונקציה
+          שתשים נקודה בין בל מילה------------------------------------------------- */}
+          <Typography variant="body2" color="text.secondary">
+            {props.props && (
+              <>
+              {cityname}<br/>
+                {typename}
+                 {bull} {props.props.RoomNum} חד'{bull}{" "}
+                {props.props.Sqm} מ"ר
+              </>
+            )}
+          </Typography>
+        </CardContent>
 
       <CardActions disableSpacing>
 

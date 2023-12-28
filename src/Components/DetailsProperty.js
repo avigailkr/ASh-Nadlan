@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SaveDetailsProp } from "../store/Actions/PropAction";
 import { useParams } from "react-router-dom";
 import { SaveArrType, SaveArrStatus } from "../store/Actions/PropAction";
-import { getAllTypeFromServer, getStatusFromServer, bringImagesFromServer , getOwnerFromServer,
+import {uplaodAddDetails, getAllTypeFromServer, getStatusFromServer, bringImagesFromServer , getOwnerFromServer,
    getAddDetails, deleteImgFromServer} from "../Services";
 import ImageGallery from "react-image-gallery";
 // import "react-image-gallery/styles/css/image-gallery.css";
@@ -60,6 +60,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Done from '@mui/icons-material/Done';
 import  {Box as JoyBox, Checkbox as JoyCheckbox, List as JoyList, ListItem as JoyListItem,}  from '@mui/joy';
 import { updateProp } from '../Services';
+import { boolean } from 'yup';
 
 const DetailsProperty = () => {
 const [imgs,setImgs] = useState([]);
@@ -71,33 +72,38 @@ const [selectedImages, setSelectedImages] = useState([]);
 const [DImg, setDImg]= useState([]);
 const [UDImg, setUDImg]= useState([]);
 
+const PropDetails=useSelector(x=>x.prop.details);
+let showP=Boolean(PropDetails.ShowPrice);
+console.log(showP);
+let helfR=Boolean(PropDetails.HalfRoom);
+
 //verible for update
-const [type, setType] = useState(1);
-const [floor, setFloor] = useState("1");
-const [inFloor, setInFloor] = useState("1");
-const [room, setRoom] = useState("1");
-const [halfRoom, setHalfRoom] = useState(true);
-const [sito, setSito] = useState(1);
-const [date, setDate] = useState(1);
-const [adress, setAdress]=useState("ישראל");
-const [adress2,setAdress2]=useState("ישראל");
-const [price, setPrice] = useState(0);
-const [mr, setmr] = useState("");
-const [isRent, setIsRent]=useState(true);
+const [type, setType] = useState(PropDetails.IdKindProp);
+const [floor, setFloor] = useState(PropDetails.Floor);
+const [inFloor, setInFloor] = useState(PropDetails.InFloor);
+const [room, setRoom] = useState(PropDetails.RoomNum);
+const [halfRoom, setHalfRoom] = useState(helfR);
+const [sito, setSito] = useState(PropDetails.IdStatus);
+const [date, setDate] = useState(PropDetails.IdEnterDate);
+const [adress, setAdress]=useState(PropDetails.Adress);
+// const [adress2,setAdress2]=useState("ישראל");
+const [price, setPrice] = useState(PropDetails.Price);
+const [mr, setmr] = useState(PropDetails.Sqm);
+const [isRent, setIsRent]=useState(PropDetails.IdTypeSale);
+const [rihut, setRihut] = useState(PropDetails.Furniture); 
+const [discription, setDiscription]= useState(PropDetails.Description)
+const [showPrice, setShowPrice]=useState(showP);
+
 const [plus, setPlus] = useState([]);
 const [value, setValue] = useState([]);
-const [rihut, setRihut] = useState("ללא"); 
-const [discription, setDiscription]= useState("")
 const [values, setValues] = useState({});
-const [status, setStatus]= useState("");
-
+const [status, setStatus]= useState();
 // const [level, setLevel]=useState("");
 // const [inLevel, setInLevel]=useState("");
 // const [roomNum, setRomNum]=useState("");
 let stringDet=""; 
 let userSelect = useSelector(state => state.user.selectedUser);
 
-const PropDetails=useSelector(x=>x.prop.details);
 
   console.log(PropDetails);
 // let idPropOwner = props.props.IdUser;
@@ -281,19 +287,31 @@ console.log("delete function")
     d.map((i,index)=>{
       if(i===v){ 
          setDate(index+1);
-      }
+      } 
      
     })
   }
 
   const handleSubmit=()=>{
+    
     setValues({type, floor, inFloor, room, halfRoom, sito, date, adress, price, mr,
-       isRent, plus, value, rihut, discription
+       isRent, rihut, discription, showPrice
     })
-    updateProp(PropDetails.Id, values).then(res=>{
-      console.log(res.data);
-    }).catch(err => alert(err))
-  }
+    console.log(plus)
+    //  
+
+    // updateProp(PropDetails.Id, values).then(res=>{
+    //   console.log(res.data);
+
+  
+  // updateAddDetails(PropDetails.Id,plus).then(res=>{
+  //   console.log(res.data);
+  // }).catch(err=>alert(err))
+
+
+
+    // }).catch(err => alert(err))
+   }
 
   
 // const FunStutus=(p)=>{
@@ -465,7 +483,7 @@ checkDesc()===true &&
                  קומה
                  </label>
                  
-                 <Select size='md' defaultValue={PropDetails.Floor?`${PropDetails.Floor}`:"בחר"} sx={{mt:1, mr:4, minWidth: 90 }}
+                 <Select size='md' defaultValue={`${floor}`} sx={{mt:1, mr:4, minWidth: 90 }}
                   onChange={(e)=>{
                     if (e && e.target) {
                       setFloor(e.target.innerText)
@@ -497,7 +515,7 @@ checkDesc()===true &&
                    <label id='leabelLevelIn22'>
                     מתוך
                    </label>
-                   <Select size='md' defaultValue={PropDetails.InFloor?`${PropDetails.InFloor}`:"בחר"} sx={{mt:1,mr:4, minWidth: 90 }}
+                   <Select size='md' defaultValue={`${inFloor}`} sx={{mt:1,mr:4, minWidth: 90 }}
                     onChange={(e)=>{
                       if (e && e.target) {
                         setInFloor(e.target.innerText)
@@ -560,7 +578,7 @@ checkDesc()===true &&
         secondary={
           update==="true"?
           <>
-          <Select defaultValue={`${PropDetails.RoomNum}`} size='md' sx={{mt:1,mb:2, minWidth:90 }}
+          <Select defaultValue={`${room}`} size='md' sx={{mt:1,mb:2, minWidth:90 }}
           onChange={(e) => {
            if (e && e.target) {
              setRoom(e.target.innerText);
@@ -589,8 +607,8 @@ checkDesc()===true &&
         
         <Checkbox 
         sx={{position:"absolute", mr:1, mt:-1.5}} 
-        checked={PropDetails.HalfRoom===0?false:true} 
-        onChange={(e) => setHalfRoom(!halfRoom)}/>
+        checked={halfRoom} 
+        onChange={() =>{setHalfRoom(!halfRoom)}} />
           </>
           :
           <React.Fragment>
@@ -678,7 +696,7 @@ checkDesc()===true &&
         <ListItemText sx={{textAlign:"right", display:'inline'}} primary="מועד כניסה:"
         secondary={ 
           update==="true"?
-          <Select defaultValue={`${det.IdEnterDate===1?("מיידי"):(det.IdEnterDate===2?("גמיש"):(det.IdEnterDate===3?("עתידי"):("בחר")))}`} size='md' sx={{mt:1,mb:2, minWidth: 120 }} 
+          <Select defaultValue={`${date===1?("מיידי"):(date===2?("גמיש"):(date===3?("עתידי"):("בחר")))}`} size='md' sx={{mt:1,mb:2, minWidth: 120 }} 
           onChange={(e)=>{
             if (e && e.target) {  
                 setId(e.target.innerHTML)           
@@ -732,7 +750,7 @@ checkDesc()===true &&
           sx={{ ml: 1, flex: 1 }}
           placeholder="לדוג': רמבם 2, חיפה "
           dir="rtl"
-          defaultValue={PropDetails.Adress}
+          defaultValue={adress}
           inputProps={{ 'aria-label': 'search google maps' }}
           onChange={(e)=>{setAdress(e.target.value)}}
         />
@@ -773,7 +791,7 @@ checkDesc()===true &&
            <FormControl dir="ltr" fullWidth sx={{ m: 1 , width:120}}>
           <OutlinedInput
           sx={{height:40}}
-          defaultValue={PropDetails.Price}
+          defaultValue={price}
             startAdornment={<InputAdornment position="start">₪</InputAdornment>}
           />
         </FormControl>
@@ -787,8 +805,8 @@ checkDesc()===true &&
             </Typography>
         
         <Checkbox sx={{position:"absolute", mr:1, mt:-1.5}} 
-        checked={PropDetails.ShowPrice===0?false:true}
-        onChange={(e) => setHalfRoom(!halfRoom)}/>
+        checked={showPrice}
+        onChange={() => setShowPrice(!showPrice)}/>
           </>
           :
           <React.Fragment>
@@ -818,7 +836,7 @@ checkDesc()===true &&
           update==="true"?
         <FormControl dir="ltr" fullWidth sx={{ m: 1 , width:110}}>
           <OutlinedInput
-          defaultValue={PropDetails.Sqm}
+          defaultValue={mr}
           sx={{height:40}}
             startAdornment={<InputAdornment position="start">מ"ר</InputAdornment>}
           />
@@ -856,7 +874,7 @@ checkDesc()===true &&
           //  <Button onClick={handleClick2} value={flag1} variant={flag1 ? "outlined": "contained"} >מוכרים</Button>
           // </Stack>
           <RadioGroup 
-    defaultValue="להשכרה"
+    defaultValue={isRent==1?"למכירה":"להשכרה"}
     onChange={()=>{setIsRent(!isRent)}}
   >
     <FormControlLabel value="להשכרה" control={<Radio />} label="להשכרה" />
@@ -975,7 +993,7 @@ checkDesc()===true &&
           id="outlined-multiline-flexible"
           multiline
           dir="rtl"
-          defaultValue={PropDetails.Description}
+          defaultValue={`${discription}`}
           sx={{width:350, mr:88, mt:10}}
           maxRows={5}
           onChange={(e)=>{setDiscription(e.target.value)}}

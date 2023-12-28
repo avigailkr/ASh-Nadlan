@@ -301,3 +301,6 @@ export const deleteImgFromServer=(id)=>{
 export const updateProp = (id, prop)=>{
     return axios.put(`http://localhost:8080/property/updateProp/${id}`, prop)
 }
+export const updateAddDetails = (id, plus)=>{
+    return axios.put(`http://localhost:8080/property/`)
+}

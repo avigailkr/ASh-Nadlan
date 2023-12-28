@@ -20,7 +20,7 @@ export default function Profile() {
 
   
   function myprofile(){nav("/myprofile")}
-  function exit(){nav("/exit")}
+  
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -53,62 +53,72 @@ export default function Profile() {
     prevOpen.current = open;
   }, [open]);
 
-  return (
-    <Stack direction="row" spacing={2}>
-      {/* <Paper>
-        <MenuList>
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>My account</MenuItem>
-          <MenuItem>Logout</MenuItem>
-        </MenuList>
-      </Paper> */}
-      <div>
+  return<>
         <Button
-          ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? 'composition-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
+          onClick={myprofile}
+          id="profil-but"
         >
            {/*--------------- אייקון פרופיל --------------*/}
            <AccountCircleSharpIcon />
           {/* ------------------------------------------- */}
         </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    <MenuItem onClick={myprofile} value="profile">פרופיל</MenuItem>
-                    {/* <MenuItem onClick={handleClose} value="profile">החשבון שלי</MenuItem> */}
-                    <MenuItem onClick={exit} value="exit">התנתקות</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-    </Stack>
-  );
+    
+    </>
+  // return (
+  //   <Stack direction="row" spacing={2}>
+  //     {/* <Paper>
+  //       <MenuList>
+  //         <MenuItem>Profile</MenuItem>
+  //         <MenuItem>My account</MenuItem>
+  //         <MenuItem>Logout</MenuItem>
+  //       </MenuList>
+  //     </Paper> */}
+  //     <div>
+  //       <Button
+  //         ref={anchorRef}
+  //         id="composition-button"
+  //         aria-controls={open ? 'composition-menu' : undefined}
+  //         aria-expanded={open ? 'true' : undefined}
+  //         aria-haspopup="true"
+  //         onClick={handleToggle}
+  //       >
+  //          {/*--------------- אייקון פרופיל --------------*/}
+  //          <AccountCircleSharpIcon />
+  //         {/* ------------------------------------------- */}
+  //       </Button>
+  //       <Popper
+  //         open={open}
+  //         anchorEl={anchorRef.current}
+  //         role={undefined}
+  //         placement="bottom-start"
+  //         transition
+  //         disablePortal
+  //       >
+  //         {({ TransitionProps, placement }) => (
+  //           <Grow
+  //             {...TransitionProps}
+  //             style={{
+  //               transformOrigin:
+  //                 placement === 'bottom-start' ? 'left top' : 'left bottom',
+  //             }}
+  //           >
+  //             <Paper>
+  //               <ClickAwayListener onClickAway={handleClose}>
+  //                 <MenuList
+  //                   autoFocusItem={open}
+  //                   id="composition-menu"
+  //                   aria-labelledby="composition-button"
+  //                   onKeyDown={handleListKeyDown}
+  //                 >
+  //                   <MenuItem onClick={myprofile} value="profile">פרופיל</MenuItem>
+  //                   {/* <MenuItem onClick={handleClose} value="profile">החשבון שלי</MenuItem> */}
+  //                 </MenuList>
+  //               </ClickAwayListener>
+  //             </Paper>
+  //           </Grow>
+  //         )}
+  //       </Popper>
+  //     </div>
+  //   </Stack>
+  // );
 }

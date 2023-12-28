@@ -29,7 +29,7 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { hover } from "@testing-library/user-event/dist/hover";
 import { useDispatch, useSelector } from "react-redux";
-import { ActivePropFromServer, bringImagesFromServer, DeletePropFromServer, NotActivePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
+import {getTypeByIdFromServer, getCityByIdFromServer, ActivePropFromServer, bringImagesFromServer, DeletePropFromServer, NotActivePropFromServer, getAllImgsByIdFromServer, getMyLikeFromServer, getOwnerFromServer } from "../../../Services";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -75,6 +75,8 @@ import ImageIcon from '@mui/icons-material/Image';
     let dis = useDispatch();
     let userSelect = useSelector(state => state.user.selectedUser);
     let idProp = props.props.Id;
+    let idCity= props.props.IdCity;
+    let idType= props.props.IdKindProp;
     let idPropOwner = props.props.IdUser;
     let [owner, setOwner] = useState(null);
     let [isLoved, setIsLoved] = useState(0);
@@ -85,6 +87,8 @@ import ImageIcon from '@mui/icons-material/Image';
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
+    let [cityname,setCityName]=useState(" ");
+    let [typename,setTypeName]=useState(" ");
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -127,6 +131,16 @@ const updateProp=()=>{
         getMyLikeFromServer(userSelect.Id, idProp).then((res) => {
           setIsLoved(res.data.length);
         }).catch(err => alert(err));
+
+        //שולחים קוד סוג נכס ומקבלים את שם הנכס
+getTypeByIdFromServer(idType).then((res)=>{
+  // console.log(res)
+  setTypeName(res.data[0].Name)
+}).catch(err=>alert(err))
+//שולחים קוד עיר ומקבלים את שם העיר
+      getCityByIdFromServer(idCity).then((res)=>{
+        setCityName(res.data[0].Name)
+      }).catch(err=>alert(err))
     }, [])
   
   
@@ -265,7 +279,9 @@ const updateProp=()=>{
           <Typography variant="body2" color="text.secondary">
             {props.props && (
               <>
-                {props.props.kind} {bull} {props.props.RoomNum} חד'{bull}{" "}
+              {cityname}<br/>
+                {typename}
+                 {bull} {props.props.RoomNum} חד'{bull}{" "}
                 {props.props.Sqm} מ"ר
               </>
             )}

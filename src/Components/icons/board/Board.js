@@ -41,6 +41,8 @@ import CreateMassegArea from "./CreateMassegBoard";
 import InputAdornment from "@mui/material/InputAdornment";
 import MassageMyBoard from "./MassageMyBoard";
 import CreateMassegBoard from "./CreateMassegBoard";
+import {darkScrollbar} from "@mui/material";
+
 
 export default function Board() {
   const [arrmyclient, serArrMyClient] = useState([]);
@@ -69,6 +71,7 @@ dis(saveArrChat([]))
     //שליפת כל בעלי הדירות שהתכתבתי איתם
     getAllMyOwnerFromServer(selectuser.Id)
       .then((res) => {
+        
         serArrMyClient(res.data);
         setFilteredList(res.data);
       })
@@ -130,7 +133,7 @@ dis(saveArrChat([]))
       {arrMass.length!=0 && <p className="litel">chat with {selectNameClient}</p>}      
       {arrMass.length==0 && <p className="litel">chat with ownersprop</p>}
       {arrMass.length!=0 && <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />}
-        <div className="chat-list">
+        <div className="chat-list" >
           <List
             sx={{
               maxWidth: 320,
@@ -172,12 +175,14 @@ dis(saveArrChat([]))
                 }}
               />
             </ListItem>
-            <div className="all-onepeople">
+            {/* ****************************************************************************** */}
+            <div className="all-onepeople" >
+              
               {filteredList
-                .filter((x) => x.Active.data[0] == 1)
-                .map((item, index) => {
-                  return (
-                    <div className="div-client" key={item.Id}>
+                    .filter((x) => x.Active.data[0] == 1)
+                    .map((item, index) => {
+                      return (
+                    <div className="div-client"  key={item.Id}>
                       {/* מציג רק משתמשים פעילים */}
                       <ListItem button key={item.Id}>
                         <OnePeople props={item} />
@@ -185,6 +190,7 @@ dis(saveArrChat([]))
                     </div>
                   );
                 })}
+            
             </div>
           </List>
         </div>

@@ -30,29 +30,10 @@ import emailjs from '@emailjs/browser';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-
-// const schema = yup.object({
-//   name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x.length<=30 && x.length >= 2)
-//   ,  
-//   password: yup.string().required("שדה חובה").test('len',"אורך לא תקין", x => x.length <= 10 && x.length >= 4)
-//   //password: yup.string().required("שדה חובה").matches("^(?=.*[A-Za-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים")
-//   // .test('len',"אורך לא תקין", x => x.length <= 10 && x.length >= 2)
-//    ,
-//   email: yup.string().email('כתובת מייל שגויה'),
-//   phone:yup.string()
-//   .required("required")
-//   .min(8, "מספר יכיל בין 8-10 תווים")
-//   .max(10, "מספר יכיל בין 8-10 תווים")
-//   // .test('len',"מספר לא תקין",x => x.length<=10 && x.length >= 9)לא עובדדדדדד
-//  }).required();
 const schema = yup.object({
-  // name: yup.string().required("שדה חובה").test('len', "אורך לא תקין", x => x!=null && (x.length<=30 && x.length >= 2))
-  //  ,
   password: yup.string().required("שדה חובה")
-  // .matches("^(?=.*[a-z])([0-9])","סיסמה חייבת להכיל תווים ומספרים")
 .test('len',"אורך לא תקין", x => x!=null && (x.length <= 10 && x.length >= 4))
    ,
-  // mail: yup.string().email('כתובת מייל שגויה'),
   phone:yup.string().test('len',"מספר לא תקין",x => x!=null && (x.length<=10 && x.length >= 9))
  }).required();
 
@@ -65,7 +46,10 @@ export default function Menu() {
   const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
   resolver: yupResolver(schema)
    });
+   let userSelect = useSelector(state => state.user.selectedUser);
 
+   function exit(){nav("/exit")}
+   
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
@@ -107,13 +91,10 @@ export default function Menu() {
   const closeAreaLogin = () => {
     setOpenLogin(false);
   };
-  const login = (e) => {
-    alert("loginnnnn")
-    console.log("loginnnnn")
-    console.log(e)
+  const login = (email,password) => {
 let details={
-    email:e.email,
-    password:e.password
+    email:email,
+    password:password
 }
 getLogin(details).then((res)=>{
     console.log("login")
@@ -129,6 +110,8 @@ getLogin(details).then((res)=>{
 }).catch(()=>{
     alert(err=>alert(err.mass))
     openAreaRegister()})
+
+
     closeAreaLogin();
   };
   //loginnnnnnnnnnnnnn
@@ -217,9 +200,12 @@ const sendEmail = () => {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                      >
-                    <MenuItem onClick={openAreaRegister} value="register">הרשמה</MenuItem>
-                    <MenuItem onClick={openAreaLogin} value="connect">התחברות</MenuItem>
-                   {selectUser!=null && <MenuItem onClick={myArea} value="myarea">לאזור האישי</MenuItem>}
+          {userSelect==null && <>
+          <MenuItem onClick={openAreaRegister} value="register">הרשמה</MenuItem>
+                    <MenuItem onClick={openAreaLogin} value="connect">התחברות</MenuItem></>}
+                    
+                   {selectUser!=null && <><MenuItem onClick={myArea} value="myarea">לאזור האישי</MenuItem>
+                   <MenuItem onClick={exit} value="exit">התנתקות</MenuItem></>}
 
                   </MenuList>
                 </ClickAwayListener>
@@ -229,12 +215,7 @@ const sendEmail = () => {
         </Popper>
       </div>
     </Stack>
-
-
-
-
-
-    {openLogin &&<> <Dialog open={openLogin} onClose={closeAreaLogin}>
+{openLogin &&<> <Dialog open={openLogin} onClose={closeAreaLogin}>
         
         <DialogTitle className="dialog-title">ברוכים הבאים לא"ש נדלן</DialogTitle>
 
@@ -242,11 +223,11 @@ const sendEmail = () => {
         <DialogContent>
           {/* <input type="text" ref={mailInput}  onChange={()=>{console.log(mailInput.current.value)}}/> */}
           <TextField autoFocus helperText={errors?.email?.message} 
-           margin="dense" label="Email Address" type="taxt" fullWidth variant="standard" name='user_email' 
+           margin="dense" label="Email Address" type="taxt" fullWidth variant="standard" name='user_email' id="user_email"
           {...register('email')} 
           />
           
-          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
+          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" id="password" fullWidth variant="standard"
           {...register('password')}
           />
           
@@ -257,8 +238,7 @@ const sendEmail = () => {
           openAreaRegister();
           }}>הרשמה</Button>
           <Button onClick={closeAreaLogin}>ביטול</Button>
-          <Button type="submit" >התחבר</Button>
-          {/* <input type="button" value="התחבר" /> */}
+          <Button onClick={()=>{login(document.getElementById("user_email").value,document.getElementById("password").value)}} >התחבר</Button>
         </DialogActions> 
         </form>
 
@@ -273,13 +253,11 @@ const sendEmail = () => {
         <DialogContent>
           <TextField autoFocus helperText={errors?.email?.message} 
            margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
-          // {...register('email')} 
           />
           <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
           {...register('password')}
           />
           <TextField helperText={errors?.name?.message} margin="dense" label="Name" type="name" fullWidth variant="standard" name='user_name'
-          // {...register('name')}
           />
           <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="number" fullWidth variant="standard" name='phone'
           {...register('phone')}
