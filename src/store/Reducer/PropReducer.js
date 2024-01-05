@@ -6,6 +6,7 @@ const initialState = {
     arrCity: [],
     arrType: [],
     arrStatus:[],
+    arrFurniture:[],
     message: null,
     details:{}
 }
@@ -65,6 +66,11 @@ const PropReducer=(state=initialState,action)=>{
             return{
               ...state,
               arrStatus:action.payload
+            }  
+            case TypeAction.SAVE_ARR_FURNITURE:
+            return{
+              ...state,
+              arrFurniture:action.payload
             }  
           case TypeAction.SAVE_PROPERTY:
             return{

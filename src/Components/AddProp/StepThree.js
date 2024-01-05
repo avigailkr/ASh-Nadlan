@@ -3,6 +3,7 @@ import Steps from "./Steps";
 import { useState } from "react";
 import {MdCloudUpload, MdDelete} from "react-icons/md";
 import {AiFillFileImage} from "react-icons/ai"
+import Typography from '@mui/material/Typography';
 
 const StepThree = ({prevStep, nextStep, values }) => {
   const [image, setImage] = useState([]);
@@ -34,9 +35,10 @@ const onFileChange = (files) => {
         <Steps level={2}/>
 
         <div className="up">
-      <label >
-       העלאת תמונות        
-      </label>
+     
+      <Typography sx={{ml:59, mb:2}} variant="h6" gutterBottom>
+      :העלאת תמונות        
+          </Typography>
 
       <div id="DivfileInput" onClick={()=>document.querySelector('.input-file').click()}>
 

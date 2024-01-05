@@ -79,16 +79,16 @@ export default function Register() {
 
 <form ref={form}  onSubmit={handleSubmit(registerfun)}>
           <TextField autoFocus helperText={errors?.mail?.message} 
-           margin="dense" label="Email Address" type="text" fullWidth variant="standard" name='user_email' defaultValue="shilat.bedani@gmail.com"
+           margin="dense" label="כתובת אימייל" type="text" fullWidth variant="standard" name='user_email' defaultValue="shilat.bedani@gmail.com"
           // {...register('mail')} 
           />
-          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="text" fullWidth variant="standard" defaultValue="12345"
+          <TextField helperText={errors?.password?.message} margin="dense" label="סיסמה" type="text" fullWidth variant="standard" defaultValue="12345"
           {...register('password')}
           />
-          <TextField helperText={errors?.name?.message} margin="dense" label="Name" type="text" fullWidth variant="standard" name='user_name'defaultValue="אביגיל"
+          <TextField helperText={errors?.name?.message} margin="dense" label="שם" type="text" fullWidth variant="standard" name='user_name'defaultValue="אביגיל"
           //  {...register('name')}
           />
-          <TextField helperText={errors?.phone?.message}  margin="dense" label="Phone" type="number" fullWidth variant="standard" name='phone'defaultValue="0598833767"
+          <TextField helperText={errors?.phone?.message}  margin="dense" label="טלפון" type="number" fullWidth variant="standard" name='phone'defaultValue="0598833767"
           {...register('phone')}
           />
 

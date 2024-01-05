@@ -272,7 +272,7 @@ let object={
         }}
       >
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table" sx={{width: '60%',marginLeft:45,marginTop:5}}>
+      <Table aria-label="collapsible table" sx={{width: '80%',marginLeft:25,marginTop:5}}>
         <TableHead>
           <TableRow sx={{color:"warning"}}>
             <TableCell />

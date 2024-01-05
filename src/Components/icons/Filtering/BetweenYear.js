@@ -24,15 +24,16 @@ export default function BetweenYear() {
 
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120 }} dir="rtl">
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">From</InputLabel>
+        <InputLabel id="demo-simple-select-label">מ...</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={year1}
-          label="Age"
           onChange={handleChange1}
+         
+
         >
    <MenuItem value={2000}>2000</MenuItem>
   <MenuItem value={2001}>2001</MenuItem>
@@ -62,12 +63,12 @@ export default function BetweenYear() {
       </FormControl>
 -
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Until</InputLabel>
+        <InputLabel id="demo-simple-select-label">עד...</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={year2}
-          label="Age"
+          // label="Age"
           onChange={handleChange2}
         >
   <MenuItem value={2000}>2000</MenuItem>

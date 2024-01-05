@@ -84,10 +84,10 @@ getLogin(details).then((res)=>{
 
         <form ref={form}  onSubmit={handleSubmit(login)}>
           <TextField autoFocus helperText={errors?.email?.message} 
-           margin="dense" label="Email Address" type="email" fullWidth variant="standard" name='user_email'    
+           margin="dense" label="כתובת אימייל" type="email" fullWidth variant="standard" name='user_email'    
           {...register('email')} 
           />
-          <TextField helperText={errors?.password?.message} margin="dense" label="Password" type="password" fullWidth variant="standard"
+          <TextField helperText={errors?.password?.message} margin="dense" label="סיסמה" type="password" fullWidth variant="standard"
           {...register('password')}
           />
 <DialogActions>

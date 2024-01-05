@@ -53,8 +53,8 @@ function mychoose(){
           <Room/>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={cancel}>ביטול</Button>
+        <DialogActions dir="rtl">
+          <Button sx={{ml:3}} onClick={cancel}>ביטול</Button>
           <Button onClick={mychoose} autoFocus>
             בצע
           </Button>

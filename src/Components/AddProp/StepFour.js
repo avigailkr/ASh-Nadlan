@@ -16,6 +16,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SaveArrStatus } from "../../store/Actions/PropAction";
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 const StepFour = ({ prevStep, nextStep, values }) => {
   const [plus, setPlus] = useState([]);
@@ -65,12 +66,16 @@ const StepFour = ({ prevStep, nextStep, values }) => {
 
     <form onSubmit={handleNext} className="form__step">
       <Steps level={3}/>
-      <label id="mn">
-      :מאפיינים נוספים     
-       </label>
-       <label>
-        ?בחר מה יש בנכס
-       </label>
+      {/* <label id="mn">
+       </label> */}
+       {/* <Typography sx={{ml:59, mb:4}} variant="h5" gutterBottom>
+       :מאפיינים נוספים     
+          </Typography> */}
+
+          <Typography sx={{ml:60, mb:2, mt:5}} variant="h6" gutterBottom>
+          :בחר מה יש בנכס
+          </Typography>
+       
       <Box role="group" aria-labelledby="rank" sx={{mb:4}}>
         <List
           orientation="horizontal"
@@ -79,6 +84,7 @@ const StepFour = ({ prevStep, nextStep, values }) => {
             '--List-gap': '8px',
             '--ListItem-radius': '20px',
             '--ListItem-minHeight': '32px',
+            ml:16
           }}
         >
           {['מרפסת','סורגים', 'ממד', 'מחסן', 'מעלית', 'חניה'].map(
@@ -88,12 +94,13 @@ const StepFour = ({ prevStep, nextStep, values }) => {
                   <Done
                     fontSize="md"
                     color="primary"
-                    sx={{ ml: -0.5, mr: 0.5, zIndex: 2, pointerEvents: 'none' }}
+                    sx={{ ml: -0.5, mr: 0.5, zIndex: 2, pointerEvents: 'none'}}
                   />
                 )}
   
                 <Checkbox
-                  size="sm"
+                 sx={{width:50, height:25}}
+                  size="md"
                   disableIcon
                   overlay
                   value={item}
@@ -132,50 +139,55 @@ const StepFour = ({ prevStep, nextStep, values }) => {
       </Box>
     
 
-    <label>
-      ?בחר מה מצב הנכס
-    </label>
+   
+    <Typography sx={{ml:58, mt:2}} variant="h6" gutterBottom>
+     :בחר מה מצב הנכס
+          </Typography>
     <RadioGroup
     row="true"
-    defaultValue="בחר"
     orientation="horizontal"
     dir="rtl"
-    sx={{mb:2}}
+    sx={{mb:2, ml:20}}
     onChange={(e)=>SetId(e.target.value)}
   >
    { arrStatus.map((item)=>{return <>
-     <FormControlLabel value={item.Status} label={item.Status} sx={{m:2}} control={<Radio />} />
+     <FormControlLabel value={item.Status} label={item.Status} sx={{m:4}} control={<Radio />} />
      </>
     })}
   
   </RadioGroup>
    
 
-<label>
-  :ריהוט
-</label>
+
+<Typography sx={{ml:71, mt:2}} variant="h6" gutterBottom>
+:ריהוט
+  </Typography>
 
 <RadioGroup
     row="true"
     defaultValue="ללא"
     orientation="horizontal"
     dir="rtl"
-    sx={{mb:2}}
+    sx={{mb:2, ml:51}}
     onChange={(e)=>setRihut(e.target.value)}
   >
-    <FormControlLabel sx={{m:2}} value="1" control={<Radio />} label="מלא"  />
-    <FormControlLabel sx={{m:2}} value="2" control={<Radio />} label="חלקי" />
-    <FormControlLabel sx={{m:2}} value="3" control={<Radio />} label="ללא" />
+    <FormControlLabel sx={{m:4}} value="1" control={<Radio />} label="מלא"  />
+    <FormControlLabel sx={{m:4}} value="2" control={<Radio />} label="חלקי" />
+    <FormControlLabel sx={{m:4}} value="3" control={<Radio />} label="ללא" />
   </RadioGroup>
 
   <label>
-        תיאור הדירה (אופציונאלי)
       </label>
+      <Typography sx={{ml:53, mt:2, mb:4}} variant="h6" gutterBottom>
+:תיאור הדירה (אופציונאלי)
+
+  </Typography>
+
       <TextField
           id="outlined-multiline-flexible"
           multiline
           dir="rtl"
-          sx={{width:200}}
+          sx={{width:500, ml:16}}
           maxRows={5}
           onChange={(e)=>{setDiscription(e.target.value)}}
         />

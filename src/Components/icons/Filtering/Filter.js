@@ -11,19 +11,58 @@ import ButSaleOrBuy from './Button/ButSaleOrRent';
 import ButAdd from './Button/ButAdd';
 import ButBetween from './Button/ButBetweenYear';
 import { useDispatch, useSelector } from 'react-redux';
-import { FilterFromServer } from '../../../Services';
+import { AddRowInSmartAgent, FilterFromServer, GetFromServerByIdSmartAgent } from '../../../Services';
 import { SaveArrProp } from '../../../store/Actions/PropAction';
-import { saveChooseAddFilter, saveChooseCityFilter, saveChoosePriceFilter, saveChooseRoomFilter, saveChooseSizeFilter, saveChooseTypeFilter, saveChooseTypeSaleFilter, saveChooseYearFilter, saveCity, saveFromPrice, saveFromSize, saveFromYear, saveIsClearFilter, saveRoom, saveTpeySale, saveType, saveUntilPrice, saveUntilSize, saveUntilYear } from '../../../store/Actions/FilterAction';
+import { AddToArrSmartAgent, saveArrSmartAgent, saveChooseAddFilter, saveChooseCityFilter, saveChoosePriceFilter, saveChooseRoomFilter, saveChooseSizeFilter, saveChooseTypeFilter, saveChooseTypeSaleFilter, saveChooseYearFilter, saveCity, saveFromPrice, saveFromSize, saveFromYear, saveIsClearFilter, saveRoom, saveTpeySale, saveType, saveUntilPrice, saveUntilSize, saveUntilYear } from '../../../store/Actions/FilterAction';
 import { useNavigate } from 'react-router-dom';
+import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+import { useState } from 'react';
+import { useEffect } from 'react';
 export default function Filter() {
     const nav=useNavigate()
     let dis=useDispatch();
     const filterobject=useSelector(state=>state.filter);
     const arrsource=useSelector(state=>state.prop.arrsource)
+    let [opensmart,SetOpenSmart]=useState(null);
+    let selectfilter=useSelector(state=>state.filter);
+    let user=useSelector(state=>state.user.selectedUser);
+    let [flag,setflag]=useState(false)
+
+    if(user!=null && flag==false) start()
+
+    function start(){
+      //מביא את כל הסוכנים של המשתמש
+      user!=null &&  GetFromServerByIdSmartAgent(user.Id).then(res=>{
+        dis(saveArrSmartAgent(res.data))
+      }).catch(err=>alert(err))
+
+      setflag(true)
+    }
+   function smartagent(){
+
+    let obj={
+fromyear: selectfilter.fromyear,
+untilyear: selectfilter.untilyear,
+fromprice: selectfilter.fromprice,
+untilprice: selectfilter.untilprice,
+type: selectfilter.type,
+fromsize: selectfilter.fromsize,
+untilsize: selectfilter.untilsize,
+room: selectfilter.room,
+typesale: selectfilter.typesale,
+city:selectfilter.city,
+iduser:user
+    }
+AddRowInSmartAgent(obj).then((res)=>{alert("סוכן חכם הופעל בהצלחה");
+     dis(AddToArrSmartAgent(obj))
+  }).catch(err=>alert(err))
+    SetOpenSmart(null)
+   }
+
     function filter(){
 FilterFromServer(filterobject).then(res=>{console.log(res.data)
 dis(SaveArrProp(res.data))
-
+SetOpenSmart(true)
 }).catch(err=>alert(err))
 
 
@@ -62,7 +101,9 @@ dis(SaveArrProp(res.data))
       <Button onClick={clear} variant="outlined" href="#outlined-buttons">
         נקה
       </Button>
-      
+      <Button onClick={smartagent}  variant="outlined" href="#outlined-buttons"  disabled={opensmart==null?true:false}>
+      <SmartToyOutlinedIcon/>
+      </Button>
       <ButCity/>
       <ButSaleOrBuy/>
       <ButPrice/>
@@ -75,4 +116,3 @@ dis(SaveArrProp(res.data))
     </Stack>
   );
 }
-

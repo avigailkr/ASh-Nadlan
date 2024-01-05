@@ -25,7 +25,7 @@ import Room from "./Components/icons/Filtering/Room";
 import Price from "./Components/icons/Filtering/Price";
 import TypeProp from "./Components/icons/Filtering/TypeProp";
 import { useEffect, useRef, useState } from "react";
-import { getNumPropToSaleOrRent, sendEmail } from "./Services";
+import { GetFromServerByIdSmartAgent, getNumPropToSaleOrRent, sendEmail } from "./Services";
 import Statistic1 from "./Components/icons/Statistic/Statistic1";
 import Statistic2 from "./Components/icons/Statistic/Statistic2";
 import Statistic3 from "./Components/icons/Statistic/Statistic3";
@@ -44,6 +44,19 @@ import { SaveArrImg } from "./store/Actions/ImgAction";
 import Uplaoded from "./Components/Uplaoded";
 import Update from "./Components/icons/myarea/Update";
 
+import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+import SmartAgent from "./Components/icons/SmartAgent";
+
+import Box from '@mui/material/Box';
+import Popper from '@mui/material/Popper';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Fade from '@mui/material/Fade';
+import Paper from '@mui/material/Paper';
+import { saveArrSmartAgent } from "./store/Actions/FilterAction";
+
+  
 // import ChatF from './Components/ChatF';
 function App() {
   const selectUser = useSelector((state) => state.user.selectedUser); //שליפה של המשתמש הנוכחי שהתחבר
@@ -52,10 +65,12 @@ function App() {
   const nav = useNavigate();
   const form = useRef();
   let dis=useDispatch();
+  let user=useSelector(state=>state.user.selectedUser);
+
   useEffect(() => {
     // sendEmail().then(res=>console.log(res)).alert(err=>console.log(err))
     nav("/login");
-
+    
     //מספר דירות פנויותתת
     getNumPropToSaleOrRent(1)
       .then((res) => setSale(res.data[0]["count(*)"]))
@@ -66,7 +81,19 @@ function App() {
 
   }, []);
 
-  
+
+  function smartagent(){
+    nav("/smartagent")
+  }
+const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState();
+
+  const handleClick = (newPlacement) => (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpen((prev) => placement !== newPlacement || !prev);
+    setPlacement(newPlacement);
+  };
   return (
     <div className="App">
       <div className="title-div">
@@ -77,7 +104,13 @@ function App() {
           <p id="title2">{sale} למכירה</p>
         </div>
       </div>
-      {selectUser != null && <Profile />}
+      {selectUser != null && <><Profile />
+      <SmartAgent/>
+      {/* <Button onClick={smartagent}  variant="outlined" href="#outlined-buttons"> */}
+      {/* <Button onClick={handleClick('left-start')}>left-start</Button> */}
+
+      {/* </Button> */}
+      </>}
 
       {/* <div id="div-title"><h1 id="title"> אש נדלן</h1><h2 id="title2">89654 הושכרו    3898 נמכרו</h2></div><br/> */}
       <NavBar />
@@ -92,7 +125,7 @@ function App() {
         <Route path="property" element={<Property />} />
         <Route path="addProp" element={<Form />} />
         <Route path="board" element={<Board />} />
-        {/* <Route path="forum" element={<Forum />} /> */}
+        <Route path="forum" element={<Forum />} />
         <Route path="DetailsProperty/:idProp/:idPropOwner/:update" element={<DetailsProperty/>} />
 
 
@@ -122,6 +155,8 @@ function App() {
         <Route path="information" element={<Infomation/>}/>
         <Route path="uplaoded" element={<Uplaoded />}/>
         <Route path="Update" element={<Update />}/>
+          
+        <Route path="smartagent" element={<SmartAgent />}/>  
 
       </Routes>
       {/* <Collage/> */}

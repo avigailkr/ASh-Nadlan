@@ -61,3 +61,10 @@ export const SaveDetailsProp =(det) =>{
     payload:det,
   };
 }
+
+export const SaveArrFurniture = (arrFurniture) =>{
+  return {
+    type: TypeAction.SAVE_ARR_FURNITURE,
+    payload: arrFurniture,
+  };
+};

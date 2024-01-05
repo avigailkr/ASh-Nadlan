@@ -45,6 +45,7 @@ function mychoose(){
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        dir="rtl"
       >
         <DialogTitle id="alert-dialog-title">
           {"בחר טווח שטח רבוע"}
@@ -55,7 +56,7 @@ function mychoose(){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={cancel}>ביטול</Button>
+          <Button sx={{ml:3}} onClick={cancel}>ביטול</Button>
           <Button onClick={mychoose} autoFocus>
             בצע
           </Button>

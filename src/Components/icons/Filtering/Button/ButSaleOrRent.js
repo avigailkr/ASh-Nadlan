@@ -45,6 +45,7 @@ export default function ButSaleOrRent() {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        dir="rtl"
       >
         <DialogTitle id="alert-dialog-title">
           {/* {"Use Google's location service?"} */}
@@ -55,7 +56,7 @@ export default function ButSaleOrRent() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={cancel}>ביטול</Button>
+          <Button sx={{ml:3}} onClick={cancel}>ביטול</Button>
           <Button onClick={mychoose} autoFocus>
             בצע
           </Button>

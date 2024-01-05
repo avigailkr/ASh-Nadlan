@@ -2,11 +2,11 @@ import * as React from 'react';
 import { useEffect, useState } from "react";
 import { getDetailsOfPropById } from "../Services";
 import { useDispatch, useSelector } from "react-redux";
-import { SaveDetailsProp } from "../store/Actions/PropAction";
+import { SaveArrFurniture, SaveDetailsProp } from "../store/Actions/PropAction";
 import { useParams } from "react-router-dom";
 import { SaveArrType, SaveArrStatus } from "../store/Actions/PropAction";
-import {uplaodAddDetails, getAllTypeFromServer, getStatusFromServer, bringImagesFromServer , getOwnerFromServer,
-   getAddDetails, deleteImgFromServer} from "../Services";
+import {updateAddDetails, getAllTypeFromServer, getStatusFromServer, bringImagesFromServer , getOwnerFromServer,
+   getAddDetails, deleteImgFromServer, getFurniture, uploadImage} from "../Services";
 import ImageGallery from "react-image-gallery";
 // import "react-image-gallery/styles/css/image-gallery.css";
 import "react-image-gallery/styles/scss/image-gallery.scss";
@@ -61,6 +61,8 @@ import Done from '@mui/icons-material/Done';
 import  {Box as JoyBox, Checkbox as JoyCheckbox, List as JoyList, ListItem as JoyListItem,}  from '@mui/joy';
 import { updateProp } from '../Services';
 import { boolean } from 'yup';
+import Uplaoded from './Uplaoded';
+
 
 const DetailsProperty = () => {
 const [imgs,setImgs] = useState([]);
@@ -70,11 +72,12 @@ let [owner, setOwner] = useState(null);
 const [details, setDetails] = useState([]);
 const [selectedImages, setSelectedImages] = useState([]);
 const [DImg, setDImg]= useState([]);
+
 const [UDImg, setUDImg]= useState([]);
 
 const PropDetails=useSelector(x=>x.prop.details);
 let showP=Boolean(PropDetails.ShowPrice);
-console.log(showP);
+
 let helfR=Boolean(PropDetails.HalfRoom);
 
 //verible for update
@@ -94,10 +97,14 @@ const [rihut, setRihut] = useState(PropDetails.Furniture);
 const [discription, setDiscription]= useState(PropDetails.Description)
 const [showPrice, setShowPrice]=useState(showP);
 
+let arrStatus=useSelector(x=>x.prop.arrStatus);
+// arrStatus[sito+1]['Status']
 const [plus, setPlus] = useState([]);
 const [value, setValue] = useState([]);
-const [values, setValues] = useState({});
-const [status, setStatus]= useState();
+const [values, setValues] = useState({type, floor, inFloor, room, halfRoom, sito, date, adress, price, mr,
+  isRent, rihut, discription, showPrice
+});
+const [status, setStatus]= useState("");
 // const [level, setLevel]=useState("");
 // const [inLevel, setInLevel]=useState("");
 // const [roomNum, setRomNum]=useState("");
@@ -105,7 +112,8 @@ let stringDet="";
 let userSelect = useSelector(state => state.user.selectedUser);
 
 
-  console.log(PropDetails);
+  // console.log(PropDetails);
+
 // let idPropOwner = props.props.IdUser;
 
 const nav = useNavigate();
@@ -115,37 +123,41 @@ let isBilding=false;
 
     let {idProp}=useParams();
      const id=idProp;
-    console.log(id);
+    // console.log(id);
 
    let {idPropOwner}=useParams();
-   console.log(idPropOwner);
+  //  console.log(idPropOwner);
 
    const {update}=useParams();
-   console.log("uuuuuuupdateeeeeeeee")
-   console.log(update)
+  //  console.log("uuuuuuupdateeeeeeeee")
+  //  console.log(update)
 
     useEffect(()=>{
     getDetailsOfPropById(id).then((res)=>{
         dis(SaveDetailsProp(res.data[0]));
-        console.log("res.data")
-        console.log(res.data[0])
+        // console.log("res.data")
+        // console.log(res.data[0])
         setDet(res.data[0]);
     }).catch(err=>console.log(err))
 
     getAllTypeFromServer().then(res=>{
         dis(SaveArrType(res.data))
-        console.log(res.data)
+        // console.log(res.data)
     }).catch(er=>alert("error in bring arr property from server"))
 
     getStatusFromServer().then(res=>{
         dis(SaveArrStatus(res.data))
-        console.log(res.data)
+        // console.log(res.data)
     }).catch(er=>alert("error in bring arr property from server"))
 
+    getFurniture().then(res=>{
+        dis(SaveArrFurniture(res.data))
+        // console.log(res.data)
+    }).catch(er=>alert("error in bring arr property from server"))
 
     bringImagesFromServer(idProp).then((res)=>{
-      console.log(res.data);
-      console.log(imgs);
+      // console.log(res.data);
+      // console.log(imgs);
 
       if(imgs.length===0){
         if(update==="true")
@@ -161,15 +173,16 @@ let isBilding=false;
 
 
   getAddDetails(idProp).then(res => {
-   console.log("addddetails")
+  //  console.log("addddetails")
    setDetails(res.data);
   }).catch(err => alert(err))
 
+  
     },[])
 
     let arrType=useSelector(x=>x.prop.arrType);
 
-    let arrStatus=useSelector(x=>x.prop.arrStatus);
+    let arrFurniture=useSelector(x=>x.prop.arrFurniture);
     
 const checkDesc = ()=>{
   if(det.Description === null || det.Description == " ")
@@ -292,45 +305,48 @@ console.log("delete function")
     })
   }
 
+
+
   const handleSubmit=()=>{
-    
-    setValues({type, floor, inFloor, room, halfRoom, sito, date, adress, price, mr,
-       isRent, rihut, discription, showPrice
-    })
-    console.log(plus)
-    //  
+      setValues({type, floor, inFloor, room, halfRoom, sito, date, adress, price, mr,
+    isRent, rihut, discription, showPrice
+ })
+  let details ={
+    type, floor, inFloor, room, halfRoom, sito, date, adress, price, mr,
+    isRent, rihut, discription, showPrice
+  }
+     console.log(details)
 
-    // updateProp(PropDetails.Id, values).then(res=>{
-    //   console.log(res.data);
+    updateProp(PropDetails.Id, details).then(res=>{
+      console.log(res.data);
 
-  
-  // updateAddDetails(PropDetails.Id,plus).then(res=>{
-  //   console.log(res.data);
-  // }).catch(err=>alert(err))
+      //עדכון פרטים נוספים
+  updateAddDetails(PropDetails.Id,plus).then(res=>{
+    console.log(res.data);
+  }).catch(err=>alert(err))
+
+  //הוספת תמונות
+  const formData = new FormData(); 
+         console.log(upImgs)
+  for (let i = 0; i < upImgs.length; i++) {
+    // 'images' name of the formData values must match the action method param on your controller
+    formData.append("idProp", idProp);
+    formData.append("image", upImgs[i]);        
+//שליחה לשרת שיוסיף את התמונות לטבלת התמונות
+   uploadImage(formData).then((res)=>{
+   console.log(res.data);
+   alert(res.data)
+  }).catch(err=>alert(err));
+   formData.delete("image");
+}
+ 
 
 
+     alert("הדירה עודכנה בהצלחה!")
+    }).catch(err => alert(err)) 
 
-    // }).catch(err => alert(err))
-   }
 
-  
-// const FunStutus=(p)=>{
-//   switch(p){
-//     case "1":
-//       setStatus("חדש מהקבלן") 
-//     case "2":
-//       setStatus("חדש") 
-//     case "3":
-//       setStatus("משופץ") 
-//     case "4":
-//       setStatus("שמור")
-//     case "5":
-//       setStatus("ישן")
-//   }
-
-// }
-// FunStutus(PropDetails.IdStatus);
-console.log(PropDetails.IdStatus)
+} 
     
   
 return <>
@@ -393,13 +409,15 @@ onChange={(e)=>{onFileChange(e.target.files)}}/>
 
 
 </div>
-:<>
+:
+<>
        <div className="divImageGallery">
        <ImageGallery items={imgs} />
        </div>
        <div>
        </div>
 </>
+
  }
 </div>
 
@@ -472,7 +490,7 @@ checkDesc()===true &&
            
               secondary={
                 update==="true"?
-               <> <Select value={Option.value} defaultValue={item.Name} size='md' sx={{mb:2, minWidth: 125 }} onChange={(e)=> setType(e.target.id)}>
+               <> <Select value={Option.value} defaultValue={item.Name} size='md' sx={{mb:2, minWidth: 141 }} onChange={(e)=> setType(e.target.id)}>
                 {arrType.map((item)=>{
                   return <Option id={item.Id} key={item.Id} value={item.Name} >{item.Name}</Option>
                 })}
@@ -633,40 +651,16 @@ checkDesc()===true &&
    <HelpOutlineIcon/>
           </Avatar>
         </ListItemAvatar>
+        {arrStatus.map((item)=>{
+          return item.Id===det.IdStatus && 
         <ListItemText sx={{textAlign:"right", display:'inline'}} primary="מצב הנכס:"
         secondary={
           update==="true"?
-          <Select 
-          defaultValue={()=>{
-            switch (PropDetails.IdStatus) {
-              case 1:
-                return "חדש מהקבלן";
-              case 2:
-                return "חדש";
-              case 3:
-                return "משופץ";
-              case 4:
-                return "שמור";
-              case 5:
-                return "ישן";
-              default:
-                return null;
-            }
-          } }
-           size='md' sx={{mt:1,mb:2, minWidth: 120 }} 
-          onChange={(e)=>{
-            if (e && e.target) {
-               setSito(e.target.innerText)
-             }
-           }}> 
-           
-             <Option value="1">חדש מהקבלן</Option>              
-             <Option value="2">חדש</Option>              
-             <Option value="3">משופץ</Option>              
-             <Option value="4">שמור</Option>
-             <Option value="5">ישן</Option>
-
-          </Select>
+          <Select value={Option.value} defaultValue={item.Status} size='md' sx={{mb:2, minWidth: 140 }} onChange={(e)=> setSito(e.target.id)}>
+                {arrStatus.map((item)=>{
+                  return <Option id={item.Id} key={item.Id} value={item.Status} >{item.Status}</Option>
+                })}
+              </Select>
           :
           <React.Fragment>
             <Typography
@@ -676,14 +670,13 @@ checkDesc()===true &&
               variant="body2"
               color="text.primary"
             >
-             {arrStatus.map((item)=>{
-        return item.Id===det.IdStatus && item.Status
-    })}
+             {item.Status}
             </Typography>
             
           </React.Fragment>
         }
         />
+      })}
       </ListItem>
 
 
@@ -915,6 +908,7 @@ checkDesc()===true &&
     '--ListItem-radius': '20px',
     '--ListItem-minHeight': '32px',
   }}
+
 >
   {['מרפסת','סורגים', 'ממד', 'מחסן', 'מעלית', 'חניה'].map(
     (item, index) => (
@@ -973,15 +967,15 @@ checkDesc()===true &&
 
 <RadioGroup
     row="true"
-    defaultValue="ללא"
+    defaultValue={rihut}
     orientation="horizontal"
     dir="rtl"
     sx={{mt:8, mr:105}}
-    onChange={(e)=>setRihut(e.target.value)}
+    onChange={(e)=>setRihut(e.target.id)}
   >
-    <FormControlLabel sx={{m:2}} value="מלא" control={<Radio />} label="מלא"  />
-    <FormControlLabel sx={{m:2}} value="חלקי" control={<Radio />} label="חלקי" />
-    <FormControlLabel sx={{m:2}} value="ללא" control={<Radio />} label="ללא" />
+    <FormControlLabel sx={{m:2}} id={1} value="מלא" control={<Radio />} label="מלא"  />
+    <FormControlLabel sx={{m:2}} id={2} value="חלקי" control={<Radio />} label="חלקי" />
+    <FormControlLabel sx={{m:2}} id={3} value="ללא" control={<Radio />} label="ללא" />
   </RadioGroup>
 
 

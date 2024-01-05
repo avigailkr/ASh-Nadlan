@@ -39,6 +39,7 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { grey} from '@mui/material/colors';
 import Button from '@mui/material/Button';
+import ImageIcon from '@mui/icons-material/Image';
 
 
 const ExpandMore = styled((props) => {
@@ -158,6 +159,7 @@ getTypeByIdFromServer(idType).then((res)=>{
       •
     </Box>
   );
+  const update=false;
 
   const nav = useNavigate();
 
@@ -165,7 +167,7 @@ getTypeByIdFromServer(idType).then((res)=>{
  const goTodetails=()=>{
   console.log("gotodetails");
   console.log(idProp)
-  nav(`/DetailsProperty/${idProp}`)
+  nav(`/DetailsProperty/${idProp}/${idPropOwner}/${update}`);
 }
 
   const fun = () => {
@@ -228,7 +230,7 @@ getTypeByIdFromServer(idType).then((res)=>{
 
            <img className="imges" src={arrImg[index]} />
            </>
-           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+           :<div className="divNotImg"><ImageIcon sx={{ fontSize: 100, opacity:"20%", mt:10}}/></div>
            }
       </div>
       

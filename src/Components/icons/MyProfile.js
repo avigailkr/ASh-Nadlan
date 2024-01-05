@@ -125,7 +125,7 @@ const MyProfile=()=>{
 
     return<>
     <button id="but-set"  onClick={setting}><BorderColorIcon/></button>
-        <Avatar sx={{ bgcolor: red[500],width: 106, height: 106,marginLeft:90}}
+        <Avatar sx={{ bgcolor: red[500],width: 106, height: 106,marginLeft:73}}
  aria-label="recipe"> 
     {selectUser.Mail[0]}
     {/* <img src={URL.createObjectURL(image)} /> */}

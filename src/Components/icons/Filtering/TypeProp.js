@@ -108,6 +108,9 @@ import { saveCity, saveType } from '../../../store/Actions/FilterAction';
 import { useEffect } from 'react';
 import { getAllNameCitysFromServer, getIdCityByNameFromServer, getIdType, getIdTypeSale, getNamesType } from '../../../Services';
 import { useState } from 'react';
+import Select, { selectClasses } from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 
 export default function TypeProp() {
   const dis=useDispatch();
@@ -118,6 +121,7 @@ export default function TypeProp() {
       for(let i=0;i<res.data.length;i++)
       {arr.push(res.data[i].Name)}
       setArrName(arr);
+      console.log(arr);
     }).catch(err=>alert(err))
   },[])
   function change(event){
@@ -130,10 +134,11 @@ export default function TypeProp() {
       disablePortal
       id="combo-box-demo"
       options={arrname}
-      sx={{width: 300 ,height:200}}
-      renderInput={(params,i) => <TextField {...params} label="Movie" id="jjjjjjjjjjjjjjjjjj"/>}
+      sx={{width: 300 ,height:100}}
+      renderInput={(params,i) => <TextField {...params} label="בחר" id="jjjjjjjjjjjjjjjjjj"/>}
       onChange={change}
     />
+   
   );
 }
 

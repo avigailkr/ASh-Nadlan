@@ -1,12 +1,12 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import City from '../City'
-import { getPropByCityFromServer } from '../../../../Services';
+// import { getPropByCityFromServer } from '../../../../Services';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToArrProp } from '../../../../store/Actions/PropAction';
 export default function ButCity() {
@@ -25,10 +25,10 @@ export default function ButCity() {
 
 console.log("selectcity")
 console.log(selectcity)
-    getPropByCityFromServer(selectcity).then(res=>{
-      console.log(res.data)
-      dis(AddToArrProp(res.data))
-    }).catch(err=>alert(err))
+    // getPropByCityFromServer(selectcity).then(res=>{
+    //   console.log(res.data)
+    //   dis(AddToArrProp(res.data))
+    // }).catch(err=>alert(err))
 
     handleClose();
   };
@@ -43,6 +43,8 @@ console.log(selectcity)
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        dir="rtl"
+
       >
         <DialogTitle id="alert-dialog-title">
           {"בחר עיר"}
@@ -53,7 +55,7 @@ console.log(selectcity)
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>ביטול</Button>
+          <Button sx={{ml:3}} onClick={handleClose}>ביטול</Button>
           <Button onClick={filter} autoFocus>
             בצע
           </Button>

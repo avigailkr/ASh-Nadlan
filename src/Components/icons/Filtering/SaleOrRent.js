@@ -18,7 +18,7 @@ export default function SaleOrRent() {
   return (
     <>  <Select
     onChange={change}
-      placeholder="Select a pet…"
+      placeholder="בחר"
       indicator={<KeyboardArrowDown />}
       sx={{m:4,
         width: 240,

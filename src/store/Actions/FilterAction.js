@@ -120,3 +120,23 @@ export const saveFromSize = (size1) => {
       payload: ans
     };
   };
+
+  //smartagent
+  export const saveArrSmartAgent = (arr) => {
+    return {
+      type: TypeAction.SAVE_ARR_SMARTAGENT,
+      payload: arr
+    };
+  };
+  export const deleteFromArrSmartAgent = (id) => {
+    return {
+      type: TypeAction.DELETE_FROM_ARR_SMARTAGENT,
+      payload: id
+    };
+  };
+  export const AddToArrSmartAgent = (smart) => {
+    return {
+      type: TypeAction.ADD_TO_ARR_SMARTAGENT,
+      payload: smart
+    };
+  };

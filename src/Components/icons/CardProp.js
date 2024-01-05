@@ -48,7 +48,7 @@
   import DialogTitle from '@mui/material/DialogTitle';
 import { LegendToggleSharp } from "@mui/icons-material";
 import Stack from '@mui/material/Stack';
-  
+import ImageIcon from '@mui/icons-material/Image';
   
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -88,7 +88,7 @@ import Stack from '@mui/material/Stack';
     };
   
     useEffect(() => {
-console.log(idType)
+// console.log(idType)
 //שולחים קוד סוג נכס ומקבלים את שם הנכס
 getTypeByIdFromServer(idType).then((res)=>{
   // console.log(res)
@@ -102,7 +102,7 @@ getTypeByIdFromServer(idType).then((res)=>{
 
       //bring all images from server the sql table images
       bringImagesFromServer(idProp).then((res)=>{
-        console.log(res.data);
+        // console.log(res.data);
         let a=[];
         for(let i=0 ; i<res.data.length ; i++){
           arrImg.push(`http://localhost:8080/images/${res.data[i].Name}`)
@@ -197,8 +197,8 @@ getTypeByIdFromServer(idType).then((res)=>{
 
      //details of property
   const goTodetails=()=>{
-    console.log("gotodetails");
-    console.log(idProp)
+    // console.log("gotodetails");
+    // console.log(idProp)
     nav(`/DetailsProperty/${idProp}/${idPropOwner}/${update}`);
   }
 const [expanded, setExpanded] = React.useState(false);
@@ -248,7 +248,7 @@ const [expanded, setExpanded] = React.useState(false);
 
           <img className="imges" src={arrImg[index]} />
            </>
-           :<div className="divNotImg"><p className="pp">בעל הנכס לא העלה תמונות</p></div>
+           :<div className="divNotImg"><ImageIcon sx={{ fontSize: 100, opacity:"20%", mt:10}}/></div>
            }
           
         </div>

@@ -169,6 +169,21 @@ export const getStatusFromServer=()=>{
     return axios.get("http://localhost:8080/property/getStatus");
 }
 
+//smartagent-סוכן חכם
+export const AddRowInSmartAgent =(row)=>{
+    console.log(row)
+    return axios.post('http://localhost:8080/filter/addRowInSmartAgent', row);
+
+}
+//מחיקת סוכן חכם
+export const DeleteSmartAgentFromServer=(id)=>{
+    alert(id)
+    return axios.delete(`http://localhost:8080/filter/deleteSmartAgent/${id}`);
+}
+export const GetFromServerByIdSmartAgent =(id)=>{
+    return axios.get(`http://localhost:8080/filter/getByIdSmartAgent/${id}`);
+
+}
 
 //filtering-סינונים
 export const FilterFromServer=(obj)=>{
@@ -302,5 +317,10 @@ export const updateProp = (id, prop)=>{
     return axios.put(`http://localhost:8080/property/updateProp/${id}`, prop)
 }
 export const updateAddDetails = (id, plus)=>{
-    return axios.put(`http://localhost:8080/property/`)
+    return axios.put(`http://localhost:8080/property//updateAddDetails/${id}`, plus)
 }
+
+export const getFurniture =()=>{
+    return axios.get(`http://localhost:8080/property/getFurniture`)
+}
+

@@ -39,7 +39,7 @@ function valueRoom(value) {
         onChange={valueRoom}
         sx={{ gap: 2, mb: 2, flexWrap: 'wrap', flexDirection: 'row' }}
       >
-        {['1', '2', '3', '4', '5','6+'].map((size) => (
+        {['1', '2', '3', '4', '5','6', '7', '8', '9','10+'].map((size) => (
           <Sheet
             key={size}
             sx={{

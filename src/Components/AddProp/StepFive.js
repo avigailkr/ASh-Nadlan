@@ -80,12 +80,13 @@ ard=values.plus;
       <form onSubmit={handleSubmit} className="form__step">
        <Steps level={4} />
        <div className="div-end">
-      <label>
-       ו... סיימנו
-      </label>
-      <label>
-      אם ברצונך להעלות את הדירה לאתר המשך לפרסם
-      </label>
+       <Typography sx={{mt:5}} variant="h6" gutterBottom>
+      ו... סיימנו
+  </Typography>
+
+  <Typography sx={{mb:10}} variant="h6" gutterBottom>
+  אם ברצונך להעלות את הדירה לאתר המשך לפרסם
+      </Typography>
 </div>
   
 

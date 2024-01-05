@@ -21,8 +21,10 @@ export default function City() {
 
   },[])
   function change(event){
+      console.log(event.target.innerText)
+
     getIdCityByNameFromServer(event.target.innerText).then(res=>{
-      // console.log(res.data[0].Id)
+       console.log(res.data[0].Id)
       dis(saveCity(res.data[0].Id))
     }).catch(err=>alert(err))
   }
@@ -32,7 +34,7 @@ export default function City() {
       id="combo-box-demo"
       options={arrname}
       sx={{width: 300}}
-      renderInput={(params,i) => <TextField {...params} label="Movie" id="jjjjjjjjjjjjjjjjjj"/>}
+      renderInput={(params,i) => <TextField {...params} label="בחר עיר" id="jjjjjjjjjjjjjjjjjj"/>}
       onChange={change}
     />
   );

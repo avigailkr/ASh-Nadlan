@@ -17,19 +17,31 @@ import { getAllTypeFromServer } from '../../Services';
 import { useDispatch, useSelector } from 'react-redux';
 import { SaveArrType } from '../../store/Actions/PropAction';
 import { useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 const StepTwo = ({ prevStep, nextStep, values }) => {
     const [type, setType] = useState(1);
     const [mr, setmr] = useState("");
     const [room, setRoom] = useState("1");
-    const [halfRoom, setHalfRoom] = useState(true);
+    const [halfRoom, setHalfRoom] = useState(false);
     const [floor, setFloor] = useState("1");
     const [inFloor, setInFloor] = useState("1");
     const [date, setDate] = useState(1);
     const [price, setPrice] = useState(0);
     const [showPrice, setShowPrice] = useState(true);
   
-   let{register,handleSubmit, formState:{isValid, errors}}=useForm({mode:"all"});
+  //  let{register,handleSubmit, formState:{isValid, errors}}=useForm({mode:"all"});
+  const schema = yup.object({ 
+    mr: yup.string().required("שדה חובה")
+     ,
+    price: yup.string().required("שדה חובה")
+   }).required();
 
     let dis=useDispatch();
 
@@ -72,12 +84,16 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
       
       <form className="form__step" onSubmit={handleNext}>
         <Steps level={1}/>
-      {/* <div> */}
-          <label dir="rtl">
+      <div className="div-type+mr">
+          {/* <label dir="rtl">
             סוג הנכס:
-          </label>
+          </label> */}
          
-         <Select value={Option.value} defaultValue="דירה" size='md' sx={{mb:2, minWidth: 120 }} onChange={(e)=> setType(e.target.id)}>
+          <Typography sx={{ml:58}} variant="h6" gutterBottom>
+          :סוג הנכס
+      </Typography>
+         
+         <Select value={Option.value} defaultValue="דירה" size='md' dir="rtl" sx={{mb:2, minWidth: 200, ml:43 }} onChange={(e)=> setType(e.target.id)}>
           {arrType.map((item)=>{
             return <Option id={item.Id} key={item.Id} value={item.Name} >{item.Name}</Option>
           })}
@@ -142,26 +158,29 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
            </div>
   }
        
-         <label>
-        שטח במ"ר:
-         </label>
+         
+          <Typography sx={{position:'absolute', mt:-12, ml:11}} variant="h6" gutterBottom>
+          :שטח במ"ר
+          </Typography>
          
          <TextField
          onChange={(e)=>setmr(e.target.value)}
          dir="ltr"
-        sx={{ mb: 2, width: '15ch' }}
+        sx={{ width: '20ch', mr:45, mt:-7 }}
        InputProps={{
             startAdornment: 'מ"ר',
         }}
         > 
         </TextField>
        
-
+</div>
          
        
-            <label>
-            מספר חדרים:
-            </label>
+            
+          <Typography sx={{ ml:55, mt:2, mb:2}} variant="h6" gutterBottom>
+          :מספר חדרים
+          </Typography>
+
             <RadioGroup
         aria-labelledby="product-size-attribute"
         defaultValue="1"
@@ -201,51 +220,62 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           </Sheet>
         ))}
       </RadioGroup>    
-          {/* <input id="file"
-            type="file"
-            value={photo}
-            onChange={(e) => setPhoto(e.target.value)}
-          /> */}
+      <div >
+          
+          
+          <Typography sx={{ml:56}} variant="h7" gutterBottom>
+          :פלוס 1/2 חדר
+          </Typography>
+        
+        <Checkbox sx={{position:'absolute', ml:-17, mt:-1.4}} onChange={(e) => setHalfRoom(!halfRoom)}/>
+   </div>
 
  
-         <label> 
+        
+          <Typography sx={{ml:55, mt:5}} variant="h6" gutterBottom>
           :תאריך כניסה
-         </label>
+          </Typography>
+
   <RadioGroup
     row="true"
     aria-labelledby="demo-radio-buttons-group-label"
     orientation="horizontal"
     dir="rtl"
     name="radio-buttons-group"
-    sx={{mb:1,mt:2}}
+    sx={{mb:2, ml:24}}
     onChange={(e)=>setId(e.target.value)}
   >
-    <FormControlLabel sx={{m:2}} value="מיידי" id="1" control={<Radio />} label="מיידי"  />
-    <FormControlLabel sx={{m:2}} value="גמיש" id="2" control={<Radio />} label="גמיש" />
-    <FormControlLabel sx={{m:2}} value="עתידי" id="3" control={<Radio />} label="עתידי" />
+    <FormControlLabel sx={{m:2, ml:10}} value="מיידי" id="1" control={<Radio />} label="מיידי"  />
+    <FormControlLabel sx={{m:2, ml:10}} value="גמיש" id="2" control={<Radio />} label="גמיש" />
+    <FormControlLabel sx={{m:2, ml:10}} value="עתידי" id="3" control={<Radio />} label="עתידי" />
   </RadioGroup>
        
-          <label>
-            :מחיר
-          </label>
+         
+          <Typography sx={{ml:65, mt:5}} variant="h6" gutterBottom>
+          :מחיר       
+          </Typography>
       
-        <input type="number" min="0" max="100000000" step="1" required="required" id="priceInput"
-         pattern="[0-9]{3},[0-9]{3},[0-9]{3}" placeholder='₪' onChange={(e) => setPrice(e.target.value)}/>
+        {/* <input type="number" min="0" max="100000000" step="1" required="required" id="priceInput"
+         pattern="[0-9]{3},[0-9]{3},[0-9]{3}" placeholder='₪' onChange={(e) => setPrice(e.target.value)}/> */}
+<FormControl dir="ltr" fullWidth sx={{m:1, ml: 48 , width:190}}>
+          <OutlinedInput
+          sx={{height:40}}
+            startAdornment={<InputAdornment position="start">₪</InputAdornment>}
+          />
+        </FormControl>
+
+
  <div className='div-adress'>
- <div id="d-p">
-          <label>
-            להציג מחיר
-          </label>
+ <div >
+          
+          
+          <Typography sx={{mt:-5, ml:-10, position:'absolute'}} variant="h7" gutterBottom>
+          :להציג מחיר
+          </Typography>
         
-        <Checkbox  onChange={(e) => setShowPrice(!showPrice)}/>
+        <Checkbox  sx={{position:'absolute', ml:-15, mt:-6}} onChange={(e) => setShowPrice(!showPrice)}/>
 </div>
-<div>
-          <label>
-            פלוס 1/2 חדר
-          </label>
-        
-        <Checkbox onChange={(e) => setHalfRoom(!halfRoom)}/>
-</div>
+
 </div>
        <div className="div-but">
         <button type="submit" className="form__button">הבא</button>

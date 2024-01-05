@@ -18,6 +18,7 @@ import { getAllCityisFromServer } from "../../Services";
 import { useDispatch, useSelector } from "react-redux";
 import { SaveArrCity } from "../../store/Actions/PropAction";
 import { useEffect } from "react";
+import Typography from '@mui/material/Typography';
 
 const StepOne = ({ nextStep }) => {
   //useState for a form 
@@ -90,19 +91,25 @@ let dis=useDispatch();
 
     <form onSubmit={handleNext} className="form__step">
       <Steps level={0}/> 
-      <label id="isSale">
+      
+        
+        <Typography sx={{ml:55, mt:5}} variant="h6" gutterBottom>
         ?מוכרים או משכירים
-        </label>
-         <Stack direction="row" spacing={2} >
+          </Typography>
+         <Stack direction="row" spacing={4} >
           
-      <Button  onClick={handleClick} value={flag} variant={flag ? "outlined": "contained"}>משכירים</Button>
-      <Button onClick={handleClick1} value={flag1} variant={flag1 ? "outlined": "contained"} >מוכרים</Button>
+      <Button fullWidth={100} onClick={handleClick} value={flag} variant={flag ? "outlined": "contained"}>משכירים</Button>
+      <Button fullWidth={100} onClick={handleClick1} value={flag1} variant={flag1 ? "outlined": "contained"} >מוכרים</Button>
      </Stack>
       
       <br/>
-      <label id="adress">
+      {/* <label id="adress">
      :כתובת הנכס
-      </label>
+      </label> */}
+     
+      <Typography sx={{ml:62, mt:5}} variant="h6" gutterBottom>
+      :כתובת הנכס
+      </Typography>
 
       {/* <div className="div-adress">
         <div>
