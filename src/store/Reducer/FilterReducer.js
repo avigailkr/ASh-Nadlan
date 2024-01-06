@@ -4,16 +4,14 @@ const initialState = {
   fromyear: 2000,
   untilyear: 2023,
   fromprice: 0,
-  untilprice: 5000000,
-  type: null,
+  untilprice: 50000000,
+  type: 1,
   fromsize: 0,
   untilsize: 5000,
   room: 1,
-  typesale: null,
-  city:null,
+  typesale: 3,
+  city:1,
   clear:false,
-
-
   //choose
   chooseyear:false,
   chooseprice:false,
@@ -24,8 +22,9 @@ const initialState = {
   choosecity:false,
   chooseadd:false,
 
-//smartagent
+  //smartagent
   arrsmartagent:[]
+
 
 };
 
@@ -148,6 +147,7 @@ const FilterReducer = (state = initialState, action) => {
       return {
         ...state,
         arrsmartagent: [...state.arrsmartagent,action.payload]
+        
       };
   }
   return state;

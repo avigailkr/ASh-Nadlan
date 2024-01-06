@@ -327,13 +327,16 @@ console.log("delete function")
 
   //הוספת תמונות
   const formData = new FormData(); 
-         console.log(upImgs)
+  console.log(upImgs);
   for (let i = 0; i < upImgs.length; i++) {
     // 'images' name of the formData values must match the action method param on your controller
     formData.append("idProp", idProp);
     formData.append("image", upImgs[i]);        
+   
+
 //שליחה לשרת שיוסיף את התמונות לטבלת התמונות
    uploadImage(formData).then((res)=>{
+     console.log(formData);
    console.log(res.data);
    alert(res.data)
   }).catch(err=>alert(err));

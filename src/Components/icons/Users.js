@@ -1,53 +1,8 @@
-
-// import * as React from 'react';
-// import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-// import { useDemoData } from '@mui/x-data-grid-generator';
-
-// const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
-
-// export default function User() {
-//   const { data } = useDemoData({
-//     dataSet: 'Employee',
-//     visibleFields: VISIBLE_FIELDS,
-//     rowLength: 100,
-//   });
-
-//   return (
-//     <div style={{ height: 400, width: '100%' }}>
-//       <DataGrid
-//         {...data}
-//         slots={{
-//           toolbar: GridToolbar,
-//         }}
-//         initialState={{
-//           ...data.initialState,
-//           filter: {
-//             ...data.initialState?.filter,
-//             filterModel: {
-//               items: [
-//                 {
-//                   field: 'rating',
-//                   operator: '>',
-//                   value: '2.5',
-//                 },
-//               ],
-//             },
-//           },
-//         }}
-//       />
-//     </div>
-//   );
-// }
-
-
-
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
-// import Table from '@mui/material/Table';
-// import Table from '@mui/joy/Table';
 import Table from '@mui/joy/Table';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
@@ -57,77 +12,126 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-// import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { act } from 'react-dom/test-utils';
-import { getCityByIdFromServer } from '../../Services';
+import { ChacimaUser, getCityByIdFromServer } from '../../Services';
 import { red } from '@mui/material/colors';
+import LockPersonIcon from '@mui/icons-material/LockPerson';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { SaveArrUsers, UpdateActiveArrUsers } from '../../store/Actions/UserAction';
 
-// function createData(name, calories, fat, carbs, protein, price) {
-//   return {
-//     name,
-//     calories,
-//     fat,
-//     carbs,
-//     protein,
-//     price,
-    // history: [
-    //   {
-    //     date: '2020-01-05',
-    //     customerId: '11091700',
-    //     amount: 3,
-    //   },
-    //   {
-    //     date: '2020-01-02',
-    //     customerId: 'Anonymous',
-    //     amount: 1,
-    //   },
-    // ],
-//   };
-// }
-function createData(iduser,name,mail,phone,active,numprops,details) 
+
+
+
+
+export default function Users() {
+  let users = useSelector((state) => state.user.arr);//כל המשתמשים
+  let props = useSelector((state) => state.prop.arr);//כל הנכסים
+  let fullarr=[];
+  let allrows = useSelector(state=>state.user.arrusers)
+  let dis=useDispatch()
+
+
+  useEffect(() => {
+    users != [] &&
+      props != [] &&
+      users.map((item, index) => { //עוברים על כל משתמש
+        let details=[]
+        let arr = props.filter((prop) => {//מסננים רק את הדירות של המשתמש הנוכחי
+          return prop.IdUser == item.Id;
+        });
+
+        if(arr.length!=0)
+ { arr.map((i, indexprop) => {
+   getCityByIdFromServer(i.IdCity).then(res=>{"console.log(res.data)"
+  console.log(res.data[0].Name)
+let object={  
+  idprop:i.Id,
+  city:res.data[0].Name,
+  adress:i.Adress,
+  numroom:i.RoomNum,
+  price:i.Price,
+  sqm:i.Sqm,
+  issaleorrent: i.IsSaleOrRent.data[0]==0 ?"למכירה":"להשכרה"
+}
+
+  details.push(object)
+          }).catch(err=>alert(err))
+        });
+      
+      }
+        
+       
+      
+       
+        let obj = createData(
+          item.Id,
+          item.Name,
+          item.Mail,
+          item.Phone,
+          arr.length,
+          item.Active.data[0],
+          details
+        );
+
+        fullarr.push(obj);
+      });
+      // 
+      // setallRows(fullarr.slice(fullarr.length/2));
+
+      console.log("fullarr.slice(fullarr.length/2)")
+      console.log(fullarr.slice(fullarr.length/2))
+
+      //חציתי את המערך ל 2 כי זה מכפיל לי את כמות המשתמשים
+      dis(SaveArrUsers(fullarr.slice(fullarr.length/2)))
+  }, []);
+function createData(iduser,name,mail,phone,numprops,active,details) 
 {
+
   return {
     iduser,
     name,
     mail,
     phone,
-    active,
     numprops,
-    details:details
-    // details: [
-    //   {
-    //     idprop:1,
-    //     city: '2020-01-05',
-    //     adress: '11091700',
-    //     numroom: 3,
-    //     price: 344,
-    //     sqm:44,
-    //     issaleorrent:"sale"
-    //   },
-    //   {
-    //     idprop:2,
-    //     city: '2020-01-05',
-    //     adress: '11091700',
-    //     numroom: 3,
-    //     price: 344,
-    //     sqm:44,
-    //     issaleorrent:"sale"
-    //   },
-    // ],
+    active,
     
-  };
+    details:details
 }
+}
+
 
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const [isactive,setisactive]=useState(row.active)
+
+  function block(id,active) {
+ 
+    if(active==1){
+      ChacimaUser(id,"true").then(res=>console.log(res.data)).catch(err=>alert(err))
+    alert("משתמש זה נחסם")  
+    setisactive(0)
+  }
+    else if(active==0){
+      ChacimaUser(id,"false").then(res=>console.log(res.data)).catch(err=>alert(err))
+    alert("משתמש זה פעיל באתר")
+    setisactive(1)
+  }
+  
+  let object={
+    iduser:row.iduser,
+    active:active==1?0:1
+  }
+  dis(UpdateActiveArrUsers(object))
+  }
+  
 return (
     <React.Fragment>
       <TableRow >
@@ -142,12 +146,24 @@ return (
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+        {row.name}
         </TableCell>
         <TableCell>{row.phone}</TableCell>
         <TableCell>{row.mail}</TableCell>
-        <TableCell>{row.active}</TableCell>
-        <TableCell  >{row.numprops}</TableCell>
+       
+        <TableCell>{row.numprops}</TableCell> 
+        <TableCell>
+        {
+        isactive == 0 ? 
+        // <IconButton type='button' color="error"  >
+            <><LockPersonIcon onClick={()=>{block(row.iduser,row.active)}}/></>
+        //  </IconButton>  
+        :
+            // <IconButton type='button' color="success" >
+                <LockOpenIcon onClick={()=>{block(row.iduser,row.active)}}/>
+            // </IconButton>
+       }
+            </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -189,59 +205,10 @@ return (
     </React.Fragment>
   );
 }
-export default function Users() {
-  let users = useSelector((state) => state.user.arr);//כל המשתמשים
-  let props = useSelector((state) => state.prop.arr);//כל הנכסים
-  let fullarr=[];
-  let [allrows, setallRows] = useState([]);
 
-  useEffect(() => {
-    users != [] &&
-      props != [] &&
-      users.map((item, index) => { //עוברים על כל משתמש
-        let details=[]
-        let arr = props.filter((prop) => {//מסננים רק את הדירות של המשתמש הנוכחי
-          return prop.IdUser == item.Id;
-        });
+const selectuser=useSelector(state=>state.user)
 
-        if(arr.length!=0)
- {       arr.map((i, indexprop) => {
-   getCityByIdFromServer(i.IdCity).then(res=>{"console.log(res.data)"
-  console.log(res.data[0].Name)
-let object={  
-  idprop:i.Id,
-  city:res.data[0].Name,
-  adress:i.Adress,
-  numroom:i.RoomNum,
-  price:i.Price,
-  sqm:i.Sqm,
-  issaleorrent: i.IsSaleOrRent.data[0]==0 ?"למכירה":"להשכרה"
-}
-
-  details.push(object)
-          }).catch(err=>alert(err))
-        });}
-        
-        let active=item.Active.data[0]==1 ? "פעיל":"חסום" 
-       
-        let obj = createData(
-          item.Id,
-          item.Name,
-          item.Mail,
-          item.Phone,
-          arr.length,
-          active,
-          details
-        );
-        console.log("פעילללל")
-        console.log(item.Active.data[0])
-        fullarr.push(obj);
-      });
-      setallRows(fullarr.slice(fullarr.length/2));//חציתי את המערך ל 2 כי זה מכפיל לי את כמות המשתמשים
-  }, []);
-
-
-  return (<>
+return (<>
    <Sheet
         sx={{
           '--TableCell-height': '60px',
@@ -272,7 +239,7 @@ let object={
         }}
       >
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table" sx={{width: '80%',marginLeft:25,marginTop:5}}>
+      <Table aria-label="collapsible table" sx={{width: '60%',marginLeft:45,marginTop:5}}>
         <TableHead>
           <TableRow sx={{color:"warning"}}>
             <TableCell />
@@ -287,8 +254,8 @@ let object={
         {console.log("allrows")}
         {console.log(allrows)}
 
-          {allrows.map((row) =>  <>
-            <Row key={row.name} row={row} />
+        {allrows.filter(x=>x.iduser!=selectuser.selectedUser.Id).map((row) =>  <>
+            <Row key={row.id} row={row} />
             </>
           )}
         </TableBody>

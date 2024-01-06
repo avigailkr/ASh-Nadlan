@@ -45,4 +45,19 @@ export const Exite = () => {
   };
 };
 
+export const SaveArrUsers = (arr) => {
 
+
+  return {
+    type: TypeAction.SAVE_ARR_USERS,
+    payload:arr
+  };
+};
+
+export const UpdateActiveArrUsers = (obj) => {
+alert(obj.iduser)
+  return {
+    type: TypeAction.UPDATE_ACTIVE_ARR_USERS,
+    payload:obj
+  };
+};

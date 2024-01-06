@@ -135,6 +135,7 @@ export const saveFromSize = (size1) => {
     };
   };
   export const AddToArrSmartAgent = (smart) => {
+  
     return {
       type: TypeAction.ADD_TO_ARR_SMARTAGENT,
       payload: smart

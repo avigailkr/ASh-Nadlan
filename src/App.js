@@ -70,8 +70,7 @@ function App() {
   useEffect(() => {
     // sendEmail().then(res=>console.log(res)).alert(err=>console.log(err))
     nav("/login");
-    
-    //מספר דירות פנויותתת
+//מספר דירות פנויותתת
     getNumPropToSaleOrRent(1)
       .then((res) => setSale(res.data[0]["count(*)"]))
       .catch((err) => alert(err));
@@ -85,7 +84,8 @@ function App() {
   function smartagent(){
     nav("/smartagent")
   }
-const [anchorEl, setAnchorEl] = useState(null);
+
+  const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState();
 

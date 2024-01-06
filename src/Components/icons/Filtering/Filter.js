@@ -11,7 +11,7 @@ import ButSaleOrBuy from './Button/ButSaleOrRent';
 import ButAdd from './Button/ButAdd';
 import ButBetween from './Button/ButBetweenYear';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddRowInSmartAgent, FilterFromServer, GetFromServerByIdSmartAgent } from '../../../Services';
+import { AddRowInSmartAgent, CheckSmartAgent, FilterFromServer, GetFromServerByIdSmartAgent } from '../../../Services';
 import { SaveArrProp } from '../../../store/Actions/PropAction';
 import { AddToArrSmartAgent, saveArrSmartAgent, saveChooseAddFilter, saveChooseCityFilter, saveChoosePriceFilter, saveChooseRoomFilter, saveChooseSizeFilter, saveChooseTypeFilter, saveChooseTypeSaleFilter, saveChooseYearFilter, saveCity, saveFromPrice, saveFromSize, saveFromYear, saveIsClearFilter, saveRoom, saveTpeySale, saveType, saveUntilPrice, saveUntilSize, saveUntilYear } from '../../../store/Actions/FilterAction';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +27,6 @@ export default function Filter() {
     let selectfilter=useSelector(state=>state.filter);
     let user=useSelector(state=>state.user.selectedUser);
     let [flag,setflag]=useState(false)
-
     if(user!=null && flag==false) start()
 
     function start(){
@@ -41,23 +40,47 @@ export default function Filter() {
    function smartagent(){
 
     let obj={
-fromyear: selectfilter.fromyear,
-untilyear: selectfilter.untilyear,
-fromprice: selectfilter.fromprice,
-untilprice: selectfilter.untilprice,
-type: selectfilter.type,
-fromsize: selectfilter.fromsize,
-untilsize: selectfilter.untilsize,
-room: selectfilter.room,
-typesale: selectfilter.typesale,
-city:selectfilter.city,
-iduser:user
+FromYear: selectfilter.fromyear,
+UntilYear: selectfilter.untilyear,
+FromPrice: selectfilter.fromprice,
+UntilPrice: selectfilter.untilprice,
+Type: selectfilter.type,
+FromSize: selectfilter.fromsize,
+UntilSize: selectfilter.untilsize,
+Room: selectfilter.room,
+TypeSale: selectfilter.typesale,
+City:selectfilter.city,
+IdUser:user
     }
 AddRowInSmartAgent(obj).then((res)=>{alert("סוכן חכם הופעל בהצלחה");
-     dis(AddToArrSmartAgent(obj))
+     addarrsmart(res.data[0].Id)//שולח לפונקציה שתוסיף את האובייקט למערך הסוכנים של המשתמש
   }).catch(err=>alert(err))
+
+
+
     SetOpenSmart(null)
    }
+
+   
+function addarrsmart(id){
+  let obj={
+    FromYear: selectfilter.fromyear,
+    UntilYear: selectfilter.untilyear,
+    FromPrice: selectfilter.fromprice,
+    UntilPrice: selectfilter.untilprice,
+    Type: selectfilter.type,
+    FromSize: selectfilter.fromsize,
+    UntilSize: selectfilter.untilsize,
+    Room: selectfilter.room,
+    TypeSale: selectfilter.typesale,
+    City:selectfilter.city,
+    IdUser:user,
+    Id:id
+        }
+  console.log("objjjjjjjjjjj")
+  console.log(obj)
+  dis(AddToArrSmartAgent(obj))
+}
 
     function filter(){
 FilterFromServer(filterobject).then(res=>{console.log(res.data)

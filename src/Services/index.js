@@ -171,18 +171,32 @@ export const getStatusFromServer=()=>{
 
 //smartagent-סוכן חכם
 export const AddRowInSmartAgent =(row)=>{
-    console.log(row)
-    return axios.post('http://localhost:8080/filter/addRowInSmartAgent', row);
+    return axios.post('http://localhost:8080/smartagent/addRowInSmartAgent', row);
 
 }
 //מחיקת סוכן חכם
 export const DeleteSmartAgentFromServer=(id)=>{
     alert(id)
-    return axios.delete(`http://localhost:8080/filter/deleteSmartAgent/${id}`);
+    return axios.delete(`http://localhost:8080/smartagent/deleteSmartAgent/${id}`);
+}
+export const CheckSmartAgent=(prop)=>{
+    alert(prop)
+    return axios.post('http://localhost:8080/smartagent/CheckSmartAgent',prop);
 }
 export const GetFromServerByIdSmartAgent =(id)=>{
-    return axios.get(`http://localhost:8080/filter/getByIdSmartAgent/${id}`);
-
+    return axios.get(`http://localhost:8080/smartagent/getByIdSmartAgent/${id}`);
+}
+//קבלת שם עיר על פי איי די
+export const GetNameCityByIdSmartAgent =(id)=>{
+    return axios.get(`http://localhost:8080/smartagent/getNameCitySmartAgent/${id}`);
+}
+//קבלת סוג מכירה על פי איי די
+export const GetTypeSaleByIdSmartAgent =(id)=>{
+    return axios.get(`http://localhost:8080/smartagent/getTypeSaleSmartAgent/${id}`);
+}
+//קבלת סוג דירה על ידי איי די
+export const GetTypePropByIdSmartAgent =(id)=>{
+    return axios.get(`http://localhost:8080/smartagent/getTypePropSmartAgent/${id}`);
 }
 
 //filtering-סינונים
@@ -323,4 +337,5 @@ export const updateAddDetails = (id, plus)=>{
 export const getFurniture =()=>{
     return axios.get(`http://localhost:8080/property/getFurniture`)
 }
+
 

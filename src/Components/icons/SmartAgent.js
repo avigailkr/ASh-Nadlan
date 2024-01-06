@@ -25,6 +25,7 @@ import { blue } from '@mui/material/colors';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { ButtonRoot } from '@mui/joy/Button/Button';
 import { deleteFromArrSmartAgent } from '../../store/Actions/FilterAction';
+import OneSmartAgent from './OneSmartAgent';
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
 function SimpleDialog(props) {
@@ -44,26 +45,16 @@ const dis=useDispatch();
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle id="dialog-smart-agent">...הסוכנים שלי</DialogTitle>
       <List sx={{ pt: 0,width:300 }}>
-      {console.log(arrsmartagent)}
-        {arrsmartagent!=[] && arrsmartagent.map((item) => (
-           
-          <ListItem disableGutters key={item.Id}>
+        {arrsmartagent && arrsmartagent.map((item,index) => (
+          
+          <ListItem disableGutters key={index}>
             <ListItem>
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                   <SmartToyOutlinedIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={`${item.City}`?"ברחבי הארץ":`${item.City}`}
-                    secondary={<>
-                    בשנים: {item.FromYear+"-"+item.UntilYear} <br/>
-                    מחיר: {item.FromPrice+"-"+item.UntilPrice}<br/>
-                     מ"ר: {item.FromSize+"-"+item.UntilSize}<br/>
-                     חדרים: {item.Room}<br/>
-                     סוג הנכס:{`${item.TypeProp}`!=null ? `${item.TypeProp}`:"כל הסוגים"}<br/>
-                     סוג מכירה: {`${item.TypeSale}`!=null?`${item.TypeSale}`:"למכירה ולהשכרה"}
-                    </>} />
-                    {/* <Button variant="outlined" color="error"> */}
+<OneSmartAgent props={item}/>
                     <IconButton  variant="plain">
                     <DeleteIcon variant="outlined" color="error" onClick={()=>{
                       DeleteSmartAgentFromServer(item.Id)

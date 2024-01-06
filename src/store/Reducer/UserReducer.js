@@ -4,7 +4,8 @@ const initialState = {
     arr: [],
     selectedUser: null,
     // active:null,
-    message: null
+    message: null,
+    arrusers:[]
 }
 
 const UserReducer=(state=initialState,action)=>{
@@ -55,8 +56,45 @@ const UserReducer=(state=initialState,action)=>{
                 message: null
                }}
 
+               case TypeAction.SAVE_ARR_USERS:{
+                console.log("arruserersssssss")
+                console.log(action.payload)
+                return {
+                 ...state,
+                 arrusers:action.payload
+                }}
+
+
+                case TypeAction.UPDATE_ACTIVE_ARR_USERS:{
+               
+                  console.log("state.arrusers")
+                  console.log(state.arrusers)
+                  console.log(action.payload)
+ 
+                  state.arrusers.map((item, index) => {
+                    if (item.iduser == action.payload.iduser) {
+
+                  //     console.log("item.active")
+                  // console.log(item.active)
+                  // console.log("action.payload.active")
+                  // console.log(action.payload.active)
+
+                        if(item.active==1)
+                        item.active=0
+                      else
+                      item.active=1
+                    }})
+
+                    console.log(state.arrusers)
+                    
+                  return {
+                   ...state,
+                   arrusers:state.arrusers
+                  }}
+ 
+
   }
   return state;
 
 }
-export default UserReducer; 
+export default UserReducer;

@@ -25,6 +25,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
+const schema = yup.object({ 
+  mr: yup.string().required("שדה חובה").test('len',"אורך לא תקין", x => x.length <= 100000000 && x.length >= 200)
+   ,
+  price: yup.string().required("שדה חובה")
+ }).required();
+
 const StepTwo = ({ prevStep, nextStep, values }) => {
     const [type, setType] = useState(1);
     const [mr, setmr] = useState("");
@@ -35,13 +41,13 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     const [date, setDate] = useState(1);
     const [price, setPrice] = useState(0);
     const [showPrice, setShowPrice] = useState(true);
+
+    const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
+    resolver: yupResolver(schema)
+     });
+
+
   
-  //  let{register,handleSubmit, formState:{isValid, errors}}=useForm({mode:"all"});
-  const schema = yup.object({ 
-    mr: yup.string().required("שדה חובה")
-     ,
-    price: yup.string().required("שדה חובה")
-   }).required();
 
     let dis=useDispatch();
 
@@ -82,7 +88,7 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     return <div className="addProp-main">
      
       
-      <form className="form__step" onSubmit={handleNext}>
+      <form  className="form__step" onSubmit={handleNext}>
         <Steps level={1}/>
       <div className="div-type+mr">
           {/* <label dir="rtl">
@@ -93,9 +99,11 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           :סוג הנכס
       </Typography>
          
-         <Select value={Option.value} defaultValue="דירה" size='md' dir="rtl" sx={{mb:2, minWidth: 200, ml:43 }} onChange={(e)=> setType(e.target.id)}>
+         <Select value={Option.value} defaultValue="בית פרטי" size='md' dir="rtl" sx={{mb:2, minWidth: 200, ml:43 }} onChange={(e)=> setType(e.target.id)}>
           {arrType.map((item)=>{
+           if(item.Name!=="כל הנכסים"){
             return <Option id={item.Id} key={item.Id} value={item.Name} >{item.Name}</Option>
+          }
           })}
         </Select>
        
@@ -164,6 +172,8 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           </Typography>
          
          <TextField
+         helperText={errors?.mr?.message}
+         type="mr"
          onChange={(e)=>setmr(e.target.value)}
          dir="ltr"
         sx={{ width: '20ch', mr:45, mt:-7 }}
@@ -257,8 +267,10 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
       
         {/* <input type="number" min="0" max="100000000" step="1" required="required" id="priceInput"
          pattern="[0-9]{3},[0-9]{3},[0-9]{3}" placeholder='₪' onChange={(e) => setPrice(e.target.value)}/> */}
-<FormControl dir="ltr" fullWidth sx={{m:1, ml: 48 , width:190}}>
+        <FormControl dir="ltr" fullWidth sx={{m:1, ml: 48 , width:190}}>
           <OutlinedInput
+          helperText={errors?.price?.message}
+          type="price"
           sx={{height:40}}
             startAdornment={<InputAdornment position="start">₪</InputAdornment>}
           />
