@@ -1,118 +1,119 @@
 import React, { useState } from "react";
 import "../style.css";
 import Steps from "./Steps";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 // import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
+import TextField from "@mui/material/TextField";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
 // import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 // import DirectionsIcon from '@mui/icons-material/Directions';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 import { getAllCityisFromServer } from "../../Services";
 import { useDispatch, useSelector } from "react-redux";
 import { SaveArrCity } from "../../store/Actions/PropAction";
 import { useEffect } from "react";
-import Typography from '@mui/material/Typography';
-import MapWithAutocomplete from './MapWithAutocomplete';
+import Typography from "@mui/material/Typography";
+import MapWithAutocomplete from "./MapWithAutocomplete";
 
 const StepOne = ({ nextStep }) => {
-  //useState for a form 
-  const [flag, setFlag] =useState(true);
-  const [flag1, setFlag1]=useState(true);
-  const [show, setShow]=useState(true);
-  const [adress, setAdress]=useState("ישראל");
-  const [adress2,setAdress2]=useState("ישראל");
-  const [city, setCity]=useState(1);
+  //useState for a form
+  const [flag, setFlag] = useState(true);
+  const [flag1, setFlag1] = useState(true);
+  const [show, setShow] = useState(true);
+  const [adress, setAdress] = useState("ישראל");
+  const [adress2, setAdress2] = useState("ישראל");
+  const [city, setCity] = useState(1);
 
-let dis=useDispatch();
+  let dis = useDispatch();
 
-  useEffect(()=>{
-    getAllCityisFromServer().then(res=>{
-        dis(SaveArrCity(res.data))
-        console.log(res.data)
-    }).catch(er=>alert("error in bring arr property from server"))
-},[])
+  useEffect(() => {
+    getAllCityisFromServer()
+      .then((res) => {
+        dis(SaveArrCity(res.data));
+        console.log(res.data);
+      })
+      .catch((er) => alert("error in bring arr property from server"));
+  }, []);
 
-// let arrCity=useSelector(x=>x.prop.arrCity);
+  // let arrCity=useSelector(x=>x.prop.arrCity);
 
-
-  //function submit 
+  //function submit
   const handleNext = (e) => {
     e.preventDefault();
-   let isSale="";
-    if(flag)
-    isSale=2;
-    else
-    isSale=1;
+    let isSale = "";
+    if (flag) isSale = 2;
+    else isSale = 1;
 
-    nextStep({isSale, adress, city});
+    nextStep({ isSale, adress, city });
   };
 
-  //function on click button color change 
+  //function on click button color change
   const handleClick = () => {
-    if(flag1===false)
-    {
-     setFlag(!flag)
-     setFlag1(!flag1)
-    }
-     else
+    if (flag1 === false) {
       setFlag(!flag);
-    
+      setFlag1(!flag1);
+    } else setFlag(!flag);
   };
   const handleClick1 = () => {
-    if(flag===false)
-    {
-      setFlag1(!flag1) 
-      setFlag(!flag)
-    }
-    else
-    setFlag1(!flag1);
+    if (flag === false) {
+      setFlag1(!flag1);
+      setFlag(!flag);
+    } else setFlag1(!flag1);
   };
-  
+
   //function to search --> substring from string the "," tav and put "+" insted
-// const search=(e)=>{
-//   setAdress2(adress)
-//   console.log(e)
+  // const search=(e)=>{
+  //   setAdress2(adress)
+  //   console.log(e)
 
-// }
-    
-  const showing=()=>{
-    setShow(!show)
-  }
-  
-  return (<div className="addProp-main">
-   
-   
+  // }
 
-    <form onSubmit={handleNext} className="form__step">
-      <Steps level={0}/> 
-      
-        
-        <Typography sx={{ml:55, mt:5}} variant="h6" gutterBottom>
-        ?מוכרים או משכירים
-          </Typography>
-         <Stack direction="row" spacing={4} >
-          
-      <Button fullWidth={100} onClick={handleClick} value={flag} variant={flag ? "outlined": "contained"}>משכירים</Button>
-      <Button fullWidth={100} onClick={handleClick1} value={flag1} variant={flag1 ? "outlined": "contained"} >מוכרים</Button>
-     </Stack>
-      
-      <br/>
-      {/* <label id="adress">
+  const showing = () => {
+    setShow(!show);
+  };
+
+  return (
+    <div className="addProp-main">
+      <form onSubmit={handleNext} className="form__step">
+        <Steps level={0} />
+        <Typography sx={{ ml: 55, mt: 5 }} variant="h6" gutterBottom>
+          ?מוכרים או משכירים
+        </Typography>
+        <Stack direction="row" spacing={4}>
+          <Button
+            fullWidth={100}
+            onClick={handleClick}
+            value={flag}
+            variant={flag ? "outlined" : "contained"}
+          >
+            משכירים
+          </Button>
+          <Button
+            fullWidth={100}
+            onClick={handleClick1}
+            value={flag1}
+            variant={flag1 ? "outlined" : "contained"}
+          >
+            מוכרים
+          </Button>
+        </Stack>
+
+        <br />
+        {/* <label id="adress">
      :כתובת הנכס
       </label> */}
-     
-      <Typography sx={{ml:62, mt:5}} variant="h6" gutterBottom>
-      :כתובת הנכס
-      </Typography>
 
-      {/* <div className="div-adress">
+        <Typography sx={{ ml: 62, mt: 5 }} variant="h6" gutterBottom>
+          :כתובת הנכס
+        </Typography>
+
+        {/* <div className="div-adress">
         <div>
          <p>עיר</p>
          
@@ -136,42 +137,61 @@ let dis=useDispatch();
        />
        </div>
 </div> */}
-       {/* <p id="l-map" onClick={showing} >:כתובת במפה</p> */}
+        {/* <p id="l-map" onClick={showing} >:כתובת במפה</p> */}
 
-    <Paper
-      // component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 600 }}
-    >
-      {/* <IconButton sx={{ p: '10px' }} aria-label="menu">
+        <Paper
+          // component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            width: 600,
+          }}
+        >
+          {/* <IconButton sx={{ p: '10px' }} aria-label="menu">
         <MenuIcon />
       </IconButton> */}
-      <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        placeholder="הזן כתובת מלאה של הנכס"
-        dir="rtl"
-        inputProps={{ 'aria-label': 'search google maps' }}
-        onChange={(e)=>{setAdress(e.target.value)}}
-      />
-      <IconButton onClick={()=>{setAdress2(adress)}} type="button" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      {/* <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="הזן כתובת מלאה של הנכס"
+            dir="rtl"
+            inputProps={{ "aria-label": "search google maps" }}
+            onChange={(e) => {
+              setAdress(e.target.value);
+            }}
+          />
+          <IconButton
+            onClick={() => {
+              setAdress2(adress);
+            }}
+            type="button"
+            sx={{ p: "10px" }}
+            aria-label="search"
+          >
+            <SearchIcon />
+          </IconButton>
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+          {/* <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
         <DirectionsIcon onClick={handleMarkerClick}/>
       </IconButton> */}
-    </Paper>    
+        </Paper>
 
-        {/* <iframe title="map" width="600" height="450" id="gmap_canvas" 
-         
-         src={`https://maps.google.com/maps?q=${adress2}&t=&z=15&ie=UTF8&iwloc=&output=embed`} >
-        </iframe> */}
-     <MapWithAutocomplete/>
+        <iframe
+          title="map"
+          width="600"
+          height="450"
+          id="gmap_canvas"
+          src={`https://maps.google.com/maps?q=${adress2}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+        ></iframe>
+        {/* <MapWithAutocomplete/> */}
 
-      <br/>
-      <div className="div-but">
-      <button type="submit" className="form__button">הבא</button>
-      </div>
-    </form>
+        <br />
+        <div className="div-but">
+          <button type="submit" className="form__button">
+            הבא
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

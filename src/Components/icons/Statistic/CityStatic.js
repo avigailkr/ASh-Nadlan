@@ -6,13 +6,12 @@ import { saveCity } from '../../../store/Actions/FilterAction';
 import { useEffect } from 'react';
 import { getAllNameCitysFromServer, getIdCityByNameFromServer } from '../../../Services';
 import { useState } from 'react';
-import { saveStatisticCity } from '../../../store/Actions/StatisticAction';
+import { saveStatisticCity, updateShow1 } from '../../../store/Actions/StatisticAction';
 
 export default function CityStatic() {
   const dis=useDispatch();
   const [arrname,setArrName]=useState([])
   useEffect(()=>{
-    // dis(saveStatisticCity(null))
     let arr=[]
     getAllNameCitysFromServer().then((res)=>{
       for(let i=0;i<res.data.length;i++)
@@ -21,11 +20,17 @@ export default function CityStatic() {
     }).catch(err=>alert(err))
 
   },[])
+
   function change(event){
-    getIdCityByNameFromServer(event.target.innerText).then(res=>{
-      //  alert(res.data[0].Id)
+    dis(updateShow1(false))
+
+    if(event.target.innerText)
+     getIdCityByNameFromServer(event.target.innerText).then(res=>{
         dis(saveStatisticCity(res.data[0].Id))
       }).catch(err=>alert(err))
+
+     else dis(saveStatisticCity(null))
+      
    
 
   }

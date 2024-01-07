@@ -11,7 +11,7 @@ import ButSaleOrBuy from './Button/ButSaleOrRent';
 import ButAdd from './Button/ButAdd';
 import ButBetween from './Button/ButBetweenYear';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddRowInSmartAgent, CheckSmartAgent, FilterFromServer, GetFromServerByIdSmartAgent } from '../../../Services';
+import { AddRowInSmartAgent, CheckSmartAgent, FilterFromServer, GetFromServerByIdSmartAgent, getAllPropertysFromServer } from '../../../Services';
 import { SaveArrProp } from '../../../store/Actions/PropAction';
 import { AddToArrSmartAgent, saveArrSmartAgent, saveChooseAddFilter, saveChooseCityFilter, saveChoosePriceFilter, saveChooseRoomFilter, saveChooseSizeFilter, saveChooseTypeFilter, saveChooseTypeSaleFilter, saveChooseYearFilter, saveCity, saveFromPrice, saveFromSize, saveFromYear, saveIsClearFilter, saveRoom, saveTpeySale, saveType, saveUntilPrice, saveUntilSize, saveUntilYear } from '../../../store/Actions/FilterAction';
 import { useNavigate } from 'react-router-dom';
@@ -44,7 +44,7 @@ FromYear: selectfilter.fromyear,
 UntilYear: selectfilter.untilyear,
 FromPrice: selectfilter.fromprice,
 UntilPrice: selectfilter.untilprice,
-Type: selectfilter.type,
+TypeProp: selectfilter.type,
 FromSize: selectfilter.fromsize,
 UntilSize: selectfilter.untilsize,
 Room: selectfilter.room,
@@ -68,7 +68,7 @@ function addarrsmart(id){
     UntilYear: selectfilter.untilyear,
     FromPrice: selectfilter.fromprice,
     UntilPrice: selectfilter.untilprice,
-    Type: selectfilter.type,
+    TypeProp: selectfilter.type,
     FromSize: selectfilter.fromsize,
     UntilSize: selectfilter.untilsize,
     Room: selectfilter.room,
@@ -77,12 +77,23 @@ function addarrsmart(id){
     IdUser:user,
     Id:id
         }
-  console.log("objjjjjjjjjjj")
-  console.log(obj)
   dis(AddToArrSmartAgent(obj))
 }
 
     function filter(){
+      if( filterobject.chooseyear==false &&
+        filterobject.chooseprice ==false &&
+        filterobject.choosetype==false &&
+        filterobject.choosesize==false &&
+        filterobject.chooseroom==false &&
+        filterobject.choosetypesale==false &&
+        filterobject.choosecity==false &&
+        filterobject.chooseadd==false)
+        getAllPropertysFromServer().then(res=>{console.log(res.data)
+          dis(SaveArrProp(res.data))
+          SetOpenSmart(true)
+          }).catch(err=>alert(err))
+          else
 FilterFromServer(filterobject).then(res=>{console.log(res.data)
 dis(SaveArrProp(res.data))
 SetOpenSmart(true)

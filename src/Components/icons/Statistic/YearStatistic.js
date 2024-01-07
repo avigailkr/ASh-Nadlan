@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveFromYear, saveUntilYear, saveYears } from '../../../store/Actions/FilterAction';
 import { useState } from 'react';
-import { saveStatisticFromYear, saveStatisticUntilYear } from '../../../store/Actions/StatisticAction';
+import { saveStatisticFromYear, saveStatisticUntilYear, updateShow1 } from '../../../store/Actions/StatisticAction';
 import { useEffect } from 'react';
 
 export default function YearStatistic() {
@@ -17,11 +17,13 @@ export default function YearStatistic() {
 
 //   useEffect(()=>{dis(saveStatisticUntilYear(null))},[])
   const handleChange1 = (event) => {
+    dis(updateShow1(false))
     setYear1(event.target.value);
     dis(saveStatisticFromYear(event.target.value))
 
   };
   const handleChange2 = (event) => {
+    dis(updateShow1(false))
     setYear2(event.target.value);
     dis(saveStatisticUntilYear(event.target.value))
 

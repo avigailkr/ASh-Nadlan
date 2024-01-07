@@ -104,7 +104,7 @@ function isdelete() {
 
  <div className="chatArea">   
  {arrMass.length!=0 && <p className="litel">התכתבות עם {selectNameClient}</p>}
- {arrMass.length==0 && <p className="litel">התכתבות עם הלקוחות</p>}
+ {arrMass.length==0 && <p className="litel">התכתבות עם לקוחות</p>}
  {arrMass.length!=0 && <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete}/>}
  <div className="chat-list">
  <List

@@ -281,8 +281,26 @@ export const getNumPropByYear=(idcity,idtypesale,year)=>{
 export const getDetailsOfPropById = (id)=>{
     return axios.get(`http://localhost:8080/property/getDetailsProp/${id}`)
 }
-
-
+//שליפת דירות על פי סוג המכירה עיר ובשנה בה נימכרו
+export const getPropertyByTypeSaleAndYearSaleAndCity = (idcity,typesale,year)=>{
+    return axios.get(`http://localhost:8080/statistic/getPropertyByTypeSaleAndYearSaleAndCity/${idcity}/${typesale}/${year}`)
+}
+//שליפת דירות על פי סוג המכירה ובשנה בה נימכרו
+export const getPropertyByTypeSaleAndYearSale = (idcity,year)=>{
+    return axios.get(`http://localhost:8080/statistic/getPropertyByTypeSaleAndYearSale/${idcity}/${year}`)
+}
+//קבלת שם עיר על פי איי די
+export const GetNameCityByIdStatistic =(id)=>{
+    return axios.get(`http://localhost:8080/statistic/getNameCityStatistic/${id}`);
+}
+//קבלת סוג מכירה על פי איי די
+export const GetTypeSaleByIdStatistic =(id)=>{
+    return axios.get(`http://localhost:8080/statistic/getTypeSaleStatistic/${id}`);
+}
+//קבלת סוג דירה על ידי איי די
+export const GetTypePropByIdStatistic =(id)=>{
+    return axios.get(`http://localhost:8080/statistic/getTypePropStatistic/${id}`);
+}
 
 // upload image
 export const uploadImage = async (img)=>{

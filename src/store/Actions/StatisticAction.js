@@ -23,4 +23,10 @@ export const saveStatisticFromYear = (fromyear) => {
       type: TypeAction.SAVE_STATISTIC_UNTIL_YEAR,
       payload: untilyear
     };
+  };  
+  export const updateShow1 = (status) => {
+    return {
+      type: TypeAction.UPDATE_SHOW1,
+      payload: status
+    };
   };

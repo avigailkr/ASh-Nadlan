@@ -15,14 +15,18 @@ useEffect(()=>{
     }).catch(err=>alert(err))
 
     props.props.TypeSale && GetTypeSaleByIdSmartAgent(props.props.TypeSale).then(res=>{
+        
         settypesale(res.data[0].type)
     }).catch(err=>alert(err))
 
     props.props.TypeProp && GetTypePropByIdSmartAgent(props.props.TypeProp).then(res=>{
+
         settypeprop(res.data[0].Name)
     }).catch(err=>alert(err))
 
 },[])
+console.log("props.props")
+console.log(props.props)
 return<>
 <ListItemText 
        primary={city}

@@ -131,7 +131,7 @@ dis(saveArrChat([]))
         <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />         */}
 
       {arrMass.length!=0 && <p className="litel">התכתבות עם {selectNameClient}</p>}      
-      {arrMass.length==0 && <p className="litel">התכתבות עם בעלי הנכסים</p>}
+      {arrMass.length==0 && <p className="litel">ההתכתבות עם בעלי הנכסים</p>}
       {arrMass.length!=0 && <DeleteSweepIcon id="deleteAllMassArea" onClick={isdelete} />}
         <div className="chat-list" >
           <List
