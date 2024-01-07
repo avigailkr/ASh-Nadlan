@@ -1381,3 +1381,7 @@ input[type=submit]:hover{
 .div-type+mr{
   margin-top:20vh;
 }
+#imgUp{
+  width: 30vw;
+  height: 20vh;
+}

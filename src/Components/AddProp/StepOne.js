@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SaveArrCity } from "../../store/Actions/PropAction";
 import { useEffect } from "react";
 import Typography from '@mui/material/Typography';
+import MapWithAutocomplete from './MapWithAutocomplete';
 
 const StepOne = ({ nextStep }) => {
   //useState for a form 
@@ -27,7 +28,7 @@ const StepOne = ({ nextStep }) => {
   const [show, setShow]=useState(true);
   const [adress, setAdress]=useState("ישראל");
   const [adress2,setAdress2]=useState("ישראל");
-  const [city, setCity]=useState(1)
+  const [city, setCity]=useState(1);
 
 let dis=useDispatch();
 
@@ -160,10 +161,11 @@ let dis=useDispatch();
       </IconButton> */}
     </Paper>    
 
-        <iframe title="map" width="600" height="450" id="gmap_canvas" 
+        {/* <iframe title="map" width="600" height="450" id="gmap_canvas" 
          
          src={`https://maps.google.com/maps?q=${adress2}&t=&z=15&ie=UTF8&iwloc=&output=embed`} >
-        </iframe>
+        </iframe> */}
+     <MapWithAutocomplete/>
 
       <br/>
       <div className="div-but">

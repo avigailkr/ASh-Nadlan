@@ -7,7 +7,7 @@ import { json } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"; //אפשרות ניתוב לפי הניתובים שהגדרת
 import Uplaoded from "../Uplaoded";
-import { SaveDetailsProp } from "../../store/Actions/PropAction";
+import { AddToArrProp, SaveDetailsProp } from "../../store/Actions/PropAction";
 
 import PropTypes from 'prop-types';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -34,7 +34,6 @@ function  StepFive ({ prevStep, values }) {
 
         //שליחת פרטי הדירה
        addPropToServer(values).then((res)=>{
-
         //יצירת אובייקט לשליחת נתונים
         const formData = new FormData(); 
          
@@ -48,9 +47,24 @@ function  StepFive ({ prevStep, values }) {
          nav(`/Uplaoded`);
         }).catch(err=>alert(err));
          formData.delete("image");
-      }
-        
-      dis(SaveDetailsProp(values))
+           //עדכון במערך הדירות את הדירה החדשה שנוספה לשרת
+        // let valuesProp = {
+        //   Id: res.data.insertId,
+        //   IdKindProp:values.type,
+        //   Floor:values.floor,
+        //   InFloor:values.inFloor,
+        //   RoomNum:values.room,
+        //   IdStatus:values.sito,
+        //   IdEnterDate:values.data,
+        //   Adress:values.adress,
+        //   Price:values.price,
+        //   Sqm:values.mr,
+        //   IdTypeSale:values.isSale,
+        //   Furniture:values.rihut,
+        //   Description:values.discription
+        // }
+        //dis(SaveDetailsProp(valuesProp));
+    }
 
      }).catch(err=>alert(err))
 

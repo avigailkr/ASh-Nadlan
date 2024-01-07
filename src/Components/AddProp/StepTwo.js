@@ -25,12 +25,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-const schema = yup.object({ 
-  mr: yup.string().required("שדה חובה").test('len',"אורך לא תקין", x => x.length <= 100000000 && x.length >= 200)
-   ,
-  price: yup.string().required("שדה חובה")
- }).required();
-
 const StepTwo = ({ prevStep, nextStep, values }) => {
     const [type, setType] = useState(1);
     const [mr, setmr] = useState("");
@@ -42,9 +36,23 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     const [price, setPrice] = useState(0);
     const [showPrice, setShowPrice] = useState(true);
 
-    const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
-    resolver: yupResolver(schema)
+    const schema = yup.object().shape({ 
+      mr: yup.string().required("שדה חובה").test('len',"אורך לא תקין", x => x.length <= 100000000 && x.length >= 200),
+      price: yup.string().required("שדה חובה")
      });
+    
+     const {
+      register,
+      setValue,
+      handleSubmit,
+      formState: { errors }
+    } = useForm({
+      resolver: yupResolver(schema)
+    });
+
+    // const { register, handleSubmit, formState: { isValid, errors } } = useForm({ mode: "all",
+    // resolver: yupResolver(schema)
+    //  });
 
 
   
@@ -55,7 +63,8 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
       getAllTypeFromServer().then(res=>{
           dis(SaveArrType(res.data))
           console.log(res.data)
-      }).catch(er=>alert("error in bring arr property from server"))
+      }).catch(er=>alert("error in bring arr property from server"));
+      setValue("mr","");
   },[])
   
   let arrType=useSelector(x=>x.prop.arrType);
@@ -88,7 +97,7 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
     return <div className="addProp-main">
      
       
-      <form  className="form__step" onSubmit={handleNext}>
+      <form  className="form__step" noValidate onSubmit={handleSubmit()}>
         <Steps level={1}/>
       <div className="div-type+mr">
           {/* <label dir="rtl">
@@ -172,8 +181,11 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           </Typography>
          
          <TextField
-         helperText={errors?.mr?.message}
-         type="mr"
+          {...register('mr')}
+          error={errors.mr ? true : false}
+          id="mr"
+        //  helperText={errors?.mr?.message}
+        //  type="mr"
          onChange={(e)=>setmr(e.target.value)}
          dir="ltr"
         sx={{ width: '20ch', mr:45, mt:-7 }}
@@ -182,6 +194,9 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
         }}
         > 
         </TextField>
+        <Typography variant="inherit" color="textSecondary">
+            {errors.mr?.message}
+         </Typography> 
        
 </div>
          
@@ -272,6 +287,7 @@ const StepTwo = ({ prevStep, nextStep, values }) => {
           helperText={errors?.price?.message}
           type="price"
           sx={{height:40}}
+          onChange={(e)=> setPrice(e.target.value)}
             startAdornment={<InputAdornment position="start">₪</InputAdornment>}
           />
         </FormControl>
