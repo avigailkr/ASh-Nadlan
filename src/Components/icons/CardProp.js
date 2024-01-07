@@ -91,12 +91,11 @@ import ImageIcon from '@mui/icons-material/Image';
 // console.log(idType)
 //שולחים קוד סוג נכס ומקבלים את שם הנכס
 getTypeByIdFromServer(idType).then((res)=>{
-  // console.log(res)
-  setTypeName(res.data[0].Name)
+  res.data.length!=0 && setTypeName(res.data[0].Name)
 }).catch(err=>alert(err))
 //שולחים קוד עיר ומקבלים את שם העיר
       getCityByIdFromServer(idCity).then((res)=>{
-        setCityName(res.data[0].Name)
+        res.data.length!=0 && setCityName(res.data[0].Name)
       }).catch(err=>alert(err))
 
 

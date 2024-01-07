@@ -47,7 +47,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import { AddProp, DeleteProp, SaveDetailsProp } from "../../../store/Actions/PropAction";
+import { AddProp, DeleteProp } from "../../../store/Actions/PropAction";
 import IosShareIcon from '@mui/icons-material/IosShare';
 import MenuCard from "../MenuCard";
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
@@ -107,7 +107,6 @@ import ImageIcon from '@mui/icons-material/Image';
     };
   const update=true;
 const updateProp=()=>{
-  dis(SaveDetailsProp(props.props));
   nav(`/DetailsProperty/${idProp}/${idPropOwner}/${update}`)
 }
 

@@ -9,31 +9,37 @@ import Statistic4 from "./Statistic4";
 import YearStatistic from "./YearStatistic";
 import { Button, Stack, colors } from "@mui/material";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateShow1 } from "../../../store/Actions/StatisticAction";
 
 const IndexStatistic = () => {
-    //שדות להוספה בדאטה
-//פונקציה המקבלת שנה ומחזירה כמה דירות נתפסו
-const idcity=useSelector(state=>state.statistic.city);
-    //תאריך מכירה או השכרה אחרון
-    //ככה שאני יוכל לחשב כמה דירות נמכרו בשנה זו
-    // ברגע שהמוכר מעדכן שהדירה תפוסה 
-    //הוא מעדכן את התאריך
-let [isshows1,setisshows1]=useState(false)
-    function s1(){setisshows1(true)}
 
+const show1=useSelector(state=>state.statistic.show1);
+const idcity=useSelector(state=>state.statistic.city);
+const fromyear=useSelector(state=>state.statistic.fromyear);
+const untilyear=useSelector(state=>state.statistic.untilyear);
+let dis=useDispatch()
+
+    function check(){
+      console.log("check")
+      console.log(idcity)
+      if(fromyear>untilyear)
+      alert("שים לב לתקינות טווח השנים")
+    else dis(updateShow1(true))
+
+    }
   return (<>      
   <p id="title-static">הכנס נתונים כדי לצפות בסחר וממכר של דירות באזור מסויים</p>
     <Stack spacing={3} direction="row" className='div-all-static'>
-    <Button onClick={s1} variant="outlined" href="#outlined-buttons" disabled={idcity==null?true:false}>
+    <Button onClick={check} variant="outlined" href="#outlined-buttons" disabled={idcity==null?true:false}>
         לצפייה
       </Button>
-      {/* <input type="button" value="לצפייה" onClick={s1} disabled={idcity==null?true:false}/> */}
-      {/* <SaleOrRentStatistic /> */}
-      <YearStatistic /><CityStatic />
+      <YearStatistic />
+      <CityStatic />
+      <SaleOrRentStatistic/>
 </Stack>
 
-{isshows1 == true? <Statistic1/>:<p style={{color:"red"}}>בחר עיר *</p>}
+{show1 == true? <Statistic1/>:<p style={{color:"red"}}>בחר עיר *</p>}
 
 </>
   );

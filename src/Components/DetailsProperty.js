@@ -333,6 +333,7 @@ console.log("delete function")
     formData.append("idProp", idProp);
     formData.append("image", upImgs[i]);        
    
+
 //שליחה לשרת שיוסיף את התמונות לטבלת התמונות
    uploadImage(formData).then((res)=>{
      console.log(formData);

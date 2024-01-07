@@ -4,7 +4,8 @@ const initialState = {
   city: null,  
   fromyear:2018,
   untilyear: 2023,
-  typesale: null
+  typesale: 3,
+  show1:false
 };
 
 const StatisticReducer = (state = initialState, action) => {
@@ -29,7 +30,11 @@ const StatisticReducer = (state = initialState, action) => {
         ...state,
         untilyear: action.payload,
       };
-    
+     case TypeAction.UPDATE_SHOW1:
+      return {
+        ...state,
+        show1: action.payload,
+      };
   }
   return state;
 };

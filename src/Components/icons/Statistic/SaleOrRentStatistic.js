@@ -4,17 +4,20 @@ import Option from '@mui/joy/Option';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import { useDispatch } from 'react-redux';
 import { saveTpeySale } from '../../../store/Actions/FilterAction';
-import { saveStatisticTypeSale } from '../../../store/Actions/StatisticAction';
+import { saveStatisticTypeSale, updateShow1 } from '../../../store/Actions/StatisticAction';
 
 export default function SaleOrRentStatistic() {
     
   const dis=useDispatch()
   function change(event){
 //    alert(event.target.innerText)
+dis(updateShow1(false))
    if(event.target.innerText==="מכירה")
    dis(saveStatisticTypeSale(1))
    else if(event.target.innerText==="השכרה")
    dis(saveStatisticTypeSale(2))
+  else
+  dis(saveStatisticTypeSale(3))
   }
   
   return (
@@ -35,6 +38,7 @@ export default function SaleOrRentStatistic() {
     >
       <Option value="sale">מכירה</Option>
       <Option value="rent">השכרה</Option>
+      <Option value="all">הכל</Option>
     </Select></>
   
   );
