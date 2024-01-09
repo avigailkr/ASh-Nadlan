@@ -43,6 +43,20 @@ height: 300px;
 #dialog-smart-agent{
   margin-left: 33%;
 }
+.dialog-title-smart-agent{
+  background: linear-gradient(to left,
+      /* violet,
+      indigo,
+      blue,
+      green, */
+      rgb(97, 147, 223),
+      orange,
+      red);
+  -webkit-background-clip: text;
+  color: transparent;
+  /* margin-right: 4%; */
+  text-align: center;
+}
 /* סרגל גלילה של הצ'אט */
 .all-onepeople {
   max-height: 300px;

@@ -7,7 +7,8 @@ export const getAllUsersFromServer=()=>{
 }
 // משתמש ע"י זהות
 export const getUserByIdFromServer=(id)=>{
-    return axios.get("http://localhost:8080/user/getUser",id);
+    alert(id)
+    return axios.get(`http://localhost:8080/user/getUser/${id}`);
 }
 //מחיקת משתמש
 export const DeleteUserFromServer=(id)=>{
@@ -179,9 +180,13 @@ export const DeleteSmartAgentFromServer=(id)=>{
     alert(id)
     return axios.delete(`http://localhost:8080/smartagent/deleteSmartAgent/${id}`);
 }
-export const CheckSmartAgent=(prop)=>{
-    alert(prop)
-    return axios.post('http://localhost:8080/smartagent/CheckSmartAgent',prop);
+export const CheckSmartAgent=(filter)=>{
+    return axios.post('http://localhost:8080/smartagent/CheckSmartAgent',filter);
+}
+export const CheckPropToSmartAgent=(prop)=>{
+    console.log("CheckPropToSmartAgent")
+    console.log(prop);
+    return axios.post('http://localhost:8080/smartagent/CheckPropToSmartAgent',prop);
 }
 export const GetFromServerByIdSmartAgent =(id)=>{
     return axios.get(`http://localhost:8080/smartagent/getByIdSmartAgent/${id}`);
@@ -242,7 +247,6 @@ export const getIdType=(type)=>{
 
 
 export const getIdTypeSale=(typesale)=>{
-    alert(typesale)
     return axios.get(`http://localhost:8080/filter/getIdTypeSaleProp/${typesale}`);
 }
 // //סוג מכירה

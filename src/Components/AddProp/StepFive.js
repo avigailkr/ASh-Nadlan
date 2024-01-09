@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../style.css";
 import Steps from "./Steps";
 import emailjs from "@emailjs/browser";
@@ -9,6 +9,8 @@ import {
   bringIdPropFromServer,
   uplaodAddDetails,
   CheckSmartAgent,
+  CheckPropToSmartAgent,
+  getUserByIdFromServer,
 } from "../../Services";
 import { useSelector, useDispatch } from "react-redux";
 import { json } from "react-router-dom";
@@ -26,6 +28,9 @@ function StepFive({ prevStep, values }) {
   let user = useSelector((state) => state.user.selectedUser);
   let dis = useDispatch();
   const nav = useNavigate();
+  const form = useRef();
+  let [email, setemail] = useState(null);
+  let [name, setname] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +64,7 @@ function StepFive({ prevStep, values }) {
               nav(`/Uplaoded`);
             })
             .catch((err) => alert(err));
+
           formData.delete("image");
           //עדכון במערך הדירות את הדירה החדשה שנוספה לשרת
           // let valuesProp = {
@@ -77,16 +83,33 @@ function StepFive({ prevStep, values }) {
           //   Description:values.discription
           // }
           //dis(SaveDetailsProp(valuesProp));
-        }
-        CheckSmartAgent(values).then((res) => {
-          console.log(res.data);
-          //iduser[1,2,3]
-          if (res.data) {
-            res.data.forEach((user, index) => {
-              sendEmail(user.Id, values);
-            });
-          }
-        });
+        } //סגירת לולאת for
+        //בתוך פונקציית הלעאת דירה לשרת then
+
+        CheckPropToSmartAgent(values)
+          .then((res) => {
+            console.log("CheckPropToSmartAgent"); //במידה וימצא חיפוש כזה נשלח הודעה למשתמש שייצר את הסוכן
+            console.log(res.data);
+
+            for (let i = 0; i < res.data.length; i++) {
+              res.data[i] &&
+                getUserByIdFromServer(res.data[i].IdUser)
+                  .then((response) => {
+                    console.log("getUserByIdFromServer " + response.data[0].Id);
+                    console.log(response.data[0].Id);
+                    //  setname(response.data[0].Name)
+                    //  setemail(response.data[0].Mail)
+                    let obj = {
+                      ...values,
+                      user_name: response.data[0].Name,
+                      user_email: response.data[0].Mail,
+                    };
+                    sendEmail(obj);
+                  })
+                  .catch((err) => alert(err));
+            }
+          })
+          .catch((err) => alert(err));
       })
       .catch((err) => alert(err));
 
@@ -102,26 +125,7 @@ function StepFive({ prevStep, values }) {
       .then((res) => {
         console.log(res.data);
       })
-      .catch((err) => alert(err));
-  };
-
-  const sendEmail = (id, values) => {
-    console.log("sendEmail");
-    emailjs
-      .sendForm(
-        "service_dddlq4q",
-        "template_whu9xw8",
-        values,
-        "h8uvQnkZ5XPOub0E6"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+      .catch((err) => alert(err)); //סגירת פונקציה האלעת פרטי דירה
   };
 
   const handlePrev = (e) => {
@@ -129,7 +133,25 @@ function StepFive({ prevStep, values }) {
     prevStep();
   };
 
-  console.log(values);
+  // console.log(values);
+
+  const sendEmail = (obj) => {
+    console.log("sendEmail");
+    // let obj={
+    //   user_name:"shili",
+    //   user_email:"shilat.bedani@gmail.com"
+    // }
+    emailjs
+      .send("service_dddlq4q", "template_whu9xw8", obj, "h8uvQnkZ5XPOub0E6")
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+        },
+        function (error) {
+          console.log("FAILED...", error);
+        }
+      );
+  };
 
   return (
     <div className="addProp-main">
@@ -154,6 +176,17 @@ function StepFive({ prevStep, values }) {
           </button>
         </div>
       </form>
+      {/* <form ref={form}>
+        <input type="text" value={name} name="user_name" />
+        <input type="text" value={email} name="user_email" />
+        <input type="text" value={values.city} name="city" />
+        <input type="text" value={values.mr} name="mr" />
+        <input type="text" value={values.price} name="price" />
+        <input type="text" value={values.InsertDate} name="InsertDate" />
+        <input type="text" value={values.type} name="type" />
+        <input type="text" value={values.room} name="room" />
+        <input type="text" value={values.isSale} name="isSale" />
+      </form> */}
     </div>
   );
 }
