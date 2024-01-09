@@ -2,7 +2,7 @@ import "./App.css";
 import "./Components/style.css";
 import NavBar from "./Components/NavBar";
 import Property from "./Components/Property";
-import DetailsProperty from './Components/DetailsProperty';
+import DetailsProperty from "./Components/DetailsProperty";
 import Forum from "./Components/Forum";
 import Answer from "./Components/chat/Answer";
 import IndexStatistic from "./Components/icons/Statistic/IndexStatistic";
@@ -25,7 +25,11 @@ import Room from "./Components/icons/Filtering/Room";
 import Price from "./Components/icons/Filtering/Price";
 import TypeProp from "./Components/icons/Filtering/TypeProp";
 import { useEffect, useRef, useState } from "react";
-import { GetFromServerByIdSmartAgent, getNumPropToSaleOrRent, sendEmail } from "./Services";
+import {
+  GetFromServerByIdSmartAgent,
+  getNumPropToSaleOrRent,
+  sendEmail,
+} from "./Services";
 import Statistic1 from "./Components/icons/Statistic/Statistic1";
 import Statistic2 from "./Components/icons/Statistic/Statistic2";
 import Statistic3 from "./Components/icons/Statistic/Statistic3";
@@ -36,7 +40,7 @@ import OnePeople from "./Components/icons/myarea/OnePeople";
 import Board from "./Components/icons/board/Board";
 import { Email } from "./Email";
 import FormField from "./Components/FormField";
-
+import { useParams } from "react-router-dom";
 import Infomation from "./Components/infomation/Infomation";
 import Err from "./Components/Err";
 import { bringAllImagesFromServer } from "./Services";
@@ -44,19 +48,20 @@ import { SaveArrImg } from "./store/Actions/ImgAction";
 import Uplaoded from "./Components/Uplaoded";
 import Update from "./Components/icons/myarea/Update";
 
-import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import SmartAgent from "./Components/icons/SmartAgent";
 
-import Box from '@mui/material/Box';
-import Popper from '@mui/material/Popper';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Fade from '@mui/material/Fade';
-import Paper from '@mui/material/Paper';
+import Box from "@mui/material/Box";
+import Popper from "@mui/material/Popper";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Fade from "@mui/material/Fade";
+import Paper from "@mui/material/Paper";
 import { saveArrSmartAgent } from "./store/Actions/FilterAction";
+import { SavePropsUrl } from "./store/Actions/PropAction";
+import { useLocation } from "react-router-dom";
 
-  
 // import ChatF from './Components/ChatF';
 function App() {
   const selectUser = useSelector((state) => state.user.selectedUser); //שליפה של המשתמש הנוכחי שהתחבר
@@ -64,25 +69,34 @@ function App() {
   let [rent, setRent] = useState(0);
   const nav = useNavigate();
   const form = useRef();
-  let dis=useDispatch();
-  let user=useSelector(state=>state.user.selectedUser);
-
+  let dis = useDispatch();
+  let user = useSelector((state) => state.user.selectedUser);
+  let location = useLocation();
+  let path = location.pathname;
   useEffect(() => {
+    // שמירת פרמטרים ברידקס
+    // מעבר לעמוד התחברות
+    //בעמוד התחברות - לגשת לרידקס ובדיקה האם יש פרופס
+    //ואם יש לנתב לניתוב עם הפרמטרים המתאים
     // sendEmail().then(res=>console.log(res)).alert(err=>console.log(err))
+    console.log("propssss");
+    console.log(location);
+    console.log(path);
+
+    dis(SavePropsUrl(path));
+
     nav("/login");
-//מספר דירות פנויותתת
+    //מספר דירות פנויותתת
     getNumPropToSaleOrRent(1)
       .then((res) => setSale(res.data[0]["count(*)"]))
       .catch((err) => alert(err));
     getNumPropToSaleOrRent(2)
       .then((res) => setRent(res.data[0]["count(*)"]))
       .catch((err) => alert(err));
-
   }, []);
 
-
-  function smartagent(){
-    nav("/smartagent")
+  function smartagent() {
+    nav("/smartagent");
   }
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -104,30 +118,38 @@ function App() {
           <p id="title2">{sale} למכירה</p>
         </div>
       </div>
-      {selectUser != null && <><Profile />
-      <SmartAgent/>
-      {/* <Button onClick={smartagent}  variant="outlined" href="#outlined-buttons"> */}
-      {/* <Button onClick={handleClick('left-start')}>left-start</Button> */}
+      {selectUser != null && (
+        <>
+          <Profile />
+          <SmartAgent />
+          {/* <Button onClick={smartagent}  variant="outlined" href="#outlined-buttons"> */}
+          {/* <Button onClick={handleClick('left-start')}>left-start</Button> */}
 
-      {/* </Button> */}
-      </>}
+          {/* </Button> */}
+        </>
+      )}
 
       {/* <div id="div-title"><h1 id="title"> אש נדלן</h1><h2 id="title2">89654 הושכרו    3898 נמכרו</h2></div><br/> */}
       <NavBar />
 
-     {/* <Err/> */}
+      {/* <Err/> */}
       {/* <FormField/> */}
       {/* index-
      localhost:3000 כאשר אין ניתוב
       תציג את הדירות */}
       <Routes>
-        <Route index element={<Property />} />
+        <Route
+          path="property/:city/:mr/:price/:insertData/:type/:room/:isSale"
+          element={<Property />}
+        />
         <Route path="property" element={<Property />} />
         <Route path="addProp" element={<Form />} />
         <Route path="board" element={<Board />} />
         <Route path="forum" element={<Forum />} />
-        <Route path="DetailsProperty/:idProp/:idPropOwner/:update" element={<DetailsProperty/>} />
-
+        <Route
+          path="DetailsProperty/:idProp/:idPropOwner/:update"
+          element={<DetailsProperty />}
+        />
 
         <Route path="help" element={<Help />} />
         <Route path="about" element={<About />} />
@@ -152,12 +174,13 @@ function App() {
         <Route path="statistic3" element={<Statistic3 />} />
         <Route path="statistic4" element={<Statistic4 />} />
 
-        <Route path="information" element={<Infomation/>}/>
-        <Route path="uplaoded" element={<Uplaoded />}/>
-        <Route path="Update" element={<Update />}/>
-          
-        <Route path="smartagent" element={<SmartAgent />}/>  
+        <Route path="information" element={<Infomation />} />
+        <Route path="uplaoded" element={<Uplaoded />} />
+        <Route path="Update" element={<Update />} />
 
+        <Route path="smartagent" element={<SmartAgent />} />
+        <Route path="" element={<Property />} />
+        {/* <Route element={<h1>אופסססס..</h1>}></Route> */}
       </Routes>
       {/* <Collage/> */}
     </div>

@@ -1,4 +1,3 @@
-
 // import { useState,useEffect,useRef } from "react";
 // import OneProperty from "./OneProperty";
 // import "./style.css";
@@ -13,7 +12,7 @@
 //  const Property=()=>{
 //   const dis=useDispatch();
 //   const arrProp=useSelector(state=>state.prop.arr);
-  
+
 //   useEffect(() => {
 //       getAllPropertysFromServer().then((res)=>{
 //         dis(SaveArrProp(res.data));
@@ -23,21 +22,20 @@
 //       getAllUsersFromServer().then((res)=>{
 //         dis(SaveArrUser(res.data));
 //       }).catch(err=>alert(err));
-//     }, []); 
+//     }, []);
 //     return <>
-//     <div id="all-filters"><Filter /></div> 
+//     <div id="all-filters"><Filter /></div>
 //     <div className="all-apartment">
 
 //     {/* למה החליפה לפילטר ולא מאפ
 //     {arrProp.map((item,index)=>{return <div className="div-apartment" key={item.Id} >
-         
+
 //          {item.Active.data[0]==1 &&   <CardProp props={item} idcard={index} />} */}
-          
 
 //         {arrProp.filter(x=>x.Active.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
-         
+
 //          {<CardProp props={item} idcard={index} />}
-          
+
 //       </div>} )}
 //     </div>
 
@@ -45,50 +43,128 @@
 // }
 // export default Property;
 
-import { useState,useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import OneProperty from "./OneProperty";
 import "./style.css";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SaveArrLike } from "../store/Actions/LikeAction";
 import CardProp from "../Components/icons/CardProp";
-import {getAllLikeFromServer, getAllPropertysFromServer, getAllUsersFromServer} from '../Services/index';
+import {
+  FilterFromServer,
+  getAllLikeFromServer,
+  getAllPropertysFromServer,
+  getAllUsersFromServer,
+} from "../Services/index";
 import { SaveArrProp, SaveArrSource } from "../store/Actions/PropAction";
 import { SaveArrUser } from "../store/Actions/UserAction";
-import Filter from './icons/Filtering/Filter';
+import Filter from "./icons/Filtering/Filter";
+import { useParams } from "react-router-dom";
+import {
+  saveStatisticCity,
+  saveStatisticTypeSale,
+} from "../store/Actions/StatisticAction";
+import {
+  saveCity,
+  saveFromPrice,
+  saveFromSize,
+  saveFromYear,
+  saveRoom,
+  saveTpeySale,
+  saveType,
+  saveUntilPrice,
+  saveUntilSize,
+  saveUntilYear,
+  saveChooseAddFilter,
+  saveChooseCityFilter,
+  saveChoosePriceFilter,
+  saveChooseRoomFilter,
+  saveChooseSizeFilter,
+  saveChooseTypeFilter,
+  saveChooseTypeSaleFilter,
+  saveChooseYearFilter,
+} from "../store/Actions/FilterAction";
+const Property = () => {
+  const { city, mr, price, insertData, type, room, isSale } = useParams();
+  const dis = useDispatch();
+  const arrProp = useSelector((state) => state.prop.arr);
 
- const Property=()=>{
-  const dis=useDispatch();
-  const arrProp=useSelector(state=>state.prop.arr);
-  
   useEffect(() => {
-      getAllPropertysFromServer().then((res)=>{
-        dis(SaveArrProp(res.data));
-        dis(SaveArrSource(res.data))
-      }).catch(err=>alert(err));
+    if (city && mr && price && insertData && type && room && isSale) {
+      dis(saveCity(city));
+      dis(saveFromSize(mr));
+      dis(saveUntilSize(mr));
+      dis(saveFromPrice(price));
+      dis(saveUntilPrice(price));
+      dis(saveType(type));
+      dis(saveTpeySale(isSale));
+      dis(saveRoom(room));
+      dis(saveFromYear(new Date(insertData).getFullYear()));
+      dis(saveUntilYear(new Date(insertData).getFullYear()));
 
-      getAllUsersFromServer().then((res)=>{
+      dis(saveChooseYearFilter(true));
+      dis(saveChooseCityFilter(true));
+      dis(saveChooseAddFilter(true));
+      dis(saveChoosePriceFilter(true));
+      dis(saveChooseRoomFilter(true));
+      dis(saveChooseSizeFilter(true));
+      dis(saveChooseTypeFilter(true));
+      dis(saveChooseTypeSaleFilter(true));
+      let obj = {
+        fromyear: new Date(insertData).getFullYear(),
+        untilyear: new Date(insertData).getFullYear(),
+        fromprice: price,
+        untilprice: price,
+        type: type,
+        fromsize: mr,
+        untilsize: mr,
+        room: room,
+        typesale: isSale,
+        city: city,
+      };
+      FilterFromServer(obj)
+        .then((res) => {
+          console.log(res.data);
+          dis(SaveArrProp(res.data));
+        })
+        .catch((err) => alert(err));
+    } else {
+      getAllPropertysFromServer()
+        .then((res) => {
+          dis(SaveArrProp(res.data));
+          dis(SaveArrSource(res.data));
+        })
+        .catch((err) => alert(err));
+    }
+    getAllUsersFromServer()
+      .then((res) => {
         // console.log("users from server")
         // console.log(res.data)
         dis(SaveArrUser(res.data));
-      }).catch(err=>alert(err));
-    }, []); 
-    return <>
-    <div id="all-filters"><Filter /></div> 
-    <div className="all-apartment">
-
-    {/* למה החליפה לפילטר ולא מאפ
+      })
+      .catch((err) => alert(err));
+  }, []);
+  return (
+    <>
+      <div id="all-filters">
+        <Filter />
+      </div>
+      <div className="all-apartment">
+        {/* למה החליפה לפילטר ולא מאפ
     {arrProp.map((item,index)=>{return <div className="div-apartment" key={item.Id} >
          
          {item.Active.data[0]==1 &&   <CardProp props={item} idcard={index} />} */}
-          
 
-        {arrProp.filter(x=>x.Active.data[0]==1).map((item,index)=>{return <div className="div-apartment" key={item.Id} >
-         
-         {<CardProp props={item} idcard={index} />}
-          
-      </div>} )}
-    </div>
-
+        {arrProp
+          .filter((x) => x.Active.data[0] == 1)
+          .map((item, index) => {
+            return (
+              <div className="div-apartment" key={item.Id}>
+                {<CardProp props={item} idcard={index} />}
+              </div>
+            );
+          })}
+      </div>
     </>
-}
+  );
+};
 export default Property;

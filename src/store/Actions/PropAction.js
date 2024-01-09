@@ -68,3 +68,12 @@ export const SaveArrFurniture = (arrFurniture) =>{
     payload: arrFurniture,
   };
 };
+
+export const SavePropsUrl = (url) =>{
+  console.log("SavePropsUrl")
+  console.log(url)
+  return {
+    type: TypeAction.SAVE_PROPS_URL,
+    payload: url,
+  };
+};

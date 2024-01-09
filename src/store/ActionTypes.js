@@ -17,7 +17,7 @@ export const SAVE_ARR_SOURCE="SAVE_ARR_SOURCE";
 export const ADD_TO_ARR_PROPERTY="ADD_TO_ARR_PROPERTY";
  export const SAVE_PROPERTY="SAVE_PROPERTY";
 
-
+ export const SAVE_PROPS_URL="SAVE_PROPS_URL";
 //chat
 export const SAVE_ARR_MASSAGES="SAVE_ARR_MASSAGES";//שמירת מערך ההודעות
 export const SELECTED_ROOM="SELECTED_ROOM";//חדר נבחר

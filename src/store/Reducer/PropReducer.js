@@ -1,84 +1,92 @@
 import * as TypeAction from "../ActionTypes";
 
 const initialState = {
-    arr: [],
-    arrsource:[],
-    arrCity: [],
-    arrType: [],
-    arrStatus:[],
-    arrFurniture:[],
-    message: null,
-    details:{}
-}
+  arr: [],
+  arrsource: [],
+  arrCity: [],
+  arrType: [],
+  arrStatus: [],
+  arrFurniture: [],
+  message: null,
+  details: {},
 
-const PropReducer=(state=initialState,action)=>{
-  switch(action.type){
-          case TypeAction.DELETED_PROPERTY:
-              let arr1 = state.arr.filter((item) => { return item.Id != action.payload })
-              
-              return {
-                  ...state,
-                  arr: arr1
-              }
-          case TypeAction.ADDED_PROPERTY:
-              return {
-                  ...state,
-                arr: [...state.arr,action.payload] 
-              }
-              case TypeAction.SAVE_ARR_PROPERTY:
-              return {
-                ...state,
+  propsUrl: "",
+};
 
-                arr:action.payload
-                // ,arrSourc:action.payload
-              } 
-               case TypeAction.SAVE_ARR_SOURCE:
-              return {
-                ...state,
-                arrsource:action.payload,
-                // ,arrSourc:action.payload
-                arr:action.payload,
-                arrSourc:action.payload
+const PropReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case TypeAction.DELETED_PROPERTY:
+      let arr1 = state.arr.filter((item) => {
+        return item.Id != action.payload;
+      });
 
-              } 
-              case TypeAction.ADD_TO_ARR_PROPERTY:
-                // איך מוסיפים דירות למערך הדירות שלא הופיעו כבר בסינון???????????????
-              return {
-                ...state,
-                arr:action.payload
-              }
-              case TypeAction.ADDED_CITY:
-              return {
-                ...state,
-                arrCity: [...state.arrCity,action.payload]
-              }
-          case TypeAction.SAVE_ARR_CITY:
-            return {
-              ...state,
-              arrCity:action.payload
-            } 
-          case TypeAction.SAVE_ARR_TYPE:
-            return {
-              ...state,
-              arrType:action.payload
-            }
-          case TypeAction.SAVE_ARR_STATUS:
-            return{
-              ...state,
-              arrStatus:action.payload
-            }  
-            case TypeAction.SAVE_ARR_FURNITURE:
-            return{
-              ...state,
-              arrFurniture:action.payload
-            }  
-          case TypeAction.SAVE_PROPERTY:
-            return{
-              ...state,
-              details:action.payload
-            }
-}
+      return {
+        ...state,
+        arr: arr1,
+      };
+    case TypeAction.ADDED_PROPERTY:
+      return {
+        ...state,
+        arr: [...state.arr, action.payload],
+      };
+    case TypeAction.SAVE_ARR_PROPERTY:
+      return {
+        ...state,
+
+        arr: action.payload,
+        // ,arrSourc:action.payload
+      };
+    case TypeAction.SAVE_ARR_SOURCE:
+      return {
+        ...state,
+        arrsource: action.payload,
+        // ,arrSourc:action.payload
+        arr: action.payload,
+        arrSourc: action.payload,
+      };
+    case TypeAction.ADD_TO_ARR_PROPERTY:
+      // איך מוסיפים דירות למערך הדירות שלא הופיעו כבר בסינון???????????????
+      return {
+        ...state,
+        arr: action.payload,
+      };
+    case TypeAction.ADDED_CITY:
+      return {
+        ...state,
+        arrCity: [...state.arrCity, action.payload],
+      };
+    case TypeAction.SAVE_ARR_CITY:
+      return {
+        ...state,
+        arrCity: action.payload,
+      };
+    case TypeAction.SAVE_ARR_TYPE:
+      return {
+        ...state,
+        arrType: action.payload,
+      };
+    case TypeAction.SAVE_ARR_STATUS:
+      return {
+        ...state,
+        arrStatus: action.payload,
+      };
+    case TypeAction.SAVE_ARR_FURNITURE:
+      return {
+        ...state,
+        arrFurniture: action.payload,
+      };
+    case TypeAction.SAVE_PROPERTY:
+      return {
+        ...state,
+        details: action.payload,
+      };
+
+    case TypeAction.SAVE_PROPS_URL:
+      return {
+        ...state,
+        propsUrl: action.payload,
+      };
+  }
   return state;
-
-}
-export default PropReducer; 
+};
+export default PropReducer;

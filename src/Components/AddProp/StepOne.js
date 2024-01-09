@@ -52,7 +52,7 @@ const StepOne = ({ nextStep }) => {
 
     nextStep({ isSale, adress, city });
   };
-
+ 
   //function on click button color change
   const handleClick = () => {
     if (flag1 === false) {
